@@ -19,7 +19,7 @@
 		7024110D29D560EE0024ABBD /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7024110C29D560EE0024ABBD /* Word.swift */; };
 		7024111329D562160024ABBD /* WordListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7024111229D562160024ABBD /* WordListViewController.swift */; };
 		7024111729D562600024ABBD /* WordListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7024111629D562600024ABBD /* WordListView.swift */; };
-		7024111929D5626D0024ABBD /* WordListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7024111829D5626D0024ABBD /* WordListView.xib */; };
+		7024111B29D56F410024ABBD /* WordListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7024111A29D56F410024ABBD /* WordListView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +56,7 @@
 		7024110C29D560EE0024ABBD /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		7024111229D562160024ABBD /* WordListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListViewController.swift; sourceTree = "<group>"; };
 		7024111629D562600024ABBD /* WordListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListView.swift; sourceTree = "<group>"; };
-		7024111829D5626D0024ABBD /* WordListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WordListView.xib; sourceTree = "<group>"; };
+		7024111A29D56F410024ABBD /* WordListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WordListView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,7 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				7024111629D562600024ABBD /* WordListView.swift */,
-				7024111829D5626D0024ABBD /* WordListView.xib */,
+				7024111A29D56F410024ABBD /* WordListView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -267,7 +267,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7024111929D5626D0024ABBD /* WordListView.xib in Resources */,
+				7024111B29D56F410024ABBD /* WordListView.xib in Resources */,
 				702410E929D55F580024ABBD /* LaunchScreen.storyboard in Resources */,
 				702410E629D55F580024ABBD /* Assets.xcassets in Resources */,
 				702410E129D55F560024ABBD /* Main.storyboard in Resources */,
