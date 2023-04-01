@@ -78,8 +78,7 @@ class WordListModel: NSObject, UITableViewDataSource {
     }
     
     // 配列に新しいツイートを追加する。
-    func addTweetList() {
-        
+    func addWordToList() {
         self.wordList.append(
             WordModel.init(initWord:
                 Word(
@@ -93,6 +92,9 @@ class WordListModel: NSObject, UITableViewDataSource {
         )
     }
     
+    func removeWord(index: Int) {
+        self.wordList.remove(at: index)
+    }
     
     // MARK: UITableViewDatasoruce
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
