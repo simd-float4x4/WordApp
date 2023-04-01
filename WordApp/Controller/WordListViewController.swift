@@ -1,6 +1,6 @@
 import UIKit
 
-class WordListViewController: UIViewController, MyDelegate {
+class WordListViewController: UIViewController, ReloadWordListWidgetDelegate {
     
     var myModel: WordListModel? {
         // セットされるたびにdidSetが動作する

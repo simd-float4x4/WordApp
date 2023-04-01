@@ -1,13 +1,13 @@
 import UIKit
 
-protocol MyDelegate: AnyObject {
+protocol ReloadWordListWidgetDelegate: AnyObject {
   func reloadWordListWidget()
 }
 
 class WordListView: UIView {
     @IBOutlet weak var wordListWidget: UITableView!
     @IBOutlet weak var hideMeaningButton: UIButton!
-    weak var delegate: MyDelegate?
+    weak var delegate: ReloadWordListWidgetDelegate?
     
    override init(frame: CGRect){
        super.init(frame: frame)
