@@ -15,6 +15,9 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate {
     var exampleSentence: String = ""
     var exampleTranslation: String = ""
     
+    var isDeleteModeOn: Bool = true
+    @IBOutlet var nabigationBarLeftButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = WordListView()
@@ -84,6 +87,12 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate {
     @objc func toWordDetailView() {
         performSegue(withIdentifier: "toWordDetailView", sender: nil)
     }
+    
+    // 削除ボタンと暗記した！ボタンを切り替える
+    @IBAction func switchWordActionMode() {
+        isDeleteModeOn = isDeleteModeOn == true ? false : true
+        nabigationBarLeftButton.image = isDeleteModeOn == true ? UIImage(systemName: "brain") : UIImage(systemName: "trash.fill")
+    }
 }
 
 // TableViewを描画・処理する為に最低限必要なデリゲートメソッド、データソース
@@ -106,7 +115,20 @@ extension WordListViewController: UITableViewDelegate {
             self.fetchCurrentProgress()
             completionHandler(true)
         }
+        let rememberedAction = UIContextualAction(style: .normal, title: "覚えた") { (action, view, completionHandler) in
+            self.wordModel?.upDateRememberStatus(index: indexPath.row)
+            // Todo
+            // 暗記Listに追加
+            self.wordModel?.removeWord(index: indexPath.row)
+            // 暗記数を更新
+            self.fetchCurrentProgress()
+            completionHandler(true)
+        }
         deleteAction.backgroundColor = UIColor.systemRed
+        rememberedAction.backgroundColor = UIColor.blue
+        if isDeleteModeOn != true {
+            return UISwipeActionsConfiguration(actions: [rememberedAction])
+        }
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 }

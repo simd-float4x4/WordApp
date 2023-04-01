@@ -19,10 +19,15 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="単語帳画面" id="bRt-fu-nAg">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="trash.fill" catalog="system" id="k5I-MB-Cej"/>
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="brain" catalog="system" id="k5I-MB-Cej">
+                            <connections>
+                                <action selector="switchWordActionMode" destination="BYZ-38-t0r" id="ZlV-9w-fHt"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="gkn-1x-OPq"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="nabigationBarLeftButton" destination="k5I-MB-Cej" id="Qm5-Uo-cGl"/>
                         <segue destination="nhc-mM-vrN" kind="presentation" identifier="toWordDetailView" id="nPt-aj-Vex"/>
                     </connections>
                 </viewController>
@@ -85,8 +90,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="brain" catalog="system" width="128" height="104"/>
         <image name="plus" catalog="system" width="128" height="113"/>
-        <image name="trash.fill" catalog="system" width="121" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

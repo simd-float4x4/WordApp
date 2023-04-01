@@ -2,7 +2,7 @@ import Foundation
 import UIKit
  
 class WordModel {
-    let word: Word
+    var word: Word
 
     init(initWord: Word){
         word = initWord
@@ -90,6 +90,10 @@ class WordListModel: NSObject, UITableViewDataSource {
                     isRemembered: false,
                     wrongCount: 5))
         )
+    }
+    
+    func upDateRememberStatus(index: Int) {
+        self.wordList[index].word.isRemembered = true
     }
     
     func removeWord(index: Int) {
