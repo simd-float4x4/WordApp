@@ -25,7 +25,7 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate {
     
     private func fetchCurrentProgress() {
         let wordListView = self.view as! WordListView
-        let wordSolvedSum = 0
+        let wordSolvedSum = 2
         let wordTotalSum = wordModel?.wordList.count ?? 0
         // TO-DO:　暗記機能実装後にゼロ除算対策をする
         let wordRememberedPercentage = wordTotalSum != 0 ? wordSolvedSum * 100 / wordTotalSum : 100

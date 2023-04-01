@@ -15,6 +15,7 @@ class WordListView: UIView {
    override init(frame: CGRect){
        super.init(frame: frame)
        loadNib()
+       initalizeProgressionWidgetStyle()
    }
 
    required init(coder aDecoder: NSCoder) {
@@ -28,6 +29,12 @@ class WordListView: UIView {
        if let subview = view.subviews.first  {
            self.addSubview(subview)
        }
+    }
+    
+    func initalizeProgressionWidgetStyle() {
+        progressBarWidget.transform = CGAffineTransform(scaleX: 1.0, y: 6.0)
+        progressBarWidget.progress = 0.0
+        progressBarWidget.progressTintColor = UIColor.green
     }
     
     @IBAction func hideMeaning() {
