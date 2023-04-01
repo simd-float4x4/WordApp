@@ -22,10 +22,28 @@
                         <barButtonItem key="leftBarButtonItem" title="Item" image="trash.fill" catalog="system" id="k5I-MB-Cej"/>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="gkn-1x-OPq"/>
                     </navigationItem>
+                    <connections>
+                        <segue destination="nhc-mM-vrN" kind="presentation" identifier="toWordDetailView" id="nPt-aj-Vex"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2044.9275362318842" y="65.625"/>
+        </scene>
+        <!--Word Detail View Controller-->
+        <scene sceneID="1Al-nO-yKT">
+            <objects>
+                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="nhc-mM-vrN" customClass="WordDetailViewController" customModule="WordApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="w8u-0v-xJf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Bbb-7g-nrP"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Sq4-nf-Qdb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3007" y="66"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="MfN-7B-9Wp">

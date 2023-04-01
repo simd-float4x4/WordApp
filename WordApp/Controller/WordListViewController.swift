@@ -10,6 +10,11 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate {
         }
     }
     
+    var singleWord: String = ""
+    var meaning: String = ""
+    var exampleSentence: String = ""
+    var exampleTranslation: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = WordListView()
@@ -60,10 +65,24 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate {
         })
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toWordDetailView" {
+            let wordDetailView = segue.destination as! WordDetailViewController
+            wordDetailView.singleWord = singleWord
+            wordDetailView.meaning = meaning
+            wordDetailView.exampleSentence = exampleSentence
+            wordDetailView.exampleTranslation = exampleTranslation
+        }
+    }
+    
     // TableViewのセルのタップを検知して、Modelの配列追加する処理を呼び出す。
     @objc func onTapTableViewCell() {
-        wordModel?.addWordToList()
+        // wordModel?.addWordToList()
         fetchCurrentProgress()
+    }
+    
+    @objc func toWordDetailView() {
+        performSegue(withIdentifier: "toWordDetailView", sender: nil)
     }
 }
 
@@ -72,7 +91,13 @@ extension WordListViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Modelでタップされた時の追加処理を行う。
-        self.onTapTableViewCell()
+        tableView.deselectRow(at: indexPath, animated: true)
+        let model = wordModel?.wordList[indexPath.row]
+        self.singleWord = model?.word.singleWord ?? ""
+        self.meaning = model?.word.meaning ?? ""
+        self.exampleSentence = model?.word.exampleSentence ?? ""
+        self.exampleTranslation = model?.word.exampleTranslation ?? ""
+        self.toWordDetailView()
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

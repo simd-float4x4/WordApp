@@ -121,7 +121,7 @@
                                                     <rect key="frame" x="8" y="8" width="172" height="38"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" title="日本語訳を隠す"/>
+                                                    <buttonConfiguration key="configuration" style="plain" title="日本語訳を表示する"/>
                                                     <connections>
                                                         <action selector="hideMeaning" destination="-1" eventType="touchUpInside" id="cok-Ys-g0p"/>
                                                     </connections>
