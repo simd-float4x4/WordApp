@@ -5,6 +5,9 @@ protocol ReloadWordListWidgetDelegate: AnyObject {
 }
 
 class WordListView: UIView {
+    @IBOutlet weak var progressBarWidget: UIProgressView!
+    @IBOutlet weak var progressPercentageLabel: UILabel!
+    @IBOutlet weak var progressWordSumLabel: UILabel!
     @IBOutlet weak var wordListWidget: UITableView!
     @IBOutlet weak var hideMeaningButton: UIButton!
     weak var delegate: ReloadWordListWidgetDelegate?

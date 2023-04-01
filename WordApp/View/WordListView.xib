@@ -11,6 +11,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WordListView" customModule="WordApp" customModuleProvider="target">
             <connections>
                 <outlet property="hideMeaningButton" destination="nSl-cv-ttl" id="k60-s6-tAP"/>
+                <outlet property="progressBarWidget" destination="86c-GU-38L" id="seQ-Qx-6j5"/>
+                <outlet property="progressPercentageLabel" destination="xp8-gS-2ae" id="mEs-Ty-Xh8"/>
+                <outlet property="progressWordSumLabel" destination="Bo5-V4-0EQ" id="ZdT-fb-zYz"/>
                 <outlet property="wordListWidget" destination="P40-5r-6Sy" id="iQU-H0-5OO"/>
             </connections>
         </placeholder>
