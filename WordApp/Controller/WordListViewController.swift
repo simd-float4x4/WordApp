@@ -1,26 +1,60 @@
 import UIKit
 
-class WordListViewController: UIViewController, UITableViewDelegate {
+class WordListViewController: UIViewController {
     
-    @IBOutlet weak var drawingXibArea: UIView!
-    
-    var myModel: WordListModel?
+    var myModel: WordListModel? {
+        // セットされるたびにdidSetが動作する
+        didSet {
+            // ViewとModelとを結合し、Modelの監視を開始する
+            registerModel()
+        }
+    }
 
+    override func loadView() {
+        super.loadView()
+        self.view = WordListView()
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Viewファイルからxibファイルを読み込む
-        let view = Bundle.main.loadNibNamed("WordListView", owner: self, options: nil)?.first as! UIView
-        view.frame = drawingXibArea.bounds
-        drawingXibArea.addSubview(view)
+        
+        self.myModel = WordListModel()
         settingTableView()
     }
     
     private func settingTableView () {
-        let wordListView = drawingXibArea as! WordListView
-        wordListView.wordListWidget.delegate = self
-        wordListView.wordListWidget.dataSource = self.myModel
+        let tweetListView = self.view as! WordListView
+        tweetListView.wordListWidget.delegate = self
+        tweetListView.wordListWidget.dataSource = self.myModel
         // TableViewに表示するCellを登録する
-        wordListView.wordListWidget.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tweetListView.wordListWidget.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+    }
+    
+    private func registerModel() {
+        guard let model = myModel else { return }
+        
+        // 配列が変化したらnotificationCenterで通知を受け取る。
+        model.notificationCenter.addObserver(forName: .init(rawValue: "changeTweetList"),
+                                             object: nil,
+                                             queue: nil,
+                                             using: {
+            [unowned self] notification in
+            let tweetListView = self.view as! WordListView
+            
+            tweetListView.wordListWidget.reloadData()
+        })
+    }
+    
+    // TableViewのセルのタップを検知して、Modelの配列追加する処理を呼び出す。
+    @objc func onTapTableViewCell() { myModel?.addTweetList() }
+}
+
+// TableViewを描画・処理する為に最低限必要なデリゲートメソッド、データソース
+extension WordListViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Modelでタップされた時の追加処理を行う。
+        self.onTapTableViewCell()
     }
 }

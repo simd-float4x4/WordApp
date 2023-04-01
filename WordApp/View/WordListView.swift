@@ -13,10 +13,11 @@ class WordListView: UIView {
        loadNib()
    }
 
-   func loadNib(){
+    func loadNib(){
        let view = Bundle.main.loadNibNamed("WordListView", owner: self, options: nil)?.first as! UIView
        view.frame = self.bounds
-       self.addSubview(view)
-   }
-
+       if let subview = view.subviews.first  {
+           self.addSubview(subview)
+       }
+    }
 }
