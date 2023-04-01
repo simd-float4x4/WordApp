@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WordListView" customModule="WordApp" customModuleProvider="target">
             <connections>
+                <outlet property="hideMeaningButton" destination="nSl-cv-ttl" id="k60-s6-tAP"/>
                 <outlet property="wordListWidget" destination="P40-5r-6Sy" id="iQU-H0-5OO"/>
             </connections>
         </placeholder>
@@ -118,6 +119,9 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" title="日本語訳を隠す"/>
+                                                    <connections>
+                                                        <action selector="hideMeaning" destination="-1" eventType="touchUpInside" id="cok-Ys-g0p"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemGray5Color"/>

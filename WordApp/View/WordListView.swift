@@ -1,8 +1,14 @@
 import UIKit
 
+protocol MyDelegate: AnyObject {
+  func reloadWordListWidget()
+}
+
 class WordListView: UIView {
-   @IBOutlet weak var wordListWidget: UITableView!
-   
+    @IBOutlet weak var wordListWidget: UITableView!
+    @IBOutlet weak var hideMeaningButton: UIButton!
+    weak var delegate: MyDelegate?
+    
    override init(frame: CGRect){
        super.init(frame: frame)
        loadNib()
@@ -19,5 +25,17 @@ class WordListView: UIView {
        if let subview = view.subviews.first  {
            self.addSubview(subview)
        }
+    }
+    
+    @IBAction func hideMeaning() {
+        let ud = UserDefaults.standard
+        let currentMeaningVisibility = ud.bool(forKey: "isMeaningHidden")
+        let visibility = currentMeaningVisibility == true ? false : true
+        ud.set(visibility, forKey: "isMeaningHidden")
+        ud.synchronize()
+        let hideMeaningButtonTitleLabelText = visibility == true ? "日本語訳を表示する" : "日本語訳を隠す"
+        hideMeaningButton.setTitle(hideMeaningButtonTitleLabelText, for: .normal)
+        
+        delegate?.reloadWordListWidget()
     }
 }

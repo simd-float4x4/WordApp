@@ -102,11 +102,14 @@ class WordListModel: NSObject, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let ud = UserDefaults.standard
+        let currentMeaningVisibility  = ud.bool(forKey: "isMeaningHidden")
         let wordModel = self.wordList[indexPath.row]
         let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+        
         var content = cell.defaultContentConfiguration()
         content.text = wordModel.word.singleWord
-        content.secondaryText = wordModel.word.meaning
+        content.secondaryText = currentMeaningVisibility == true ? nil : wordModel.word.meaning
         cell.contentConfiguration = content
         return cell
         

@@ -1,6 +1,6 @@
 import UIKit
 
-class WordListViewController: UIViewController {
+class WordListViewController: UIViewController, MyDelegate {
     
     var myModel: WordListModel? {
         // セットされるたびにdidSetが動作する
@@ -14,15 +14,25 @@ class WordListViewController: UIViewController {
         super.viewDidLoad()
         self.view = WordListView()
         
+        let ud = UserDefaults.standard
+        ud.set(true, forKey: "isMeaningHidden")
+        ud.synchronize()
+        
         self.myModel = WordListModel()
         initializeWordListWidget()
     }
     
     private func initializeWordListWidget() {
         let wordListView = self.view as! WordListView
+        wordListView.delegate = self
         wordListView.wordListWidget.delegate = self
         wordListView.wordListWidget.dataSource = self.myModel
         wordListView.wordListWidget.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+    }
+    
+    func reloadWordListWidget(){
+        let wordListView = self.view as! WordListView
+        wordListView.wordListWidget.reloadData()
     }
     
     private func registerModel() {
@@ -34,9 +44,7 @@ class WordListViewController: UIViewController {
                                              queue: nil,
                                              using: {
             [unowned self] notification in
-            let wordListView = self.view as! WordListView
-            
-            wordListView.wordListWidget.reloadData()
+            reloadWordListWidget()
         })
     }
     
