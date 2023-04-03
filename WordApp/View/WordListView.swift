@@ -4,13 +4,19 @@ protocol ReloadWordListWidgetDelegate: AnyObject {
   func reloadWordListWidget()
 }
 
+protocol SortWordListWidgetDelegate: AnyObject {
+    func sortWordListView()
+}
+
 class WordListView: UIView {
     @IBOutlet weak var progressBarWidget: UIProgressView!
     @IBOutlet weak var progressPercentageLabel: UILabel!
     @IBOutlet weak var progressWordSumLabel: UILabel!
     @IBOutlet weak var wordListWidget: UITableView!
     @IBOutlet weak var hideMeaningButton: UIButton!
-    weak var delegate: ReloadWordListWidgetDelegate?
+    @IBOutlet weak var sortWordListButton: UIButton!
+    weak var reloadWordListdelegate: ReloadWordListWidgetDelegate?
+    weak var sortWordListdelegate: SortWordListWidgetDelegate?
     
    override init(frame: CGRect){
        super.init(frame: frame)
@@ -46,6 +52,11 @@ class WordListView: UIView {
         let hideMeaningButtonTitleLabelText = visibility == true ? "日本語訳を表示する" : "日本語訳を隠す"
         hideMeaningButton.setTitle(hideMeaningButtonTitleLabelText, for: .normal)
         
-        delegate?.reloadWordListWidget()
+        reloadWordListdelegate?.reloadWordListWidget()
     }
+    
+    @IBAction func sortWordListWidget() {
+        sortWordListdelegate?.sortWordListView()
+    }
+    
 }

@@ -1,6 +1,6 @@
 import UIKit
 
-class WordListViewController: UIViewController, ReloadWordListWidgetDelegate {
+class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, SortWordListWidgetDelegate {
     
     var wordModel: WordListModel? {
         // セットされるたびにdidSetが動作する
@@ -14,8 +14,10 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate {
     var meaning: String = ""
     var exampleSentence: String = ""
     var exampleTranslation: String = ""
-    
+    var sortType: Int = 1
+    var sortTypeTextArray: [String] = ["登録日時が古い順", "登録日時が新しい順", "アルファベット順(昇順)", "アルファベット順(降順)"]
     var isDeleteModeOn: Bool = true
+    
     @IBOutlet var nabigationBarLeftButton: UIBarButtonItem!
     
     override func viewDidLoad() {
@@ -44,7 +46,8 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate {
     
     private func initializeWordListWidget() {
         let wordListView = self.view as! WordListView
-        wordListView.delegate = self
+        wordListView.reloadWordListdelegate = self
+        wordListView.sortWordListdelegate = self
         wordListView.wordListWidget.delegate = self
         wordListView.wordListWidget.dataSource = self.wordModel
         wordListView.wordListWidget.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
@@ -53,6 +56,15 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate {
     func reloadWordListWidget() {
         let wordListView = self.view as! WordListView
         wordListView.wordListWidget.reloadData()
+    }
+    
+    func sortWordListView() {
+        let wordListView = self.view as! WordListView
+        sortType += 1
+        sortType = sortType == 5 ? 1 : sortType
+        wordModel?.sortWordList(sortModeId: sortType)
+        wordListView.sortWordListButton.setTitle(sortTypeTextArray[sortType-1], for: .normal)
+        reloadWordListWidget()
     }
     
     private func registerModel() {

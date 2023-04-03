@@ -100,6 +100,25 @@ class WordListModel: NSObject, UITableViewDataSource {
         self.wordList.remove(at: index)
     }
     
+    func sortWordList(sortModeId: Int) {
+        switch sortModeId {
+        case 1:
+            // ID順（昇順）
+            self.wordList.sort(by: {$0.word.id < $1.word.id})
+        case 2:
+            // ID順（降順）
+            self.wordList.sort(by: {$0.word.id > $1.word.id})
+        case 3:
+            //　昇順
+            self.wordList.sort(by: {$0.word.singleWord < $1.word.singleWord})
+        case 4:
+            //　降順
+            self.wordList.sort(by: {$0.word.singleWord > $1.word.singleWord})
+        default:
+            break
+        }
+    }
+    
     // MARK: UITableViewDatasoruce
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.wordList.count
