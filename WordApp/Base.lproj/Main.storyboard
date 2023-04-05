@@ -24,7 +24,12 @@
                                 <action selector="switchWordActionMode" destination="BYZ-38-t0r" id="ZlV-9w-fHt"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="gkn-1x-OPq"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="gkn-1x-OPq">
+                            <connections>
+                                <action selector="toAddWordView" destination="BYZ-38-t0r" id="2Un-ww-LDN"/>
+                                <segue destination="1BG-fX-tpE" kind="show" identifier="toAddWordView" id="Va2-OG-7o8"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="nabigationBarLeftButton" destination="k5I-MB-Cej" id="Qm5-Uo-cGl"/>
@@ -33,7 +38,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2044.9275362318842" y="65.625"/>
+            <point key="canvasLocation" x="2057" y="66"/>
+        </scene>
+        <!--単語登録画面-->
+        <scene sceneID="U2u-f4-zLC">
+            <objects>
+                <viewController id="1BG-fX-tpE" customClass="AddWordViewController" customModule="WordApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PSs-0K-uBE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="skf-WZ-giU"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="単語登録画面" id="skH-jX-wTZ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8ak-QM-h7Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3000" y="-562"/>
         </scene>
         <!--Word Detail View Controller-->
         <scene sceneID="1Al-nO-yKT">

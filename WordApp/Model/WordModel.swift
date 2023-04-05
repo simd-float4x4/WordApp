@@ -73,22 +73,22 @@ class WordListModel: NSObject, UITableViewDataSource {
     ] {
         didSet{
             // Modelで管理している配列に変化があった場合に呼び出されて、通知する。
-            notificationCenter.post(name: .init(rawValue: "changeTweetList"), object: nil, userInfo: ["list" : wordList])
+            notificationCenter.post(name: .notifyName, object: nil, userInfo: ["list" : wordList])
         }
     }
     
-    // 配列に新しいツイートを追加する。
-    func addWordToList() {
+    // 配列に新しい単語を追加する。
+    func addWordToList(id: Int, data: [String]) {
         self.wordList.append(
             WordModel.init(initWord:
                 Word(
-                    id: 7,
-                    singleWord: "bibliography",
-                    meaning: "書誌",
-                    exampleSentence: "His first book was too short to have a bibliography. ",
-                    exampleTranslation: "彼の最初の本はごく短いもので参考文献一覧はなかった。",
+                    id: id+1,
+                    singleWord: data[0],
+                    meaning: data[1],
+                    exampleSentence: data[2],
+                    exampleTranslation: data[3],
                     isRemembered: false,
-                    wrongCount: 5))
+                    wrongCount: 0))
         )
     }
     

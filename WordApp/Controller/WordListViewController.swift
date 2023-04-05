@@ -37,7 +37,7 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         let wordListView = self.view as! WordListView
         let wordSolvedSum = 2
         let wordTotalSum = wordModel?.wordList.count ?? 0
-        // TO-DO:　暗記機能実装後にゼロ除算対策をする
+        // TODO: 暗記機能実装後にゼロ除算対策をする
         let wordRememberedPercentage = wordTotalSum != 0 ? wordSolvedSum * 100 / wordTotalSum : 100
         wordListView.progressWordSumLabel.text = String(wordSolvedSum) + " / " + String(wordTotalSum)
         wordListView.progressPercentageLabel.text = String(wordRememberedPercentage) + " %"
@@ -58,6 +58,11 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         wordListView.wordListWidget.reloadData()
     }
     
+    @objc func reloadWordListWidgetWithObjc() {
+        let wordListView = self.view as! WordListView
+        wordListView.wordListWidget.reloadData()
+    }
+    
     func sortWordListView() {
         let wordListView = self.view as! WordListView
         sortType += 1
@@ -71,13 +76,14 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         guard let model = wordModel else { return }
         
         // 配列が変化したらnotificationCenterで通知を受け取る。
-        model.notificationCenter.addObserver(forName: .init(rawValue: "changeTweetList"),
-                                             object: nil,
-                                             queue: nil,
-                                             using: {
-            [unowned self] notification in
-            reloadWordListWidget()
-        })
+        model.notificationCenter.addObserver(
+            forName: .notifyName,
+            object: nil,
+            queue: nil,
+            using: {
+                [unowned self] Notification in
+                reloadWordListWidget()
+            })
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -92,12 +98,16 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     
     // TableViewのセルのタップを検知して、Modelの配列追加する処理を呼び出す。
     @objc func onTapTableViewCell() {
-        // wordModel?.addWordToList()
+        // wordModel?.addWordToList(id: 100, data: ["0","a","sa","ss"])
         fetchCurrentProgress()
     }
     
     @objc func toWordDetailView() {
         performSegue(withIdentifier: "toWordDetailView", sender: nil)
+    }
+    
+    @IBAction func toAddWordView() {
+        performSegue(withIdentifier: "toAddWordView", sender: nil)
     }
     
     // 削除ボタンと暗記した！ボタンを切り替える
@@ -129,10 +139,9 @@ extension WordListViewController: UITableViewDelegate {
         }
         let rememberedAction = UIContextualAction(style: .normal, title: "覚えた") { (action, view, completionHandler) in
             self.wordModel?.upDateRememberStatus(index: indexPath.row)
-            // Todo
-            // 暗記Listに追加
+            // TODO: 暗記リスト配列に追加
             self.wordModel?.removeWord(index: indexPath.row)
-            // 暗記数を更新
+            // TODO: ProgressBarを更新
             self.fetchCurrentProgress()
             completionHandler(true)
         }
@@ -143,4 +152,9 @@ extension WordListViewController: UITableViewDelegate {
         }
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
+}
+
+
+extension Notification.Name {
+    static let notifyName = Notification.Name("changeWordList")
 }
