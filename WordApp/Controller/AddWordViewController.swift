@@ -1,18 +1,18 @@
 import UIKit
 
-class AddWordViewController: UIViewController, UITextViewDelegate, AddWordViewDelegate {
+class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWordListDelegate {
     
-    var wordModel: WordListModel? {
-        // セットされるたびにdidSetが動作する
-        didSet {
-            // ViewとModelとを結合し、Modelの監視を開始する
-            registerModel()
-        }
-    }
+    var model = WordListModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeWordAddView()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // 1つ前の画面に引数を渡す
+        sendWordModelToPrevious()
     }
     
     func initializeWordAddView() {
@@ -21,9 +21,8 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordViewDe
         view.meaningWordTextView.delegate = self
         view.exampleSentenceTextView.delegate = self
         view.exampleTranslationTextView.delegate = self
-        view.addWordViewDelegate = self
+        view.addWordToWordListDelegate = self
         self.view = view
-        self.wordModel = WordListModel()
     }
     
     func reloadWordListWidget() {
@@ -31,16 +30,7 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordViewDe
         wordListView.wordListWidget.reloadData()
     }
     
-    private func registerModel() {
-        guard let model = wordModel else { return }
-        model.notificationCenter.post(name: .notifyName, object: nil)
-    }
-    
-    func callAddWordFunction(data: [String]) {
-        addWordToList(data: data)
-    }
-    
-    @objc func addWordToList(data: [String]) {
+    func addWordToList(data: [String]) {
         let checkBool = makeValidationToAddWord(data: data)
         if !checkBool {
             // TODO: エラーハンドリング
@@ -57,8 +47,10 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordViewDe
             present(alertContent, animated: true, completion: nil)
         } else {
             // TODO: 確実に要素数を取得する方法を探す
-            let currentWordId = wordModel?.wordList.count ?? 0
-            wordModel?.addWordToList(id: currentWordId, data: data)
+            // TODO: WordListViewController経由で.addWordListする
+            let currentWordId = model.wordList.count
+            model.addWordToList(id: currentWordId, data: data)
+            registerModel()
         }
     }
     
@@ -70,7 +62,20 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordViewDe
         }
         return true
     }
-
+    
+    func registerModel() {
+        NotificationCenter.default.post(name: .notifyName, object: nil)
+    }
+    
+    func sendWordModelToPrevious() {
+        if let index = navigationController?.viewControllers.count {
+            let preVC = navigationController?.viewControllers[index - 1] as! WordListViewController
+            preVC.wordModel = self.model
+            print(self.model.wordList.last?.word)
+            print(preVC.wordModel?.wordList.last?.word)
+        }
+    }
+    
     //テキストフィールドでリターンが押されたときに通知され起動するメソッド
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)

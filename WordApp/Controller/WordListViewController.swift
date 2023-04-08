@@ -1,5 +1,7 @@
 import UIKit
 
+//TODO: Delegateをextensionごとに切り出す
+//TODO: 全体的にコードが非常に読みにくいので適宜リファクタリングする
 class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, SortWordListWidgetDelegate {
     
     var wordModel: WordListModel? {
@@ -9,6 +11,7 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
             registerModel()
         }
     }
+    var notificationObserver: NSObjectProtocol?
     
     var singleWord: String = ""
     var meaning: String = ""
@@ -27,10 +30,16 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         let ud = UserDefaults.standard
         ud.set(true, forKey: "isMeaningHidden")
         ud.synchronize()
-        
+
         self.wordModel = WordListModel()
         fetchCurrentProgress()
         initializeWordListWidget()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        initializeWordListWidget()
+        reloadWordListWidget()
+        print(wordModel?.wordList.last?.word)
     }
     
     private func fetchCurrentProgress() {
@@ -46,19 +55,14 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     
     private func initializeWordListWidget() {
         let wordListView = self.view as! WordListView
-        wordListView.reloadWordListdelegate = self
-        wordListView.sortWordListdelegate = self
+        wordListView.reloadWordListDelegate = self
+        wordListView.sortWordListDelegate = self
         wordListView.wordListWidget.delegate = self
         wordListView.wordListWidget.dataSource = self.wordModel
         wordListView.wordListWidget.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
     }
     
     func reloadWordListWidget() {
-        let wordListView = self.view as! WordListView
-        wordListView.wordListWidget.reloadData()
-    }
-    
-    @objc func reloadWordListWidgetWithObjc() {
         let wordListView = self.view as! WordListView
         wordListView.wordListWidget.reloadData()
     }
@@ -73,17 +77,15 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     }
     
     private func registerModel() {
-        guard let model = wordModel else { return }
-        
         // 配列が変化したらnotificationCenterで通知を受け取る。
-        model.notificationCenter.addObserver(
+        NotificationCenter.default.addObserver(
             forName: .notifyName,
             object: nil,
             queue: nil,
             using: {
                 [unowned self] Notification in
                 reloadWordListWidget()
-            })
+        })
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

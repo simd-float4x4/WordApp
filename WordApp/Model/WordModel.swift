@@ -11,9 +11,6 @@ class WordModel {
 
 class WordListModel: NSObject, UITableViewDataSource {
     
-    // Modelを監視するクラス
-    let notificationCenter = NotificationCenter()
-    
     // Modelで管理する配列に初期値を設定する。
     private(set) var wordList: [WordModel] = [
         WordModel.init(
@@ -73,7 +70,10 @@ class WordListModel: NSObject, UITableViewDataSource {
     ] {
         didSet{
             // Modelで管理している配列に変化があった場合に呼び出されて、通知する。
-            notificationCenter.post(name: .notifyName, object: nil, userInfo: ["list" : wordList])
+            NotificationCenter.default.post(
+                name: .notifyName,
+                object: nil,
+                userInfo: ["list" : wordList])
         }
     }
     
@@ -135,6 +135,5 @@ class WordListModel: NSObject, UITableViewDataSource {
         content.secondaryText = currentMeaningVisibility == true ? nil : wordModel.word.meaning
         cell.contentConfiguration = content
         return cell
-        
     }
 }

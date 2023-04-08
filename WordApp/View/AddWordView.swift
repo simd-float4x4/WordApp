@@ -1,7 +1,7 @@
 import UIKit
 
-@objc protocol AddWordViewDelegate: AnyObject {
-    func callAddWordFunction(data: [String])
+protocol AddWordToWordListDelegate: AnyObject {
+    func addWordToList(data: [String])
 }
 
 class AddWordView: UIView {
@@ -10,7 +10,7 @@ class AddWordView: UIView {
     @IBOutlet weak var meaningWordTextView: UITextView!
     @IBOutlet weak var exampleSentenceTextView: UITextView!
     @IBOutlet weak var exampleTranslationTextView: UITextView!
-    @objc weak var addWordViewDelegate: AddWordViewDelegate?
+    weak var addWordToWordListDelegate: AddWordToWordListDelegate?
     
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -56,6 +56,6 @@ class AddWordView: UIView {
             meaningWordTextView.text!,
             exampleSentenceTextView.text!,
             exampleTranslationTextView.text!]
-        addWordViewDelegate?.callAddWordFunction(data: wordData)
+        addWordToWordListDelegate?.addWordToList(data: wordData)
     }
 }
