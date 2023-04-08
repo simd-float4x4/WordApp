@@ -79,6 +79,11 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         // WordListViewの描画を更新する
         let wordListView = self.view as! WordListView
         wordListView.wordListWidget.reloadData()
+        if wordModel?.wordList.isEmpty == true {
+            wordListView.wordListWidget.isHidden = true
+        } else {
+            wordListView.wordListWidget.isHidden = false
+        }
     }
     
     // WordListWidgetに現在表示されているModelをUserDefaultsに保存する
@@ -173,6 +178,7 @@ extension WordListViewController: UITableViewDelegate {
         }
         deleteAction.backgroundColor = UIColor.systemRed
         rememberedAction.backgroundColor = UIColor.blue
+        self.reloadWordListWidget()
         // 削除モードがON/OFFの時、アクションを切り替える
         if isDeleteModeOn != true {
             return UISwipeActionsConfiguration(actions: [rememberedAction])
