@@ -87,6 +87,7 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
         if let index = navigationController?.viewControllers.count {
             let preVC = navigationController?.viewControllers[index - 1] as! WordListViewController
             preVC.wordModel = self.model
+            // TODO: WordListViewの最新版の中身を登録する
         }
     }
     

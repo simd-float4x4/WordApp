@@ -74,9 +74,14 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     
     // WordListWidgetをリロードする
     func reloadWordListWidget() {
+        // TODO: WordListViewの最新版の中身を取得する
+        
+        // WordListViewの描画を更新する
         let wordListView = self.view as! WordListView
         wordListView.wordListWidget.reloadData()
     }
+    
+    // WordListWidgetに現在表示されているModelをUserDefaultsに保存する
     
     // WordListWidgetをソートする
     func sortWordListView() {
