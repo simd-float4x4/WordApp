@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 
+// MARK: WordModel
 class WordModel {
     var word: Word
 
@@ -9,8 +10,8 @@ class WordModel {
     }
 }
 
+// MARK: WordListModel
 class WordListModel: NSObject, UITableViewDataSource {
-    
     // Modelで管理する配列に初期値を設定する。
     private(set) var wordList: [WordModel] = [
         WordModel.init(
@@ -78,6 +79,9 @@ class WordListModel: NSObject, UITableViewDataSource {
     }
     
     // 配列に新しい単語を追加する。
+    /// - Parameters:
+        ///   - id: 単語ID：wordList要素数を代入し、+1した値をIDとする。
+        ///   - data: data[0]〜data[3]の要素数4のString型の配列。内訳は順番に単語、意味、例文、訳。
     func addWordToList(id: Int, data: [String]) {
         self.wordList.append(
             WordModel.init(initWord:
@@ -92,14 +96,23 @@ class WordListModel: NSObject, UITableViewDataSource {
         )
     }
     
+    // 暗記モードがONの状態でWordListWidgetを右にスワイプした際に単語データのステータスを更新する
+    /// - Parameters:
+        ///   - index: 単語ID（Int）
     func upDateRememberStatus(index: Int) {
         self.wordList[index].word.isRemembered = true
     }
     
+    // 削除モードがONの状態の際に単語データを削除する
+    /// - Parameters:
+        ///   - index: 単語ID（Int）
     func removeWord(index: Int) {
         self.wordList.remove(at: index)
     }
     
+    // WordListWidgetを並び替える
+    /// - Parameters:
+        ///   - sortModeId: 並び替えモードのID。
     func sortWordList(sortModeId: Int) {
         switch sortModeId {
         case 1:
@@ -119,11 +132,13 @@ class WordListModel: NSObject, UITableViewDataSource {
         }
     }
     
-    // MARK: UITableViewDatasoruce
+// MARK: UITableViewDatasoruce
+    // UITableViewが返す要素数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.wordList.count
     }
     
+    // UITableViewの各セルが表示する内容
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let ud = UserDefaults.standard
         let currentMeaningVisibility  = ud.bool(forKey: "isMeaningHidden")

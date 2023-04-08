@@ -1,5 +1,6 @@
 import UIKit
 
+// MARK: AddWordViewController
 class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWordListDelegate {
     
     var model = WordListModel()
@@ -15,6 +16,7 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
         sendWordModelToPrevious()
     }
     
+    // Viewの初期化
     func initializeWordAddView() {
         let view = AddWordView()
         view.singleWordTextView.delegate = self
@@ -25,13 +27,11 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
         self.view = view
     }
     
-    func reloadWordListWidget() {
-        let wordListView = WordListView()
-        wordListView.wordListWidget.reloadData()
-    }
-    
+    // 単語を登録する
     func addWordToList(data: [String]) {
+        // バリデーションチェック
         let checkBool = makeValidationToAddWord(data: data)
+        // エラー発生時
         if !checkBool {
             // TODO: エラーハンドリング
             let alertContent = UIAlertController(
@@ -46,6 +46,7 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
             alertContent.addAction(okAction)
             present(alertContent, animated: true, completion: nil)
         } else {
+        // バリデーション追加時
             let currentWordId = model.wordList.count
             model.addWordToList(id: currentWordId, data: data)
             let alertContent = UIAlertController(
@@ -66,6 +67,7 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
         }
     }
     
+    // バリデーションチェック（暫定的にnilチェックのみ）
     func makeValidationToAddWord(data: [String]) -> Bool{
         for i in 0 ..< data.count {
             if data[i].isEmpty {
@@ -75,16 +77,16 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
         return true
     }
     
+    // NotificationCenterに変更を通知
     func registerModel() {
         NotificationCenter.default.post(name: .notifyName, object: nil)
     }
     
+    // WorListViewControllerのwordModelを更新する
     func sendWordModelToPrevious() {
         if let index = navigationController?.viewControllers.count {
             let preVC = navigationController?.viewControllers[index - 1] as! WordListViewController
             preVC.wordModel = self.model
-            print(self.model.wordList.last?.word)
-            print(preVC.wordModel?.wordList.last?.word)
         }
     }
     

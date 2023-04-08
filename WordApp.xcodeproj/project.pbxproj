@@ -27,6 +27,7 @@
 		706C44C029DAEEA700B5FBC8 /* AddWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706C44BE29DAEEA700B5FBC8 /* AddWordView.swift */; };
 		706C44C129DAEEA700B5FBC8 /* AddWordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 706C44BF29DAEEA700B5FBC8 /* AddWordView.xib */; };
 		706C44C329DAEEB500B5FBC8 /* AddWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706C44C229DAEEB500B5FBC8 /* AddWordViewController.swift */; };
+		709BDBCB29E2281B00F06C59 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709BDBCA29E2281B00F06C59 /* Notification.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		706C44BE29DAEEA700B5FBC8 /* AddWordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddWordView.swift; sourceTree = "<group>"; };
 		706C44BF29DAEEA700B5FBC8 /* AddWordView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddWordView.xib; sourceTree = "<group>"; };
 		706C44C229DAEEB500B5FBC8 /* AddWordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddWordViewController.swift; sourceTree = "<group>"; };
+		709BDBCA29E2281B00F06C59 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +159,7 @@
 			children = (
 				7024110C29D560EE0024ABBD /* Word.swift */,
 				7024111C29D577A50024ABBD /* WordModel.swift */,
+				709BDBCA29E2281B00F06C59 /* Notification.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 				7024111729D562600024ABBD /* WordListView.swift in Sources */,
 				7024111D29D577A60024ABBD /* WordModel.swift in Sources */,
 				702F654C29D7FF200041B8DC /* WordDetailView.swift in Sources */,
+				709BDBCB29E2281B00F06C59 /* Notification.swift in Sources */,
 				702410DC29D55F560024ABBD /* SceneDelegate.swift in Sources */,
 				706C44C029DAEEA700B5FBC8 /* AddWordView.swift in Sources */,
 				702F654829D7FEDA0041B8DC /* WordDetailViewController.swift in Sources */,

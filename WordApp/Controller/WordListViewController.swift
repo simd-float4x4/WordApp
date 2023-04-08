@@ -1,9 +1,10 @@
 import UIKit
 
-//TODO: Delegateをextensionごとに切り出す
-//TODO: 全体的にコードが非常に読みにくいので適宜リファクタリングする
+// MARK: WordListViewController
 class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, SortWordListWidgetDelegate {
     
+    // wordListModel型のwordModelを宣言。MARK: ここ以外にwordModelは原則宣言しない。
+    // TODO: wordModelという名前がambigiousであるため、いい命名が思いつき次第リファクタリング
     var wordModel: WordListModel? {
         // セットされるたびにdidSetが動作する
         didSet {
@@ -11,39 +12,47 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
             registerModel()
         }
     }
-    var notificationObserver: NSObjectProtocol?
     
+    // DetailViewControllerに渡すための文字列
     var singleWord: String = ""
     var meaning: String = ""
     var exampleSentence: String = ""
     var exampleTranslation: String = ""
+    // ソートタイプ：default値は1をセットする。
     var sortType: Int = 1
+    // TODO: Localizable.stringにする
     var sortTypeTextArray: [String] = ["登録日時が古い順", "登録日時が新しい順", "アルファベット順(昇順)", "アルファベット順(降順)"]
     var isDeleteModeOn: Bool = true
     
+    // 削除モード/暗記モード切り替えボタン。NavigationBarの左上に配置するものとする。
     @IBOutlet var nabigationBarLeftButton: UIBarButtonItem!
+    
+    let ud = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = WordListView()
         
-        let ud = UserDefaults.standard
+        // 日本語訳の表示/非表示に関しては、アプリ起動時には原則trueをセットする
         ud.set(true, forKey: "isMeaningHidden")
         ud.synchronize()
 
         self.wordModel = WordListModel()
+        // 描画系処理を呼び出す
         fetchCurrentProgress()
         initializeWordListWidget()
     }
     
+    // 画面が呼ばれるたびにWordListWidgetを更新する
     override func viewWillAppear(_ animated: Bool) {
         initializeWordListWidget()
         reloadWordListWidget()
-        print(wordModel?.wordList.last?.word)
     }
     
+    // 最新の回答状況を取得する
     private func fetchCurrentProgress() {
         let wordListView = self.view as! WordListView
+        // TODO: rememberedList実装後に動的に取得できるようにする
         let wordSolvedSum = 2
         let wordTotalSum = wordModel?.wordList.count ?? 0
         // TODO: 暗記機能実装後にゼロ除算対策をする
@@ -53,6 +62,7 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         wordListView.progressBarWidget.progress = Float(wordRememberedPercentage) / 100.0
     }
     
+    // WordListWidgetを初期化する
     private func initializeWordListWidget() {
         let wordListView = self.view as! WordListView
         wordListView.reloadWordListDelegate = self
@@ -62,16 +72,22 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         wordListView.wordListWidget.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
     }
     
+    // WordListWidgetをリロードする
     func reloadWordListWidget() {
         let wordListView = self.view as! WordListView
         wordListView.wordListWidget.reloadData()
     }
     
+    // WordListWidgetをソートする
     func sortWordListView() {
         let wordListView = self.view as! WordListView
         sortType += 1
+        // TODO: 5(ソートタイプの上限)を定数管理する
+        // 一巡したらソートタイプを1に戻す
         sortType = sortType == 5 ? 1 : sortType
+        // wordListを並び替える
         wordModel?.sortWordList(sortModeId: sortType)
+        // ソートボタンのラベル文字を適宜変更する
         wordListView.sortWordListButton.setTitle(sortTypeTextArray[sortType-1], for: .normal)
         reloadWordListWidget()
     }
@@ -88,6 +104,7 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         })
     }
     
+    // ToDetailViewに遷移したときに値を渡す処理
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toWordDetailView" {
             let wordDetailView = segue.destination as! WordDetailViewController
@@ -98,12 +115,7 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         }
     }
     
-    // TableViewのセルのタップを検知して、Modelの配列追加する処理を呼び出す。
-    @objc func onTapTableViewCell() {
-        // wordModel?.addWordToList(id: 100, data: ["0","a","sa","ss"])
-        fetchCurrentProgress()
-    }
-    
+    // 画面遷移系メソッド
     @objc func toWordDetailView() {
         performSegue(withIdentifier: "toWordDetailView", sender: nil)
     }
@@ -112,33 +124,40 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         performSegue(withIdentifier: "toAddWordView", sender: nil)
     }
     
-    // 削除ボタンと暗記した！ボタンを切り替える
+    // 削除ボタンと暗記した！ボタンを切り替えた際にアイコンの画像を変更する
     @IBAction func switchWordActionMode() {
         isDeleteModeOn = isDeleteModeOn == true ? false : true
         nabigationBarLeftButton.image = isDeleteModeOn == true ? UIImage(systemName: "brain") : UIImage(systemName: "trash.fill")
     }
 }
 
+// MARK: WordListViewControllerのTableViewDelegate
 // TableViewを描画・処理する為に最低限必要なデリゲートメソッド、データソース
 extension WordListViewController: UITableViewDelegate {
 
+    // セルが選択された際の処理
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Modelでタップされた時の追加処理を行う。
+        // タップされた時の追加処理を行う。
         tableView.deselectRow(at: indexPath, animated: true)
+        // 単語詳細画面に行く際のデータを橋渡し
         let model = wordModel?.wordList[indexPath.row]
         self.singleWord = model?.word.singleWord ?? ""
         self.meaning = model?.word.meaning ?? ""
         self.exampleSentence = model?.word.exampleSentence ?? ""
         self.exampleTranslation = model?.word.exampleTranslation ?? ""
+        // 単語詳細画面へ
         self.toWordDetailView()
     }
     
+    // セルをスワイプした時の処理
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        // 削除アクション
         let deleteAction = UIContextualAction(style: .normal, title: "削除") { (action, view, completionHandler) in
             self.wordModel?.removeWord(index: indexPath.row)
             self.fetchCurrentProgress()
             completionHandler(true)
         }
+        // 暗記アクション
         let rememberedAction = UIContextualAction(style: .normal, title: "覚えた") { (action, view, completionHandler) in
             self.wordModel?.upDateRememberStatus(index: indexPath.row)
             // TODO: 暗記リスト配列に追加
@@ -149,14 +168,10 @@ extension WordListViewController: UITableViewDelegate {
         }
         deleteAction.backgroundColor = UIColor.systemRed
         rememberedAction.backgroundColor = UIColor.blue
+        // 削除モードがON/OFFの時、アクションを切り替える
         if isDeleteModeOn != true {
             return UISwipeActionsConfiguration(actions: [rememberedAction])
         }
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
-}
-
-
-extension Notification.Name {
-    static let notifyName = Notification.Name("changeWordList")
 }
