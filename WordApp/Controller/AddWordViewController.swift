@@ -46,10 +46,22 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
             alertContent.addAction(okAction)
             present(alertContent, animated: true, completion: nil)
         } else {
-            // TODO: 確実に要素数を取得する方法を探す
-            // TODO: WordListViewController経由で.addWordListする
             let currentWordId = model.wordList.count
             model.addWordToList(id: currentWordId, data: data)
+            let alertContent = UIAlertController(
+                title: "登録完了（"+data[0]+"）",
+                message: "単語を完了いたしました。",
+                preferredStyle: .alert)
+            let okAction = UIAlertAction(
+                title: "OK",
+                style: .default) { (action) in
+                    let view = AddWordView()
+                    view.resetWordInputField()
+                    self.initializeWordAddView()
+                self.dismiss(animated: true, completion: nil)
+            }
+            alertContent.addAction(okAction)
+            present(alertContent, animated: true, completion: nil)
             registerModel()
         }
     }

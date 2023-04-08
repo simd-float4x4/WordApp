@@ -58,4 +58,11 @@ class AddWordView: UIView {
             exampleTranslationTextView.text!]
         addWordToWordListDelegate?.addWordToList(data: wordData)
     }
+    
+    func resetWordInputField() {
+        singleWordTextView.text = ""
+        meaningWordTextView.text = ""
+        exampleSentenceTextView.text = ""
+        exampleTranslationTextView.text = ""
+    }
 }
