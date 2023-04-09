@@ -14,60 +14,60 @@ class WordModel {
 class WordListModel: NSObject, UITableViewDataSource {
     // Modelで管理する配列に初期値を設定する。
     private(set) var wordList: [WordModel] = [
-//        WordModel.init(
-//            initWord: Word(
-//                id: 1,
-//                singleWord: "accentuate",
-//                meaning: "強調する",
-//                exampleSentence: "This picture was taken in the evening to accentuate the shows of ancient remains.",
-//                exampleTranslation: "この写真は古代遺物の出現を強調するために夕方撮影された。",
-//                isRemembered: false,
-//                wrongCount: 0)),
-//        WordModel.init(
-//            initWord: Word(
-//                id: 2,
-//                singleWord: "culminate",
-//                meaning: "締め括る／最高潮に達する",
-//                exampleSentence: "The ceremony was culminated with the national anthem.",
-//                exampleTranslation: "その式典は国歌斉唱で締めくくられた。",
-//                isRemembered: false,
-//                wrongCount: 0)),
-//        WordModel.init(
-//            initWord: Word(
-//                id: 3,
-//                singleWord: "protectionism",
-//                meaning: "保護主義",
-//                exampleSentence: "The country denounced Japan's protectionism to conceal its own lack of economic policy.",
-//                exampleTranslation: "その国は自らの経済的な無策を隠すために日本の保護貿易主義を非難しました。",
-//                isRemembered: false,
-//                wrongCount: 0)),
-//        WordModel.init(
-//            initWord: Word(
-//                id: 4,
-//                singleWord: "trespass",
-//                meaning: "侵害する",
-//                exampleSentence: "He trespassed on neighbor's land without any allowance.",
-//                exampleTranslation: "彼は無断で隣人の土地に侵入した。",
-//                isRemembered: false,
-//                wrongCount: 0)),
-//        WordModel.init(
-//            initWord: Word(
-//                id: 5,
-//                singleWord: "sloppy",
-//                meaning: "杜撰な",
-//                exampleSentence: "He was accused of the responsibility of sloppy accounting.",
-//                exampleTranslation: "彼は杜撰な会計処理の責任を責め立てられた",
-//                isRemembered: false,
-//                wrongCount: 0)),
-//        WordModel.init(
-//            initWord: Word(
-//                id: 6,
-//                singleWord: "transcribe",
-//                meaning: "複写する",
-//                exampleSentence: "She can transcribe melodic patterns from sound even if melody is adlib",
-//                exampleTranslation: "たとえアドリブであっても、彼女は聴いた旋律パターンを楽譜に起こすことができる",
-//                isRemembered: false,
-//                wrongCount: 0)),
+        WordModel.init(
+            initWord: Word(
+                id: 1,
+                singleWord: "accentuate",
+                meaning: "強調する",
+                exampleSentence: "This picture was taken in the evening to accentuate the shows of ancient remains.",
+                exampleTranslation: "この写真は古代遺物の出現を強調するために夕方撮影された。",
+                isRemembered: false,
+                wrongCount: 0)),
+        WordModel.init(
+            initWord: Word(
+                id: 2,
+                singleWord: "culminate",
+                meaning: "締め括る／最高潮に達する",
+                exampleSentence: "The ceremony was culminated with the national anthem.",
+                exampleTranslation: "その式典は国歌斉唱で締めくくられた。",
+                isRemembered: true,
+                wrongCount: 0)),
+        WordModel.init(
+            initWord: Word(
+                id: 3,
+                singleWord: "protectionism",
+                meaning: "保護主義",
+                exampleSentence: "The country denounced Japan's protectionism to conceal its own lack of economic policy.",
+                exampleTranslation: "その国は自らの経済的な無策を隠すために日本の保護貿易主義を非難しました。",
+                isRemembered: false,
+                wrongCount: 0)),
+        WordModel.init(
+            initWord: Word(
+                id: 4,
+                singleWord: "trespass",
+                meaning: "侵害する",
+                exampleSentence: "He trespassed on neighbor's land without any allowance.",
+                exampleTranslation: "彼は無断で隣人の土地に侵入した。",
+                isRemembered: false,
+                wrongCount: 0)),
+        WordModel.init(
+            initWord: Word(
+                id: 5,
+                singleWord: "sloppy",
+                meaning: "杜撰な",
+                exampleSentence: "He was accused of the responsibility of sloppy accounting.",
+                exampleTranslation: "彼は杜撰な会計処理の責任を責め立てられた",
+                isRemembered: false,
+                wrongCount: 0)),
+        WordModel.init(
+            initWord: Word(
+                id: 6,
+                singleWord: "transcribe",
+                meaning: "複写する",
+                exampleSentence: "She can transcribe melodic patterns from sound even if melody is adlib",
+                exampleTranslation: "たとえアドリブであっても、彼女は聴いた旋律パターンを楽譜に起こすことができる",
+                isRemembered: false,
+                wrongCount: 0)),
     ] {
         didSet{
             // Modelで管理している配列に変化があった場合に呼び出されて、通知する。
@@ -135,14 +135,18 @@ class WordListModel: NSObject, UITableViewDataSource {
 // MARK: UITableViewDatasoruce
     // UITableViewが返す要素数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.wordList.count
+        // 暗記した単語は非表示にしたいのでその分をfilterしておく
+        let availableWord = self.wordList.filter( {$0.word.isRemembered == false} )
+        return availableWord.count
     }
     
     // UITableViewの各セルが表示する内容
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let ud = UserDefaults.standard
         let currentMeaningVisibility  = ud.bool(forKey: "isMeaningHidden")
-        let wordModel = self.wordList[indexPath.row]
+        // 暗記した単語は非表示にしたいのでその分をfilterしておく
+        let availableWordList = self.wordList.filter( {$0.word.isRemembered == false} )
+        let wordModel = availableWordList[indexPath.row]
         let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
         
         var content = cell.defaultContentConfiguration()
