@@ -15,7 +15,10 @@ class WordListModel: NSObject, UITableViewDataSource {
     // UserDefaults
     let ud = UserDefaults.standard
     // 単語帳画面／暗記単語一覧画面切り替えるための変数
-    var checkIsThisRememberedWordList = false
+    var checkIsThisRememberedWordList = true
+    
+    private override init() {}
+    static let shared = WordListModel()
     
     // Modelで管理する配列に初期値を設定する。
     private(set) var wordList: [WordModel] = [

@@ -5,13 +5,15 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     
     // wordListModel型のwordModelを宣言。MARK: ここ以外にwordModelは原則宣言しない。
     // TODO: wordModelという名前がambigiousであるため、いい命名が思いつき次第リファクタリング
-    var wordModel: WordListModel? {
-        // セットされるたびにdidSetが動作する
-        didSet {
-            // ViewとModelとを結合し、Modelの監視を開始する
-            registerModel()
-        }
-    }
+//    var wordModel: WordListModel? {
+//        // セットされるたびにdidSetが動作する
+//        didSet {
+//            // ViewとModelとを結合し、Modelの監視を開始する
+//            registerModel()
+//        }
+//    }
+    
+    var wordModel = WordListModel.shared
     
     // DetailViewControllerに渡すための文字列
     var singleWord: String = ""
@@ -35,10 +37,8 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         // 日本語訳の表示/非表示に関しては、アプリ起動時には原則trueをセットする
         ud.set(true, forKey: "isMeaningHidden")
         ud.synchronize()
-        // checkIsThisRememberedWordListの変数を切り替える
-        self.wordModel?.changeUserReferredWordListStatus()
         // WordModelを登録する
-        self.wordModel = WordListModel()
+        // self.wordModel = WordListModel
         // 描画系処理を呼び出す
         fetchCurrentProgress()
         initializeWordListWidget()
@@ -47,6 +47,7 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     // 画面が呼ばれるたびにWordListWidgetを更新する
     override func viewWillAppear(_ animated: Bool) {
         initializeWordListWidget()
+        wordModel.changeUserReferredWordListStatus()
         reloadWordListWidget()
     }
     
@@ -55,7 +56,7 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         let wordListView = self.view as! WordListView
         // TODO: rememberedList実装後に動的に取得できるようにする
         let wordSolvedSum = 2
-        let wordTotalSum = wordModel?.wordList.count ?? 0
+        let wordTotalSum = wordModel.wordList.count
         // TODO: 暗記機能実装後にゼロ除算対策をする
         let wordRememberedPercentage = wordTotalSum != 0 ? wordSolvedSum * 100 / wordTotalSum : 100
         wordListView.progressWordSumLabel.text = String(wordSolvedSum) + " / " + String(wordTotalSum)
@@ -81,8 +82,8 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         let wordListView = self.view as! WordListView
         wordListView.wordListWidget.reloadData()
         // 表示上の配列をあらかじめfilterしておく
-        let itemList =  wordModel?.returnFilteredWordList(isWordRememberedStatus: false)
-        if itemList!.isEmpty == true {
+        let itemList =  wordModel.returnFilteredWordList(isWordRememberedStatus: false)
+        if itemList.isEmpty == true {
             wordListView.wordListWidget.isHidden = true
         } else {
             wordListView.wordListWidget.isHidden = false
@@ -99,7 +100,7 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         // 一巡したらソートタイプを1に戻す
         sortType = sortType == 5 ? 1 : sortType
         // wordListを並び替える
-        wordModel?.sortWordList(sortModeId: sortType)
+        wordModel.sortWordList(sortModeId: sortType)
         // ソートボタンのラベル文字を適宜変更する
         wordListView.sortWordListButton.setTitle(sortTypeTextArray[sortType-1], for: .normal)
         reloadWordListWidget()
@@ -151,13 +152,13 @@ extension WordListViewController: UITableViewDelegate {
     // セルが選択された際の処理
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 表示上の配列をあらかじめfilterしておく
-        let itemList =  wordModel?.returnFilteredWordList(isWordRememberedStatus: false)
+        let itemList =  wordModel.returnFilteredWordList(isWordRememberedStatus: false)
         // タップされた時の追加処理を行う。
         tableView.deselectRow(at: indexPath, animated: true)
         // 配列からidを取得
-        let id = itemList?[indexPath.row].word.id
+        let id = itemList[indexPath.row].word.id
         // 取得したidからデータ絞り込み
-        let model = wordModel?.wordList.first(where: {$0.word.id == id!})
+        let model = wordModel.wordList.first(where: {$0.word.id == id})
         // 単語詳細画面に行く際のデータを橋渡し
         self.singleWord = model?.word.singleWord ?? ""
         self.meaning = model?.word.meaning ?? ""
@@ -170,13 +171,13 @@ extension WordListViewController: UITableViewDelegate {
     // セルをスワイプした時の処理
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         // 表示上の配列をあらかじめfilterしておく
-        let itemList =  wordModel?.returnFilteredWordList(isWordRememberedStatus: false)
+        let itemList =  wordModel.returnFilteredWordList(isWordRememberedStatus: false)
         // 削除アクション
         let deleteAction = UIContextualAction(style: .normal, title: "削除") { (action, view, completionHandler) in
             // 配列からidを取得
-            let id = itemList?[indexPath.row].word.id
+            let id = itemList[indexPath.row].word.id
             // wordModel.wordListから該当するidの要素を削除
-            self.wordModel?.removeWord(index: id!)
+            self.wordModel.removeWord(index: id)
             // WordListWidgetを更新
             self.reloadWordListWidget()
             // TODO: ProgressBarを更新
@@ -185,8 +186,8 @@ extension WordListViewController: UITableViewDelegate {
         }
         // 暗記アクション
         let rememberedAction = UIContextualAction(style: .normal, title: "覚えた") { (action, view, completionHandler) in
-            let id = itemList?[indexPath.row].word.id
-            self.wordModel?.upDateRememberStatus(index: id!)
+            let id = itemList[indexPath.row].word.id
+            self.wordModel.upDateRememberStatus(index: id)
             // WordListWidgetを更新
             self.reloadWordListWidget()
             // TODO: ProgressBarを更新

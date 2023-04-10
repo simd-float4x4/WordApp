@@ -3,7 +3,7 @@ import UIKit
 // MARK: AddWordViewController
 class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWordListDelegate {
     
-    var model = WordListModel()
+    var wordModel = WordListModel.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,8 +47,8 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
             present(alertContent, animated: true, completion: nil)
         } else {
         // バリデーション追加時
-            let currentWordId = model.wordList.count
-            model.addWordToList(id: currentWordId, data: data)
+            let currentWordId = wordModel.wordList.count
+            wordModel.addWordToList(id: currentWordId, data: data)
             let alertContent = UIAlertController(
                 title: "登録完了（"+data[0]+"）",
                 message: "単語を完了いたしました。",
@@ -87,7 +87,7 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
         if let index = navigationController?.viewControllers.count {
             // TODO: 不具合対応：TabBarControllerで別のTabVC開いてからここにアクセスするとCould not cast value of type 'WordApp.AddWordViewController' (0x1022333b8) to 'WordApp.WordListViewController' （SIGNAL SIGABRT）
             let preVC = navigationController?.viewControllers[index - 1] as! WordListViewController
-            preVC.wordModel = self.model
+            preVC.wordModel = self.wordModel
             // TODO: WordListViewの最新版の中身を登録する
         }
     }
