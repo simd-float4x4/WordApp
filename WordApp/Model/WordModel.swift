@@ -12,6 +12,11 @@ class WordModel {
 
 // MARK: WordListModel
 class WordListModel: NSObject, UITableViewDataSource {
+    // UserDefaults
+    let ud = UserDefaults.standard
+    // 単語帳画面／暗記単語一覧画面切り替えるための変数
+    var checkIsThisRememberedWordList = false
+    
     // Modelで管理する配列に初期値を設定する。
     private(set) var wordList: [WordModel] = [
         WordModel.init(
@@ -48,7 +53,7 @@ class WordListModel: NSObject, UITableViewDataSource {
                 meaning: "侵害する",
                 exampleSentence: "He trespassed on neighbor's land without any allowance.",
                 exampleTranslation: "彼は無断で隣人の土地に侵入した。",
-                isRemembered: false,
+                isRemembered: true,
                 wrongCount: 0)),
         WordModel.init(
             initWord: Word(
@@ -100,14 +105,23 @@ class WordListModel: NSObject, UITableViewDataSource {
     /// - Parameters:
         ///   - index: 単語ID（Int）
     func upDateRememberStatus(index: Int) {
-        self.wordList[index].word.isRemembered = true
+        let selectedWord = self.wordList.first(where: {$0.word.id == index})
+        let currentRememberStatus = selectedWord?.word.isRemembered
+        if currentRememberStatus == true {
+            selectedWord?.word.isRemembered = false
+        } else if currentRememberStatus == false {
+            selectedWord?.word.isRemembered = true
+        } else {
+            print("error: cannot get curretRememberStatus")
+        }
     }
     
     // 削除モードがONの状態の際に単語データを削除する
     /// - Parameters:
         ///   - index: 単語ID（Int）
     func removeWord(index: Int) {
-        self.wordList.remove(at: index)
+        // idはUniqueであるため下記実装で問題がないと思われるが、今後のテストの結果次第で実装し直すべきだと思われる
+        self.wordList.removeAll(where: {$0.word.id == index})
     }
     
     // WordListWidgetを並び替える
@@ -132,25 +146,40 @@ class WordListModel: NSObject, UITableViewDataSource {
         }
     }
     
+    //
+    func changeUserReferredWordListStatus() {
+        checkIsThisRememberedWordList = checkIsThisRememberedWordList == true ? false : true
+    }
+    
+    // WordListWidgetを並び替える
+    /// - Parameters:
+        ///   - sortModeId: 並び替えモードのID。
+    func returnFilteredWordList(isWordRememberedStatus: Bool) -> [WordModel] {
+        let array = self.wordList.filter( {$0.word.isRemembered == isWordRememberedStatus})
+        return array
+    }
+    
 // MARK: UITableViewDatasoruce
     // UITableViewが返す要素数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // 暗記した単語は非表示にしたいのでその分をfilterしておく
-        let availableWord = self.wordList.filter( {$0.word.isRemembered == false} )
-        return availableWord.count
+        // WordListをfilterしておく
+        let availableWordList = returnFilteredWordList(isWordRememberedStatus: checkIsThisRememberedWordList)
+        return availableWordList.count
     }
     
     // UITableViewの各セルが表示する内容
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let ud = UserDefaults.standard
+        // 現在の意味表示モードのON/OFFを取得
         let currentMeaningVisibility  = ud.bool(forKey: "isMeaningHidden")
-        // 暗記した単語は非表示にしたいのでその分をfilterしておく
-        let availableWordList = self.wordList.filter( {$0.word.isRemembered == false} )
+        // WordListをfilterしておく
+        let availableWordList = returnFilteredWordList(isWordRememberedStatus: checkIsThisRememberedWordList)
+        // wordModelを取得する
         let wordModel = availableWordList[indexPath.row]
+        // cellを登録
         let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-        
+        // cellの描画
         var content = cell.defaultContentConfiguration()
-        content.text = wordModel.word.singleWord
+        content.text = String(wordModel.word.id) + "：" + wordModel.word.singleWord + "（" + String(indexPath.row) + "）"
         content.secondaryText = currentMeaningVisibility == true ? nil : wordModel.word.meaning
         cell.contentConfiguration = content
         return cell

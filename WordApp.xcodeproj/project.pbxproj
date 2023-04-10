@@ -28,6 +28,9 @@
 		706C44C129DAEEA700B5FBC8 /* AddWordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 706C44BF29DAEEA700B5FBC8 /* AddWordView.xib */; };
 		706C44C329DAEEB500B5FBC8 /* AddWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706C44C229DAEEB500B5FBC8 /* AddWordViewController.swift */; };
 		709BDBCB29E2281B00F06C59 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709BDBCA29E2281B00F06C59 /* Notification.swift */; };
+		709BDBCD29E2397C00F06C59 /* WordRememberedListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 709BDBCC29E2397C00F06C59 /* WordRememberedListView.xib */; };
+		709BDBCF29E2398500F06C59 /* WordRememberedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709BDBCE29E2398500F06C59 /* WordRememberedListView.swift */; };
+		709BDBD129E23BDC00F06C59 /* WordRememberedListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709BDBD029E23BDC00F06C59 /* WordRememberedListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +76,9 @@
 		706C44BF29DAEEA700B5FBC8 /* AddWordView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddWordView.xib; sourceTree = "<group>"; };
 		706C44C229DAEEB500B5FBC8 /* AddWordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddWordViewController.swift; sourceTree = "<group>"; };
 		709BDBCA29E2281B00F06C59 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		709BDBCC29E2397C00F06C59 /* WordRememberedListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WordRememberedListView.xib; sourceTree = "<group>"; };
+		709BDBCE29E2398500F06C59 /* WordRememberedListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordRememberedListView.swift; sourceTree = "<group>"; };
+		709BDBD029E23BDC00F06C59 /* WordRememberedListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordRememberedListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +176,7 @@
 				706C44C229DAEEB500B5FBC8 /* AddWordViewController.swift */,
 				7024111229D562160024ABBD /* WordListViewController.swift */,
 				702F654729D7FEDA0041B8DC /* WordDetailViewController.swift */,
+				709BDBD029E23BDC00F06C59 /* WordRememberedListViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -183,6 +190,8 @@
 				7024111A29D56F410024ABBD /* WordListView.xib */,
 				702F654B29D7FF200041B8DC /* WordDetailView.swift */,
 				702F654929D7FF120041B8DC /* WordDetailView.xib */,
+				709BDBCE29E2398500F06C59 /* WordRememberedListView.swift */,
+				709BDBCC29E2397C00F06C59 /* WordRememberedListView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -296,6 +305,7 @@
 				706C44C129DAEEA700B5FBC8 /* AddWordView.xib in Resources */,
 				702410E929D55F580024ABBD /* LaunchScreen.storyboard in Resources */,
 				702410E629D55F580024ABBD /* Assets.xcassets in Resources */,
+				709BDBCD29E2397C00F06C59 /* WordRememberedListView.xib in Resources */,
 				702410E129D55F560024ABBD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -321,10 +331,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				709BDBD129E23BDC00F06C59 /* WordRememberedListViewController.swift in Sources */,
 				702410E429D55F560024ABBD /* WordApp.xcdatamodeld in Sources */,
 				7024110D29D560EE0024ABBD /* Word.swift in Sources */,
 				7024111329D562160024ABBD /* WordListViewController.swift in Sources */,
 				702410DA29D55F560024ABBD /* AppDelegate.swift in Sources */,
+				709BDBCF29E2398500F06C59 /* WordRememberedListView.swift in Sources */,
 				706C44C329DAEEB500B5FBC8 /* AddWordViewController.swift in Sources */,
 				7024111729D562600024ABBD /* WordListView.swift in Sources */,
 				7024111D29D577A60024ABBD /* WordModel.swift in Sources */,

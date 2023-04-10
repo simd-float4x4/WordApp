@@ -71,6 +71,22 @@
             </objects>
             <point key="canvasLocation" x="3007" y="66"/>
         </scene>
+        <!--暗記リスト-->
+        <scene sceneID="DiE-iT-kVW">
+            <objects>
+                <viewController id="eKR-8C-rqu" customClass="WordRememberedListViewController" customModule="WordApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CaQ-jf-FqI">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Vpa-kN-X6i"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="暗記リスト" id="ODZ-HP-Fmh"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CRa-Ur-GNQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2057" y="739"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="MfN-7B-9Wp">
             <objects>
@@ -83,6 +99,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="NJE-lU-czm" kind="relationship" relationship="viewControllers" id="wdz-AE-7Zf"/>
+                        <segue destination="wKg-S6-9iP" kind="relationship" relationship="viewControllers" id="ZhF-sK-gH1"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vm5-1K-ZRB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -108,6 +125,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CM6-6V-8Yj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1134.7826086956522" y="65.625"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="XHD-tl-H4B">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wKg-S6-9iP" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="2f0-Rg-5Jo"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FYh-Yv-xSS">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="eKR-8C-rqu" kind="relationship" relationship="rootViewController" id="5A3-O5-kxg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="acf-Cq-eUV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1135" y="739"/>
         </scene>
     </scenes>
     <resources>

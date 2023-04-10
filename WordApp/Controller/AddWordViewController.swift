@@ -85,6 +85,7 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
     // WorListViewControllerのwordModelを更新する
     func sendWordModelToPrevious() {
         if let index = navigationController?.viewControllers.count {
+            // TODO: 不具合対応：TabBarControllerで別のTabVC開いてからここにアクセスするとCould not cast value of type 'WordApp.AddWordViewController' (0x1022333b8) to 'WordApp.WordListViewController' （SIGNAL SIGABRT）
             let preVC = navigationController?.viewControllers[index - 1] as! WordListViewController
             preVC.wordModel = self.model
             // TODO: WordListViewの最新版の中身を登録する

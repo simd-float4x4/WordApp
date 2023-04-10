@@ -32,11 +32,12 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = WordListView()
-        
         // 日本語訳の表示/非表示に関しては、アプリ起動時には原則trueをセットする
         ud.set(true, forKey: "isMeaningHidden")
         ud.synchronize()
-
+        // checkIsThisRememberedWordListの変数を切り替える
+        self.wordModel?.changeUserReferredWordListStatus()
+        // WordModelを登録する
         self.wordModel = WordListModel()
         // 描画系処理を呼び出す
         fetchCurrentProgress()
@@ -147,10 +148,15 @@ extension WordListViewController: UITableViewDelegate {
 
     // セルが選択された際の処理
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // 表示上の配列をあらかじめfilterしておく
+        let itemList =  wordModel?.returnFilteredWordList(isWordRememberedStatus: false)
         // タップされた時の追加処理を行う。
         tableView.deselectRow(at: indexPath, animated: true)
+        // 配列からidを取得
+        let id = itemList?[indexPath.row].word.id
+        // 取得したidからデータ絞り込み
+        let model = wordModel?.wordList.first(where: {$0.word.id == id!})
         // 単語詳細画面に行く際のデータを橋渡し
-        let model = wordModel?.wordList[indexPath.row]
         self.singleWord = model?.word.singleWord ?? ""
         self.meaning = model?.word.meaning ?? ""
         self.exampleSentence = model?.word.exampleSentence ?? ""
@@ -161,24 +167,33 @@ extension WordListViewController: UITableViewDelegate {
     
     // セルをスワイプした時の処理
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        // 表示上の配列をあらかじめfilterしておく
+        let itemList =  wordModel?.returnFilteredWordList(isWordRememberedStatus: false)
         // 削除アクション
         let deleteAction = UIContextualAction(style: .normal, title: "削除") { (action, view, completionHandler) in
-            self.wordModel?.removeWord(index: indexPath.row)
+            // 配列からidを取得
+            let id = itemList?[indexPath.row].word.id
+            // wordModel.wordListから該当するidの要素を削除
+            self.wordModel?.removeWord(index: id!)
+            // WordListWidgetを更新
+            self.reloadWordListWidget()
+            // TODO: ProgressBarを更新
             self.fetchCurrentProgress()
             completionHandler(true)
         }
         // 暗記アクション
         let rememberedAction = UIContextualAction(style: .normal, title: "覚えた") { (action, view, completionHandler) in
-            self.wordModel?.upDateRememberStatus(index: indexPath.row)
-            // TODO: 暗記リスト配列に追加
-            self.wordModel?.removeWord(index: indexPath.row)
+            let id = itemList?[indexPath.row].word.id
+            self.wordModel?.upDateRememberStatus(index: id!)
+            // WordListWidgetを更新
+            self.reloadWordListWidget()
             // TODO: ProgressBarを更新
             self.fetchCurrentProgress()
             completionHandler(true)
         }
+        // 背景色の決定
         deleteAction.backgroundColor = UIColor.systemRed
         rememberedAction.backgroundColor = UIColor.blue
-        self.reloadWordListWidget()
         // 削除モードがON/OFFの時、アクションを切り替える
         if isDeleteModeOn != true {
             return UISwipeActionsConfiguration(actions: [rememberedAction])
