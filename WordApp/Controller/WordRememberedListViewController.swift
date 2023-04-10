@@ -2,7 +2,7 @@ import UIKit
 
 class WordRememberedListViewController: UIViewController {
     
-    let wordModel = WordListModel()
+    var wordModel = WordListModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()

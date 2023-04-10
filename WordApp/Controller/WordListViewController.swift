@@ -80,7 +80,9 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         // WordListViewの描画を更新する
         let wordListView = self.view as! WordListView
         wordListView.wordListWidget.reloadData()
-        if wordModel?.wordList.isEmpty == true {
+        // 表示上の配列をあらかじめfilterしておく
+        let itemList =  wordModel?.returnFilteredWordList(isWordRememberedStatus: false)
+        if itemList!.isEmpty == true {
             wordListView.wordListWidget.isHidden = true
         } else {
             wordListView.wordListWidget.isHidden = false
