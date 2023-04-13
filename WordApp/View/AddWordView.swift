@@ -33,6 +33,7 @@ class AddWordView: UIView {
             self.addSubview(subview)
         }
         initializeTextField()
+        inputTestData()
     }
     
     // UITextFieldを初期化する
@@ -72,5 +73,12 @@ class AddWordView: UIView {
         meaningWordTextView.text = ""
         exampleSentenceTextView.text = ""
         exampleTranslationTextView.text = ""
+    }
+    
+    func inputTestData() {
+        singleWordTextView.text = "envisage"
+        meaningWordTextView.text = "〜を想像する"
+        exampleSentenceTextView.text = "Did you ever envisage that your book might be translated into different languages?"
+        exampleTranslationTextView.text = "自分の本がいろいろな国の言葉に翻訳されると予想されましたか？"
     }
 }

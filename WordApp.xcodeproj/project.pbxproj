@@ -34,6 +34,7 @@
 		709BDBD329E3A7C600F06C59 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709BDBD229E3A7C600F06C59 /* QuizView.swift */; };
 		709BDBD529E3A7D400F06C59 /* QuizView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 709BDBD429E3A7D400F06C59 /* QuizView.xib */; };
 		709BDBD729E3A83400F06C59 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709BDBD629E3A83400F06C59 /* QuizViewController.swift */; };
+		709BDBDC29E7A86300F06C59 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709BDBDB29E7A86200F06C59 /* Alert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		709BDBD229E3A7C600F06C59 /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
 		709BDBD429E3A7D400F06C59 /* QuizView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuizView.xib; sourceTree = "<group>"; };
 		709BDBD629E3A83400F06C59 /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
+		709BDBDB29E7A86200F06C59 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 		702410D829D55F560024ABBD /* WordApp */ = {
 			isa = PBXGroup;
 			children = (
+				709BDBDA29E7A85400F06C59 /* Common */,
 				7024111029D561BC0024ABBD /* View */,
 				7024110F29D561AC0024ABBD /* Controller */,
 				7024110E29D561A70024ABBD /* Model */,
@@ -203,6 +206,14 @@
 				709BDBD429E3A7D400F06C59 /* QuizView.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		709BDBDA29E7A85400F06C59 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				709BDBDB29E7A86200F06C59 /* Alert.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -344,6 +355,7 @@
 				709BDBD129E23BDC00F06C59 /* WordRememberedListViewController.swift in Sources */,
 				702410E429D55F560024ABBD /* WordApp.xcdatamodeld in Sources */,
 				709BDBD329E3A7C600F06C59 /* QuizView.swift in Sources */,
+				709BDBDC29E7A86300F06C59 /* Alert.swift in Sources */,
 				7024110D29D560EE0024ABBD /* Word.swift in Sources */,
 				7024111329D562160024ABBD /* WordListViewController.swift in Sources */,
 				702410DA29D55F560024ABBD /* AppDelegate.swift in Sources */,

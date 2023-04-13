@@ -11,7 +11,7 @@
         <!--単語帳画面-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="WordListViewController" customModule="WordApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WordListViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="WordListViewController" customModule="WordApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -82,10 +82,28 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="暗記リスト" id="ODZ-HP-Fmh"/>
+                    <connections>
+                        <segue destination="eCW-PU-OHY" kind="presentation" identifier="toWordDetailView" id="rGK-Yx-fkq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CRa-Ur-GNQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2057" y="739"/>
+        </scene>
+        <!--Word Detail View Controller-->
+        <scene sceneID="BxJ-7T-D8i">
+            <objects>
+                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="eCW-PU-OHY" customClass="WordDetailViewController" customModule="WordApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4Q7-cK-BEW">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Y3o-GV-lC3"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sYY-UD-Vgh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3006" y="739"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="MfN-7B-9Wp">
@@ -146,7 +164,7 @@
             </objects>
             <point key="canvasLocation" x="1135" y="739"/>
         </scene>
-        <!--Title-->
+        <!--クイズモード-->
         <scene sceneID="QZT-0w-28u">
             <objects>
                 <viewController id="qBZ-n6-KuY" customClass="QuizViewController" customModule="WordApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -156,7 +174,7 @@
                         <viewLayoutGuide key="safeArea" id="fuN-Ed-pvS"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="wjm-Yn-Cvl"/>
+                    <navigationItem key="navigationItem" title="クイズモード" id="wjm-Yn-Cvl"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QI5-aw-K1M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

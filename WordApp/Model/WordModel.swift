@@ -29,7 +29,7 @@ class WordListModel: NSObject, UITableViewDataSource {
                 meaning: "強調する",
                 exampleSentence: "This picture was taken in the evening to accentuate the shows of ancient remains.",
                 exampleTranslation: "この写真は古代遺物の出現を強調するために夕方撮影された。",
-                isRemembered: false,
+                isRemembered: true,
                 wrongCount: 0)),
         WordModel.init(
             initWord: Word(
@@ -65,7 +65,7 @@ class WordListModel: NSObject, UITableViewDataSource {
                 meaning: "杜撰な",
                 exampleSentence: "He was accused of the responsibility of sloppy accounting.",
                 exampleTranslation: "彼は杜撰な会計処理の責任を責め立てられた",
-                isRemembered: false,
+                isRemembered: true,
                 wrongCount: 0)),
         WordModel.init(
             initWord: Word(
@@ -74,7 +74,7 @@ class WordListModel: NSObject, UITableViewDataSource {
                 meaning: "複写する",
                 exampleSentence: "She can transcribe melodic patterns from sound even if melody is adlib",
                 exampleTranslation: "たとえアドリブであっても、彼女は聴いた旋律パターンを楽譜に起こすことができる",
-                isRemembered: false,
+                isRemembered: true,
                 wrongCount: 0)),
     ] {
         didSet{
@@ -150,8 +150,15 @@ class WordListModel: NSObject, UITableViewDataSource {
     }
     
     //
-    func changeUserReferredWordListStatus() {
-        checkIsThisRememberedWordList = checkIsThisRememberedWordList == true ? false : true
+    func changeUserReferredWordListStatus(key: String) {
+        switch key {
+            case "wordListIsShown":
+                checkIsThisRememberedWordList = false
+            case "wordRememberedListIsShown":
+                checkIsThisRememberedWordList = true
+            default:
+                break
+        }
     }
     
     // WordListWidgetを並び替える
