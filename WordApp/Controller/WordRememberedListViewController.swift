@@ -1,6 +1,6 @@
 import UIKit
 
-class WordRememberedListViewController: UIViewController {
+class WordRememberedListViewController: UIViewController, SortWordRememberedListWidgetDelegate {
     
     var wordModel = WordListModel.shared
     
@@ -9,12 +9,18 @@ class WordRememberedListViewController: UIViewController {
     var meaning: String = ""
     var exampleSentence: String = ""
     var exampleTranslation: String = ""
+    
+    // ソートタイプ：default値は1をセットする。
+    var sortType: Int = 1
+    // TODO: Localizable.stringにする
+    var sortTypeTextArray: [String] = ["登録日時が古い順", "登録日時が新しい順", "アルファベット順(昇順)", "アルファベット順(降順)", "ランダム順", "誤答数が多い順", "誤答数が少ない順"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         let view = WordRememberedListView()
         view.wordRememberedListWidget.delegate = self
         view.wordRememberedListWidget.dataSource = self.wordModel
+        view.sortWordRemeberedListDelegate = self
         self.view = view
     }
     
@@ -41,8 +47,6 @@ class WordRememberedListViewController: UIViewController {
     
     // WordListWidgetをリロードする
     func reloadWordListWidget() {
-        // TODO: WordListViewの最新版の中身を取得する
-        
         // WordListViewの描画を更新する
         let wordListView = self.view as! WordRememberedListView
         wordListView.wordRememberedListWidget.reloadData()
@@ -51,6 +55,21 @@ class WordRememberedListViewController: UIViewController {
         } else {
             wordListView.wordRememberedListWidget.isHidden = false
         }
+    }
+    
+    // WordListWidgetをソートする
+    func sortWordRememberedListView() {
+        let wordRememberedListView = self.view as! WordRememberedListView
+        sortType += 1
+        print(sortType)
+        // TODO: (ソートタイプの上限)を定数管理する
+        // 一巡したらソートタイプを1に戻す
+        sortType = sortType == 8 ? 1 : sortType
+        // wordListを並び替える
+        wordModel.sortWordList(sortModeId: sortType)
+        // ソートボタンのラベル文字を適宜変更する
+        wordRememberedListView.sortWordRememberedListButton.setTitle(sortTypeTextArray[sortType-1], for: .normal)
+        reloadWordListWidget()
     }
 }
 
@@ -86,11 +105,16 @@ extension WordRememberedListViewController: UITableViewDelegate {
         let id = itemList[indexPath.row].word.id
         // 復元アクション
         let categorizeToWordListAction = UIContextualAction(style: .normal, title: "復元") { (action, view, completionHandler) in
+            // 単語帳に戻す
             self.wordModel.upDateRememberStatus(index: id)
+            // 誤答数をリセットする
+            self.wordModel.resetWordWrongCount(index: id)
+            // WoedListを更新する
             self.reloadWordListWidget()
             completionHandler(true)
         }
         categorizeToWordListAction.backgroundColor = UIColor.systemGreen
         return UISwipeActionsConfiguration(actions: [categorizeToWordListAction])
     }
+
 }

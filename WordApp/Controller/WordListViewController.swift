@@ -85,7 +85,7 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         let wordListView = self.view as! WordListView
         sortType += 1
         // TODO: 5(ソートタイプの上限)を定数管理する
-        // 一巡したらソートタイプを1に戻す
+        // 一巡したらソートタイプを1に戻す（sortType: 5~7は暗記専用）
         sortType = sortType == 5 ? 1 : sortType
         // wordListを並び替える
         wordModel.sortWordList(sortModeId: sortType)

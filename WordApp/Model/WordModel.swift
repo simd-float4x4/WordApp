@@ -30,7 +30,7 @@ class WordListModel: NSObject, UITableViewDataSource {
                 exampleSentence: "This picture was taken in the evening to accentuate the shows of ancient remains.",
                 exampleTranslation: "この写真は古代遺物の出現を強調するために夕方撮影された。",
                 isRemembered: true,
-                wrongCount: 0)),
+                wrongCount: 4)),
         WordModel.init(
             initWord: Word(
                 id: 2,
@@ -48,7 +48,7 @@ class WordListModel: NSObject, UITableViewDataSource {
                 exampleSentence: "The country denounced Japan's protectionism to conceal its own lack of economic policy.",
                 exampleTranslation: "その国は自らの経済的な無策を隠すために日本の保護貿易主義を非難しました。",
                 isRemembered: false,
-                wrongCount: 0)),
+                wrongCount: 8)),
         WordModel.init(
             initWord: Word(
                 id: 4,
@@ -57,7 +57,7 @@ class WordListModel: NSObject, UITableViewDataSource {
                 exampleSentence: "He trespassed on neighbor's land without any allowance.",
                 exampleTranslation: "彼は無断で隣人の土地に侵入した。",
                 isRemembered: true,
-                wrongCount: 0)),
+                wrongCount: 2)),
         WordModel.init(
             initWord: Word(
                 id: 5,
@@ -66,7 +66,7 @@ class WordListModel: NSObject, UITableViewDataSource {
                 exampleSentence: "He was accused of the responsibility of sloppy accounting.",
                 exampleTranslation: "彼は杜撰な会計処理の責任を責め立てられた",
                 isRemembered: true,
-                wrongCount: 0)),
+                wrongCount: 6)),
         WordModel.init(
             initWord: Word(
                 id: 6,
@@ -75,7 +75,7 @@ class WordListModel: NSObject, UITableViewDataSource {
                 exampleSentence: "She can transcribe melodic patterns from sound even if melody is adlib",
                 exampleTranslation: "たとえアドリブであっても、彼女は聴いた旋律パターンを楽譜に起こすことができる",
                 isRemembered: true,
-                wrongCount: 0)),
+                wrongCount: 9)),
     ] {
         didSet{
             // Modelで管理している配列に変化があった場合に呼び出されて、通知する。
@@ -144,12 +144,23 @@ class WordListModel: NSObject, UITableViewDataSource {
         case 4:
             //　降順
             self.wordList.sort(by: {$0.word.singleWord > $1.word.singleWord})
+        case 5:
+            //　ランダム
+            self.wordList.shuffle()
+        case 6:
+            // 誤答数多い順
+            self.wordList.sort(by: {$0.word.wrongCount > $1.word.wrongCount})
+        case 7:
+            // 誤答数少ない順
+            self.wordList.sort(by: {$0.word.wrongCount < $1.word.wrongCount})
         default:
             break
         }
     }
     
-    //
+    // Userが参照した画面によってTableViewの表示モードを切り替える
+    /// - Parameters:
+        ///   - key: モード名。
     func changeUserReferredWordListStatus(key: String) {
         switch key {
             case "wordListIsShown":
@@ -159,6 +170,14 @@ class WordListModel: NSObject, UITableViewDataSource {
             default:
                 break
         }
+    }
+    
+    // 誤答数をリセット
+    /// - Parameters:
+        ///   - index: 単語ID（Int）
+    func resetWordWrongCount(index: Int) {
+        let selectedWord = self.wordList.first(where: {$0.word.id == index})
+        selectedWord?.word.wrongCount = 0
     }
     
     // WordListWidgetを並び替える
@@ -189,7 +208,20 @@ class WordListModel: NSObject, UITableViewDataSource {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
         // cellの描画
         var content = cell.defaultContentConfiguration()
-        content.text = String(wordModel.word.id) + "：" + wordModel.word.singleWord + "（" + String(indexPath.row) + "）"
+        if checkIsThisRememberedWordList {
+            // 現在の誤答数を取得
+            let currentWrongCount = wordModel.word.wrongCount
+            // SystemImageのファイル名を生成
+            let suffixFileName = currentWrongCount >= 6 ? ".circle.fill" : ".circle"
+            let fileName = String(currentWrongCount) + suffixFileName
+            // 色を指定
+            let priorityRedColor = CGFloat(Float(currentWrongCount)/10)
+            let color = UIColor(red: priorityRedColor, green: 0.25, blue: 0.25, alpha: 1.0)
+            // 誤答数を表示
+            content.image = UIImage(systemName: fileName)
+            content.imageProperties.tintColor = color
+        }
+        content.text = wordModel.word.singleWord
         content.secondaryText = currentMeaningVisibility == true ? nil : wordModel.word.meaning
         cell.contentConfiguration = content
         return cell

@@ -1,9 +1,19 @@
 import Foundation
 import UIKit
 
+// MARK: SortWordRememberedListWidgetDelegate
+/// - func sortWordRememberedListView() → WordRememberedListViewControllerと接続
+protocol SortWordRememberedListWidgetDelegate: AnyObject {
+    func sortWordRememberedListView()
+}
+
+// MARK: WordRememberedListView
 class WordRememberedListView: UIView {
     
     @IBOutlet weak var wordRememberedListWidget: UITableView!
+    @IBOutlet weak var sortWordRememberedListButton: UIButton!
+    
+    weak var sortWordRemeberedListDelegate: SortWordRememberedListWidgetDelegate!
     
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -21,5 +31,9 @@ class WordRememberedListView: UIView {
         if let subview = view.subviews.first  {
             self.addSubview(subview)
         }
+    }
+    
+    @IBAction func sortWordRememberedList() {
+        sortWordRemeberedListDelegate.sortWordRememberedListView()
     }
 }

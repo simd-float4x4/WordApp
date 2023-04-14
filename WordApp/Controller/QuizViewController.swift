@@ -49,6 +49,20 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
         }
     }
     
+    
+    // UIの初期化
+    func initQuizUI() {
+        initProgressArea()
+        initButtonState()
+    }
+    
+    // ProgressのUIを初期化する
+    func initProgressArea() {
+        let view = self.view as! QuizView
+        view.quizProgressionLabel.text = "1問目"
+        view.quizProgressBar.progress = 0.0
+    }
+    
     // 回答ボタンのUIを初期化する
     func initButtonState() {
         let view = self.view as! QuizView
@@ -67,8 +81,8 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     
     // クイズを初期化
     func initializeQuiz() {
-        // ボタンの状態を初期化
-        initButtonState()
+        // UIの状態を初期化
+        initQuizUI()
         // クイズをシャッフルして配列を生成する
         quiz = makeRandomQuizList()
         totalSolvedQuizCount = 0
@@ -227,6 +241,11 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
             quiz[0].word.wrongCount += 1
             // 今回のQuizで間違えた回数を取得
             totalQuizWrongCount += 1
+            //　10回以上誤答した場合強制的に暗記リストから削除
+            if quiz[0].word.wrongCount >= 10 {
+                quiz[0].word.isRemembered = false
+                quiz[0].word.wrongCount = 0
+            }
         }
         // 今回のQuizで解答数を更新
         totalSolvedQuizCount += 1
