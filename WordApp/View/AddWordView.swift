@@ -14,6 +14,8 @@ class AddWordView: UIView {
     @IBOutlet weak var exampleSentenceTextView: UITextView!
     @IBOutlet weak var exampleTranslationTextView: UITextView!
     
+    @IBOutlet weak var wordAddContainerView: UIView!
+    
     weak var addWordToWordListDelegate: AddWordToWordListDelegate?
     
     override init(frame: CGRect){

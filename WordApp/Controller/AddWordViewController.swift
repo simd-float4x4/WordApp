@@ -8,6 +8,37 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeWordAddView()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        let tapGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGR.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tapGR)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        // WordListViewを取得
+        let addWordView = self.view as! AddWordView
+        // keyboardのsizeを取得
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if addWordView.wordAddContainerView.frame.height > self.view.frame.height / 2 {
+                if self.view.frame.origin.y == 0 {
+                    self.view.frame.origin.y -= keyboardSize.height / 2
+                } else {
+                    let suggestionHeight = self.view.frame.origin.y + keyboardSize.height / 2
+                    self.view.frame.origin.y -= suggestionHeight
+                }
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide() {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
+    
+    @objc func dismissKeyboard() {
+        self.view.endEditing(true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
