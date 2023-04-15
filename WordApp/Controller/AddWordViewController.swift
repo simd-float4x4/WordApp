@@ -9,50 +9,9 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeWordAddView()
-        self.tabBarController?.tabBar.isHidden = true
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        let tapGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        tapGR.cancelsTouchesInView = false
-        self.view.addGestureRecognizer(tapGR)
-    }
-    
-    @objc func keyboardWillShow(notification: NSNotification) {
-        // WordListViewを取得
-        let addWordView = self.view as! AddWordView
-        // タップされたtextFieldがどれか取得
-        DispatchQueue.main.async {
-            // singleWordだったら動かさない
-            if self.tappedTextViewName == ".exampleTranslation" || self.tappedTextViewName == ".exampleSentence" {
-                // keyboardのsizeを取得
-                if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-                    if addWordView.wordAddContainerView.frame.height > self.view.frame.height / 2 {
-                        if self.view.frame.origin.y == 0 {
-                            self.view.frame.origin.y -= keyboardSize.height / 2
-                        } else {
-                            let suggestionHeight = self.view.frame.origin.y + keyboardSize.height / 2
-                            self.view.frame.origin.y -= suggestionHeight
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    func getTappedTextviewName(name: String) {
-        tappedTextViewName = name
-    }
-    
-    @objc func keyboardWillHide() {
-        DispatchQueue.main.async {
-            if self.view.frame.origin.y != 0 {
-                self.view.frame.origin.y = 0
-            }
-        }
-    }
-    
-    @objc func dismissKeyboard() {
-        self.view.endEditing(true)
+        hideTabBarController()
+        setNotificationCenters()
+        setTapGesuture()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -91,7 +50,7 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
             alertContent.addAction(okAction)
             present(alertContent, animated: true, completion: nil)
         } else {
-        // バリデーション追加時
+            // バリデーション追加時
             let currentWordId = wordModel.wordList.count
             wordModel.addWordToList(id: currentWordId, data: data)
             let alertContent = UIAlertController(
@@ -136,9 +95,11 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
         }
     }
     
+    // TextViewがタップされたら
     func textViewDidBeginEditing(_ textView: UITextView) {
         // WordListViewを取得
         let addWordView = self.view as! AddWordView
+        // タップしたTextViewによってキーを変更
         if textView == addWordView.singleWordTextView {
             tappedTextViewName = ".singleWord"
         }
@@ -162,8 +123,69 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-}
-
-class ViewController: UIViewController, UITextFieldDelegate {
     
+    // TabbarControllerを非表示に
+    func hideTabBarController() {
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    // NotificationCenterを登録する
+    func setNotificationCenters() {
+        // キーボードが表示される際の処理
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        // キーボードが閉じられる際の処理
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    // キーボードが表示される時の処理
+    @objc func keyboardWillShow(notification: NSNotification) {
+        // WordListViewを取得
+        let addWordView = self.view as! AddWordView
+        // タップされたtextFieldがどれか取得
+        DispatchQueue.main.async {
+            // singleWordだったら動かさない
+            if self.tappedTextViewName == ".exampleTranslation" || self.tappedTextViewName == ".exampleSentence" {
+                // keyboardのsizeを取得
+                if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                    // TODO: 条件式の算出方法については要検討、再議論の必要あり
+                    // addwordView内の描画領域が画面サイズの半分を超えたら
+                    if addWordView.wordAddContainerView.frame.height > self.view.frame.height / 2 {
+                        if self.view.frame.origin.y == 0 {
+                            self.view.frame.origin.y -= keyboardSize.height / 2
+                        } else {
+                            let suggestionHeight = self.view.frame.origin.y + keyboardSize.height / 2
+                            self.view.frame.origin.y -= suggestionHeight
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    // キーボードが閉じられた時の処理
+    @objc func keyboardWillHide() {
+        DispatchQueue.main.async {
+            if self.view.frame.origin.y != 0 {
+                self.view.frame.origin.y = 0
+            }
+        }
+    }
+    
+    // タップされた際のGestureを登録する
+    func setTapGesuture() {
+        // キーボードがキャンセルされたときの処理
+        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    
+    // キーボードがキャンセルされた時の処理
+    @objc func dismissKeyboard() {
+        self.view.endEditing(true)
+    }
+    
+    // AddWordViewからタップ情報を取得
+    func getTappedTextviewName(name: String) {
+        tappedTextViewName = name
+    }
 }

@@ -38,7 +38,7 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         wordModel.changeUserReferredWordListStatus(key: "wordListIsShown")
         reloadWordListWidget()
         fetchCurrentProgress()
-        self.tabBarController?.tabBar.isHidden = false
+        showTabBarController()
     }
     
     // 最新の回答状況を取得する
@@ -191,5 +191,10 @@ extension WordListViewController: UITableViewDelegate {
             return UISwipeActionsConfiguration(actions: [rememberedAction])
         }
         return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
+    
+    // 単語登録画面から帰ってきた時にTabBarの非表示を解除する（厳密にはどの画面から飛んできても表示する）
+    func showTabBarController() {
+        self.tabBarController?.tabBar.isHidden = false
     }
 }
