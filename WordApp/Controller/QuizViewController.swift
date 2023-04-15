@@ -61,6 +61,7 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
         let view = self.view as! QuizView
         view.quizProgressionLabel.text = "1問目"
         view.quizProgressBar.progress = 0.0
+        view.moveToNextQuizButton.setTitle("次の問題へ", for: .normal)
     }
     
     // 回答ボタンのUIを初期化する
@@ -261,20 +262,31 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     // 次の問題へ進む
     func moveToNextQuiz() {
         let view = self.view as! QuizView
-        view.isAnsweredBool = false
-        view.moveToNextQuizButton.isHidden = true
         removeFirstQuiz()
+        reloadQuizState(view: view)
         resetButtonState(view: view)
-        checkNextQuizIsLast()
         showCurrentQuiz()
         reloadProgressionView()
+        checkNextQuizIsLast()
+    }
+    
+    // 問題の状態を更新する
+    func reloadQuizState(view: QuizView) {
+        // 回答したかを判定するBoolをfalseに
+        view.isAnsweredBool = false
+        //　次の問題へボタンは非表示に
+        view.moveToNextQuizButton.isHidden = true
+        // 次の問題が最初に出題した問題であれば（=この問題が最終問題なら）、ラベルの表示を変更する
+        if quiz[1].word.id == currentQuizStopper {
+            view.moveToNextQuizButton.setTitle("結果発表へ", for: .normal)
+        }
     }
     
     // この問題が最終問題かどうか取得する
     func checkNextQuizIsLast() {
         if quiz[0].word.id == currentQuizStopper {
-            let solvedCount = totalSolvedQuizCount - totalQuizWrongCount
-            let scoreString = String(solvedCount * 100 / totalSolvedQuizCount) + "点です。（100点満点中）"
+            let solvedCorrectlyCount = totalSolvedQuizCount - totalQuizWrongCount
+            let scoreString = String(solvedCorrectlyCount * 100 / totalSolvedQuizCount) + "点です。（100点満点中）" + "\n⭕️" + String(solvedCorrectlyCount) + "問　❌" + String(totalQuizWrongCount) + "問"
             let alertContent = UIAlertController(
                 title: "お疲れ様でした。",
                 message: scoreString,
