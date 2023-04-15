@@ -4,10 +4,12 @@ import UIKit
 class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWordListDelegate {
     
     var wordModel = WordListModel.shared
+    var tappedTextViewName = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeWordAddView()
+        self.tabBarController?.tabBar.isHidden = true
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         let tapGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
@@ -18,22 +20,34 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
     @objc func keyboardWillShow(notification: NSNotification) {
         // WordListViewを取得
         let addWordView = self.view as! AddWordView
-        // keyboardのsizeを取得
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            if addWordView.wordAddContainerView.frame.height > self.view.frame.height / 2 {
-                if self.view.frame.origin.y == 0 {
-                    self.view.frame.origin.y -= keyboardSize.height / 2
-                } else {
-                    let suggestionHeight = self.view.frame.origin.y + keyboardSize.height / 2
-                    self.view.frame.origin.y -= suggestionHeight
+        // タップされたtextFieldがどれか取得
+        DispatchQueue.main.async {
+            // singleWordだったら動かさない
+            if self.tappedTextViewName == ".exampleTranslation" || self.tappedTextViewName == ".exampleSentence" {
+                // keyboardのsizeを取得
+                if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                    if addWordView.wordAddContainerView.frame.height > self.view.frame.height / 2 {
+                        if self.view.frame.origin.y == 0 {
+                            self.view.frame.origin.y -= keyboardSize.height / 2
+                        } else {
+                            let suggestionHeight = self.view.frame.origin.y + keyboardSize.height / 2
+                            self.view.frame.origin.y -= suggestionHeight
+                        }
+                    }
                 }
             }
         }
     }
     
+    func getTappedTextviewName(name: String) {
+        tappedTextViewName = name
+    }
+    
     @objc func keyboardWillHide() {
-        if self.view.frame.origin.y != 0 {
-            self.view.frame.origin.y = 0
+        DispatchQueue.main.async {
+            if self.view.frame.origin.y != 0 {
+                self.view.frame.origin.y = 0
+            }
         }
     }
     
@@ -116,13 +130,28 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
     // WorListViewControllerのwordModelを更新する
     func sendWordModelToPrevious() {
         if let index = navigationController?.viewControllers.count {
-            // TODO: 不具合対応：TabBarControllerで別のTabVC開いてからここにアクセスするとCould not cast value of type 'WordApp.AddWordViewController' (0x1022333b8) to 'WordApp.WordListViewController' （SIGNAL SIGABRT）
             let preVC = navigationController?.viewControllers[index - 1] as! WordListViewController
             preVC.wordModel = self.wordModel
             // TODO: WordListViewの最新版の中身を登録する
         }
     }
     
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        // WordListViewを取得
+        let addWordView = self.view as! AddWordView
+        if textView == addWordView.singleWordTextView {
+            tappedTextViewName = ".singleWord"
+        }
+        if textView == addWordView.meaningWordTextView {
+            tappedTextViewName = ".meaningWord"
+        }
+        if textView == addWordView.exampleSentenceTextView {
+            tappedTextViewName = ".exampleSentence"
+        }
+        if textView == addWordView.exampleTranslationTextView {
+            tappedTextViewName = ".exampleTranslation"
+        }
+    }
     //テキストフィールドでリターンが押されたときに通知され起動するメソッド
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
@@ -133,4 +162,8 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+}
+
+class ViewController: UIViewController, UITextFieldDelegate {
+    
 }

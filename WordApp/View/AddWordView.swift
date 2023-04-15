@@ -4,6 +4,7 @@ import UIKit
 /// - func addWordToList(data: [String]) → AddWordViewControllerと接続
 protocol AddWordToWordListDelegate: AnyObject {
     func addWordToList(data: [String])
+    func getTappedTextviewName(name: String)
 }
 
 // MARK: AddWordView
@@ -15,6 +16,8 @@ class AddWordView: UIView {
     @IBOutlet weak var exampleTranslationTextView: UITextView!
     
     @IBOutlet weak var wordAddContainerView: UIView!
+    
+    var tappedTextViewName = ""
     
     weak var addWordToWordListDelegate: AddWordToWordListDelegate?
     
@@ -82,5 +85,9 @@ class AddWordView: UIView {
         meaningWordTextView.text = "〜を想像する"
         exampleSentenceTextView.text = "Did you ever envisage that your book might be translated into different languages?"
         exampleTranslationTextView.text = "自分の本がいろいろな国の言葉に翻訳されると予想されましたか？"
+    }
+    
+    func setTappedTextView() {
+        addWordToWordListDelegate?.getTappedTextviewName(name: ".singleWord")
     }
 }

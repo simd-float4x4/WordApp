@@ -38,6 +38,7 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         wordModel.changeUserReferredWordListStatus(key: "wordListIsShown")
         reloadWordListWidget()
         fetchCurrentProgress()
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     // 最新の回答状況を取得する
