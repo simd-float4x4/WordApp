@@ -119,6 +119,7 @@
                         <segue destination="NJE-lU-czm" kind="relationship" relationship="viewControllers" id="wdz-AE-7Zf"/>
                         <segue destination="wKg-S6-9iP" kind="relationship" relationship="viewControllers" id="ZhF-sK-gH1"/>
                         <segue destination="msJ-zi-qUc" kind="relationship" relationship="viewControllers" id="Ddd-i0-c03"/>
+                        <segue destination="Go9-DT-Myx" kind="relationship" relationship="viewControllers" id="8EA-RB-cMD"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vm5-1K-ZRB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -198,6 +199,41 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aln-ab-Di7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1113.0434782608697" y="1458.4821428571429"/>
+        </scene>
+        <!--Title-->
+        <scene sceneID="KeO-ko-RoM">
+            <objects>
+                <viewController id="ywv-cO-DfP" customClass="SettingViewController" customModule="WordApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KYg-s1-bfV">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="1fR-Dq-QAG"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="ON6-Rt-g6O"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="86Z-0e-yRN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2026.0869565217392" y="2202.4553571428569"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="lFb-Ga-2iX">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Go9-DT-Myx" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="Yjt-0P-XCD"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2D4-6y-a8v">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ywv-cO-DfP" kind="relationship" relationship="rootViewController" id="0b9-iV-uOK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yn7-Fd-9mI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1115.9420289855072" y="2202.4553571428569"/>
         </scene>
     </scenes>
     <resources>

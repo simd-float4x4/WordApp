@@ -7,7 +7,9 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     var wordModel = WordListModel.shared
     var quiz: [WordModel] = []
     // 選択肢の数
-    let maximumAnswerSelectionCount: Int = 5
+    var maximumAnswerChoicesCount: Int = 5
+    // 出題するクイズの数
+    var maximumQuizCount: Int = 0
     // StopperのID格納変数
     var currentQuizStopper: Int = 0
     // 現在暗記した単語の総数
@@ -28,6 +30,8 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
         let isAvailable = checkIsQuizAvailable()
         if isAvailable {
             // 現状クイズが出来る状態であれば
+            //　現在のクイズに関してのプロパティを取得
+            getQuizCurrentProperties()
             // 利用可能なクイズ数を取得
             currentQuizTotal = countCurrentRegisteredWord()
             // クイズを初期化する
@@ -40,6 +44,8 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     override func viewWillAppear(_ animated: Bool) {
         let isAvailable = checkIsQuizAvailable()
         if isAvailable {
+            //　現在のクイズに関してのプロパティを取得
+            getQuizCurrentProperties()
             // 利用可能なクイズ数を取得
             currentQuizTotal = countCurrentRegisteredWord()
             // クイズを初期化する
@@ -49,24 +55,30 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
         }
     }
     
+    // 設定からクイズに関する情報を取得する
+    func getQuizCurrentProperties() {
+        maximumAnswerChoicesCount = wordModel.getAndReturnQuizChoices()
+        maximumQuizCount = wordModel.getAndReturnMaximumQuizCount()
+    }
+    
     
     // UIの初期化
     func initQuizUI() {
-        initProgressArea()
-        initButtonState()
+        let view = self.view as! QuizView
+        initProgressArea(view: view)
+        initButtonState(view: view)
+        decideButtonDisplayOrNot(view: view)
     }
     
     // ProgressのUIを初期化する
-    func initProgressArea() {
-        let view = self.view as! QuizView
+    func initProgressArea(view: QuizView) {
         view.quizProgressionLabel.text = "1問目"
         view.quizProgressBar.progress = 0.0
         view.moveToNextQuizButton.setTitle("次の問題へ", for: .normal)
     }
     
     // 回答ボタンのUIを初期化する
-    func initButtonState() {
-        let view = self.view as! QuizView
+    func initButtonState(view: QuizView) {
         resetButtonState(view: view)
         view.quizAnswerButtonIsTappedDelegate = self
     }
@@ -78,6 +90,22 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
         view.quizThirdAnswerButton.configuration?.background.backgroundColor = UIColor.systemGray
         view.quizFourthAnswerButton.configuration?.background.backgroundColor = UIColor.systemGray
         view.quizFifthAnswerButton.configuration?.background.backgroundColor = UIColor.systemGray
+    }
+    
+    // ボタンを描画するかどうか決定する
+    func decideButtonDisplayOrNot(view: QuizView) {
+        let selectionCount = wordModel.getAndReturnQuizChoices()
+        var fourthChoiceIsHidden = true
+        var fifthChoiceIsHidden = true
+        if selectionCount == 4 {
+            fourthChoiceIsHidden = false
+        }
+        if selectionCount == 5 {
+            fourthChoiceIsHidden = false
+            fifthChoiceIsHidden = false
+        }
+        view.quizFourthAnswerButton.isHidden = fourthChoiceIsHidden
+        view.quizFifthAnswerButton.isHidden = fifthChoiceIsHidden
     }
     
     // クイズを初期化
@@ -104,7 +132,7 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
         let currentQuiz = quiz[0]
         var meaningArray: [String] = []
         meaningArray.append(currentQuiz.word.meaning)
-        for i in 1 ..< maximumAnswerSelectionCount {
+        for i in 1 ..< maximumAnswerChoicesCount {
             meaningArray.append(quiz[i].word.meaning)
         }
         drawInformationOnQuizWidget(quiz: currentQuiz, dummyAnswers: meaningArray, correctAnswer: meaningArray[0])
@@ -113,7 +141,7 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     // 登録した単語が特定の単語数未満だった場合アラートを表示する
     func checkIsQuizAvailable() -> Bool {
         let currenWordRegisterCount = countCurrentRegisteredWord()
-        if currenWordRegisterCount < maximumAnswerSelectionCount {
+        if currenWordRegisterCount < maximumAnswerChoicesCount {
             wordAmountIsNotEnoughToActivateQuizAlert()
             return false
         }
@@ -144,14 +172,17 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     
     // 現在登録されている単語の数を取得
     func countCurrentRegisteredWord() -> Int{
-        let currentRememberedWordList = wordModel.wordList.filter({$0.word.isRemembered == true})
-        return currentRememberedWordList.count
+        return wordModel.getAndReturnMaximumQuizCount()
     }
     
     // 暗記したQuizのWordListをランダムにシャッフルして返す
     func makeRandomQuizList() -> [WordModel] {
         // wordListをランダムにシャッフル
-        let quizArray = wordModel.wordList.filter({$0.word.isRemembered == true}).shuffled()
+        var quizArray = wordModel.wordList.filter({$0.word.isRemembered == true}).shuffled()
+        let maximumQuizCount = wordModel.getMaximumQuizCount()
+        quizArray = quizArray.prefix(maximumQuizCount).map { $0 }
+        print("配列の数：")
+        print(quizArray.count)
         return quizArray
     }
     
@@ -177,7 +208,7 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
         // 問題を表示
         view.quizSingleWordLabel.text = quiz.word.singleWord
         let dummy = dummyAnswers.shuffled()
-        for i in 0 ..< maximumAnswerSelectionCount {
+        for i in 0 ..< maximumAnswerChoicesCount {
             // String型の変数：answerを宣言
             var answer = ""
             answer = dummy[i]
@@ -187,8 +218,15 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
             if i == 0 { view.quizFirstAnswerButton.configuration?.title = answer }
             if i == 1 { view.quizSecondAnswerButton.configuration?.title = answer }
             if i == 2 { view.quizThirdAnswerButton.configuration?.title = answer }
-            if i == 3 { view.quizFourthAnswerButton.configuration?.title = answer }
-            if i == 4 { view.quizFifthAnswerButton.configuration?.title = answer }
+            switch maximumAnswerChoicesCount {
+                case 4:
+                    if i == 3 { view.quizFourthAnswerButton.configuration?.title = answer }
+                case 5:
+                    if i == 3 { view.quizFourthAnswerButton.configuration?.title = answer }
+                    if i == 4 { view.quizFifthAnswerButton.configuration?.title = answer }
+                default:
+                    break
+            }
         }
     }
     
@@ -305,7 +343,7 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     // Progressionを更新する
     func reloadProgressionView() {
         let view = self.view as! QuizView
-        let progressionRate = Float(totalSolvedQuizCount) / Float(maximumAnswerSelectionCount)
+        let progressionRate = Float(totalSolvedQuizCount) / Float(maximumAnswerChoicesCount)
         view.quizProgressionLabel.text = String(totalSolvedQuizCount+1) + "問目"
         view.quizProgressBar.progress = Float(progressionRate)
     }

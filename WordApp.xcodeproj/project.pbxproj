@@ -35,6 +35,9 @@
 		709BDBD529E3A7D400F06C59 /* QuizView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 709BDBD429E3A7D400F06C59 /* QuizView.xib */; };
 		709BDBD729E3A83400F06C59 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709BDBD629E3A83400F06C59 /* QuizViewController.swift */; };
 		709BDBDC29E7A86300F06C59 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709BDBDB29E7A86200F06C59 /* Alert.swift */; };
+		70A7C43029EB6F7F007C07FC /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C42F29EB6F7F007C07FC /* SettingView.swift */; };
+		70A7C43229EB6F88007C07FC /* SettingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C43129EB6F88007C07FC /* SettingView.xib */; };
+		70A7C43429EB6FF4007C07FC /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C43329EB6FF4007C07FC /* SettingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +90,9 @@
 		709BDBD429E3A7D400F06C59 /* QuizView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuizView.xib; sourceTree = "<group>"; };
 		709BDBD629E3A83400F06C59 /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
 		709BDBDB29E7A86200F06C59 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		70A7C42F29EB6F7F007C07FC /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		70A7C43129EB6F88007C07FC /* SettingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingView.xib; sourceTree = "<group>"; };
+		70A7C43329EB6FF4007C07FC /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +193,7 @@
 				702F654729D7FEDA0041B8DC /* WordDetailViewController.swift */,
 				709BDBD029E23BDC00F06C59 /* WordRememberedListViewController.swift */,
 				709BDBD629E3A83400F06C59 /* QuizViewController.swift */,
+				70A7C43329EB6FF4007C07FC /* SettingViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -204,6 +211,8 @@
 				709BDBCC29E2397C00F06C59 /* WordRememberedListView.xib */,
 				709BDBD229E3A7C600F06C59 /* QuizView.swift */,
 				709BDBD429E3A7D400F06C59 /* QuizView.xib */,
+				70A7C42F29EB6F7F007C07FC /* SettingView.swift */,
+				70A7C43129EB6F88007C07FC /* SettingView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -323,6 +332,7 @@
 				7024111B29D56F410024ABBD /* WordListView.xib in Resources */,
 				709BDBD529E3A7D400F06C59 /* QuizView.xib in Resources */,
 				702F654A29D7FF120041B8DC /* WordDetailView.xib in Resources */,
+				70A7C43229EB6F88007C07FC /* SettingView.xib in Resources */,
 				706C44C129DAEEA700B5FBC8 /* AddWordView.xib in Resources */,
 				702410E929D55F580024ABBD /* LaunchScreen.storyboard in Resources */,
 				702410E629D55F580024ABBD /* Assets.xcassets in Resources */,
@@ -355,6 +365,7 @@
 				709BDBD129E23BDC00F06C59 /* WordRememberedListViewController.swift in Sources */,
 				702410E429D55F560024ABBD /* WordApp.xcdatamodeld in Sources */,
 				709BDBD329E3A7C600F06C59 /* QuizView.swift in Sources */,
+				70A7C43029EB6F7F007C07FC /* SettingView.swift in Sources */,
 				709BDBDC29E7A86300F06C59 /* Alert.swift in Sources */,
 				7024110D29D560EE0024ABBD /* Word.swift in Sources */,
 				7024111329D562160024ABBD /* WordListViewController.swift in Sources */,
@@ -367,6 +378,7 @@
 				709BDBD729E3A83400F06C59 /* QuizViewController.swift in Sources */,
 				709BDBCB29E2281B00F06C59 /* Notification.swift in Sources */,
 				702410DC29D55F560024ABBD /* SceneDelegate.swift in Sources */,
+				70A7C43429EB6FF4007C07FC /* SettingViewController.swift in Sources */,
 				706C44C029DAEEA700B5FBC8 /* AddWordView.swift in Sources */,
 				702F654829D7FEDA0041B8DC /* WordDetailViewController.swift in Sources */,
 			);

@@ -12,10 +12,18 @@ class WordModel {
 
 // MARK: WordListModel
 class WordListModel: NSObject, UITableViewDataSource {
+    
     // UserDefaults
     let ud = UserDefaults.standard
+    
     // 単語帳画面／暗記単語一覧画面切り替えるための変数
     var checkIsThisRememberedWordList = true
+    
+    //　現在の選択肢数
+    var currentQuizChoicesCount: Int = 5
+    
+    //　現在のクイズ出題数
+    var currentQuizMaximumCount: Int = 5
     
     private override init() {}
     static let shared = WordListModel()
@@ -186,6 +194,32 @@ class WordListModel: NSObject, UITableViewDataSource {
     func returnFilteredWordList(isWordRememberedStatus: Bool) -> [WordModel] {
         let array = self.wordList.filter( {$0.word.isRemembered == isWordRememberedStatus})
         return array
+    }
+    
+    //　クイズの上限数を返却
+    func getAndReturnMaximumQuizCount() -> Int {
+        let currentRememberedWordList = self.wordList.filter({$0.word.isRemembered == true})
+        return currentRememberedWordList.count
+    }
+    
+    //　クイズのうち、設定した先頭n件分のデータを返却
+    func getMaximumQuizCount() -> Int {
+        return currentQuizMaximumCount
+    }
+    
+    //　クイズの上限数をセット
+    func setMaximumQuiz(count: Int) {
+        currentQuizMaximumCount = count
+    }
+    
+    //　選択肢の上限数を返却
+    func getAndReturnQuizChoices() -> Int {
+        return currentQuizChoicesCount
+    }
+    
+    //　選択肢の上限数をセット
+    func setReturnQuizChoices(count: Int) {
+        currentQuizChoicesCount = count
     }
     
 // MARK: UITableViewDatasoruce
