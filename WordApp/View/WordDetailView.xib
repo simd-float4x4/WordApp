@@ -12,7 +12,7 @@
             <connections>
                 <outlet property="cancelView" destination="bVQ-0d-VDG" id="jIw-fI-EZS"/>
                 <outlet property="exampleSentenseLabel" destination="Zm2-kW-QtA" id="EtM-tD-YhQ"/>
-                <outlet property="exampleSentenseTranslationLabel" destination="t4L-Tj-EVM" id="l4s-MS-Ec8"/>
+                <outlet property="exampleSentenseTranslationLabel" destination="DbO-Lb-FLb" id="19R-1h-o67"/>
                 <outlet property="meaningLabel" destination="y4m-vU-dzY" id="bzP-kO-FRS"/>
                 <outlet property="singleWordLabel" destination="1PO-xY-dWM" id="d7g-et-IhD"/>
             </connections>
@@ -57,22 +57,21 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 </view>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4B0-t9-xgq" userLabel="Down">
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oUJ-w1-CC4" userLabel="Down">
                                                     <rect key="frame" x="8" y="88" width="287" height="88"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="The country denounced Japan's protectionism to conceal its own lack of economic policy." textAlignment="justified" lineBreakMode="clip" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t4L-Tj-EVM" userLabel="ExampleSentenseTranslation">
-                                                            <rect key="frame" x="6" y="0.0" width="281" height="88"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="The country denounced Japan's protectionism to conceal its own lack of economic policy." textAlignment="justified" lineBreakMode="clip" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DbO-Lb-FLb" userLabel="ExampleSentence">
+                                                            <rect key="frame" x="0.0" y="0.0" width="287" height="88"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 </view>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBrownColor"/>
