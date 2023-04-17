@@ -37,7 +37,6 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
         let checkBool = makeValidationToAddWord(data: data)
         // エラー発生時
         if !checkBool {
-            // TODO: エラーハンドリング
             let alertContent = UIAlertController(
                 title: "エラー",
                 message: "単語の登録が出来ませんでした。",
@@ -51,7 +50,7 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
             present(alertContent, animated: true, completion: nil)
         } else {
             // バリデーション追加時
-            let currentWordId = wordModel.wordList.count
+            let currentWordId = wordModel.wordList.last?.word.id ?? 0
             wordModel.addWordToList(id: currentWordId, data: data)
             let alertContent = UIAlertController(
                 title: "登録完了（"+data[0]+"）",
@@ -91,7 +90,6 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
         if let index = navigationController?.viewControllers.count {
             let preVC = navigationController?.viewControllers[index - 1] as! WordListViewController
             preVC.wordModel = self.wordModel
-            // TODO: WordListViewの最新版の中身を登録する
         }
     }
     

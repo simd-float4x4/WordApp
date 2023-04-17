@@ -1,6 +1,6 @@
 import Foundation
 
-struct Word {
+struct Word: Codable {
     var id: Int
     var singleWord: String
     var meaning: String

@@ -27,6 +27,8 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         // 日本語訳の表示/非表示に関しては、アプリ起動時には原則trueをセットする
         ud.set(true, forKey: "isMeaningHidden")
         ud.synchronize()
+        // データを呼び出す
+        wordModel.fetchSavedData()
         // 描画系処理を呼び出す
         fetchCurrentProgress()
         initializeWordListWidget()
@@ -36,6 +38,7 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     override func viewWillAppear(_ animated: Bool) {
         initializeWordListWidget()
         wordModel.changeUserReferredWordListStatus(key: "wordListIsShown")
+        
         reloadWordListWidget()
         fetchCurrentProgress()
         showTabBarController()
@@ -65,8 +68,6 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     
     // WordListWidgetをリロードする
     func reloadWordListWidget() {
-        // TODO: WordListViewの最新版の中身を取得する
-        
         // WordListViewの描画を更新する
         let wordListView = self.view as! WordListView
         wordListView.wordListWidget.reloadData()
@@ -169,7 +170,7 @@ extension WordListViewController: UITableViewDelegate {
             self.wordModel.removeWord(index: id)
             // WordListWidgetを更新
             self.reloadWordListWidget()
-            // TODO: ProgressBarを更新
+            // ProgressBarを更新
             self.fetchCurrentProgress()
             completionHandler(true)
         }
@@ -179,7 +180,7 @@ extension WordListViewController: UITableViewDelegate {
             self.wordModel.upDateRememberStatus(index: id)
             // WordListWidgetを更新
             self.reloadWordListWidget()
-            // TODO: ProgressBarを更新
+            // ProgressBarを更新
             self.fetchCurrentProgress()
             completionHandler(true)
         }

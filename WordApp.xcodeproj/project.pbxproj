@@ -38,6 +38,7 @@
 		70A7C43029EB6F7F007C07FC /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C42F29EB6F7F007C07FC /* SettingView.swift */; };
 		70A7C43229EB6F88007C07FC /* SettingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C43129EB6F88007C07FC /* SettingView.xib */; };
 		70A7C43429EB6FF4007C07FC /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C43329EB6FF4007C07FC /* SettingViewController.swift */; };
+		70A7C43629ED0664007C07FC /* DummyData in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C43529ED0664007C07FC /* DummyData */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		70A7C42F29EB6F7F007C07FC /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		70A7C43129EB6F88007C07FC /* SettingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingView.xib; sourceTree = "<group>"; };
 		70A7C43329EB6FF4007C07FC /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		70A7C43529ED0664007C07FC /* DummyData */ = {isa = PBXFileReference; lastKnownFileType = text; path = DummyData; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 				702410E729D55F580024ABBD /* LaunchScreen.storyboard */,
 				702410EA29D55F580024ABBD /* Info.plist */,
 				702410E229D55F560024ABBD /* WordApp.xcdatamodeld */,
+				70A7C43529ED0664007C07FC /* DummyData */,
 			);
 			path = WordApp;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				7024111B29D56F410024ABBD /* WordListView.xib in Resources */,
 				709BDBD529E3A7D400F06C59 /* QuizView.xib in Resources */,
 				702F654A29D7FF120041B8DC /* WordDetailView.xib in Resources */,
+				70A7C43629ED0664007C07FC /* DummyData in Resources */,
 				70A7C43229EB6F88007C07FC /* SettingView.xib in Resources */,
 				706C44C129DAEEA700B5FBC8 /* AddWordView.xib in Resources */,
 				702410E929D55F580024ABBD /* LaunchScreen.storyboard in Resources */,

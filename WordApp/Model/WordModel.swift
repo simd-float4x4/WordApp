@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 // MARK: WordModel
-class WordModel {
+class WordModel: Codable {
     var word: Word
 
     init(initWord: Word){
@@ -29,74 +29,27 @@ class WordListModel: NSObject, UITableViewDataSource {
     static let shared = WordListModel()
     
     // Modelで管理する配列に初期値を設定する。
-    private(set) var wordList: [WordModel] = [
-        WordModel.init(
-            initWord: Word(
-                id: 1,
-                singleWord: "accentuate",
-                meaning: "強調する",
-                exampleSentence: "This picture was taken in the evening to accentuate the shows of ancient remains.",
-                exampleTranslation: "この写真は古代遺物の出現を強調するために夕方撮影された。",
-                isRemembered: true,
-                wrongCount: 4)),
-        WordModel.init(
-            initWord: Word(
-                id: 2,
-                singleWord: "culminate",
-                meaning: "締め括る／最高潮に達する",
-                exampleSentence: "The ceremony was culminated with the national anthem.",
-                exampleTranslation: "その式典は国歌斉唱で締めくくられた。",
-                isRemembered: true,
-                wrongCount: 0)),
-        WordModel.init(
-            initWord: Word(
-                id: 3,
-                singleWord: "protectionism",
-                meaning: "保護主義",
-                exampleSentence: "The country denounced Japan's protectionism to conceal its own lack of economic policy.",
-                exampleTranslation: "その国は自らの経済的な無策を隠すために日本の保護貿易主義を非難しました。",
-                isRemembered: false,
-                wrongCount: 8)),
-        WordModel.init(
-            initWord: Word(
-                id: 4,
-                singleWord: "trespass",
-                meaning: "侵害する",
-                exampleSentence: "He trespassed on neighbor's land without any allowance.",
-                exampleTranslation: "彼は無断で隣人の土地に侵入した。",
-                isRemembered: true,
-                wrongCount: 2)),
-        WordModel.init(
-            initWord: Word(
-                id: 5,
-                singleWord: "sloppy",
-                meaning: "杜撰な",
-                exampleSentence: "He was accused of the responsibility of sloppy accounting.",
-                exampleTranslation: "彼は杜撰な会計処理の責任を責め立てられた",
-                isRemembered: true,
-                wrongCount: 6)),
-        WordModel.init(
-            initWord: Word(
-                id: 6,
-                singleWord: "transcribe",
-                meaning: "複写する",
-                exampleSentence: "She can transcribe melodic patterns from sound even if melody is adlib",
-                exampleTranslation: "たとえアドリブであっても、彼女は聴いた旋律パターンを楽譜に起こすことができる",
-                isRemembered: true,
-                wrongCount: 9)),
-    ] {
-        didSet{
-            // Modelで管理している配列に変化があった場合に呼び出されて、通知する。
-            NotificationCenter.default.post(
-                name: .notifyName,
-                object: nil,
-                userInfo: ["list" : wordList])
+    var wordList: [WordModel] = []
+    
+    // データを更新
+    func updateData(){
+        let encodedData = try? JSONEncoder().encode(self.wordList)
+        UserDefaults.standard.set(encodedData, forKey: "hoge")
+
+    }
+    
+    // 保存したデータを取得
+    func fetchSavedData() {
+        let data = UserDefaults.standard.data(forKey: "hoge")
+        if data != nil {
+            let wordModelData = try? JSONDecoder().decode([WordModel].self, from: data!)
+            wordList = wordModelData!
         }
     }
     
     // 配列に新しい単語を追加する。
     /// - Parameters:
-        ///   - id: 単語ID：wordList要素数を代入し、+1した値をIDとする。
+        ///   - id: 単語ID：wordList.last?のid + 1した値を代入する。
         ///   - data: data[0]〜data[3]の要素数4のString型の配列。内訳は順番に単語、意味、例文、訳。
     func addWordToList(id: Int, data: [String]) {
         self.wordList.append(
@@ -110,6 +63,7 @@ class WordListModel: NSObject, UITableViewDataSource {
                     isRemembered: false,
                     wrongCount: 0))
         )
+        self.updateData()
     }
     
     // 暗記モードがONの状態でWordListWidgetを右にスワイプした際に単語データのステータスを更新する
@@ -125,6 +79,7 @@ class WordListModel: NSObject, UITableViewDataSource {
         } else {
             print("error: cannot get curretRememberStatus")
         }
+        self.updateData()
     }
     
     // 削除モードがONの状態の際に単語データを削除する
@@ -133,6 +88,7 @@ class WordListModel: NSObject, UITableViewDataSource {
     func removeWord(index: Int) {
         // idはUniqueであるため下記実装で問題がないと思われるが、今後のテストの結果次第で実装し直すべきだと思われる
         self.wordList.removeAll(where: {$0.word.id == index})
+        self.updateData()
     }
     
     // WordListWidgetを並び替える
@@ -186,6 +142,7 @@ class WordListModel: NSObject, UITableViewDataSource {
     func resetWordWrongCount(index: Int) {
         let selectedWord = self.wordList.first(where: {$0.word.id == index})
         selectedWord?.word.wrongCount = 0
+        self.updateData()
     }
     
     // WordListWidgetを並び替える

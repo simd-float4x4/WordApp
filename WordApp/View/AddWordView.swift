@@ -38,7 +38,8 @@ class AddWordView: UIView {
             self.addSubview(subview)
         }
         initializeTextField()
-        inputTestData()
+        // テストデータを自動入力。（今後のデバッグ用に残す）
+        // inputTestData()
     }
     
     // UITextFieldを初期化する
