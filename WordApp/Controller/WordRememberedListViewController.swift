@@ -17,16 +17,33 @@ class WordRememberedListViewController: UIViewController, SortWordRememberedList
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        initializeView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        initializeView()
+        wordModel.changeUserReferredWordListStatus(key: "wordRememberedListIsShown")
+        self.reloadWordListWidget()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        removeAllSubviews(parentView: self.view)
+    }
+    
+    func removeAllSubviews(parentView: UIView){
+        let subviews = parentView.subviews
+        for subview in subviews {
+            subview.removeFromSuperview()
+        }
+    }
+    
+    func initializeView() {
+        removeAllSubviews(parentView: self.view)
         let view = WordRememberedListView()
         view.wordRememberedListWidget.delegate = self
         view.wordRememberedListWidget.dataSource = self.wordModel
         view.sortWordRemeberedListDelegate = self
         self.view = view
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        wordModel.changeUserReferredWordListStatus(key: "wordRememberedListIsShown")
-        self.reloadWordListWidget()
     }
     
     // ToDetailViewに遷移したときに値を渡す処理

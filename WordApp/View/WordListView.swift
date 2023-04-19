@@ -39,11 +39,11 @@ class WordListView: UIView {
    }
 
     func loadNib(){
-       let view = Bundle.main.loadNibNamed("WordListView", owner: self, options: nil)?.first as! UIView
-       view.frame = self.bounds
-       if let subview = view.subviews.first  {
-           self.addSubview(subview)
-       }
+        let view = Bundle.main.loadNibNamed("WordListView", owner: self, options: nil)?.first as! UIView
+        view.frame = self.frame
+        if let subview = view.subviews.first  {
+            self.addSubview(subview)
+        }
     }
     
     // ProgressionBar（Outlet）のStyleの初期化

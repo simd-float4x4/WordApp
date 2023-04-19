@@ -23,6 +23,9 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     // 解いた数
     var totalSolvedQuizCount: Int = 0
     
+    var topSafeAreaHeight: CGFloat = 0
+    var bottomSafeAreaHeight: CGFloat = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let view = QuizView()

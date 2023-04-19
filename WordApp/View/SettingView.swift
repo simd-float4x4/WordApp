@@ -45,6 +45,7 @@ class SettingView: UIView {
         // セグメントが変更された時に呼び出すメソッドの設定
         quizAnserSegmentedControl.addTarget(self, action: #selector(quizChoicesSegmentedControl(_:)), for: UIControl.Event.valueChanged)
         makeQuizSumCountControl.addTarget(self, action: #selector(quizMaximumCountSegmentedControl(_:)), for: UIControl.Event.valueChanged)
+        
     }
     
     @IBAction func quizChoicesSegmentedControl(_ sender: UISegmentedControl) {

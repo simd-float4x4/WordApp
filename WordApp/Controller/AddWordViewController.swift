@@ -137,23 +137,25 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
     
     // キーボードが表示される時の処理
     @objc func keyboardWillShow(notification: NSNotification) {
-        // WordListViewを取得
-        let addWordView = self.view as! AddWordView
+        var exampleHeight = 0.0
         // タップされたtextFieldがどれか取得
         DispatchQueue.main.async {
+            if self.tappedTextViewName == ".exampleTranslation" {
+                exampleHeight = 0.75
+            }
+            if self.tappedTextViewName == ".exampleSentence" {
+                exampleHeight = 0.5
+            }
             // singleWordだったら動かさない
             if self.tappedTextViewName == ".exampleTranslation" || self.tappedTextViewName == ".exampleSentence" {
                 // keyboardのsizeを取得
                 if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
                     // TODO: 条件式の算出方法については要検討、再議論の必要あり
-                    // addwordView内の描画領域が画面サイズの半分を超えたら
-                    if addWordView.wordAddContainerView.frame.height > self.view.frame.height / 2 {
-                        if self.view.frame.origin.y == 0 {
-                            self.view.frame.origin.y -= keyboardSize.height / 2
-                        } else {
-                            let suggestionHeight = self.view.frame.origin.y + keyboardSize.height / 2
-                            self.view.frame.origin.y -= suggestionHeight
-                        }
+                    if self.view.frame.origin.y == 0 {
+                        self.view.frame.origin.y -= keyboardSize.height * exampleHeight
+                    } else {
+                        let suggestionHeight = self.view.frame.origin.y + keyboardSize.height * exampleHeight
+                        self.view.frame.origin.y -= suggestionHeight
                     }
                 }
             }

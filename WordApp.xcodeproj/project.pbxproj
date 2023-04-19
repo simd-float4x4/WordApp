@@ -39,6 +39,12 @@
 		70A7C43229EB6F88007C07FC /* SettingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C43129EB6F88007C07FC /* SettingView.xib */; };
 		70A7C43429EB6FF4007C07FC /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C43329EB6FF4007C07FC /* SettingViewController.swift */; };
 		70A7C43629ED0664007C07FC /* DummyData in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C43529ED0664007C07FC /* DummyData */; };
+		70A7C43A29ED15D8007C07FC /* DesignTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C43929ED15D8007C07FC /* DesignTheme.swift */; };
+		70A7C43C29ED167A007C07FC /* DesignThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C43B29ED167A007C07FC /* DesignThemeModel.swift */; };
+		70A7C43F29ED28F1007C07FC /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C43E29ED28F1007C07FC /* CustomView.swift */; };
+		70A7C44129ED3176007C07FC /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C44029ED3176007C07FC /* UIColor.swift */; };
+		70A7C44429ED4848007C07FC /* orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C44329ED4848007C07FC /* orange.png */; };
+		70A7C44629ED7225007C07FC /* earth.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C44529ED7225007C07FC /* earth.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +101,12 @@
 		70A7C43129EB6F88007C07FC /* SettingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingView.xib; sourceTree = "<group>"; };
 		70A7C43329EB6FF4007C07FC /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		70A7C43529ED0664007C07FC /* DummyData */ = {isa = PBXFileReference; lastKnownFileType = text; path = DummyData; sourceTree = "<group>"; };
+		70A7C43929ED15D8007C07FC /* DesignTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignTheme.swift; sourceTree = "<group>"; };
+		70A7C43B29ED167A007C07FC /* DesignThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignThemeModel.swift; sourceTree = "<group>"; };
+		70A7C43E29ED28F1007C07FC /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
+		70A7C44029ED3176007C07FC /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		70A7C44329ED4848007C07FC /* orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orange.png; sourceTree = "<group>"; };
+		70A7C44529ED7225007C07FC /* earth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = earth.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +157,8 @@
 		702410D829D55F560024ABBD /* WordApp */ = {
 			isa = PBXGroup;
 			children = (
+				70A7C44229ED483B007C07FC /* Image */,
+				70A7C43D29ED28DE007C07FC /* Extension */,
 				709BDBDA29E7A85400F06C59 /* Common */,
 				7024111029D561BC0024ABBD /* View */,
 				7024110F29D561AC0024ABBD /* Controller */,
@@ -181,9 +195,8 @@
 		7024110E29D561A70024ABBD /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7024110C29D560EE0024ABBD /* Word.swift */,
-				7024111C29D577A50024ABBD /* WordModel.swift */,
-				709BDBCA29E2281B00F06C59 /* Notification.swift */,
+				70A7C43829ED15CC007C07FC /* Design */,
+				70A7C43729ED15C1007C07FC /* Word */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -226,6 +239,43 @@
 				709BDBDB29E7A86200F06C59 /* Alert.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		70A7C43729ED15C1007C07FC /* Word */ = {
+			isa = PBXGroup;
+			children = (
+				7024110C29D560EE0024ABBD /* Word.swift */,
+				7024111C29D577A50024ABBD /* WordModel.swift */,
+			);
+			path = Word;
+			sourceTree = "<group>";
+		};
+		70A7C43829ED15CC007C07FC /* Design */ = {
+			isa = PBXGroup;
+			children = (
+				70A7C43929ED15D8007C07FC /* DesignTheme.swift */,
+				70A7C43B29ED167A007C07FC /* DesignThemeModel.swift */,
+			);
+			path = Design;
+			sourceTree = "<group>";
+		};
+		70A7C43D29ED28DE007C07FC /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				709BDBCA29E2281B00F06C59 /* Notification.swift */,
+				70A7C43E29ED28F1007C07FC /* CustomView.swift */,
+				70A7C44029ED3176007C07FC /* UIColor.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		70A7C44229ED483B007C07FC /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				70A7C44529ED7225007C07FC /* earth.png */,
+				70A7C44329ED4848007C07FC /* orange.png */,
+			);
+			path = Image;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -333,12 +383,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				7024111B29D56F410024ABBD /* WordListView.xib in Resources */,
+				70A7C44429ED4848007C07FC /* orange.png in Resources */,
 				709BDBD529E3A7D400F06C59 /* QuizView.xib in Resources */,
 				702F654A29D7FF120041B8DC /* WordDetailView.xib in Resources */,
 				70A7C43629ED0664007C07FC /* DummyData in Resources */,
 				70A7C43229EB6F88007C07FC /* SettingView.xib in Resources */,
 				706C44C129DAEEA700B5FBC8 /* AddWordView.xib in Resources */,
 				702410E929D55F580024ABBD /* LaunchScreen.storyboard in Resources */,
+				70A7C44629ED7225007C07FC /* earth.png in Resources */,
 				702410E629D55F580024ABBD /* Assets.xcassets in Resources */,
 				709BDBCD29E2397C00F06C59 /* WordRememberedListView.xib in Resources */,
 				702410E129D55F560024ABBD /* Main.storyboard in Resources */,
@@ -368,13 +420,17 @@
 			files = (
 				709BDBD129E23BDC00F06C59 /* WordRememberedListViewController.swift in Sources */,
 				702410E429D55F560024ABBD /* WordApp.xcdatamodeld in Sources */,
+				70A7C43F29ED28F1007C07FC /* CustomView.swift in Sources */,
 				709BDBD329E3A7C600F06C59 /* QuizView.swift in Sources */,
 				70A7C43029EB6F7F007C07FC /* SettingView.swift in Sources */,
 				709BDBDC29E7A86300F06C59 /* Alert.swift in Sources */,
+				70A7C43C29ED167A007C07FC /* DesignThemeModel.swift in Sources */,
 				7024110D29D560EE0024ABBD /* Word.swift in Sources */,
 				7024111329D562160024ABBD /* WordListViewController.swift in Sources */,
 				702410DA29D55F560024ABBD /* AppDelegate.swift in Sources */,
+				70A7C44129ED3176007C07FC /* UIColor.swift in Sources */,
 				709BDBCF29E2398500F06C59 /* WordRememberedListView.swift in Sources */,
+				70A7C43A29ED15D8007C07FC /* DesignTheme.swift in Sources */,
 				706C44C329DAEEB500B5FBC8 /* AddWordViewController.swift in Sources */,
 				7024111729D562600024ABBD /* WordListView.swift in Sources */,
 				7024111D29D577A60024ABBD /* WordModel.swift in Sources */,

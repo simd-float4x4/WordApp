@@ -23,7 +23,7 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view = WordListView()
+        initializeView()
         // 日本語訳の表示/非表示に関しては、アプリ起動時には原則trueをセットする
         ud.set(true, forKey: "isMeaningHidden")
         ud.synchronize()
@@ -36,17 +36,46 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     
     // 画面が呼ばれるたびにWordListWidgetを更新する
     override func viewWillAppear(_ animated: Bool) {
+        initializeView()
         initializeWordListWidget()
         wordModel.changeUserReferredWordListStatus(key: "wordListIsShown")
-        
         reloadWordListWidget()
         fetchCurrentProgress()
         showTabBarController()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        removeAllSubviews(parentView: self.view)
+    }
+    
+    func removeAllSubviews(parentView: UIView){
+        let subviews = parentView.subviews
+        for subview in subviews {
+            subview.removeFromSuperview()
+        }
+    }
+    
+    func initializeView() {
+        removeAllSubviews(parentView: self.view)
+        let view = WordListView()
+        self.view.addSubview(view)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        let navHeight = self.navigationController?.navigationBar.frame.height ?? 0
+        let bottomHeight = -(self.tabBarController?.tabBar.frame.height ?? 0)
+        print(navHeight, bottomHeight)
+        NSLayoutConstraint.activate([
+            view.topAnchor.constraint(equalTo: self.view.topAnchor, constant: navHeight),
+            view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: bottomHeight),
+            view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 4.0),
+            view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 4.0),
+            view.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+            view.heightAnchor.constraint(equalTo: self.view.heightAnchor)
+        ])
+    }
+    
     // 最新の回答状況を取得する
     private func fetchCurrentProgress() {
-        let wordListView = self.view as! WordListView
+        let wordListView = self.view.subviews.first as! WordListView
         let wordSolvedSum = wordModel.wordList.filter({$0.word.isRemembered == true}).count
         let wordTotalSum = wordModel.wordList.count
         // TODO: 暗記機能実装後にゼロ除算対策をする
@@ -58,7 +87,7 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     
     // WordListWidgetを初期化する
     private func initializeWordListWidget() {
-        let wordListView = self.view as! WordListView
+        let wordListView = self.view.subviews.first as! WordListView
         wordListView.reloadWordListDelegate = self
         wordListView.sortWordListDelegate = self
         wordListView.wordListWidget.delegate = self
@@ -69,7 +98,7 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     // WordListWidgetをリロードする
     func reloadWordListWidget() {
         // WordListViewの描画を更新する
-        let wordListView = self.view as! WordListView
+        let wordListView = self.view.subviews.first as! WordListView
         wordListView.wordListWidget.reloadData()
         // 表示上の配列をあらかじめfilterしておく
         let itemList =  wordModel.returnFilteredWordList(isWordRememberedStatus: false)
@@ -84,7 +113,7 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     
     // WordListWidgetをソートする
     func sortWordListView() {
-        let wordListView = self.view as! WordListView
+        let wordListView = self.view.subviews.first as! WordListView
         sortType += 1
         // TODO: 5(ソートタイプの上限)を定数管理する
         // 一巡したらソートタイプを1に戻す（sortType: 5~7は暗記専用）
