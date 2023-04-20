@@ -15,7 +15,7 @@ class CustomTabBarController: UITabBarController {
     }
     
     func reloadData() {
-        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as! Int
+        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
         let barTintColor = themeModel.themeList[selected].theme.fontColor
         let accentColor = themeModel.themeList[selected].theme.accentColor
         self.tabBar.unselectedItemTintColor = UIColor(hex: barTintColor)

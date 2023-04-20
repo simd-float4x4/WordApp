@@ -194,7 +194,7 @@ class WordListModel: NSObject, UITableViewDataSource {
     
     // UITableViewの各セルが表示する内容
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as! Int
+        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
         // 現在の意味表示モードのON/OFFを取得
         let currentMeaningVisibility  = ud.bool(forKey: "isMeaningHidden")
         // WordListをfilterしておく

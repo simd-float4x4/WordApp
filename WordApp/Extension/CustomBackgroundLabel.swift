@@ -26,7 +26,7 @@ class CustomBackgroundLabel: UILabel {
     }
     
     func fetchEncodedThemeData() {
-        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as! Int
+        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
         fontColor = themeModel.themeList[selected].theme.fontColor
         fontName = themeModel.themeList[selected].theme.fontName
     }

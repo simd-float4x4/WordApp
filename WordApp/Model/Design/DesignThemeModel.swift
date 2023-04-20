@@ -20,7 +20,7 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
             DesignTheme(id: 1,
                         name: "ノーマル",
                         useImage: false,
-                        themeImageForIconUrl: "F4F4F4",
+                        themeImageForIconUrl: "",
                         backgroundImageUrl: "",
                         mainColor: "F4F4F4",
                         subColor: "FFFFFF",
@@ -32,7 +32,7 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
             DesignTheme(id: 2,
                         name: "スペース",
                         useImage: true,
-                        themeImageForIconUrl: "000000",
+                        themeImageForIconUrl: "earth_icon",
                         backgroundImageUrl: "earth",
                         mainColor: "000000",
                         subColor: "A7ECF7",
@@ -44,7 +44,7 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
             DesignTheme(id: 3,
                         name: "オレンジ",
                         useImage: true,
-                        themeImageForIconUrl: "FFA500",
+                        themeImageForIconUrl: "",
                         backgroundImageUrl: "",
                         mainColor: "FAB12F",
                         subColor: "FFA500",
@@ -56,7 +56,7 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
             DesignTheme(id: 4,
                         name: "オリーブ",
                         useImage: false,
-                        themeImageForIconUrl: "303314",
+                        themeImageForIconUrl: "",
                         backgroundImageUrl: "",
                         mainColor: "303314",
                         subColor: "90993C",
@@ -68,8 +68,8 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
             DesignTheme(id: 5,
                         name: "ブルーソーダ",
                         useImage: true,
-                        themeImageForIconUrl: "1881B5",
-                        backgroundImageUrl: "",
+                        themeImageForIconUrl: "soda_icon",
+                        backgroundImageUrl: "soda",
                         mainColor: "1881B5",
                         subColor: "EAE2B8",
                         accentColor: "A90000",
@@ -80,8 +80,8 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
             DesignTheme(id: 6,
                         name: "ストロベリー",
                         useImage: true,
-                        themeImageForIconUrl: "B45460",
-                        backgroundImageUrl: "",
+                        themeImageForIconUrl: "strawberry_icon",
+                        backgroundImageUrl: "strawberry",
                         mainColor: "B45460",
                         subColor: "8B2635",
                         accentColor: "E6CCBE",
@@ -92,20 +92,20 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
             DesignTheme(id: 7,
                         name: "ラグジュアリー",
                         useImage: true,
-                        themeImageForIconUrl: "222025",
+                        themeImageForIconUrl: "luxury_icon",
                         backgroundImageUrl: "tufting",
                         mainColor: "222025",
                         subColor: "4D392E",
                         accentColor: "CFAA54",
                         fontColor: "FFFFFF",
-                        fontName: "HannariMincho-Regular")
+                        fontName: "Snell RoundHand")
         ),
         DesignThemeModel.init(initTheme:
             DesignTheme(id: 8,
                         name: "チョコレート",
                         useImage: true,
-                        themeImageForIconUrl: "401100",
-                        backgroundImageUrl: "",
+                        themeImageForIconUrl: "chocolate_icon",
+                        backgroundImageUrl: "chocolate",
                         mainColor: "401100",
                         subColor: "9D6631",
                         accentColor: "A9782C",
@@ -136,7 +136,17 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
         cell.clipsToBounds = true
         cell.layer.borderColor = UIColor.systemBlue.cgColor
         cell.layer.borderWidth = indexPath.row == currentThemeId as! Int ? 8.0 : 0.0
-        cell.backgroundColor = UIColor(hex: backgroundColor)
+        let url = themeList[indexPath.row].theme.themeImageForIconUrl
+        if url != "" {
+            let image1: UIImage = UIImage(named: url)!
+            let imageView = UIImageView(image: image1)
+            imageView.contentMode = .scaleAspectFill
+            imageView.frame = cell.frame
+            cell.backgroundView = imageView
+        } else {
+            let backgroundColor = themeList[indexPath.row].theme.mainColor
+            cell.backgroundColor = UIColor(hex: backgroundColor)
+        }
     
     // 以下不要の可能性あり
         // let storyboard = UIStoryboard(name: "Main", bundle: nil)

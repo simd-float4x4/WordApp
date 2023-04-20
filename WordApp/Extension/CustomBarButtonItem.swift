@@ -18,7 +18,7 @@ class CustomNavigationItem: UIBarButtonItem {
     }
     
     func fetchEncodedThemeData() {
-        // let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as! Int
-        // color = themeModel.themeList[selected].theme.fontColor
+        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
+        color = themeModel.themeList[selected].theme.fontColor
     }
 }

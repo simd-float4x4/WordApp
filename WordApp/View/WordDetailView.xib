@@ -52,7 +52,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="The country denounced Japan's protectionism to conceal its own lack of economic policy." textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zm2-kW-QtA" userLabel="ExampleSentence" customClass="CustomBackgroundLabel" customModule="WordApp" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="287" height="100"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
+                                                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -65,7 +65,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="The country denounced Japan's protectionism to conceal its own lack of economic policy." textAlignment="justified" lineBreakMode="clip" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DbO-Lb-FLb" userLabel="ExampleSentence" customClass="CustomBackgroundLabel" customModule="WordApp" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="287" height="100"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
+                                                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -96,6 +96,14 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="luxury.001.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZzY-mi-RE9" customClass="ImageForLuxuryTheme" customModule="WordApp" customModuleProvider="target">
+                            <rect key="frame" x="87" y="256" width="240" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="luxury.002.png" translatesAutoresizingMaskIntoConstraints="NO" id="1Qs-x9-GYa" customClass="ImageForLuxuryTheme" customModule="WordApp" customModuleProvider="target">
+                            <rect key="frame" x="87" y="678" width="240" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
@@ -106,6 +114,8 @@
         </view>
     </objects>
     <resources>
+        <image name="luxury.001.png" width="797" height="90"/>
+        <image name="luxury.002.png" width="824" height="86"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

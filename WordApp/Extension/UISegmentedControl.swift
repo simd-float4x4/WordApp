@@ -18,11 +18,11 @@ class CustomUISegmentedControl: UISegmentedControl {
     
     func loadProperties() {
         fetchEncodedThemeData()
-        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as! Int
+        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
         color = themeModel.themeList[selected].theme.accentColor
         let ud = UserDefaults.standard
-        let getQuizSelectionCount = ud.value(forKey: "maximumQuizSelectionCount")
-        let getMaximumQuizCount = ud.value(forKey: "maximumQuizCount")
+        let getQuizSelectionCount = ud.value(forKey: "maximumQuizSelectionCount") as? Int ?? 0
+        let getMaximumQuizCount = ud.value(forKey: "maximumQuizCount") as? Int ?? 0
         // 選択時の背景色（iOS13から選択時の背景はselectedSegmentTintColorで指定するようになりました）
         if #available(iOS 13.0, *) {
             self.selectedSegmentTintColor = UIColor(hex: color)
@@ -36,18 +36,14 @@ class CustomUISegmentedControl: UISegmentedControl {
         self.setTitleTextAttributes( [NSAttributedString.Key.foregroundColor: UIColor(hex: "000000")], for: .normal)
         self.setTitleTextAttributes( [NSAttributedString.Key.foregroundColor: UIColor(hex: "CCCCCC")], for: .disabled)
         if self.tag == 1 {
-            if getQuizSelectionCount != nil {
-                self.selectedSegmentIndex = getQuizSelectionCount as! Int
-            }
+            self.selectedSegmentIndex = getQuizSelectionCount
         } else if self.tag == 2 {
-            if getMaximumQuizCount != nil {
-                self.selectedSegmentIndex = getMaximumQuizCount as! Int
-            }
+            self.selectedSegmentIndex = getMaximumQuizCount
         }
     }
     
     func fetchEncodedThemeData() {
-        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as! Int
+        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
         color = themeModel.themeList[selected].theme.accentColor
     }
 }

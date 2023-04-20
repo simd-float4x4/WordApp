@@ -18,7 +18,7 @@ class CustomView: UIView {
     
     func loadProperties() {
         fetchEncodedThemeData()
-        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as! Int
+        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
         self.layer.shadowOpacity = 1.0
         self.layer.shadowRadius = 1
         if selected == 1 {
@@ -39,7 +39,7 @@ class CustomView: UIView {
     }
     
     func fetchEncodedThemeData() {
-        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as! Int
+        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
         backGroundColor = themeModel.themeList[selected].theme.subColor
     }
 }

@@ -59,7 +59,18 @@
 		70A7C46229F017A5007C07FC /* 851Gkktt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C46129F017A5007C07FC /* 851Gkktt.ttf */; };
 		70A7C46429F0F64C007C07FC /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C46329F0F64C007C07FC /* CustomTabBarController.swift */; };
 		70A7C46629F0FCBE007C07FC /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C46529F0FCBD007C07FC /* CustomNavigationBar.swift */; };
-		70A7C46829F10C1A007C07FC /* tufting.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C46729F10C19007C07FC /* tufting.png */; };
+		70A7C46A29F13616007C07FC /* tufting.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C46929F13616007C07FC /* tufting.png */; };
+		70A7C46C29F144D4007C07FC /* strawberry.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C46B29F144D4007C07FC /* strawberry.png */; };
+		70A7C46E29F14AD5007C07FC /* chocolate.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C46D29F14AD4007C07FC /* chocolate.png */; };
+		70A7C47129F14E0D007C07FC /* luxury.001.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C46F29F14E0D007C07FC /* luxury.001.png */; };
+		70A7C47229F14E0D007C07FC /* luxury.002.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C47029F14E0D007C07FC /* luxury.002.png */; };
+		70A7C47429F14EB7007C07FC /* ImageForLuxuryTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C47329F14EB7007C07FC /* ImageForLuxuryTheme.swift */; };
+		70A7C47629F16666007C07FC /* soda.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C47529F16665007C07FC /* soda.png */; };
+		70A7C47C29F168B1007C07FC /* luxury_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C47729F168B0007C07FC /* luxury_icon.png */; };
+		70A7C47D29F168B1007C07FC /* strawberry_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C47829F168B1007C07FC /* strawberry_icon.png */; };
+		70A7C47E29F168B1007C07FC /* soda_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C47929F168B1007C07FC /* soda_icon.png */; };
+		70A7C47F29F168B1007C07FC /* chocolate_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C47A29F168B1007C07FC /* chocolate_icon.png */; };
+		70A7C48029F168B1007C07FC /* earth_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C47B29F168B1007C07FC /* earth_icon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,7 +147,18 @@
 		70A7C46129F017A5007C07FC /* 851Gkktt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = 851Gkktt.ttf; sourceTree = "<group>"; };
 		70A7C46329F0F64C007C07FC /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		70A7C46529F0FCBD007C07FC /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
-		70A7C46729F10C19007C07FC /* tufting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tufting.png; sourceTree = "<group>"; };
+		70A7C46929F13616007C07FC /* tufting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tufting.png; sourceTree = "<group>"; };
+		70A7C46B29F144D4007C07FC /* strawberry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = strawberry.png; sourceTree = "<group>"; };
+		70A7C46D29F14AD4007C07FC /* chocolate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chocolate.png; sourceTree = "<group>"; };
+		70A7C46F29F14E0D007C07FC /* luxury.001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = luxury.001.png; sourceTree = "<group>"; };
+		70A7C47029F14E0D007C07FC /* luxury.002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = luxury.002.png; sourceTree = "<group>"; };
+		70A7C47329F14EB7007C07FC /* ImageForLuxuryTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageForLuxuryTheme.swift; sourceTree = "<group>"; };
+		70A7C47529F16665007C07FC /* soda.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = soda.png; sourceTree = "<group>"; };
+		70A7C47729F168B0007C07FC /* luxury_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = luxury_icon.png; sourceTree = "<group>"; };
+		70A7C47829F168B1007C07FC /* strawberry_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = strawberry_icon.png; sourceTree = "<group>"; };
+		70A7C47929F168B1007C07FC /* soda_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = soda_icon.png; sourceTree = "<group>"; };
+		70A7C47A29F168B1007C07FC /* chocolate_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chocolate_icon.png; sourceTree = "<group>"; };
+		70A7C47B29F168B1007C07FC /* earth_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = earth_icon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -308,6 +330,7 @@
 				70A7C45529EFA716007C07FC /* CustomUIProgressionBar.swift */,
 				70A7C45F29F008C7007C07FC /* CustomUITabBar.swift */,
 				70A7C46529F0FCBD007C07FC /* CustomNavigationBar.swift */,
+				70A7C47329F14EB7007C07FC /* ImageForLuxuryTheme.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -315,8 +338,18 @@
 		70A7C44229ED483B007C07FC /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				70A7C47529F16665007C07FC /* soda.png */,
 				70A7C44529ED7225007C07FC /* earth.png */,
-				70A7C46729F10C19007C07FC /* tufting.png */,
+				70A7C46B29F144D4007C07FC /* strawberry.png */,
+				70A7C46D29F14AD4007C07FC /* chocolate.png */,
+				70A7C46F29F14E0D007C07FC /* luxury.001.png */,
+				70A7C47029F14E0D007C07FC /* luxury.002.png */,
+				70A7C47929F168B1007C07FC /* soda_icon.png */,
+				70A7C47829F168B1007C07FC /* strawberry_icon.png */,
+				70A7C47A29F168B1007C07FC /* chocolate_icon.png */,
+				70A7C47729F168B0007C07FC /* luxury_icon.png */,
+				70A7C47B29F168B1007C07FC /* earth_icon.png */,
+				70A7C46929F13616007C07FC /* tufting.png */,
 				70A7C45D29F007E5007C07FC /* 100.png */,
 				70A7C44329ED4848007C07FC /* orange.png */,
 			);
@@ -427,21 +460,31 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70A7C47F29F168B1007C07FC /* chocolate_icon.png in Resources */,
 				7024111B29D56F410024ABBD /* WordListView.xib in Resources */,
 				70A7C44429ED4848007C07FC /* orange.png in Resources */,
 				70A7C45E29F007E5007C07FC /* 100.png in Resources */,
+				70A7C46C29F144D4007C07FC /* strawberry.png in Resources */,
+				70A7C48029F168B1007C07FC /* earth_icon.png in Resources */,
 				709BDBD529E3A7D400F06C59 /* QuizView.xib in Resources */,
 				702F654A29D7FF120041B8DC /* WordDetailView.xib in Resources */,
+				70A7C46E29F14AD5007C07FC /* chocolate.png in Resources */,
 				70A7C45029EF8FA8007C07FC /* HannariMincho-Regular.otf in Resources */,
 				70A7C44F29EF8FA3007C07FC /* SoukouMincho.ttf in Resources */,
+				70A7C47C29F168B1007C07FC /* luxury_icon.png in Resources */,
 				70A7C43629ED0664007C07FC /* DummyData in Resources */,
 				70A7C43229EB6F88007C07FC /* SettingView.xib in Resources */,
-				70A7C46829F10C1A007C07FC /* tufting.png in Resources */,
+				70A7C46A29F13616007C07FC /* tufting.png in Resources */,
 				706C44C129DAEEA700B5FBC8 /* AddWordView.xib in Resources */,
 				70A7C44C29EF807D007C07FC /* LightNovelPOPv2.otf in Resources */,
+				70A7C47129F14E0D007C07FC /* luxury.001.png in Resources */,
 				702410E929D55F580024ABBD /* LaunchScreen.storyboard in Resources */,
 				70A7C44629ED7225007C07FC /* earth.png in Resources */,
+				70A7C47D29F168B1007C07FC /* strawberry_icon.png in Resources */,
+				70A7C47629F16666007C07FC /* soda.png in Resources */,
 				702410E629D55F580024ABBD /* Assets.xcassets in Resources */,
+				70A7C47229F14E0D007C07FC /* luxury.002.png in Resources */,
+				70A7C47E29F168B1007C07FC /* soda_icon.png in Resources */,
 				709BDBCD29E2397C00F06C59 /* WordRememberedListView.xib in Resources */,
 				70A7C46229F017A5007C07FC /* 851Gkktt.ttf in Resources */,
 				702410E129D55F560024ABBD /* Main.storyboard in Resources */,
@@ -499,6 +542,7 @@
 				709BDBCB29E2281B00F06C59 /* Notification.swift in Sources */,
 				702410DC29D55F560024ABBD /* SceneDelegate.swift in Sources */,
 				70A7C43429EB6FF4007C07FC /* SettingViewController.swift in Sources */,
+				70A7C47429F14EB7007C07FC /* ImageForLuxuryTheme.swift in Sources */,
 				706C44C029DAEEA700B5FBC8 /* AddWordView.swift in Sources */,
 				702F654829D7FEDA0041B8DC /* WordDetailViewController.swift in Sources */,
 			);

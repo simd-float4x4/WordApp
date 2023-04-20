@@ -45,6 +45,10 @@
                                                     <rect key="frame" x="8" y="8" width="367" height="265"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
+                                                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="luxury.001.png" translatesAutoresizingMaskIntoConstraints="NO" id="m0p-Gn-jHZ" customClass="ImageForLuxuryTheme" customModule="WordApp" customModuleProvider="target">
+                                                            <rect key="frame" x="8" y="61" width="351" height="36"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
                                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LYc-sJ-LKK">
                                                             <rect key="frame" x="8" y="212" width="351" height="45"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -84,6 +88,10 @@
                                                                 </label>
                                                             </subviews>
                                                         </view>
+                                                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="luxury.002.png" translatesAutoresizingMaskIntoConstraints="NO" id="bmI-PH-e68" customClass="ImageForLuxuryTheme" customModule="WordApp" customModuleProvider="target">
+                                                            <rect key="frame" x="8" y="168" width="351" height="36"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
                                                     </subviews>
                                                 </view>
                                             </subviews>
@@ -165,6 +173,8 @@
         </view>
     </objects>
     <resources>
+        <image name="luxury.001.png" width="797" height="90"/>
+        <image name="luxury.002.png" width="824" height="86"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

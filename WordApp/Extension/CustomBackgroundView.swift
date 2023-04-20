@@ -22,9 +22,9 @@ class CustomBackgroundView: UIView {
     }
     
     func fetchEncodedThemeData() {
-        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as! Int
+        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
         backGroundColor = themeModel.themeList[selected].theme.mainColor
-        if selected == 1 || selected == 6 {
+        if selected == 1 || selected == 6 || selected == 5 || selected == 7 || selected == 4 {
             setBackGroundImage(imageId: selected)
         }
     }
@@ -33,6 +33,8 @@ class CustomBackgroundView: UIView {
         let imageUrl = themeModel.themeList[imageId].theme.backgroundImageUrl
         let image1: UIImage = UIImage(named: imageUrl)!
         let imageView = UIImageView(image: image1)
+        imageView.contentMode = .scaleAspectFill
+        imageView.frame = self.frame
         self.insertSubview(imageView, at: 0)
     }
 }
