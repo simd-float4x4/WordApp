@@ -11,19 +11,24 @@ class SettingViewController: UIViewController, SettingViewDelegate, UICollection
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeView()
+        getAndCheckCurrentQuizStatus()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        initializeView()
+        getAndCheckCurrentQuizStatus()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        removeAllSubviews(parentView: self.view)
+    }
+    
+    func getAndCheckCurrentQuizStatus() {
         // 利用可能なクイズ数を取得
         currentQuizTotal = wordModel.getAndReturnMaximumQuizCount()
         //　現在のクイズ上限数を取得
         currentChoicesTotal = wordModel.getAndReturnQuizChoices()
         checkMaximumAvaivleForQuizCount()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        initializeView()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        removeAllSubviews(parentView: self.view)
     }
     
     func removeAllSubviews(parentView: UIView){
@@ -77,8 +82,6 @@ class SettingViewController: UIViewController, SettingViewDelegate, UICollection
         if count == 0 { sum = currentQuizTotal }
         if count != 0 { sum = count }
         wordModel.setMaximumQuiz(count: sum)
-        print("現在の設定：")
-        print(sum)
     }
     
     func upDateAppInfo(choicesCount: Int) {

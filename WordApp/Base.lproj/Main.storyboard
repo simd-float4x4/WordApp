@@ -19,12 +19,12 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="単語帳画面" id="bRt-fu-nAg">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="brain" catalog="system" id="k5I-MB-Cej">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="brain" catalog="system" id="k5I-MB-Cej" customClass="CustomNavigationItem" customModule="WordApp" customModuleProvider="target">
                             <connections>
                                 <action selector="switchWordActionMode" destination="BYZ-38-t0r" id="ZlV-9w-fHt"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="gkn-1x-OPq">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="gkn-1x-OPq" customClass="CustomNavigationItem" customModule="WordApp" customModuleProvider="target">
                             <connections>
                                 <action selector="toAddWordView" destination="BYZ-38-t0r" id="2Un-ww-LDN"/>
                                 <segue destination="1BG-fX-tpE" kind="show" identifier="toAddWordView" id="Va2-OG-7o8"/>
@@ -33,43 +33,36 @@
                     </navigationItem>
                     <connections>
                         <outlet property="nabigationBarLeftButton" destination="k5I-MB-Cej" id="Qm5-Uo-cGl"/>
-                        <segue destination="nhc-mM-vrN" kind="presentation" identifier="toWordDetailView" id="nPt-aj-Vex"/>
+                        <segue destination="eCW-PU-OHY" kind="presentation" identifier="toWordDetailView" id="QnR-9Y-feW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2056.521739130435" y="65.625"/>
         </scene>
-        <!--単語登録画面-->
+        <!--Add Word View Controller-->
         <scene sceneID="U2u-f4-zLC">
             <objects>
                 <viewController id="1BG-fX-tpE" customClass="AddWordViewController" customModule="WordApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PSs-0K-uBE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hHN-fh-MDy">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="登録画面" id="85m-ls-bYE"/>
+                                </items>
+                            </navigationBar>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="skf-WZ-giU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="単語登録画面" id="skH-jX-wTZ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8ak-QM-h7Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3000" y="-562"/>
-        </scene>
-        <!--Word Detail View Controller-->
-        <scene sceneID="1Al-nO-yKT">
-            <objects>
-                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="nhc-mM-vrN" customClass="WordDetailViewController" customModule="WordApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="w8u-0v-xJf">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="Bbb-7g-nrP"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Sq4-nf-Qdb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3007" y="66"/>
+            <point key="canvasLocation" x="3006" y="-563"/>
         </scene>
         <!--暗記リスト-->
         <scene sceneID="DiE-iT-kVW">
@@ -105,15 +98,15 @@
             </objects>
             <point key="canvasLocation" x="3006" y="739"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Custom Tab Bar View Controller-->
         <scene sceneID="MfN-7B-9Wp">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="ad8-6t-vsY" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="customTabBarController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ad8-6t-vsY" customClass="CustomTabBarViewController" customModule="WordApp" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WoQ-A1-vXW">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WoQ-A1-vXW" customClass="CustomUITabBar" customModule="WordApp" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="NJE-lU-czm" kind="relationship" relationship="viewControllers" id="wdz-AE-7Zf"/>
@@ -126,16 +119,15 @@
             </objects>
             <point key="canvasLocation" x="-584" y="686"/>
         </scene>
-        <!--Item-->
+        <!--単語帳-->
         <scene sceneID="1JC-1x-WCs">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NJE-lU-czm" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="pDA-7g-Nvw"/>
+                    <tabBarItem key="tabBarItem" title="単語帳" image="list.bullet.rectangle.portrait" catalog="system" id="pDA-7g-Nvw"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="w9w-h7-xiU">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -146,11 +138,11 @@
             </objects>
             <point key="canvasLocation" x="1134.7826086956522" y="65.625"/>
         </scene>
-        <!--Item-->
+        <!--暗記リスト-->
         <scene sceneID="XHD-tl-H4B">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wKg-S6-9iP" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="2f0-Rg-5Jo"/>
+                    <tabBarItem key="tabBarItem" title="暗記リスト" image="brain" catalog="system" id="2f0-Rg-5Jo"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="FYh-Yv-xSS">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -181,11 +173,11 @@
             </objects>
             <point key="canvasLocation" x="2023.1884057971015" y="1458.4821428571429"/>
         </scene>
-        <!--Item-->
+        <!--クイズ-->
         <scene sceneID="T4P-GL-ffo">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="msJ-zi-qUc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="2Gt-et-DHP"/>
+                    <tabBarItem key="tabBarItem" title="クイズ" image="questionmark" catalog="system" id="2Gt-et-DHP"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="GUJ-m9-9GJ">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -200,7 +192,7 @@
             </objects>
             <point key="canvasLocation" x="1113.0434782608697" y="1458.4821428571429"/>
         </scene>
-        <!--Title-->
+        <!--設定画面-->
         <scene sceneID="KeO-ko-RoM">
             <objects>
                 <viewController id="ywv-cO-DfP" customClass="SettingViewController" customModule="WordApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -210,17 +202,17 @@
                         <viewLayoutGuide key="safeArea" id="1fR-Dq-QAG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="ON6-Rt-g6O"/>
+                    <navigationItem key="navigationItem" title="設定画面" id="ON6-Rt-g6O"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="86Z-0e-yRN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2026.0869565217392" y="2202.4553571428569"/>
         </scene>
-        <!--Item-->
+        <!--カスタマイズ-->
         <scene sceneID="lFb-Ga-2iX">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Go9-DT-Myx" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Yjt-0P-XCD"/>
+                    <tabBarItem key="tabBarItem" title="カスタマイズ" image="gear.circle" catalog="system" id="Yjt-0P-XCD"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2D4-6y-a8v">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -236,9 +228,15 @@
             <point key="canvasLocation" x="1115.9420289855072" y="2202.4553571428569"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="QnR-9Y-feW"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="brain" catalog="system" width="128" height="104"/>
+        <image name="gear.circle" catalog="system" width="128" height="121"/>
+        <image name="list.bullet.rectangle.portrait" catalog="system" width="115" height="128"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="questionmark" catalog="system" width="96" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

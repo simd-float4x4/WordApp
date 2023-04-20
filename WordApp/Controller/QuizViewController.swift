@@ -26,10 +26,18 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     var topSafeAreaHeight: CGFloat = 0
     var bottomSafeAreaHeight: CGFloat = 0
     
+    // プリセット値：ダミー用回答（正解が2個以上ある際に使用する）
+    var presetDummyAnswersArray = [
+        "〜を明らかにする", "〜を横断する", "〜を乗り越える", "減少する", "分配する", "証明する", "を起訴する", "を回避する", "を蒸発させる",
+        "〜に追従する", "〜を目撃する", "〜が落ちる", "干渉する", "救出する", "痛める", "を再生させる", "を飲む", "を破壊する",
+        "形式上の", "個別の", "交互の", "神経症の〜", "時代遅れの〜", "揮発性の〜", "親切な", "綺麗に保たれている", "一過性の〜",
+        "卓越", "支配権", "酵素", "信条", "領事", "吸収", "友愛", "花婿", "誘導", "完成", "詰め物", "襲撃", "事件", "建築物", "栽培", "（グラスなどの）容器"
+    ]
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let view = QuizView()
-        self.view = view
+        initializeView()
         let isAvailable = checkIsQuizAvailable()
         if isAvailable {
             // 現状クイズが出来る状態であれば
@@ -45,6 +53,7 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        initializeView()
         let isAvailable = checkIsQuizAvailable()
         if isAvailable {
             //　現在のクイズに関してのプロパティを取得
@@ -56,6 +65,23 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
             // 最初のクイズを取得する
             getFirstQuiz()
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        removeAllSubviews(parentView: self.view)
+    }
+    
+    func removeAllSubviews(parentView: UIView){
+        let subviews = parentView.subviews
+        for subview in subviews {
+            subview.removeFromSuperview()
+        }
+    }
+    
+    func initializeView() {
+        removeAllSubviews(parentView: self.view)
+        let view = QuizView()
+        self.view = view
     }
     
     // 設定からクイズに関する情報を取得する
@@ -184,8 +210,6 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
         var quizArray = wordModel.wordList.filter({$0.word.isRemembered == true}).shuffled()
         let maximumQuizCount = wordModel.getMaximumQuizCount()
         quizArray = quizArray.prefix(maximumQuizCount).map { $0 }
-        print("配列の数：")
-        print(quizArray.count)
         return quizArray
     }
     
@@ -210,13 +234,47 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
         let view = self.view as! QuizView
         // 問題を表示
         view.quizSingleWordLabel.text = quiz.word.singleWord
+        // dummyAnswerをshuffleする（※　正解のanswerも含まれている）
         let dummy = dummyAnswers.shuffled()
+        // 同じ回答の重複対策用フラグ
+        var isCorrectAnswerAlreadyAppeared: Bool = false
+        // クイズ選択肢の数だけ
         for i in 0 ..< maximumAnswerChoicesCount {
-            // String型の変数：answerを宣言
+            // answerを生成する
             var answer = ""
             answer = dummy[i]
-            // シャッフルした配列から正解の添字を取得
-            if answer == correctAnswer { answerId = i }
+            // dummy配列の中の値が、correctAnswerと同一ならanswerIdを取得する
+            if answer == correctAnswer && isCorrectAnswerAlreadyAppeared == false {
+                // どのボタンを押したら正解判定にするのか決める
+                answerId = i
+                // 既に正解は現れたか？
+                isCorrectAnswerAlreadyAppeared = true
+            // ダミー選択肢が正解と同じ内容かつ既にボタンが現れたのか判定
+            } else if answer == correctAnswer && isCorrectAnswerAlreadyAppeared == true {
+                var index = i
+                // 検索終了するか？
+                var finishSearching: Bool = false
+                //　検索終了まで続行
+                while !finishSearching {
+                    // 配列の末尾まで検索
+                    if index < maximumAnswerChoicesCount {
+                        // dummy選択肢のラベルが、correctAnswerと合致しないのであれば
+                        if dummy[index] != correctAnswer {
+                            // ランダムプリセットから値をset
+                            let randomInt = Int.random(in: 0 ..< presetDummyAnswersArray.count)
+                            answer = presetDummyAnswersArray[randomInt]
+                            // 検索終了
+                            finishSearching = true
+                        }
+                    } else {
+                        // 検索終了していない状態で配列の末尾に行ったらindex=0でリセット
+                        index = 0
+                    }
+                    // indexをインクリメント
+                    index += 1
+                }
+            }
+            
             // 各ボタンに描画
             if i == 0 { view.quizFirstAnswerButton.configuration?.title = answer }
             if i == 1 { view.quizSecondAnswerButton.configuration?.title = answer }

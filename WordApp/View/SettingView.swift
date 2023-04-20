@@ -60,6 +60,8 @@ class SettingView: UIView {
                 break
         }
         settingViewDelegate.updateMaximumQuizSelection(count: currentChoicesTotal)
+        let ud = UserDefaults.standard
+        ud.set(sender.selectedSegmentIndex, forKey: "maximumQuizSelectionCount")
     }
     
     @IBAction func quizMaximumCountSegmentedControl(_ sender: UISegmentedControl) {
@@ -82,5 +84,7 @@ class SettingView: UIView {
                 break
         }
         settingViewDelegate.updateMaximumQuizCount(count: currentMaximumQuizSum)
+        let ud = UserDefaults.standard
+        ud.set(sender.selectedSegmentIndex, forKey: "maximumQuizCount")
     }
 }

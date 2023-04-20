@@ -26,35 +26,35 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
                         subColor: "FFFFFF",
                         accentColor: "0076BA",
                         fontColor: "000000",
-                        fontName: "")
+                        fontName: "DINAlternate-Bold")
         ),
         DesignThemeModel.init(initTheme:
             DesignTheme(id: 2,
                         name: "スペース",
                         useImage: true,
                         themeImageForIconUrl: "000000",
-                        backgroundImageUrl: "",
+                        backgroundImageUrl: "earth",
                         mainColor: "000000",
-                        subColor: "2A3757",
-                        accentColor: "A7ECF7",
+                        subColor: "A7ECF7",
+                        accentColor: "2A3757",
                         fontColor: "FFFFFF",
-                        fontName: "")
+                        fontName: "851Gkktt")
         ),
         DesignThemeModel.init(initTheme:
             DesignTheme(id: 3,
                         name: "オレンジ",
                         useImage: true,
                         themeImageForIconUrl: "FFA500",
-                        backgroundImageUrl: "Image/orange.png",
+                        backgroundImageUrl: "",
                         mainColor: "FAB12F",
                         subColor: "FFA500",
                         accentColor: "FEF3E2",
                         fontColor: "000000",
-                        fontName: "")
+                        fontName: "DINAlternate-Bold")
         ),
         DesignThemeModel.init(initTheme:
             DesignTheme(id: 4,
-                        name: "オリエンタル",
+                        name: "オリーブ",
                         useImage: false,
                         themeImageForIconUrl: "303314",
                         backgroundImageUrl: "",
@@ -62,7 +62,7 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
                         subColor: "90993C",
                         accentColor: "EFFF63",
                         fontColor: "FFFFFF",
-                        fontName: "")
+                        fontName: "HannariMincho-Regular")
         ),
         DesignThemeModel.init(initTheme:
             DesignTheme(id: 5,
@@ -74,7 +74,7 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
                         subColor: "EAE2B8",
                         accentColor: "A90000",
                         fontColor: "000000",
-                        fontName: "")
+                        fontName: "SoukouMincho")
         ),
         DesignThemeModel.init(initTheme:
             DesignTheme(id: 6,
@@ -85,20 +85,20 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
                         mainColor: "B45460",
                         subColor: "8B2635",
                         accentColor: "E6CCBE",
-                        fontColor: "000000",
-                        fontName: "")
+                        fontColor: "FFFFFF",
+                        fontName: "LightNovelPOPv2")
         ),
         DesignThemeModel.init(initTheme:
             DesignTheme(id: 7,
                         name: "ラグジュアリー",
                         useImage: true,
                         themeImageForIconUrl: "222025",
-                        backgroundImageUrl: "",
+                        backgroundImageUrl: "tufting",
                         mainColor: "222025",
                         subColor: "4D392E",
                         accentColor: "CFAA54",
                         fontColor: "FFFFFF",
-                        fontName: "")
+                        fontName: "HannariMincho-Regular")
         ),
         DesignThemeModel.init(initTheme:
             DesignTheme(id: 8,
@@ -110,7 +110,7 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
                         subColor: "9D6631",
                         accentColor: "A9782C",
                         fontColor: "FFFFFF",
-                        fontName: "")
+                        fontName: "LightNovelPOPv2")
         ),
     
     
@@ -129,12 +129,26 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
         config.text = self.themeList[indexPath.row].theme.name
         config.textProperties.alignment = .center
         config.textProperties.color = UIColor(hex: fontColor)
+        let currentFontSize = config.textProperties.font.pointSize
+        config.textProperties.font = UIFont(name: self.themeList[indexPath.row].theme.fontName, size: currentFontSize) ?? UIFont(name: "LightNovelPOPv2", size: 20.0)!
         cell.contentConfiguration = config
         cell.layer.cornerRadius = cell.frame.size.width * 0.05
         cell.clipsToBounds = true
         cell.layer.borderColor = UIColor.systemBlue.cgColor
         cell.layer.borderWidth = indexPath.row == currentThemeId as! Int ? 8.0 : 0.0
         cell.backgroundColor = UIColor(hex: backgroundColor)
+    
+    // 以下不要の可能性あり
+        // let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        if let tabBarController = storyboard.instantiateViewController(withIdentifier: "customTabBarController") as? CustomTabBarController {
+//            tabBarController.loadViewIfNeeded()
+//            print("tabBarReloadIsCalled")
+//            for viewController in tabBarController.viewControllers ?? [] {
+//                if let reloadable = viewController as? Reloadable {
+//                    reloadable.reloadData()
+//                }
+//            }
+//        }
         return cell
     }
 }

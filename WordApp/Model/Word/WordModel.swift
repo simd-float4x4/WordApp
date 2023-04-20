@@ -16,6 +16,10 @@ class WordListModel: NSObject, UITableViewDataSource {
     // UserDefaults
     let ud = UserDefaults.standard
     
+    var themeModel = DesignThemeListModel.shared
+    
+    var currentSortMode = 0
+    
     // 単語帳画面／暗記単語一覧画面切り替えるための変数
     var checkIsThisRememberedWordList = true
     
@@ -95,6 +99,7 @@ class WordListModel: NSObject, UITableViewDataSource {
     /// - Parameters:
         ///   - sortModeId: 並び替えモードのID。
     func sortWordList(sortModeId: Int) {
+        currentSortMode = sortModeId
         switch sortModeId {
         case 1:
             // ID順（昇順）
@@ -189,6 +194,7 @@ class WordListModel: NSObject, UITableViewDataSource {
     
     // UITableViewの各セルが表示する内容
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as! Int
         // 現在の意味表示モードのON/OFFを取得
         let currentMeaningVisibility  = ud.bool(forKey: "isMeaningHidden")
         // WordListをfilterしておく
@@ -214,7 +220,34 @@ class WordListModel: NSObject, UITableViewDataSource {
         }
         content.text = wordModel.word.singleWord
         content.secondaryText = currentMeaningVisibility == true ? nil : wordModel.word.meaning
+        let fontColor = UIColor(hex: themeModel.themeList[selected].theme.fontColor)
+        content.textProperties.color = fontColor
+        let font = themeModel.themeList[selected].theme.fontName
+        // content.textProperties.font = UIFont(name: font, size: 20.0)!
         cell.contentConfiguration = content
+        cell.backgroundColor = UIColor.clear
         return cell
+    }
+    
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        if currentSortMode == 3 || currentSortMode == 4 {
+            var titles = [String]()
+            // WordListをfilterしておく
+            let availableWordList = returnFilteredWordList(isWordRememberedStatus: checkIsThisRememberedWordList)
+            for section in 0 ..< availableWordList.count {
+                let index = availableWordList[section].word.singleWord.prefix(1)
+                titles.append(String(index))
+            }
+            return titles
+        }
+        return []
+    }
+    
+    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+        guard let section = Int(title) else {
+            return 0
+        }
+
+        return section
     }
 }

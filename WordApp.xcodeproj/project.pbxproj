@@ -45,6 +45,21 @@
 		70A7C44129ED3176007C07FC /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C44029ED3176007C07FC /* UIColor.swift */; };
 		70A7C44429ED4848007C07FC /* orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C44329ED4848007C07FC /* orange.png */; };
 		70A7C44629ED7225007C07FC /* earth.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C44529ED7225007C07FC /* earth.png */; };
+		70A7C44C29EF807D007C07FC /* LightNovelPOPv2.otf in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C44B29EF807D007C07FC /* LightNovelPOPv2.otf */; };
+		70A7C44F29EF8FA3007C07FC /* SoukouMincho.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C44E29EF8F3F007C07FC /* SoukouMincho.ttf */; };
+		70A7C45029EF8FA8007C07FC /* HannariMincho-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C44D29EF8F2A007C07FC /* HannariMincho-Regular.otf */; };
+		70A7C45229EFA6CD007C07FC /* CustomBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C45129EFA6CD007C07FC /* CustomBackgroundView.swift */; };
+		70A7C45429EFA6F7007C07FC /* CustomBackgroundLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C45329EFA6F7007C07FC /* CustomBackgroundLabel.swift */; };
+		70A7C45629EFA716007C07FC /* CustomUIProgressionBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C45529EFA716007C07FC /* CustomUIProgressionBar.swift */; };
+		70A7C45829EFA73D007C07FC /* UISegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C45729EFA73D007C07FC /* UISegmentedControl.swift */; };
+		70A7C45A29EFA76C007C07FC /* CustomPlaneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C45929EFA76C007C07FC /* CustomPlaneButton.swift */; };
+		70A7C45C29EFC8E0007C07FC /* CustomBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C45B29EFC8E0007C07FC /* CustomBarButtonItem.swift */; };
+		70A7C45E29F007E5007C07FC /* 100.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C45D29F007E5007C07FC /* 100.png */; };
+		70A7C46029F008C7007C07FC /* CustomUITabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C45F29F008C7007C07FC /* CustomUITabBar.swift */; };
+		70A7C46229F017A5007C07FC /* 851Gkktt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C46129F017A5007C07FC /* 851Gkktt.ttf */; };
+		70A7C46429F0F64C007C07FC /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C46329F0F64C007C07FC /* CustomTabBarController.swift */; };
+		70A7C46629F0FCBE007C07FC /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C46529F0FCBD007C07FC /* CustomNavigationBar.swift */; };
+		70A7C46829F10C1A007C07FC /* tufting.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C46729F10C19007C07FC /* tufting.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +122,21 @@
 		70A7C44029ED3176007C07FC /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		70A7C44329ED4848007C07FC /* orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orange.png; sourceTree = "<group>"; };
 		70A7C44529ED7225007C07FC /* earth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = earth.png; sourceTree = "<group>"; };
+		70A7C44B29EF807D007C07FC /* LightNovelPOPv2.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LightNovelPOPv2.otf; sourceTree = "<group>"; };
+		70A7C44D29EF8F2A007C07FC /* HannariMincho-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HannariMincho-Regular.otf"; sourceTree = "<group>"; };
+		70A7C44E29EF8F3F007C07FC /* SoukouMincho.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SoukouMincho.ttf; sourceTree = "<group>"; };
+		70A7C45129EFA6CD007C07FC /* CustomBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackgroundView.swift; sourceTree = "<group>"; };
+		70A7C45329EFA6F7007C07FC /* CustomBackgroundLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackgroundLabel.swift; sourceTree = "<group>"; };
+		70A7C45529EFA716007C07FC /* CustomUIProgressionBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIProgressionBar.swift; sourceTree = "<group>"; };
+		70A7C45729EFA73D007C07FC /* UISegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISegmentedControl.swift; sourceTree = "<group>"; };
+		70A7C45929EFA76C007C07FC /* CustomPlaneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPlaneButton.swift; sourceTree = "<group>"; };
+		70A7C45B29EFC8E0007C07FC /* CustomBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBarButtonItem.swift; sourceTree = "<group>"; };
+		70A7C45D29F007E5007C07FC /* 100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 100.png; sourceTree = "<group>"; };
+		70A7C45F29F008C7007C07FC /* CustomUITabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUITabBar.swift; sourceTree = "<group>"; };
+		70A7C46129F017A5007C07FC /* 851Gkktt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = 851Gkktt.ttf; sourceTree = "<group>"; };
+		70A7C46329F0F64C007C07FC /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
+		70A7C46529F0FCBD007C07FC /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
+		70A7C46729F10C19007C07FC /* tufting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tufting.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +167,10 @@
 		702410CD29D55F560024ABBD = {
 			isa = PBXGroup;
 			children = (
+				70A7C44B29EF807D007C07FC /* LightNovelPOPv2.otf */,
+				70A7C46129F017A5007C07FC /* 851Gkktt.ttf */,
+				70A7C44E29EF8F3F007C07FC /* SoukouMincho.ttf */,
+				70A7C44D29EF8F2A007C07FC /* HannariMincho-Regular.otf */,
 				702410D829D55F560024ABBD /* WordApp */,
 				702410F229D55F590024ABBD /* WordAppTests */,
 				702410FC29D55F590024ABBD /* WordAppUITests */,
@@ -210,6 +244,7 @@
 				709BDBD029E23BDC00F06C59 /* WordRememberedListViewController.swift */,
 				709BDBD629E3A83400F06C59 /* QuizViewController.swift */,
 				70A7C43329EB6FF4007C07FC /* SettingViewController.swift */,
+				70A7C46329F0F64C007C07FC /* CustomTabBarController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -264,7 +299,15 @@
 			children = (
 				709BDBCA29E2281B00F06C59 /* Notification.swift */,
 				70A7C43E29ED28F1007C07FC /* CustomView.swift */,
+				70A7C45B29EFC8E0007C07FC /* CustomBarButtonItem.swift */,
+				70A7C45729EFA73D007C07FC /* UISegmentedControl.swift */,
 				70A7C44029ED3176007C07FC /* UIColor.swift */,
+				70A7C45129EFA6CD007C07FC /* CustomBackgroundView.swift */,
+				70A7C45329EFA6F7007C07FC /* CustomBackgroundLabel.swift */,
+				70A7C45929EFA76C007C07FC /* CustomPlaneButton.swift */,
+				70A7C45529EFA716007C07FC /* CustomUIProgressionBar.swift */,
+				70A7C45F29F008C7007C07FC /* CustomUITabBar.swift */,
+				70A7C46529F0FCBD007C07FC /* CustomNavigationBar.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -273,6 +316,8 @@
 			isa = PBXGroup;
 			children = (
 				70A7C44529ED7225007C07FC /* earth.png */,
+				70A7C46729F10C19007C07FC /* tufting.png */,
+				70A7C45D29F007E5007C07FC /* 100.png */,
 				70A7C44329ED4848007C07FC /* orange.png */,
 			);
 			path = Image;
@@ -384,15 +429,21 @@
 			files = (
 				7024111B29D56F410024ABBD /* WordListView.xib in Resources */,
 				70A7C44429ED4848007C07FC /* orange.png in Resources */,
+				70A7C45E29F007E5007C07FC /* 100.png in Resources */,
 				709BDBD529E3A7D400F06C59 /* QuizView.xib in Resources */,
 				702F654A29D7FF120041B8DC /* WordDetailView.xib in Resources */,
+				70A7C45029EF8FA8007C07FC /* HannariMincho-Regular.otf in Resources */,
+				70A7C44F29EF8FA3007C07FC /* SoukouMincho.ttf in Resources */,
 				70A7C43629ED0664007C07FC /* DummyData in Resources */,
 				70A7C43229EB6F88007C07FC /* SettingView.xib in Resources */,
+				70A7C46829F10C1A007C07FC /* tufting.png in Resources */,
 				706C44C129DAEEA700B5FBC8 /* AddWordView.xib in Resources */,
+				70A7C44C29EF807D007C07FC /* LightNovelPOPv2.otf in Resources */,
 				702410E929D55F580024ABBD /* LaunchScreen.storyboard in Resources */,
 				70A7C44629ED7225007C07FC /* earth.png in Resources */,
 				702410E629D55F580024ABBD /* Assets.xcassets in Resources */,
 				709BDBCD29E2397C00F06C59 /* WordRememberedListView.xib in Resources */,
+				70A7C46229F017A5007C07FC /* 851Gkktt.ttf in Resources */,
 				702410E129D55F560024ABBD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,19 +469,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70A7C46429F0F64C007C07FC /* CustomTabBarController.swift in Sources */,
 				709BDBD129E23BDC00F06C59 /* WordRememberedListViewController.swift in Sources */,
 				702410E429D55F560024ABBD /* WordApp.xcdatamodeld in Sources */,
 				70A7C43F29ED28F1007C07FC /* CustomView.swift in Sources */,
+				70A7C45229EFA6CD007C07FC /* CustomBackgroundView.swift in Sources */,
 				709BDBD329E3A7C600F06C59 /* QuizView.swift in Sources */,
 				70A7C43029EB6F7F007C07FC /* SettingView.swift in Sources */,
+				70A7C46029F008C7007C07FC /* CustomUITabBar.swift in Sources */,
 				709BDBDC29E7A86300F06C59 /* Alert.swift in Sources */,
 				70A7C43C29ED167A007C07FC /* DesignThemeModel.swift in Sources */,
+				70A7C45829EFA73D007C07FC /* UISegmentedControl.swift in Sources */,
 				7024110D29D560EE0024ABBD /* Word.swift in Sources */,
 				7024111329D562160024ABBD /* WordListViewController.swift in Sources */,
+				70A7C45429EFA6F7007C07FC /* CustomBackgroundLabel.swift in Sources */,
 				702410DA29D55F560024ABBD /* AppDelegate.swift in Sources */,
+				70A7C45629EFA716007C07FC /* CustomUIProgressionBar.swift in Sources */,
 				70A7C44129ED3176007C07FC /* UIColor.swift in Sources */,
+				70A7C45C29EFC8E0007C07FC /* CustomBarButtonItem.swift in Sources */,
 				709BDBCF29E2398500F06C59 /* WordRememberedListView.swift in Sources */,
 				70A7C43A29ED15D8007C07FC /* DesignTheme.swift in Sources */,
+				70A7C46629F0FCBE007C07FC /* CustomNavigationBar.swift in Sources */,
+				70A7C45A29EFA76C007C07FC /* CustomPlaneButton.swift in Sources */,
 				706C44C329DAEEB500B5FBC8 /* AddWordViewController.swift in Sources */,
 				7024111729D562600024ABBD /* WordListView.swift in Sources */,
 				7024111D29D577A60024ABBD /* WordModel.swift in Sources */,

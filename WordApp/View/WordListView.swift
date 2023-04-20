@@ -21,6 +21,7 @@ class WordListView: UIView {
     @IBOutlet weak var wordListWidget: UITableView!
     @IBOutlet weak var hideMeaningButton: UIButton!
     @IBOutlet weak var sortWordListButton: UIButton!
+    @IBOutlet weak var thereIsNoUILabel: UILabel!
     
     weak var reloadWordListDelegate: ReloadWordListWidgetDelegate?
     weak var sortWordListDelegate: SortWordListWidgetDelegate?
@@ -31,6 +32,7 @@ class WordListView: UIView {
        super.init(frame: frame)
        loadNib()
        initalizeProgressionWidgetStyle()
+       wordListWidget.backgroundColor = UIColor.clear
    }
 
    required init(coder aDecoder: NSCoder) {
@@ -50,7 +52,7 @@ class WordListView: UIView {
     func initalizeProgressionWidgetStyle() {
         progressBarWidget.transform = CGAffineTransform(scaleX: 1.0, y: 6.0)
         progressBarWidget.progress = 0.0
-        progressBarWidget.progressTintColor = UIColor.green
+        progressBarWidget.backgroundColor = UIColor.clear
     }
     
     // 意味を表示/隠すトグル

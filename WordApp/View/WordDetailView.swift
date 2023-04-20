@@ -25,5 +25,7 @@ class WordDetailView: UIView {
         if let subview = view.subviews.first  {
             self.addSubview(subview)
         }
+        exampleSentenseLabel.numberOfLines = 0
+        exampleSentenseLabel.sizeToFit()
     }
 }

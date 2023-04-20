@@ -36,6 +36,7 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     
     // 画面が呼ばれるたびにWordListWidgetを更新する
     override func viewWillAppear(_ animated: Bool) {
+        print("viewWillAppear is called")
         initializeView()
         initializeWordListWidget()
         wordModel.changeUserReferredWordListStatus(key: "wordListIsShown")
@@ -58,27 +59,27 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     func initializeView() {
         removeAllSubviews(parentView: self.view)
         let view = WordListView()
-        self.view.addSubview(view)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        let navHeight = self.navigationController?.navigationBar.frame.height ?? 0
-        let bottomHeight = -(self.tabBarController?.tabBar.frame.height ?? 0)
-        print(navHeight, bottomHeight)
-        NSLayoutConstraint.activate([
-            view.topAnchor.constraint(equalTo: self.view.topAnchor, constant: navHeight),
-            view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: bottomHeight),
-            view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 4.0),
-            view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 4.0),
-            view.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            view.heightAnchor.constraint(equalTo: self.view.heightAnchor)
-        ])
+        self.view = view
+        // self.view.addSubview(view)
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//        let navHeight = self.navigationController?.navigationBar.frame.height ?? 0
+//        let bottomHeight = -(self.tabBarController?.tabBar.frame.height ?? 0)
+//        print(navHeight, bottomHeight)
+//        NSLayoutConstraint.activate([
+//            view.topAnchor.constraint(equalTo: self.view.topAnchor, constant: navHeight),
+//            view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: bottomHeight),
+//            view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 4.0),
+//            view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 4.0),
+//            view.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+//            view.heightAnchor.constraint(equalTo: self.view.heightAnchor)
+//        ])
     }
     
     // 最新の回答状況を取得する
     private func fetchCurrentProgress() {
-        let wordListView = self.view.subviews.first as! WordListView
+        let wordListView = self.view as! WordListView
         let wordSolvedSum = wordModel.wordList.filter({$0.word.isRemembered == true}).count
         let wordTotalSum = wordModel.wordList.count
-        // TODO: 暗記機能実装後にゼロ除算対策をする
         let wordRememberedPercentage = wordTotalSum != 0 ? wordSolvedSum * 100 / wordTotalSum : 100
         wordListView.progressWordSumLabel.text = String(wordSolvedSum) + " / " + String(wordTotalSum)
         wordListView.progressPercentageLabel.text = String(wordRememberedPercentage) + " %"
@@ -87,7 +88,7 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     
     // WordListWidgetを初期化する
     private func initializeWordListWidget() {
-        let wordListView = self.view.subviews.first as! WordListView
+        let wordListView = self.view as! WordListView
         wordListView.reloadWordListDelegate = self
         wordListView.sortWordListDelegate = self
         wordListView.wordListWidget.delegate = self
@@ -98,14 +99,16 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     // WordListWidgetをリロードする
     func reloadWordListWidget() {
         // WordListViewの描画を更新する
-        let wordListView = self.view.subviews.first as! WordListView
+        let wordListView = self.view as! WordListView
         wordListView.wordListWidget.reloadData()
         // 表示上の配列をあらかじめfilterしておく
         let itemList =  wordModel.returnFilteredWordList(isWordRememberedStatus: false)
         if itemList.isEmpty == true {
             wordListView.wordListWidget.isHidden = true
+            wordListView.thereIsNoUILabel.isHidden = false
         } else {
             wordListView.wordListWidget.isHidden = false
+            wordListView.thereIsNoUILabel.isHidden = true
         }
     }
     
@@ -113,7 +116,7 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     
     // WordListWidgetをソートする
     func sortWordListView() {
-        let wordListView = self.view.subviews.first as! WordListView
+        let wordListView = self.view as! WordListView
         sortType += 1
         // TODO: 5(ソートタイプの上限)を定数管理する
         // 一巡したらソートタイプを1に戻す（sortType: 5~7は暗記専用）
@@ -151,6 +154,7 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     // 画面遷移系メソッド
     @objc func toWordDetailView() {
         performSegue(withIdentifier: "toWordDetailView", sender: nil)
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     @IBAction func toAddWordView() {
@@ -225,6 +229,7 @@ extension WordListViewController: UITableViewDelegate {
     
     // 単語登録画面から帰ってきた時にTabBarの非表示を解除する（厳密にはどの画面から飛んできても表示する）
     func showTabBarController() {
+        print("showTabBarControllerIsCalled")
         self.tabBarController?.tabBar.isHidden = false
     }
 }
