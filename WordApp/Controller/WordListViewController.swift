@@ -82,6 +82,11 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         wordListView.progressWordSumLabel.text = String(wordSolvedSum) + " / " + String(wordTotalSum)
         wordListView.progressPercentageLabel.text = String(wordRememberedPercentage) + " %"
         wordListView.progressBarWidget.progress = Float(wordRememberedPercentage) / 100.0
+        // データ個数が0の場合
+        if wordTotalSum == 0 && wordSolvedSum == 0 {
+            wordListView.progressPercentageLabel.text = "0 %"
+            wordListView.progressBarWidget.progress = 0.0 / 100.0
+        }
     }
     
     // WordListWidgetを初期化する
