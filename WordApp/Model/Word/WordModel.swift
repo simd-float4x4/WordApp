@@ -166,24 +166,28 @@ class WordListModel: NSObject, UITableViewDataSource {
     
     //　クイズのうち、設定した先頭n件分のデータを返却
     func getMaximumQuizCount() -> Int {
-//        let ud = UserDefaults.standard
-//        let count = ud.value(forKey: "maximumQuizCount") as? Int
-        return currentQuizMaximumCount
+        let ud = UserDefaults.standard
+        let currentRememberedWordList = getAndReturnMaximumQuizCount()
+        let count = ud.value(forKey: "maximumQuizCount") as? Int ?? currentRememberedWordList
+        return count
     }
     
     //　クイズの上限数をセット
     func setMaximumQuiz(count: Int) {
         currentQuizMaximumCount = count
+        ud.set(currentQuizMaximumCount, forKey: "maximumQuizCount")
     }
     
     //　選択肢の上限数を返却
     func getAndReturnQuizChoices() -> Int {
-        return currentQuizChoicesCount
+        let count = ud.value(forKey: "maximumQuizSelectionCount") as? Int ?? 5
+        return count
     }
     
     //　選択肢の上限数をセット
     func setReturnQuizChoices(count: Int) {
         currentQuizChoicesCount = count
+        ud.set(currentQuizChoicesCount, forKey: "maximumQuizSelectionCount")
     }
     
 // MARK: UITableViewDatasoruce

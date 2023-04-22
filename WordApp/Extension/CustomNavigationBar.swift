@@ -16,7 +16,7 @@ class CustomNavigationBar: UINavigationBar {
     
     func loadProperties() {
         fetchEncodedThemeData()
-        self.backgroundColor = UIColor.red
+        // self.backgroundColor = UIColor.red
         self.tintColor = UIColor(hex: color)
         self.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(hex: color)]
     }

@@ -36,7 +36,6 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     
     // 画面が呼ばれるたびにWordListWidgetを更新する
     override func viewWillAppear(_ animated: Bool) {
-        print("viewWillAppear is called")
         initializeView()
         initializeWordListWidget()
         wordModel.changeUserReferredWordListStatus(key: "wordListIsShown")
@@ -64,7 +63,6 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
 //        view.translatesAutoresizingMaskIntoConstraints = false
 //        let navHeight = self.navigationController?.navigationBar.frame.height ?? 0
 //        let bottomHeight = -(self.tabBarController?.tabBar.frame.height ?? 0)
-//        print(navHeight, bottomHeight)
 //        NSLayoutConstraint.activate([
 //            view.topAnchor.constraint(equalTo: self.view.topAnchor, constant: navHeight),
 //            view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: bottomHeight),
@@ -229,7 +227,6 @@ extension WordListViewController: UITableViewDelegate {
     
     // 単語登録画面から帰ってきた時にTabBarの非表示を解除する（厳密にはどの画面から飛んできても表示する）
     func showTabBarController() {
-        print("showTabBarControllerIsCalled")
         self.tabBarController?.tabBar.isHidden = false
     }
 }

@@ -89,7 +89,7 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     // 設定からクイズに関する情報を取得する
     func getQuizCurrentProperties() {
         maximumAnswerChoicesCount = wordModel.getAndReturnQuizChoices()
-        maximumQuizCount = wordModel.getAndReturnMaximumQuizCount()
+        maximumQuizCount = wordModel.getMaximumQuizCount()
     }
     
     // UIの初期化
@@ -102,7 +102,7 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     
     // ProgressのUIを初期化する
     func initProgressArea(view: QuizView) {
-        view.quizProgressionLabel.text = "1　問目"
+        view.quizProgressionLabel.text = "1　 問目"
         view.quizProgressBar.progress = 0.0
         view.moveToNextQuizButton.setTitle("次の問題へ", for: .normal)
     }
@@ -213,8 +213,8 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     func makeRandomQuizList() -> [WordModel] {
         // wordListをランダムにシャッフル
         var quizArray = wordModel.wordList.filter({$0.word.isRemembered == true}).shuffled()
-        let maximumQuizCount = wordModel.getMaximumQuizCount()
-        quizArray = quizArray.prefix(maximumQuizCount).map { $0 }
+        let _maximumQuizCount = maximumQuizCount
+        quizArray = quizArray.prefix(_maximumQuizCount).map { $0 }
         return quizArray
     }
     
@@ -434,7 +434,7 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     func reloadProgressionView() {
         let view = self.view as! QuizView
         let progressionRate = Float(totalSolvedQuizCount) / Float(maximumQuizCount)
-        view.quizProgressionLabel.text = String(totalSolvedQuizCount+1) + " 問目"
+        view.quizProgressionLabel.text = String(totalSolvedQuizCount+1) + "  問目"
         view.quizProgressBar.progress = Float(progressionRate)
     }
     

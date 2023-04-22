@@ -59,7 +59,7 @@
                                                                 </imageView>
                                                             </subviews>
                                                         </view>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gGZ-0z-DdH" customClass="CustomBackgroundLabel" customModule="WordApp" customModuleProvider="target">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gGZ-0z-DdH" customClass="CustomBackgroundLabel" customModule="WordApp" customModuleProvider="target">
                                                             <rect key="frame" x="8" y="92" width="351" height="80"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="30"/>
@@ -117,7 +117,7 @@
                                                     <rect key="frame" x="8" y="16" width="367" height="55"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="filled" title=""/>
                                                     <connections>
                                                         <action selector="pressedFirstbutton" destination="-1" eventType="touchUpInside" id="Pn7-cq-fdj"/>
                                                     </connections>
@@ -126,7 +126,7 @@
                                                     <rect key="frame" x="8" y="79" width="367" height="55"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="filled" title=""/>
                                                     <connections>
                                                         <action selector="pressedSecondbutton" destination="-1" eventType="touchUpInside" id="i1o-ez-Pil"/>
                                                     </connections>
@@ -135,7 +135,7 @@
                                                     <rect key="frame" x="8" y="142" width="367" height="55"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="filled" title=""/>
                                                     <connections>
                                                         <action selector="pressedThirdbutton" destination="-1" eventType="touchUpInside" id="syv-dg-fzv"/>
                                                     </connections>
@@ -144,7 +144,7 @@
                                                     <rect key="frame" x="8" y="205" width="367" height="55"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="filled" title=""/>
                                                     <connections>
                                                         <action selector="pressedFourthbutton" destination="-1" eventType="touchUpInside" id="xl3-Cm-w2a"/>
                                                     </connections>
@@ -153,7 +153,7 @@
                                                     <rect key="frame" x="8" y="268" width="367" height="55"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="filled" title=""/>
                                                     <connections>
                                                         <action selector="pressedFifthbutton" destination="-1" eventType="touchUpInside" id="KVa-hz-V5K"/>
                                                     </connections>

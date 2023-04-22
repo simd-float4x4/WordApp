@@ -7,6 +7,7 @@ class SettingViewController: UIViewController, SettingViewDelegate, UICollection
     var quiz: [WordModel] = []
     var currentQuizTotal: Int = 0
     var currentChoicesTotal: Int = 0
+    let ud = UserDefaults.standard
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,10 +25,7 @@ class SettingViewController: UIViewController, SettingViewDelegate, UICollection
     }
     
     func getAndCheckCurrentQuizStatus() {
-        // 利用可能なクイズ数を取得
-        currentQuizTotal = wordModel.getAndReturnMaximumQuizCount()
-        //　現在のクイズ上限数を取得
-        currentChoicesTotal = wordModel.getAndReturnQuizChoices()
+        reloadCurrentStatus()
         checkMaximumAvaivleForQuizCount()
     }
     
@@ -60,7 +58,11 @@ class SettingViewController: UIViewController, SettingViewDelegate, UICollection
         for i in 1 ..< 7 {
             var isAvaivable: Bool = true
             if i > forSegmentAt { isAvaivable = false }
-            view.makeQuizSumCountControl.setEnabled(isAvaivable, forSegmentAt: i);
+            let choiceIndex = ud.value(forKey: "choicesSelectedSegmentIndex") as? Int ?? 0
+            let quizIndex = ud.value(forKey: "quizMaximumSelectedSegmentIndex") as? Int ?? 0
+            view.makeQuizSumCountControl.setEnabled(isAvaivable, forSegmentAt: i)
+            view.makeQuizSumCountControl.selectedSegmentIndex = quizIndex
+            view.quizAnserSegmentedControl.selectedSegmentIndex = choiceIndex
         }
     }
     
@@ -73,19 +75,14 @@ class SettingViewController: UIViewController, SettingViewDelegate, UICollection
     
     func updateMaximumQuizSelection(count: Int) {
         reloadCurrentStatus()
-        upDateAppInfo(choicesCount: count)
+        wordModel.setReturnQuizChoices(count: count)
     }
     
     func updateMaximumQuizCount(count: Int) {
         reloadCurrentStatus()
-        var sum = 0
-        if count == 0 { sum = currentQuizTotal }
-        if count != 0 { sum = count }
-        wordModel.setMaximumQuiz(count: sum)
-    }
-    
-    func upDateAppInfo(choicesCount: Int) {
-        wordModel.setReturnQuizChoices(count: choicesCount)
+        // segmetnded=0の時0が帰ってくるため、totalを返す
+        let index = count == 0 ? currentQuizTotal : count
+        wordModel.setMaximumQuiz(count: index)
     }
 }
 

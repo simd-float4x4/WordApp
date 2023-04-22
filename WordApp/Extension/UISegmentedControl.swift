@@ -5,6 +5,7 @@ class CustomUISegmentedControl: UISegmentedControl {
     
     var color: String = "0000FF"
     var themeModel = DesignThemeListModel.shared
+    var wordModel = WordListModel.shared
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,7 +23,7 @@ class CustomUISegmentedControl: UISegmentedControl {
         color = themeModel.themeList[selected].theme.accentColor
         let ud = UserDefaults.standard
         let getQuizSelectionCount = ud.value(forKey: "maximumQuizSelectionCount") as? Int ?? 5
-        let getMaximumQuizCount = ud.value(forKey: "maximumQuizCount") as? Int ?? 5
+        let getMaximumQuizCount = ud.value(forKey: "maximumQuizCount") as? Int ?? wordModel.getAndReturnMaximumQuizCount()
         // 選択時の背景色（iOS13から選択時の背景はselectedSegmentTintColorで指定するようになりました）
         if #available(iOS 13.0, *) {
             self.selectedSegmentTintColor = UIColor(hex: color)
@@ -43,8 +44,10 @@ class CustomUISegmentedControl: UISegmentedControl {
         if self.tag == 1 {
             self.selectedSegmentIndex = getQuizSelectionCount
         } else if self.tag == 2 {
-            self.selectedSegmentIndex = getMaximumQuizCount
+            self.selectedSegmentIndex = getMaximumQuizCount / 5
         }
+        wordModel.setMaximumQuiz(count: getMaximumQuizCount)
+        wordModel.setReturnQuizChoices(count: getQuizSelectionCount)
     }
     
     func fetchEncodedThemeData() {

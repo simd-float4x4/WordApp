@@ -78,7 +78,6 @@ class WordRememberedListViewController: UIViewController, SortWordRememberedList
     func sortWordRememberedListView() {
         let wordRememberedListView = self.view as! WordRememberedListView
         sortType += 1
-        print(sortType)
         // TODO: (ソートタイプの上限)を定数管理する
         // 一巡したらソートタイプを1に戻す
         sortType = sortType == 8 ? 1 : sortType
