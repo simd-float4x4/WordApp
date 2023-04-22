@@ -211,6 +211,7 @@ class WordListModel: NSObject, UITableViewDataSource {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
         // cellの描画
         var content = cell.defaultContentConfiguration()
+        content.secondaryText = currentMeaningVisibility == true ? nil : wordModel.word.meaning
         if checkIsThisRememberedWordList {
             // 現在の誤答数を取得
             let currentWrongCount = wordModel.word.wrongCount
@@ -223,10 +224,9 @@ class WordListModel: NSObject, UITableViewDataSource {
             // 誤答数を表示
             content.image = UIImage(systemName: fileName)
             content.imageProperties.tintColor = color
-        
+            content.secondaryText = nil
         }
         content.text = wordModel.word.singleWord
-        content.secondaryText = currentMeaningVisibility == true ? nil : wordModel.word.meaning
         let fontColor = UIColor(hex: themeModel.themeList[selected].theme.fontColor)
         content.textProperties.color = fontColor
         cell.contentConfiguration = content
