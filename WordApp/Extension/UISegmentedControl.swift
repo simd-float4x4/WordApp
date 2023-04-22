@@ -21,8 +21,8 @@ class CustomUISegmentedControl: UISegmentedControl {
         let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
         color = themeModel.themeList[selected].theme.accentColor
         let ud = UserDefaults.standard
-        let getQuizSelectionCount = ud.value(forKey: "maximumQuizSelectionCount") as? Int ?? 0
-        let getMaximumQuizCount = ud.value(forKey: "maximumQuizCount") as? Int ?? 0
+        let getQuizSelectionCount = ud.value(forKey: "maximumQuizSelectionCount") as? Int ?? 5
+        let getMaximumQuizCount = ud.value(forKey: "maximumQuizCount") as? Int ?? 5
         // 選択時の背景色（iOS13から選択時の背景はselectedSegmentTintColorで指定するようになりました）
         if #available(iOS 13.0, *) {
             self.selectedSegmentTintColor = UIColor(hex: color)
@@ -31,7 +31,12 @@ class CustomUISegmentedControl: UISegmentedControl {
             self.tintColor = UIColor(hex: color)
         }
         // 文字色
-        let bgColor = themeModel.themeList[selected].theme.fontColor
+        var bgColor = ""
+        if selected == 0 || selected == 3 || selected == 4 || selected == 5 || selected == 6 {
+            bgColor = themeModel.themeList[selected].theme.complementalFontColor
+        } else {
+            bgColor = themeModel.themeList[selected].theme.fontColor
+        }
         self.setTitleTextAttributes( [NSAttributedString.Key.foregroundColor: UIColor(hex: bgColor)], for: .selected)
         self.setTitleTextAttributes( [NSAttributedString.Key.foregroundColor: UIColor(hex: "000000")], for: .normal)
         self.setTitleTextAttributes( [NSAttributedString.Key.foregroundColor: UIColor(hex: "CCCCCC")], for: .disabled)

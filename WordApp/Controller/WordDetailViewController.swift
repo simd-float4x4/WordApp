@@ -7,6 +7,7 @@ class WordDetailViewController: UIViewController {
     var meaning: String = ""
     var exampleSentence: String = ""
     var exampleTranslation: String = ""
+    var themeModel = DesignThemeListModel.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,9 +46,16 @@ class WordDetailViewController: UIViewController {
         let attrText = NSMutableAttributedString(string: view.exampleSentenseLabel.text!)
         // フォントカラーを設定します.
         let length = (end - start) + 1
+        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
+        let backgroundColor = themeModel.themeList[selected].theme.accentColor
+        var fontColor = themeModel.themeList[selected].theme.complementalFontColor
+        if selected == 1 || selected == 2 { fontColor = themeModel.themeList[selected].theme.fontColor }
         // rangeで該当箇所を指定します（ここでは「いいえ」が対象）.
         attrText.addAttribute(.foregroundColor,
-            value: UIColor.red, range: NSMakeRange(start, length))
+            value: UIColor(hex: fontColor), range: NSMakeRange(start, length))
+        // rangeで該当箇所を指定します（ここでは「いいえ」が対象）.
+        attrText.addAttribute(.backgroundColor,
+            value: UIColor(hex: backgroundColor), range: NSMakeRange(start, length))
 
         // attributedTextとしてUILabelに追加します.
         view.exampleSentenseLabel.attributedText = attrText

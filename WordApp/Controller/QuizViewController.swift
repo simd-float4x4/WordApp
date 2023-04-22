@@ -26,6 +26,8 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     var topSafeAreaHeight: CGFloat = 0
     var bottomSafeAreaHeight: CGFloat = 0
     
+    var answerSelectionArray: [String] = []
+    
     // プリセット値：ダミー用回答（正解が2個以上ある際に使用する）
     var presetDummyAnswersArray = [
         "〜を明らかにする", "〜を横断する", "〜を乗り越える", "減少する", "分配する", "証明する", "を起訴する", "を回避する", "を蒸発させる",
@@ -90,7 +92,6 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
         maximumQuizCount = wordModel.getAndReturnMaximumQuizCount()
     }
     
-    
     // UIの初期化
     func initQuizUI() {
         let view = self.view as! QuizView
@@ -101,7 +102,7 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     
     // ProgressのUIを初期化する
     func initProgressArea(view: QuizView) {
-        view.quizProgressionLabel.text = "1問目"
+        view.quizProgressionLabel.text = "1　問目"
         view.quizProgressBar.progress = 0.0
         view.moveToNextQuizButton.setTitle("次の問題へ", for: .normal)
     }
@@ -114,11 +115,14 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     
     // 回答ボタンの色・テキストをリセットする
     func resetButtonState(view: QuizView) {
-        view.quizFirstAnswerButton.configuration?.background.backgroundColor = UIColor.systemGray
-        view.quizSecondAnswerButton.configuration?.background.backgroundColor = UIColor.systemGray
-        view.quizThirdAnswerButton.configuration?.background.backgroundColor = UIColor.systemGray
-        view.quizFourthAnswerButton.configuration?.background.backgroundColor = UIColor.systemGray
-        view.quizFifthAnswerButton.configuration?.background.backgroundColor = UIColor.systemGray
+        var config = UIButton.Configuration.filled()
+        config.background.backgroundColor = UIColor.systemGray
+        config.image = nil
+        view.quizFirstAnswerButton.configuration = config
+        view.quizSecondAnswerButton.configuration = config
+        view.quizThirdAnswerButton.configuration = config
+        view.quizFourthAnswerButton.configuration = config
+        view.quizFifthAnswerButton.configuration = config
     }
     
     // ボタンを描画するかどうか決定する
@@ -170,6 +174,7 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     // 登録した単語が特定の単語数未満だった場合アラートを表示する
     func checkIsQuizAvailable() -> Bool {
         let currenWordRegisterCount = countCurrentRegisteredWord()
+        // TODO: change variable
         if currenWordRegisterCount < maximumAnswerChoicesCount {
             wordAmountIsNotEnoughToActivateQuizAlert()
             return false
@@ -231,6 +236,9 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     
     // WordListの要素をUIに反映させる
     func drawInformationOnQuizWidget(quiz: WordModel, dummyAnswers: [String], correctAnswer: String) {
+        // 選択肢配列は問題ごとに削除しておく
+        answerSelectionArray.removeAll()
+        // QuizViewを定義
         let view = self.view as! QuizView
         // 問題を表示
         view.quizSingleWordLabel.text = quiz.word.singleWord
@@ -274,7 +282,14 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
                     index += 1
                 }
             }
-            
+            // ダミー選択肢のボタンが重複した場合
+            for j in 0 ..< i {
+                if answer == dummy[j] {
+                    // ランダムプリセットから値をset
+                    let randomInt = Int.random(in: 0 ..< presetDummyAnswersArray.count)
+                    answer = presetDummyAnswersArray[randomInt]
+                }
+            }
             // 各ボタンに描画
             if i == 0 { view.quizFirstAnswerButton.configuration?.title = answer }
             if i == 1 { view.quizSecondAnswerButton.configuration?.title = answer }
@@ -288,43 +303,57 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
                 default:
                     break
             }
+            // 最終的に確定された選択肢を配列に格納
+            answerSelectionArray.append(answer)
         }
     }
     
     // 回答ボタンの色を変更する
     func changeInformationOnQuizWidget() {
         let view = self.view as! QuizView
+        // UIButtonのCongfigを設定
+        var config = UIButton.Configuration.filled()
+        // Configの共通処理
+        config.imagePadding = 8.0
+        config.title = answerSelectionArray[getPressedButtonId]
+        
         // 不正解の時
         if answerId != getPressedButtonId {
+            // 背景を赤色かつxアイコンが表示されるように
+            config.background.backgroundColor = UIColor.systemRed
+            config.image = UIImage(systemName: "multiply.circle")
             switch getPressedButtonId {
             case 0:
-                view.quizFirstAnswerButton.configuration?.background.backgroundColor = UIColor.systemRed
+                view.quizFirstAnswerButton.configuration = config
             case 1:
-                view.quizSecondAnswerButton.configuration?.background.backgroundColor = UIColor.systemRed
+                view.quizSecondAnswerButton.configuration = config
             case 2:
-                view.quizThirdAnswerButton.configuration?.background.backgroundColor = UIColor.systemRed
+                view.quizThirdAnswerButton.configuration = config
             case 3:
-                view.quizFourthAnswerButton.configuration?.background.backgroundColor = UIColor.systemRed
+                view.quizFourthAnswerButton.configuration = config
             case 4:
-                view.quizFifthAnswerButton.configuration?.background.backgroundColor = UIColor.systemRed
+                view.quizFifthAnswerButton.configuration = config
             default:
                 break
             }
         }
-        // 正解の時：Tapしたボタンだけ緑色にする、選択肢の前にチェックマークをつける
+        // 正解時背景を緑かつチェックアイコンが表示されるように
+        config.background.backgroundColor = UIColor.systemGreen
+        config.image = UIImage(systemName: "checkmark.circle")
+        config.title = answerSelectionArray[answerId]
         switch answerId {
-        case 0:
-            view.quizFirstAnswerButton.configuration?.background.backgroundColor = UIColor.systemGreen
-        case 1:
-            view.quizSecondAnswerButton.configuration?.background.backgroundColor = UIColor.systemGreen
-        case 2:
-            view.quizThirdAnswerButton.configuration?.background.backgroundColor = UIColor.systemGreen
-        case 3:
-            view.quizFourthAnswerButton.configuration?.background.backgroundColor = UIColor.systemGreen
-        case 4:
-            view.quizFifthAnswerButton.configuration?.background.backgroundColor = UIColor.systemGreen
-        default:
-            break
+            case 0:
+                view.quizFirstAnswerButton.configuration = config
+            case 1:
+                view.quizSecondAnswerButton.configuration = config
+            case 2:
+                view.quizThirdAnswerButton.configuration = config
+            case 3:
+                view.quizFourthAnswerButton.configuration = config
+            case 4:
+                view.quizFifthAnswerButton.configuration = config
+            default:
+                break
         }
     }
 
@@ -404,8 +433,8 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     // Progressionを更新する
     func reloadProgressionView() {
         let view = self.view as! QuizView
-        let progressionRate = Float(totalSolvedQuizCount) / Float(maximumAnswerChoicesCount)
-        view.quizProgressionLabel.text = String(totalSolvedQuizCount+1) + "問目"
+        let progressionRate = Float(totalSolvedQuizCount) / Float(maximumQuizCount)
+        view.quizProgressionLabel.text = String(totalSolvedQuizCount+1) + " 問目"
         view.quizProgressBar.progress = Float(progressionRate)
     }
     

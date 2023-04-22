@@ -13,12 +13,13 @@ class CustomNavigationItem: UIBarButtonItem {
     
     func loadProperties() {
         fetchEncodedThemeData()
-        // self.tintColor = UIColor(hex: color)
-        
+        self.tintColor = UIColor(hex: color)
     }
     
     func fetchEncodedThemeData() {
         let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
-        color = themeModel.themeList[selected].theme.fontColor
+        if selected != 0 || selected != 2 || selected != 4 {
+            color = themeModel.themeList[selected].theme.fontColor
+        }
     }
 }

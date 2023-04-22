@@ -125,7 +125,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NJE-lU-czm" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="単語帳" image="list.bullet.rectangle.portrait" catalog="system" id="pDA-7g-Nvw"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="w9w-h7-xiU">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="w9w-h7-xiU" customClass="CustomNavigationBar" customModule="WordApp" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -144,7 +144,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wKg-S6-9iP" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="暗記リスト" image="brain" catalog="system" id="2f0-Rg-5Jo"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FYh-Yv-xSS">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FYh-Yv-xSS" customClass="CustomNavigationBar" customModule="WordApp" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -179,7 +179,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="msJ-zi-qUc" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="クイズ" image="questionmark" catalog="system" id="2Gt-et-DHP"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GUJ-m9-9GJ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GUJ-m9-9GJ" customClass="CustomNavigationBar" customModule="WordApp" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -214,7 +214,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Go9-DT-Myx" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="カスタマイズ" image="gear.circle" catalog="system" id="Yjt-0P-XCD"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2D4-6y-a8v">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2D4-6y-a8v" customClass="CustomNavigationBar" customModule="WordApp" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

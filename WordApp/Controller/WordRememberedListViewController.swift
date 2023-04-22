@@ -13,7 +13,7 @@ class WordRememberedListViewController: UIViewController, SortWordRememberedList
     // ソートタイプ：default値は1をセットする。
     var sortType: Int = 1
     // TODO: Localizable.stringにする
-    var sortTypeTextArray: [String] = ["登録日時が古い順", "登録日時が新しい順", "アルファベット順(昇順)", "アルファベット順(降順)", "ランダム", "誤答数が多い順", "誤答数が少ない順"]
+    var sortTypeTextArray: [String] = ["登録日時が古い順", "登録日時が新しい順", "ABC順(昇順)", "ABC順(降順)", "ランダム", "誤答数が多い順", "誤答数が少ない順"]
 
     override func viewDidLoad() {
         super.viewDidLoad()

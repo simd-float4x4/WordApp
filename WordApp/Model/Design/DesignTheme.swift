@@ -6,12 +6,12 @@ struct DesignTheme: Codable {
     var useImage: Bool
     var themeImageForIconUrl: String
     var backgroundImageUrl: String
-    // TODO: 適切な型に代入する
     var mainColor: String
     var subColor: String
     var accentColor: String
-    
-    //TODO: fontcolor, font
+    var vividColor: String
+    var complementalColor: String // 補色
     var fontColor: String
+    var complementalFontColor: String // フォントの補色
     var fontName: String
 }

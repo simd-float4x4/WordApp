@@ -25,7 +25,10 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
                         mainColor: "F4F4F4",
                         subColor: "FFFFFF",
                         accentColor: "0076BA",
+                        vividColor: "000000",
+                        complementalColor: "000000",
                         fontColor: "000000",
+                        complementalFontColor: "FFFFFF",
                         fontName: "DINAlternate-Bold")
         ),
         DesignThemeModel.init(initTheme:
@@ -37,7 +40,10 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
                         mainColor: "000000",
                         subColor: "A7ECF7",
                         accentColor: "2A3757",
+                        vividColor: "581308",
+                        complementalColor: "F7B2A7",
                         fontColor: "FFFFFF",
+                        complementalFontColor: "000000",
                         fontName: "851Gkktt")
         ),
         DesignThemeModel.init(initTheme:
@@ -49,7 +55,10 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
                         mainColor: "FAB12F",
                         subColor: "FFA500",
                         accentColor: "FEF3E2",
+                        vividColor: "005AFF",
+                        complementalColor: "005AFF",
                         fontColor: "000000",
+                        complementalFontColor: "FFFFFF",
                         fontName: "DINAlternate-Bold")
         ),
         DesignThemeModel.init(initTheme:
@@ -61,7 +70,10 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
                         mainColor: "303314",
                         subColor: "90993C",
                         accentColor: "EFFF63",
+                        vividColor: "453C99",
+                        complementalColor: "6F66C3",
                         fontColor: "FFFFFF",
+                        complementalFontColor: "000000",
                         fontName: "HannariMincho-Regular")
         ),
         DesignThemeModel.init(initTheme:
@@ -73,7 +85,10 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
                         mainColor: "1881B5",
                         subColor: "EAE2B8",
                         accentColor: "A90000",
+                        vividColor: "151D47",
+                        complementalColor: "B8C0EA",
                         fontColor: "000000",
+                        complementalFontColor: "FFFFFF",
                         fontName: "SoukouMincho")
         ),
         DesignThemeModel.init(initTheme:
@@ -85,7 +100,10 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
                         mainColor: "B45460",
                         subColor: "8B2635",
                         accentColor: "E6CCBE",
+                        vividColor: "268B7C",
+                        complementalColor: "74D9CA",
                         fontColor: "FFFFFF",
+                        complementalFontColor: "000000",
                         fontName: "LightNovelPOPv2")
         ),
         DesignThemeModel.init(initTheme:
@@ -97,7 +115,10 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
                         mainColor: "222025",
                         subColor: "4D392E",
                         accentColor: "CFAA54",
+                        vividColor: "B2CD61",
+                        complementalColor: "2E424D",
                         fontColor: "FFFFFF",
+                        complementalFontColor: "000000",
                         fontName: "Snell RoundHand")
         ),
         DesignThemeModel.init(initTheme:
@@ -109,7 +130,10 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
                         mainColor: "401100",
                         subColor: "9D6631",
                         accentColor: "A9782C",
+                        vividColor: "31689D",
+                        complementalColor: "6299CE",
                         fontColor: "FFFFFF",
+                        complementalFontColor: "000000",
                         fontName: "LightNovelPOPv2")
         ),
     
@@ -122,7 +146,6 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
-        let backgroundColor = themeList[indexPath.row].theme.themeImageForIconUrl
         let fontColor = themeList[indexPath.row].theme.fontColor
         var config = UIListContentConfiguration.cell()
         let currentThemeId = UserDefaults.standard.value(forKey: "selectedThemeColorId") ?? 0

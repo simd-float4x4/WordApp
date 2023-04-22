@@ -52,8 +52,7 @@
 		70A7C45429EFA6F7007C07FC /* CustomBackgroundLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C45329EFA6F7007C07FC /* CustomBackgroundLabel.swift */; };
 		70A7C45629EFA716007C07FC /* CustomUIProgressionBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C45529EFA716007C07FC /* CustomUIProgressionBar.swift */; };
 		70A7C45829EFA73D007C07FC /* UISegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C45729EFA73D007C07FC /* UISegmentedControl.swift */; };
-		70A7C45A29EFA76C007C07FC /* CustomPlaneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C45929EFA76C007C07FC /* CustomPlaneButton.swift */; };
-		70A7C45C29EFC8E0007C07FC /* CustomBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C45B29EFC8E0007C07FC /* CustomBarButtonItem.swift */; };
+		70A7C45C29EFC8E0007C07FC /* CustomNavgiationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C45B29EFC8E0007C07FC /* CustomNavgiationItem.swift */; };
 		70A7C45E29F007E5007C07FC /* 100.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C45D29F007E5007C07FC /* 100.png */; };
 		70A7C46029F008C7007C07FC /* CustomUITabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C45F29F008C7007C07FC /* CustomUITabBar.swift */; };
 		70A7C46229F017A5007C07FC /* 851Gkktt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C46129F017A5007C07FC /* 851Gkktt.ttf */; };
@@ -71,6 +70,8 @@
 		70A7C47E29F168B1007C07FC /* soda_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C47929F168B1007C07FC /* soda_icon.png */; };
 		70A7C47F29F168B1007C07FC /* chocolate_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C47A29F168B1007C07FC /* chocolate_icon.png */; };
 		70A7C48029F168B1007C07FC /* earth_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C47B29F168B1007C07FC /* earth_icon.png */; };
+		70A7C48429F37847007C07FC /* CustomUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C48329F37846007C07FC /* CustomUIButton.swift */; };
+		70A7C48629F39278007C07FC /* CommonNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C48529F39277007C07FC /* CommonNavigationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -140,8 +141,7 @@
 		70A7C45329EFA6F7007C07FC /* CustomBackgroundLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackgroundLabel.swift; sourceTree = "<group>"; };
 		70A7C45529EFA716007C07FC /* CustomUIProgressionBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIProgressionBar.swift; sourceTree = "<group>"; };
 		70A7C45729EFA73D007C07FC /* UISegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISegmentedControl.swift; sourceTree = "<group>"; };
-		70A7C45929EFA76C007C07FC /* CustomPlaneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPlaneButton.swift; sourceTree = "<group>"; };
-		70A7C45B29EFC8E0007C07FC /* CustomBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBarButtonItem.swift; sourceTree = "<group>"; };
+		70A7C45B29EFC8E0007C07FC /* CustomNavgiationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavgiationItem.swift; sourceTree = "<group>"; };
 		70A7C45D29F007E5007C07FC /* 100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 100.png; sourceTree = "<group>"; };
 		70A7C45F29F008C7007C07FC /* CustomUITabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUITabBar.swift; sourceTree = "<group>"; };
 		70A7C46129F017A5007C07FC /* 851Gkktt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = 851Gkktt.ttf; sourceTree = "<group>"; };
@@ -159,6 +159,8 @@
 		70A7C47929F168B1007C07FC /* soda_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = soda_icon.png; sourceTree = "<group>"; };
 		70A7C47A29F168B1007C07FC /* chocolate_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chocolate_icon.png; sourceTree = "<group>"; };
 		70A7C47B29F168B1007C07FC /* earth_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = earth_icon.png; sourceTree = "<group>"; };
+		70A7C48329F37846007C07FC /* CustomUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIButton.swift; sourceTree = "<group>"; };
+		70A7C48529F39277007C07FC /* CommonNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonNavigationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,10 +191,6 @@
 		702410CD29D55F560024ABBD = {
 			isa = PBXGroup;
 			children = (
-				70A7C44B29EF807D007C07FC /* LightNovelPOPv2.otf */,
-				70A7C46129F017A5007C07FC /* 851Gkktt.ttf */,
-				70A7C44E29EF8F3F007C07FC /* SoukouMincho.ttf */,
-				70A7C44D29EF8F2A007C07FC /* HannariMincho-Regular.otf */,
 				702410D829D55F560024ABBD /* WordApp */,
 				702410F229D55F590024ABBD /* WordAppTests */,
 				702410FC29D55F590024ABBD /* WordAppUITests */,
@@ -213,6 +211,7 @@
 		702410D829D55F560024ABBD /* WordApp */ = {
 			isa = PBXGroup;
 			children = (
+				70A7C48129F1AB3C007C07FC /* Fonts */,
 				70A7C44229ED483B007C07FC /* Image */,
 				70A7C43D29ED28DE007C07FC /* Extension */,
 				709BDBDA29E7A85400F06C59 /* Common */,
@@ -267,6 +266,7 @@
 				709BDBD629E3A83400F06C59 /* QuizViewController.swift */,
 				70A7C43329EB6FF4007C07FC /* SettingViewController.swift */,
 				70A7C46329F0F64C007C07FC /* CustomTabBarController.swift */,
+				70A7C48529F39277007C07FC /* CommonNavigationController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -321,16 +321,16 @@
 			children = (
 				709BDBCA29E2281B00F06C59 /* Notification.swift */,
 				70A7C43E29ED28F1007C07FC /* CustomView.swift */,
-				70A7C45B29EFC8E0007C07FC /* CustomBarButtonItem.swift */,
+				70A7C45B29EFC8E0007C07FC /* CustomNavgiationItem.swift */,
 				70A7C45729EFA73D007C07FC /* UISegmentedControl.swift */,
 				70A7C44029ED3176007C07FC /* UIColor.swift */,
 				70A7C45129EFA6CD007C07FC /* CustomBackgroundView.swift */,
 				70A7C45329EFA6F7007C07FC /* CustomBackgroundLabel.swift */,
-				70A7C45929EFA76C007C07FC /* CustomPlaneButton.swift */,
 				70A7C45529EFA716007C07FC /* CustomUIProgressionBar.swift */,
 				70A7C45F29F008C7007C07FC /* CustomUITabBar.swift */,
 				70A7C46529F0FCBD007C07FC /* CustomNavigationBar.swift */,
 				70A7C47329F14EB7007C07FC /* ImageForLuxuryTheme.swift */,
+				70A7C48329F37846007C07FC /* CustomUIButton.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -354,6 +354,17 @@
 				70A7C44329ED4848007C07FC /* orange.png */,
 			);
 			path = Image;
+			sourceTree = "<group>";
+		};
+		70A7C48129F1AB3C007C07FC /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				70A7C44B29EF807D007C07FC /* LightNovelPOPv2.otf */,
+				70A7C46129F017A5007C07FC /* 851Gkktt.ttf */,
+				70A7C44E29EF8F3F007C07FC /* SoukouMincho.ttf */,
+				70A7C44D29EF8F2A007C07FC /* HannariMincho-Regular.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -529,15 +540,16 @@
 				702410DA29D55F560024ABBD /* AppDelegate.swift in Sources */,
 				70A7C45629EFA716007C07FC /* CustomUIProgressionBar.swift in Sources */,
 				70A7C44129ED3176007C07FC /* UIColor.swift in Sources */,
-				70A7C45C29EFC8E0007C07FC /* CustomBarButtonItem.swift in Sources */,
+				70A7C45C29EFC8E0007C07FC /* CustomNavgiationItem.swift in Sources */,
 				709BDBCF29E2398500F06C59 /* WordRememberedListView.swift in Sources */,
 				70A7C43A29ED15D8007C07FC /* DesignTheme.swift in Sources */,
 				70A7C46629F0FCBE007C07FC /* CustomNavigationBar.swift in Sources */,
-				70A7C45A29EFA76C007C07FC /* CustomPlaneButton.swift in Sources */,
 				706C44C329DAEEB500B5FBC8 /* AddWordViewController.swift in Sources */,
 				7024111729D562600024ABBD /* WordListView.swift in Sources */,
 				7024111D29D577A60024ABBD /* WordModel.swift in Sources */,
 				702F654C29D7FF200041B8DC /* WordDetailView.swift in Sources */,
+				70A7C48429F37847007C07FC /* CustomUIButton.swift in Sources */,
+				70A7C48629F39278007C07FC /* CommonNavigationController.swift in Sources */,
 				709BDBD729E3A83400F06C59 /* QuizViewController.swift in Sources */,
 				709BDBCB29E2281B00F06C59 /* Notification.swift in Sources */,
 				702410DC29D55F560024ABBD /* SceneDelegate.swift in Sources */,

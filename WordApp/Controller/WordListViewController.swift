@@ -13,7 +13,7 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     // ソートタイプ：default値は1をセットする。
     var sortType: Int = 1
     // TODO: Localizable.stringにする
-    var sortTypeTextArray: [String] = ["登録日時が古い順", "登録日時が新しい順", "アルファベット順(昇順)", "アルファベット順(降順)"]
+    var sortTypeTextArray: [String] = ["登録日時が古い順", "登録日時が新しい順", "ABC順(昇順)", "ABC順(降順)"]
     var isDeleteModeOn: Bool = true
     
     // 削除モード/暗記モード切り替えボタン。NavigationBarの左上に配置するものとする。

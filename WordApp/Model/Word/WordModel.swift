@@ -166,6 +166,8 @@ class WordListModel: NSObject, UITableViewDataSource {
     
     //　クイズのうち、設定した先頭n件分のデータを返却
     func getMaximumQuizCount() -> Int {
+//        let ud = UserDefaults.standard
+//        let count = ud.value(forKey: "maximumQuizCount") as? Int
         return currentQuizMaximumCount
     }
     
@@ -217,13 +219,12 @@ class WordListModel: NSObject, UITableViewDataSource {
             // 誤答数を表示
             content.image = UIImage(systemName: fileName)
             content.imageProperties.tintColor = color
+        
         }
         content.text = wordModel.word.singleWord
         content.secondaryText = currentMeaningVisibility == true ? nil : wordModel.word.meaning
         let fontColor = UIColor(hex: themeModel.themeList[selected].theme.fontColor)
         content.textProperties.color = fontColor
-        let font = themeModel.themeList[selected].theme.fontName
-        // content.textProperties.font = UIFont(name: font, size: 20.0)!
         cell.contentConfiguration = content
         cell.backgroundColor = UIColor.clear
         return cell
