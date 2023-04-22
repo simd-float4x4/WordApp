@@ -1,28 +1,14 @@
-import Foundation
 import UIKit
 
-class CommonAlert {
-    func make(alertTitle: String, alertMessage: String, alertAction: [String]) -> UIAlertController{
-        let alertContent = UIAlertController(
-            title: alertTitle,
-            message: alertMessage,
-            preferredStyle: .alert)
-        for i in 0 ..< alertAction.count {
-            var getAction = UIAlertAction()
-            switch alertAction[i] {
-                case ".ok":
-                    getAction = UIAlertAction(
-                        title: "OK",
-                        style: .default) { (action) in
-                            
-                        }
-                case ".cancel":
-                    break
-                default :
-                    break
-            }
-            alertContent.addAction(getAction)
-        }
-        return alertContent
+/// UIViewController拡張(アラート)
+public extension UIViewController {
+
+    // MARK: Public Methods
+
+    func showAlert(title: String, message: String, actions: [UIAlertAction]) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        actions.forEach { alert.addAction($0) }
+        present(alert, animated: true)
     }
+
 }

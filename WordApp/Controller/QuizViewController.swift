@@ -184,18 +184,10 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     
     // 登録した単語が特定の単語数未満だった場合表示するアラート
     func wordAmountIsNotEnoughToActivateQuizAlert() {
-        // TODO: handlerをAlertに持っていけるようになったら共通化
-        let alertContent = UIAlertController(
-            title: "現在クイズ機能はご利用いただけません。",
-            message: "クイズを利用するためには、単語を5つ以上暗記してください。",
-            preferredStyle: .alert)
-        let getAction = UIAlertAction(
-            title: "OK",
-            style: .default) { (action) in
-                self.goToTheRootViewController()
-            }
-        alertContent.addAction(getAction)
-        present(alertContent, animated: true, completion: nil)
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            self.goToTheRootViewController()
+        }
+        showAlert(title: "現在クイズ機能はご利用いただけません。", message: "クイズを利用するためには、単語を5つ以上暗記してください。", actions: [okAction])
     }
     
     // RootViewController(WordListViewController)に遷移する
@@ -415,17 +407,10 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
         if quiz[0].word.id == currentQuizStopper {
             let solvedCorrectlyCount = totalSolvedQuizCount - totalQuizWrongCount
             let scoreString = String(solvedCorrectlyCount * 100 / totalSolvedQuizCount) + "点です。（100点満点中）" + "\n⭕️" + String(solvedCorrectlyCount) + "問　❌" + String(totalQuizWrongCount) + "問"
-            let alertContent = UIAlertController(
-                title: "お疲れ様でした。",
-                message: scoreString,
-                preferredStyle: .alert)
-            let getAction = UIAlertAction(
-                title: "OK",
-                style: .default) { (action) in
-                    self.goToTheRootViewController()
-                }
-            alertContent.addAction(getAction)
-            present(alertContent, animated: true, completion: nil)
+            let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+                self.goToTheRootViewController()
+            }
+            showAlert(title: "お疲れ様でした。", message: scoreString, actions: [okAction])
             goToTheRootViewController()
         }
     }
@@ -436,13 +421,5 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
         let progressionRate = Float(totalSolvedQuizCount) / Float(maximumQuizCount)
         view.quizProgressionLabel.text = String(totalSolvedQuizCount+1) + "  問目"
         view.quizProgressBar.progress = Float(progressionRate)
-    }
-    
-    // TODO: Alertにhandlerを渡せるようになったら共通化
-    // アラートを作る
-    func makeAlert(alertTitle: String, alertMessage: String, alertAction: [String]){
-        let commonAlert = CommonAlert()
-        let alert = commonAlert.make(alertTitle: alertTitle, alertMessage: alertMessage, alertAction: alertAction)
-        present(alert, animated: true, completion: nil)
     }
 }

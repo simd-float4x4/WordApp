@@ -37,35 +37,22 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
         let checkBool = makeValidationToAddWord(data: data)
         // エラー発生時
         if !checkBool {
-            let alertContent = UIAlertController(
-                title: "エラー",
-                message: "単語の登録が出来ませんでした。",
-                preferredStyle: .alert)
-            let okAction = UIAlertAction(
-                title: "OK",
-                style: .default) { (action) in
+            let okAction = UIAlertAction(title: "OK", style: .default) { _ in
                 self.dismiss(animated: true, completion: nil)
             }
-            alertContent.addAction(okAction)
-            present(alertContent, animated: true, completion: nil)
+            showAlert(title: "エラー", message: "単語の登録が出来ませんでした。", actions: [okAction])
         } else {
             // バリデーション追加時
             let currentWordId = wordModel.wordList.last?.word.id ?? 0
             wordModel.addWordToList(id: currentWordId, data: data)
-            let alertContent = UIAlertController(
-                title: "登録完了（"+data[0]+"）",
-                message: "単語を完了いたしました。",
-                preferredStyle: .alert)
-            let okAction = UIAlertAction(
-                title: "OK",
-                style: .default) { (action) in
-                    let view = AddWordView()
-                    view.resetWordInputField()
-                    self.initializeWordAddView()
+            
+            let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+                let view = AddWordView()
+                view.resetWordInputField()
+                self.initializeWordAddView()
                 self.dismiss(animated: true, completion: nil)
             }
-            alertContent.addAction(okAction)
-            present(alertContent, animated: true, completion: nil)
+            showAlert(title: "登録完了（"+data[0]+"）", message: "単語を完了いたしました。", actions: [okAction])
             registerModel()
         }
     }
