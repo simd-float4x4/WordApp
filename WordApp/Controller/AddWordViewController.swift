@@ -6,6 +6,18 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
     var wordModel = WordListModel.shared
     var tappedTextViewName = ""
     
+    let alertErrorTitleLabel = NSLocalizedString("alertErrorTitle", comment: "")
+    let alertMessageSucceedLabel = NSLocalizedString("alertRegisterWordIsFinishedText", comment: "")
+    let alertMesssageFailedLabel = NSLocalizedString("alertRegisterWordIsFailedText", comment: "")
+    let alertOkButton = NSLocalizedString("alertOkButton", comment: "")
+    let alertRegisterFinishedPrefixLabel = NSLocalizedString("alertRegisterWordIsFinishedTitle", comment: "")
+    let alertRegisterFinishedSuffixLabel = NSLocalizedString("alertRegisterWordIsFinishedTitleSuffix", comment: "")
+
+    let singleWordTextViewisTapped = NSLocalizedString("single", comment: "")
+    let meaningTextViewisTapped = NSLocalizedString("meaning", comment: "")
+    let exampleSentenceTextViewisTapped = NSLocalizedString("ex-sente", comment: "")
+    let exampleTranslationTextViewisTapped = NSLocalizedString("ex-trans", comment: "")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeWordAddView()
@@ -37,22 +49,23 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
         let checkBool = makeValidationToAddWord(data: data)
         // エラー発生時
         if !checkBool {
-            let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            let okAction = UIAlertAction(title: alertOkButton, style: .default) { _ in
                 self.dismiss(animated: true, completion: nil)
             }
-            showAlert(title: "エラー", message: "単語の登録が出来ませんでした。", actions: [okAction])
+            showAlert(title: alertErrorTitleLabel, message: alertMesssageFailedLabel, actions: [okAction])
         } else {
             // バリデーション追加時
             let currentWordId = wordModel.wordList.last?.word.id ?? 0
             wordModel.addWordToList(id: currentWordId, data: data)
             
-            let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            let okAction = UIAlertAction(title: alertOkButton, style: .default) { _ in
                 let view = AddWordView()
                 view.resetWordInputField()
                 self.initializeWordAddView()
                 self.dismiss(animated: true, completion: nil)
             }
-            showAlert(title: "登録完了（"+data[0]+"）", message: "単語を完了いたしました。", actions: [okAction])
+            let alertFinishedLabelString = alertRegisterFinishedPrefixLabel + data[0] + alertRegisterFinishedSuffixLabel
+            showAlert(title: alertFinishedLabelString, message: alertMessageSucceedLabel, actions: [okAction])
             registerModel()
         }
     }
@@ -86,16 +99,16 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
         let addWordView = self.view as! AddWordView
         // タップしたTextViewによってキーを変更
         if textView == addWordView.singleWordTextView {
-            tappedTextViewName = ".singleWord"
+            tappedTextViewName = singleWordTextViewisTapped
         }
         if textView == addWordView.meaningWordTextView {
-            tappedTextViewName = ".meaningWord"
+            tappedTextViewName = meaningTextViewisTapped
         }
         if textView == addWordView.exampleSentenceTextView {
-            tappedTextViewName = ".exampleSentence"
+            tappedTextViewName = exampleSentenceTextViewisTapped
         }
         if textView == addWordView.exampleTranslationTextView {
-            tappedTextViewName = ".exampleTranslation"
+            tappedTextViewName = exampleTranslationTextViewisTapped
         }
     }
     //テキストフィールドでリターンが押されたときに通知され起動するメソッド
@@ -127,14 +140,14 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
         var exampleHeight = 0.0
         // タップされたtextFieldがどれか取得
         DispatchQueue.main.async {
-            if self.tappedTextViewName == ".exampleTranslation" {
+            if self.tappedTextViewName == self.exampleTranslationTextViewisTapped {
                 exampleHeight = 0.75
             }
-            if self.tappedTextViewName == ".exampleSentence" {
+            if self.tappedTextViewName == self.exampleSentenceTextViewisTapped {
                 exampleHeight = 0.5
             }
             // singleWordだったら動かさない
-            if self.tappedTextViewName == ".exampleTranslation" || self.tappedTextViewName == ".exampleSentence" {
+            if self.tappedTextViewName == self.exampleTranslationTextViewisTapped || self.tappedTextViewName == self.exampleSentenceTextViewisTapped {
                 // keyboardのsizeを取得
                 if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
                     // TODO: 条件式の算出方法については要検討、再議論の必要あり
@@ -169,10 +182,5 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
     // キーボードがキャンセルされた時の処理
     @objc func dismissKeyboard() {
         self.view.endEditing(true)
-    }
-    
-    // AddWordViewからタップ情報を取得
-    func getTappedTextviewName(name: String) {
-        tappedTextViewName = name
     }
 }

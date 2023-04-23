@@ -4,7 +4,6 @@ import UIKit
 /// - func addWordToList(data: [String]) → AddWordViewControllerと接続
 protocol AddWordToWordListDelegate: AnyObject {
     func addWordToList(data: [String])
-    func getTappedTextviewName(name: String)
 }
 
 // MARK: AddWordView
@@ -14,6 +13,11 @@ class AddWordView: UIView {
     @IBOutlet weak var meaningWordTextView: UITextView!
     @IBOutlet weak var exampleSentenceTextView: UITextView!
     @IBOutlet weak var exampleTranslationTextView: UITextView!
+    
+    @IBOutlet weak var singleWordTextLabel: UILabel!
+    @IBOutlet weak var meaningWordTextLabel: UILabel!
+    @IBOutlet weak var exampleSentenceTextLabel: UILabel!
+    @IBOutlet weak var exampleTranslationTextLabel: UILabel!
     
     @IBOutlet weak var wordAddContainerView: UIView!
     
@@ -32,14 +36,24 @@ class AddWordView: UIView {
     }
 
     func loadNib(){
-        let view = Bundle.main.loadNibNamed("AddWordView", owner: self, options: nil)?.first as! UIView
+        let fileName = NSLocalizedString("AddWordView", comment: "")
+        let view = Bundle.main.loadNibNamed(fileName, owner: self, options: nil)?.first as! UIView
         view.frame = self.bounds
         if let subview = view.subviews.first  {
             self.addSubview(subview)
         }
         initializeTextField()
+        initializeUILabel()
         // テストデータを自動入力。（今後のデバッグ用に残す）
         inputTestData()
+    }
+    
+    // UILabelの初期値を取得する
+    func initializeUILabel() {
+        singleWordTextLabel.text = NSLocalizedString("singleWordLabel", comment: "")
+        meaningWordTextLabel.text = NSLocalizedString("meaningWordLabel", comment: "")
+        exampleSentenceTextLabel.text = NSLocalizedString("exampleSentenceLabel", comment: "")
+        exampleTranslationTextLabel.text = NSLocalizedString("exampleTranslationLabel", comment: "")
     }
     
     // UITextFieldを初期化する
@@ -51,7 +65,8 @@ class AddWordView: UIView {
         let enter = UIButton(frame: CGRect(x: 300, y: 5, width: 80, height: 35))
         enter.backgroundColor = UIColor.white
         enter.layer.cornerRadius = 17
-        enter.setTitle("登録", for: UIControl.State.normal)
+        let registerWordButtonLabel = NSLocalizedString("registerUIButton", comment: "")
+        enter.setTitle(registerWordButtonLabel, for: UIControl.State.normal)
         enter.setTitleColor(UIColor.black, for: UIControl.State.normal)
         // TODO: Viewの責務ではない？　議論の余地あり
         enter.addTarget(self, action: #selector(onTapAddWord), for: UIControl.Event.touchUpInside)
@@ -109,9 +124,5 @@ class AddWordView: UIView {
         meaningWordTextView.text = meaningArray[index]
         exampleSentenceTextView.text = exampleArray[index]
         exampleTranslationTextView.text = transArray[index]
-    }
-    
-    func setTappedTextView() {
-        addWordToWordListDelegate?.getTappedTextviewName(name: ".singleWord")
     }
 }

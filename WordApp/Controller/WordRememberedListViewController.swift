@@ -12,8 +12,14 @@ class WordRememberedListViewController: UIViewController, SortWordRememberedList
     
     // ソートタイプ：default値は1をセットする。
     var sortType: Int = 1
-    // TODO: Localizable.stringにする
-    var sortTypeTextArray: [String] = ["登録日時が古い順", "登録日時が新しい順", "ABC順(昇順)", "ABC順(降順)", "ランダム", "誤答数が多い順", "誤答数が少ない順"]
+    var sortTypeTextArray: [String] = [
+        NSLocalizedString("sortOldOrder", comment: ""),
+        NSLocalizedString("sortNewOrder", comment: ""),
+        NSLocalizedString("sortABCAsc", comment: ""),
+        NSLocalizedString("sortABCDesc", comment: ""),
+        NSLocalizedString("sortRandom", comment: ""),
+        NSLocalizedString("sortWrongCountAsc", comment: ""),
+        NSLocalizedString("sortWrongCountDesc", comment: "")]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,7 +86,7 @@ class WordRememberedListViewController: UIViewController, SortWordRememberedList
         sortType += 1
         // TODO: (ソートタイプの上限)を定数管理する
         // 一巡したらソートタイプを1に戻す
-        sortType = sortType == 8 ? 1 : sortType
+        sortType = sortType == sortTypeTextArray.count + 1 ? 1 : sortType
         // wordListを並び替える
         wordModel.sortWordList(sortModeId: sortType)
         // ソートボタンのラベル文字を適宜変更する
@@ -120,7 +126,7 @@ extension WordRememberedListViewController: UITableViewDelegate {
         // 配列からidを取得
         let id = itemList[indexPath.row].word.id
         // 復元アクション
-        let categorizeToWordListAction = UIContextualAction(style: .normal, title: "復元") { (action, view, completionHandler) in
+        let categorizeToWordListAction = UIContextualAction(style: .normal, title: NSLocalizedString("WordRecoveryButton", comment: "")) { (action, view, completionHandler) in
             // 単語帳に戻す
             self.wordModel.upDateRememberStatus(index: id)
             // 誤答数をリセットする

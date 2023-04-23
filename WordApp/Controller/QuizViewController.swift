@@ -28,6 +28,14 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     
     var answerSelectionArray: [String] = []
     
+    
+    let alertOkButton = NSLocalizedString("alertOkButton", comment: "")
+    let alertQuizIsNotAvailableTitleLabel = NSLocalizedString("alertQuizIsNotAvailableTitle", comment: "")
+    let alertQuizIsNotAvailableTextLabel = NSLocalizedString("alertQuizIsNotAvailableText", comment: "")
+    let alertQuizIsFinishedTitleLabel = NSLocalizedString("alertQuizFinishedTitle", comment: "")
+    let alertQuizIsFinishedTextLabel = NSLocalizedString("alertQuizFinishedText", comment: "")
+    let alertQuizNumberTextLabel = NSLocalizedString("alertQuizNumber", comment: "")
+    
     // プリセット値：ダミー用回答（正解が2個以上ある際に使用する）
     var presetDummyAnswersArray = [
         "〜を明らかにする", "〜を横断する", "〜を乗り越える", "減少する", "分配する", "証明する", "を起訴する", "を回避する", "を蒸発させる",
@@ -102,9 +110,10 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     
     // ProgressのUIを初期化する
     func initProgressArea(view: QuizView) {
-        view.quizProgressionLabel.text = "1　 問目"
+        let string = NSLocalizedString("one", comment: "") + NSLocalizedString("quizCurrentQuizNumber", comment: "")
+        view.quizProgressionLabel.text = string
         view.quizProgressBar.progress = 0.0
-        view.moveToNextQuizButton.setTitle("次の問題へ", for: .normal)
+        view.moveToNextQuizButton.setTitle(NSLocalizedString("quizMoveToNextQuizButtonText", comment: ""), for: .normal)
     }
     
     // 回答ボタンのUIを初期化する
@@ -184,10 +193,10 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     
     // 登録した単語が特定の単語数未満だった場合表示するアラート
     func wordAmountIsNotEnoughToActivateQuizAlert() {
-        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+        let okAction = UIAlertAction(title: alertOkButton, style: .default) { _ in
             self.goToTheRootViewController()
         }
-        showAlert(title: "現在クイズ機能はご利用いただけません。", message: "クイズを利用するためには、単語を5つ以上暗記してください。", actions: [okAction])
+        showAlert(title: alertQuizIsNotAvailableTitleLabel, message: alertQuizIsNotAvailableTextLabel, actions: [okAction])
     }
     
     // RootViewController(WordListViewController)に遷移する
@@ -406,11 +415,11 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     func checkNextQuizIsLast() {
         if quiz[0].word.id == currentQuizStopper {
             let solvedCorrectlyCount = totalSolvedQuizCount - totalQuizWrongCount
-            let scoreString = String(solvedCorrectlyCount * 100 / totalSolvedQuizCount) + "点です。（100点満点中）" + "\n⭕️" + String(solvedCorrectlyCount) + "問　❌" + String(totalQuizWrongCount) + "問"
-            let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            let scoreString = String(solvedCorrectlyCount * 100 / totalSolvedQuizCount) + alertQuizIsFinishedTextLabel + "\n⭕️" + String(solvedCorrectlyCount)   + alertQuizNumberTextLabel  + " " + "❌" + String(totalQuizWrongCount)  + alertQuizNumberTextLabel
+            let okAction = UIAlertAction(title: alertOkButton, style: .default) { _ in
                 self.goToTheRootViewController()
             }
-            showAlert(title: "お疲れ様でした。", message: scoreString, actions: [okAction])
+            showAlert(title: alertQuizIsFinishedTitleLabel, message: scoreString, actions: [okAction])
             goToTheRootViewController()
         }
     }

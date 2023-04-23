@@ -14,6 +14,15 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
     
     static let shared = DesignThemeListModel()
     
+    let normalColorThemeTitle = NSLocalizedString("designThemeNameNormal", comment: "")
+    let spaceColorThemeTitle = NSLocalizedString("designThemeNameSpace", comment: "")
+    let orangeColorThemeTitle = NSLocalizedString("designThemeNameOrange", comment: "")
+    let oliveColorThemeTitle = NSLocalizedString("designThemeNameOlive", comment: "")
+    let blueSodaColorThemeTitle = NSLocalizedString("designThemeNameBlueSoda", comment: "")
+    let strawberryColorThemeTitle = NSLocalizedString("designThemeNameStrawberry", comment: "")
+    let luxuryColorThemeTitle = NSLocalizedString("designThemeNameLuxury", comment: "")
+    let chocolateColorThemeTitle = NSLocalizedString("designThemeNameChocolate", comment: "")
+    
     // Modelで管理する配列に初期値を設定する。
     var themeList: [DesignThemeModel] = [
         DesignThemeModel.init(initTheme:

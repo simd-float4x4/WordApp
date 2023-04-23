@@ -18,6 +18,10 @@ class SettingView: UIView {
     //　テーマ選択用CollectionView
     @IBOutlet weak var collectionThemeCollectionView: UICollectionView!
     
+    @IBOutlet weak var settingViewSelectQuizSelectionCountTextLabel: UILabel!
+    @IBOutlet weak var settingViewQuizMaximumCountTextLabel: UILabel!
+    @IBOutlet weak var settingViewDesignThemeTextLabel: UILabel!
+    
     @IBOutlet var testLabel: UILabel!
     
     weak var settingViewDelegate: SettingViewDelegate!
@@ -47,7 +51,9 @@ class SettingView: UIView {
         // セグメントが変更された時に呼び出すメソッドの設定
         quizAnserSegmentedControl.addTarget(self, action: #selector(quizChoicesSegmentedControl(_:)), for: UIControl.Event.valueChanged)
         makeQuizSumCountControl.addTarget(self, action: #selector(quizMaximumCountSegmentedControl(_:)), for: UIControl.Event.valueChanged)
-        
+        settingViewSelectQuizSelectionCountTextLabel.text = NSLocalizedString("settingSelectionAnswerCountTitle", comment: "")
+        settingViewQuizMaximumCountTextLabel.text = NSLocalizedString("settingMaximumQuizCountTitle", comment: "")
+        settingViewDesignThemeTextLabel.text = NSLocalizedString("settingDesignThemeTitle", comment: "")
     }
     
     @IBAction func quizChoicesSegmentedControl(_ sender: UISegmentedControl) {

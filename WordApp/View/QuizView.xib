@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QuizView" customModule="WordApp" customModuleProvider="target">
             <connections>
                 <outlet property="moveToNextQuizButton" destination="KVf-k0-GJN" id="pxg-R9-cxV"/>
+                <outlet property="quizDescriptionTextLabel" destination="g9R-xe-5pk" id="qSK-15-Kqo"/>
                 <outlet property="quizFifthAnswerButton" destination="V7g-eg-rzM" id="RRe-f3-vpD"/>
                 <outlet property="quizFirstAnswerButton" destination="cEz-nB-Nlu" id="86J-UD-AjN"/>
                 <outlet property="quizFourthAnswerButton" destination="03H-oC-ufN" id="OjS-XR-XXx"/>

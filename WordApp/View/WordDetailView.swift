@@ -8,6 +8,7 @@ class WordDetailView: UIView {
     @IBOutlet weak var exampleSentenseLabel: UILabel!
     @IBOutlet weak var exampleSentenseTranslationLabel: UILabel!
     @IBOutlet weak var cancelView: UIView!
+    @IBOutlet weak var tapToRootViewTextLabel: UILabel!
     
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -25,7 +26,6 @@ class WordDetailView: UIView {
         if let subview = view.subviews.first  {
             self.addSubview(subview)
         }
-        exampleSentenseLabel.numberOfLines = 0
-        exampleSentenseLabel.sizeToFit()
+        tapToRootViewTextLabel.text = NSLocalizedString("buttonBackToWordList", comment: "")
     }
 }

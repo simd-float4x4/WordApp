@@ -12,9 +12,19 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     var exampleTranslation: String = ""
     // ソートタイプ：default値は1をセットする。
     var sortType: Int = 1
-    // TODO: Localizable.stringにする
-    var sortTypeTextArray: [String] = ["登録日時が古い順", "登録日時が新しい順", "ABC順(昇順)", "ABC順(降順)"]
+    var sortTypeTextArray: [String] = [
+        NSLocalizedString("sortOldOrder", comment: ""),
+        NSLocalizedString("sortNewOrder", comment: ""),
+        NSLocalizedString("sortABCAsc", comment: ""),
+        NSLocalizedString("sortABCDesc", comment: "")]
     var isDeleteModeOn: Bool = true
+    
+    var percetnageString = NSLocalizedString("percentageLabel", comment: "")
+    var slashString = NSLocalizedString("slashLabel", comment: "")
+    var wordDeleteButtonTextLabel = NSLocalizedString("WordDeleteButton", comment: "")
+    var wordRememberedButtonTextLabel = NSLocalizedString("WordRememberedButton", comment: "")
+    var zeroString = NSLocalizedString("zero", comment: "")
+    
     
     // 削除モード/暗記モード切り替えボタン。NavigationBarの左上に配置するものとする。
     @IBOutlet var nabigationBarLeftButton: UIBarButtonItem!
@@ -79,12 +89,12 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         let wordSolvedSum = wordModel.wordList.filter({$0.word.isRemembered == true}).count
         let wordTotalSum = wordModel.wordList.count
         let wordRememberedPercentage = wordTotalSum != 0 ? wordSolvedSum * 100 / wordTotalSum : 100
-        wordListView.progressWordSumLabel.text = String(wordSolvedSum) + " / " + String(wordTotalSum)
-        wordListView.progressPercentageLabel.text = String(wordRememberedPercentage) + " %"
+        wordListView.progressWordSumLabel.text = String(wordSolvedSum) + slashString + String(wordTotalSum)
+        wordListView.progressPercentageLabel.text = String(wordRememberedPercentage) + percetnageString
         wordListView.progressBarWidget.progress = Float(wordRememberedPercentage) / 100.0
         // データ個数が0の場合
         if wordTotalSum == 0 && wordSolvedSum == 0 {
-            wordListView.progressPercentageLabel.text = "0 %"
+            wordListView.progressPercentageLabel.text = zeroString + percetnageString
             wordListView.progressBarWidget.progress = 0.0 / 100.0
         }
     }
@@ -123,7 +133,7 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         sortType += 1
         // TODO: 5(ソートタイプの上限)を定数管理する
         // 一巡したらソートタイプを1に戻す（sortType: 5~7は暗記専用）
-        sortType = sortType == 5 ? 1 : sortType
+        sortType = sortType == sortTypeTextArray.count + 1 ? 1 : sortType
         // wordListを並び替える
         wordModel.sortWordList(sortModeId: sortType)
         // ソートボタンのラベル文字を適宜変更する
@@ -199,7 +209,7 @@ extension WordListViewController: UITableViewDelegate {
         // 表示上の配列をあらかじめfilterしておく
         let itemList =  wordModel.returnFilteredWordList(isWordRememberedStatus: false)
         // 削除アクション
-        let deleteAction = UIContextualAction(style: .normal, title: "削除") { (action, view, completionHandler) in
+        let deleteAction = UIContextualAction(style: .normal, title: wordDeleteButtonTextLabel) { (action, view, completionHandler) in
             // 配列からidを取得
             let id = itemList[indexPath.row].word.id
             // wordModel.wordListから該当するidの要素を削除
@@ -211,7 +221,7 @@ extension WordListViewController: UITableViewDelegate {
             completionHandler(true)
         }
         // 暗記アクション
-        let rememberedAction = UIContextualAction(style: .normal, title: "覚えた") { (action, view, completionHandler) in
+        let rememberedAction = UIContextualAction(style: .normal, title: wordRememberedButtonTextLabel) { (action, view, completionHandler) in
             let id = itemList[indexPath.row].word.id
             self.wordModel.upDateRememberStatus(index: id)
             // WordListWidgetを更新

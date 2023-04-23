@@ -13,6 +13,9 @@
                 <outlet property="collectionThemeCollectionView" destination="DBO-Pn-3w1" id="s2G-gH-WBh"/>
                 <outlet property="makeQuizSumCountControl" destination="rfe-TG-QOA" id="r77-g4-0DC"/>
                 <outlet property="quizAnserSegmentedControl" destination="dk8-98-Nnn" id="anH-3h-g4C"/>
+                <outlet property="settingViewDesignThemeTextLabel" destination="RQL-lD-bek" id="9Jh-s0-yT1"/>
+                <outlet property="settingViewQuizMaximumCountTextLabel" destination="eOt-Xw-kcc" id="97f-De-zBe"/>
+                <outlet property="settingViewSelectQuizSelectionCountTextLabel" destination="z2i-dH-gvQ" id="ULJ-WS-FDY"/>
                 <outlet property="testLabel" destination="z2i-dH-gvQ" id="ogt-jq-D5n"/>
             </connections>
         </placeholder>

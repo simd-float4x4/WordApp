@@ -25,6 +25,7 @@ class QuizView: UIView {
     @IBOutlet weak var quizProgressionLabel: UILabel!
     
     @IBOutlet weak var moveToNextQuizButton: UIButton!
+    @IBOutlet weak var quizDescriptionTextLabel: UILabel!
     
     weak var quizAnswerButtonIsTappedDelegate: QuizAnswerButtonIsTappedDelegate?
     
@@ -47,6 +48,7 @@ class QuizView: UIView {
             self.addSubview(subview)
         }
         moveToNextQuizButton.isHidden = true
+        quizDescriptionTextLabel.text = NSLocalizedString("quizQuestionTextLabel", comment: "")
     }
     
     @IBAction func pressedFirstbutton() {

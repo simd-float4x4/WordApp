@@ -33,6 +33,7 @@ class WordListView: UIView {
        loadNib()
        initalizeProgressionWidgetStyle()
        wordListWidget.backgroundColor = UIColor.clear
+       thereIsNoUILabel.text = NSLocalizedString("WordListWidgetIsNilLabel", comment: "")
    }
 
    required init(coder aDecoder: NSCoder) {
@@ -65,7 +66,7 @@ class WordListView: UIView {
         ud.set(visibility, forKey: "isMeaningHidden")
         ud.synchronize()
         // 表示モードの変更に伴いラベルテキストも変更
-        let hideMeaningButtonTitleLabelText = visibility == true ? "日本語訳を表示する" : "日本語訳を隠す"
+        let hideMeaningButtonTitleLabelText = visibility != true ? NSLocalizedString("hideTranslation", comment: "") : NSLocalizedString("showTranslation", comment: "")
         hideMeaningButton.setTitle(hideMeaningButtonTitleLabelText, for: .normal)
         // リロードする
         /// WordListViewControllerのreloadWordListWidget()と接続

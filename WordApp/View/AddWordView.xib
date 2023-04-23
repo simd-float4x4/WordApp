@@ -10,9 +10,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddWordView" customModule="WordApp" customModuleProvider="target">
             <connections>
+                <outlet property="exampleSentenceTextLabel" destination="txR-Mm-7hU" id="skD-Xw-ELA"/>
                 <outlet property="exampleSentenceTextView" destination="beJ-gw-2l2" id="nha-47-D7j"/>
+                <outlet property="exampleTranslationTextLabel" destination="Ecl-Lb-Wxo" id="GSg-EQ-oRF"/>
                 <outlet property="exampleTranslationTextView" destination="SRa-Qh-f5p" id="U1k-Yg-JsG"/>
+                <outlet property="meaningWordTextLabel" destination="yQt-kn-X3q" id="WnL-6v-Wg2"/>
                 <outlet property="meaningWordTextView" destination="uk0-75-EFI" id="Svm-61-d62"/>
+                <outlet property="singleWordTextLabel" destination="R8H-mL-cwA" id="XoB-jl-76R"/>
                 <outlet property="singleWordTextView" destination="t3e-DS-Fkk" id="BT5-wT-Zgk"/>
                 <outlet property="wordAddContainerView" destination="Srv-wJ-XJI" id="vMe-Ab-Mth"/>
             </connections>

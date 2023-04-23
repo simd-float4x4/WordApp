@@ -1,0 +1,98 @@
+/* Xib FileNames */
+"AddWordView" = "AddWordView";
+"WordListView" = "WordListView";
+"WordDetailView" = "WordDetailView";
+"WordRememberedListView" = "WordRememberedListView";
+"QuizView" = "QuizView";
+"SettingView" = "SettingView";
+
+/* NavBar Title */
+"WordListViewTitleText" = "単語帳画面";
+"AddWordViewTitleText" = "単語登録画面";
+"WordRememberedListViewTitleText" = "暗記リスト";
+"QuizViewTitleText" = "クイズモード";
+"SettingViewTitleText" = "設定画面";
+
+/* Sort */
+"sortOldOrder" = "登録日時が古い順";
+"sortNewOrder" = "登録日時が新しい順";
+"sortABCAsc" = "ABC順(昇順)";
+"sortABCDesc" = "ABC順(降順)";
+"sortRandom" = "ランダム";
+"sortWrongCountAsc" = "誤答数が多い順";
+"sortWrongCountDesc" = "誤答数が少ない順";
+
+/* Hide/Show Translation */
+"hideTranslation" = "日本語訳を隠す";
+"showTranslation" = "日本語訳を表示する";
+
+/* WordListWidget */
+"progressionTitleLabelText" = "Progression";
+"percentageLabel" = "　% ";
+"slashLabel" = "　/　";
+"WordListWidgetIsNilLabel" = "単語が登録されていません";
+"WordDeleteButton" = "削除";
+"WordRememberedButton" = "覚えた";
+
+/* AddWordList */
+"singleWordLabel" = "単語";
+"meaningWordLabel" = "意味";
+"exampleSentenceLabel" = "例文";
+"exampleTranslationLabel" = "例文訳";
+"makeSampleDataQuicklyButtonText" = "テストデータを入力する";
+
+"single" = ".single";
+"meaning" = ".meaning";
+"ex-sente" = ".exampleSentence";
+"ex-trans" = ".exampleTranslation";
+
+/* UIButton */
+"registerUIButton" = "登録";
+
+/* Alert */
+"alertErrorTitle" = "エラー";
+"alertQuizFinishedTitle" = "お疲れ様でした。";
+"alertQuizIsNotAvailableTitle" = "現在クイズ機能はご利用いただけません。";
+"alertRegisterWordIsFinishedTitle" = "登録完了(";
+"alertRegisterWordIsFinishedTitleSuffix" = ")";
+"alertRegisterWordIsFinishedText" = "単語を完了いたしました。";
+"alertRegisterWordIsFailedText" = "単語を登録できませんでした。";
+"alertQuizIsNotAvailableText" = "クイズを利用するためには、単語を5つ以上暗記してください。";
+"alertQuizFinishedText" = "点です。（100点満点中）";
+"alertQuizNumber" = "問";
+"alertOkButton" = "OK";
+
+/* RememberedWordList */
+"WordRecoveryButton" = "復元";
+
+/* WordDetail */
+"buttonBackToWordList" = "画面外をタップで戻る";
+
+/* QuizView */
+"quizCurrentQuizNumber" = " 　問目";
+"quizQuestionTextLabel" = "上の単語の意味として正しいものはどれか。";
+"quizMoveToNextQuizButtonText" = "次の問題へ";
+"quizMoveToResultPresentation" = "結果発表へ";
+
+/* SettingView */
+"settingSelectionAnswerCountTitle" = "回答の選択肢数";
+"settingMaximumQuizCountTitle" = "クイズ出題数";
+"settingDesignThemeTitle" = "デザインテーマ";
+
+/* designThemes */
+"designThemeNameNormal" = "ノーマル";
+"designThemeNameSpace" = "スペース";
+"designThemeNameOrange" = "オレンジ";
+"designThemeNameOlive" = "オリーブ";
+"designThemeNameBlueSoda" = "ブルーソーダ";
+"designThemeNameStrawberry" = "ストロベリー";
+"designThemeNameLuxury" = "ラグジュアリー";
+"designThemeNameChocolate" = "チョコレート";
+
+/* numbers */
+"zero" = "0";
+"one" = "1";
+"two" = "2";
+"three" = "3";
+"four" = "4";
+"five" = "5";

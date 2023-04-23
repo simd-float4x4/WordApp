@@ -15,6 +15,7 @@
                 <outlet property="exampleSentenseTranslationLabel" destination="DbO-Lb-FLb" id="19R-1h-o67"/>
                 <outlet property="meaningLabel" destination="y4m-vU-dzY" id="bzP-kO-FRS"/>
                 <outlet property="singleWordLabel" destination="1PO-xY-dWM" id="d7g-et-IhD"/>
+                <outlet property="tapToRootViewTextLabel" destination="6wd-wA-LAK" id="qGj-gf-ZUf"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

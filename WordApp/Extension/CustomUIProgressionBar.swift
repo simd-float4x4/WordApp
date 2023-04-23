@@ -22,7 +22,7 @@ class CustomUIProgressionBar: UIProgressView {
     }
     
     func fetchEncodedThemeData() {
-        var selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
+        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
         color = themeModel.themeList[selected].theme.accentColor
     }
 }
