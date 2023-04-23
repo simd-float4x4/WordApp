@@ -12,6 +12,7 @@ class WordRememberedListView: UIView {
     
     @IBOutlet weak var wordRememberedListWidget: UITableView!
     @IBOutlet weak var sortWordRememberedListButton: UIButton!
+    @IBOutlet weak var viewNavigationBar: UINavigationBar!
     
     weak var sortWordRemeberedListDelegate: SortWordRememberedListWidgetDelegate!
     

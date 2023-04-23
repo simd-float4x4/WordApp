@@ -229,6 +229,7 @@ class WordListModel: NSObject, UITableViewDataSource {
         content.text = wordModel.word.singleWord
         let fontColor = UIColor(hex: themeModel.themeList[selected].theme.fontColor)
         content.textProperties.color = fontColor
+        content.secondaryTextProperties.color = fontColor
         cell.contentConfiguration = content
         cell.backgroundColor = UIColor.clear
         return cell

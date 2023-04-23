@@ -4,6 +4,7 @@ import UIKit
 class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, SortWordListWidgetDelegate {
     
     var wordModel = WordListModel.shared
+    var themeModel = DesignThemeListModel.shared
     
     // DetailViewControllerに渡すための文字列
     var singleWord: String = ""
@@ -31,6 +32,10 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     
     let ud = UserDefaults.standard
     
+    let wordListNavigationItem = UINavigationItem(title: "単語帳画面")
+    
+    var navigationBarImageName = "brain"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeView()
@@ -54,33 +59,24 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         showTabBarController()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        removeAllSubviews(parentView: self.view)
-    }
-    
-    func removeAllSubviews(parentView: UIView){
-        let subviews = parentView.subviews
-        for subview in subviews {
-            subview.removeFromSuperview()
-        }
-    }
-    
     func initializeView() {
-        removeAllSubviews(parentView: self.view)
         let view = WordListView()
+        view.viewNavigationBar.delegate = self
+        let createButton = UIBarButtonItem(image: UIImage(systemName: navigationBarImageName)!, style: .plain, target: self, action: #selector(switchWordActionMode))
+        wordListNavigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .add, target: self, action: #selector(toAddWordView))
+        wordListNavigationItem.leftBarButtonItem = createButton
+        view.viewNavigationBar.setItems([wordListNavigationItem], animated: false)
+        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
+        if selected == 1 || selected == 3 || selected == 6 || selected == 7 {
+            let color = themeModel.themeList[selected].theme.subColor
+            view.viewNavigationBar.barTintColor = UIColor(hex: color)
+            if selected != 1 {
+                wordListNavigationItem.leftBarButtonItem?.tintColor = UIColor(hex: "FFFFFF")
+                wordListNavigationItem.rightBarButtonItem?.tintColor = UIColor(hex: "FFFFFF")
+            }
+        }
         self.view = view
-        // self.view.addSubview(view)
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        let navHeight = self.navigationController?.navigationBar.frame.height ?? 0
-//        let bottomHeight = -(self.tabBarController?.tabBar.frame.height ?? 0)
-//        NSLayoutConstraint.activate([
-//            view.topAnchor.constraint(equalTo: self.view.topAnchor, constant: navHeight),
-//            view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: bottomHeight),
-//            view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 4.0),
-//            view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 4.0),
-//            view.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-//            view.heightAnchor.constraint(equalTo: self.view.heightAnchor)
-//        ])
     }
     
     // 最新の回答状況を取得する
@@ -175,9 +171,10 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     }
     
     // 削除ボタンと暗記した！ボタンを切り替えた際にアイコンの画像を変更する
-    @IBAction func switchWordActionMode() {
+    @objc func switchWordActionMode() {
         isDeleteModeOn = isDeleteModeOn == true ? false : true
-        nabigationBarLeftButton.image = isDeleteModeOn == true ? UIImage(systemName: "brain") : UIImage(systemName: "trash.fill")
+        navigationBarImageName = isDeleteModeOn == true ? "brain" : "trash.fill"
+        viewWillAppear(true)
     }
 }
 
@@ -243,5 +240,11 @@ extension WordListViewController: UITableViewDelegate {
     // 単語登録画面から帰ってきた時にTabBarの非表示を解除する（厳密にはどの画面から飛んできても表示する）
     func showTabBarController() {
         self.tabBarController?.tabBar.isHidden = false
+    }
+}
+
+extension WordListViewController: UINavigationBarDelegate {
+    func position(for bar: UIBarPositioning) -> UIBarPosition {
+        return .topAttached
     }
 }

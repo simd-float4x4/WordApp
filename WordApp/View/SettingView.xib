@@ -17,6 +17,7 @@
                 <outlet property="settingViewQuizMaximumCountTextLabel" destination="eOt-Xw-kcc" id="97f-De-zBe"/>
                 <outlet property="settingViewSelectQuizSelectionCountTextLabel" destination="z2i-dH-gvQ" id="ULJ-WS-FDY"/>
                 <outlet property="testLabel" destination="z2i-dH-gvQ" id="ogt-jq-D5n"/>
+                <outlet property="viewNavigationBar" destination="DwH-Fv-szE" id="xVm-vw-y9B"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -27,8 +28,15 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
+                        <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DwH-Fv-szE">
+                            <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <items>
+                                <navigationItem title="Title" id="L5a-sq-0Al"/>
+                            </items>
+                        </navigationBar>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gUf-ZJ-c3x">
-                            <rect key="frame" x="12" y="91" width="390" height="714"/>
+                            <rect key="frame" x="12" y="102" width="390" height="714"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m0r-KX-XxF" customClass="CustomView" customModule="WordApp" customModuleProvider="target">

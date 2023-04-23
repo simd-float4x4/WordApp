@@ -71,7 +71,6 @@
 		70A7C47F29F168B1007C07FC /* chocolate_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C47A29F168B1007C07FC /* chocolate_icon.png */; };
 		70A7C48029F168B1007C07FC /* earth_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C47B29F168B1007C07FC /* earth_icon.png */; };
 		70A7C48429F37847007C07FC /* CustomUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C48329F37846007C07FC /* CustomUIButton.swift */; };
-		70A7C48629F39278007C07FC /* CommonNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C48529F39277007C07FC /* CommonNavigationController.swift */; };
 		70A7C49029F45A9F007C07FC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C49229F45A9F007C07FC /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
@@ -161,7 +160,6 @@
 		70A7C47A29F168B1007C07FC /* chocolate_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chocolate_icon.png; sourceTree = "<group>"; };
 		70A7C47B29F168B1007C07FC /* earth_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = earth_icon.png; sourceTree = "<group>"; };
 		70A7C48329F37846007C07FC /* CustomUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIButton.swift; sourceTree = "<group>"; };
-		70A7C48529F39277007C07FC /* CommonNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonNavigationController.swift; sourceTree = "<group>"; };
 		70A7C48C29F45A04007C07FC /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		70A7C48D29F45A04007C07FC /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		70A7C49129F45A9F007C07FC /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -271,7 +269,6 @@
 				709BDBD629E3A83400F06C59 /* QuizViewController.swift */,
 				70A7C43329EB6FF4007C07FC /* SettingViewController.swift */,
 				70A7C46329F0F64C007C07FC /* CustomTabBarController.swift */,
-				70A7C48529F39277007C07FC /* CommonNavigationController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -556,7 +553,6 @@
 				7024111D29D577A60024ABBD /* WordModel.swift in Sources */,
 				702F654C29D7FF200041B8DC /* WordDetailView.swift in Sources */,
 				70A7C48429F37847007C07FC /* CustomUIButton.swift in Sources */,
-				70A7C48629F39278007C07FC /* CommonNavigationController.swift in Sources */,
 				709BDBD729E3A83400F06C59 /* QuizViewController.swift in Sources */,
 				709BDBCB29E2281B00F06C59 /* Notification.swift in Sources */,
 				702410DC29D55F560024ABBD /* SceneDelegate.swift in Sources */,

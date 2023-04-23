@@ -18,6 +18,7 @@
                 <outlet property="meaningWordTextView" destination="uk0-75-EFI" id="Svm-61-d62"/>
                 <outlet property="singleWordTextLabel" destination="R8H-mL-cwA" id="XoB-jl-76R"/>
                 <outlet property="singleWordTextView" destination="t3e-DS-Fkk" id="BT5-wT-Zgk"/>
+                <outlet property="viewNavigationBar" destination="ys9-sh-EX2" id="qdT-3Q-c6A"/>
                 <outlet property="wordAddContainerView" destination="Srv-wJ-XJI" id="vMe-Ab-Mth"/>
             </connections>
         </placeholder>
@@ -109,6 +110,15 @@
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 </view>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vce-u3-h4b">
+                                                    <rect key="frame" x="175" y="372" width="198" height="47"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="filled" title="ダミーデータを自動登録"/>
+                                                    <connections>
+                                                        <action selector="autoAddDummyData" destination="-1" eventType="touchUpInside" id="c8p-d0-7UJ"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                         </view>
                                     </subviews>
@@ -117,6 +127,13 @@
                                 </scrollView>
                             </subviews>
                         </view>
+                        <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ys9-sh-EX2">
+                            <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <items>
+                                <navigationItem title="Title" id="kb2-AD-bjB"/>
+                            </items>
+                        </navigationBar>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemCyanColor"/>
                 </view>

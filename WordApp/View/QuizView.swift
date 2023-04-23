@@ -27,6 +27,8 @@ class QuizView: UIView {
     @IBOutlet weak var moveToNextQuizButton: UIButton!
     @IBOutlet weak var quizDescriptionTextLabel: UILabel!
     
+    @IBOutlet weak var viewNavigationBar: UINavigationBar!
+    
     weak var quizAnswerButtonIsTappedDelegate: QuizAnswerButtonIsTappedDelegate?
     
     var isAnsweredBool: Bool = false

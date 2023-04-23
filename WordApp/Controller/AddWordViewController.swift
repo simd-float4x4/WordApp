@@ -4,6 +4,7 @@ import UIKit
 class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWordListDelegate {
     
     var wordModel = WordListModel.shared
+    var themeModel = DesignThemeListModel.shared
     var tappedTextViewName = ""
     
     let alertErrorTitleLabel = NSLocalizedString("alertErrorTitle", comment: "")
@@ -17,6 +18,10 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
     let meaningTextViewisTapped = NSLocalizedString("meaning", comment: "")
     let exampleSentenceTextViewisTapped = NSLocalizedString("ex-sente", comment: "")
     let exampleTranslationTextViewisTapped = NSLocalizedString("ex-trans", comment: "")
+    
+    let addWordNavigationItem = UINavigationItem(title: "単語登録画面")
+    
+    var navigationBarImageName = "chevron.backward"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +44,20 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
         view.meaningWordTextView.delegate = self
         view.exampleSentenceTextView.delegate = self
         view.exampleTranslationTextView.delegate = self
+        view.viewNavigationBar.delegate = self
         view.addWordToWordListDelegate = self
+        let createButton = UIBarButtonItem(image: UIImage(systemName: navigationBarImageName)!, style: .plain, target: self, action: #selector(onTapDismissWordView))
+        addWordNavigationItem.leftBarButtonItem = createButton
+        view.viewNavigationBar.setItems([addWordNavigationItem], animated: false)
+        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
+        if selected == 1 || selected == 3 || selected == 6 || selected == 7 {
+            let color = themeModel.themeList[selected].theme.subColor
+            view.viewNavigationBar.barTintColor = UIColor(hex: color)
+            if selected != 1 {
+                addWordNavigationItem.leftBarButtonItem?.tintColor = UIColor(hex: "FFFFFF")
+                addWordNavigationItem.rightBarButtonItem?.tintColor = UIColor(hex: "FFFFFF")
+            }
+        }
         self.view = view
     }
     
@@ -62,7 +80,6 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
                 let view = AddWordView()
                 view.resetWordInputField()
                 self.initializeWordAddView()
-                self.dismiss(animated: true, completion: nil)
             }
             let alertFinishedLabelString = alertRegisterFinishedPrefixLabel + data[0] + alertRegisterFinishedSuffixLabel
             showAlert(title: alertFinishedLabelString, message: alertMessageSucceedLabel, actions: [okAction])
@@ -182,5 +199,15 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
     // キーボードがキャンセルされた時の処理
     @objc func dismissKeyboard() {
         self.view.endEditing(true)
+    }
+    
+    @objc func onTapDismissWordView() {
+        dismiss(animated: true,completion: nil)
+    }
+}
+
+extension AddWordViewController: UINavigationBarDelegate {
+    func position(for bar: UIBarPositioning) -> UIBarPosition {
+        return .topAttached
     }
 }

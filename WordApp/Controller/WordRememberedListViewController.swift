@@ -3,6 +3,7 @@ import UIKit
 class WordRememberedListViewController: UIViewController, SortWordRememberedListWidgetDelegate {
     
     var wordModel = WordListModel.shared
+    var themeModel = DesignThemeListModel.shared
     
     // DetailViewControllerに渡すための文字列
     var singleWord: String = ""
@@ -20,7 +21,9 @@ class WordRememberedListViewController: UIViewController, SortWordRememberedList
         NSLocalizedString("sortRandom", comment: ""),
         NSLocalizedString("sortWrongCountAsc", comment: ""),
         NSLocalizedString("sortWrongCountDesc", comment: "")]
-
+    
+    let WordRememberedListNavigationItem = UINavigationItem(title: "暗記リスト")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeView()
@@ -32,23 +35,18 @@ class WordRememberedListViewController: UIViewController, SortWordRememberedList
         self.reloadWordListWidget()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        removeAllSubviews(parentView: self.view)
-    }
-    
-    func removeAllSubviews(parentView: UIView){
-        let subviews = parentView.subviews
-        for subview in subviews {
-            subview.removeFromSuperview()
-        }
-    }
-    
     func initializeView() {
-        removeAllSubviews(parentView: self.view)
         let view = WordRememberedListView()
         view.wordRememberedListWidget.delegate = self
         view.wordRememberedListWidget.dataSource = self.wordModel
         view.sortWordRemeberedListDelegate = self
+        view.viewNavigationBar.delegate = self
+        view.viewNavigationBar.setItems([WordRememberedListNavigationItem], animated: false)
+        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
+        if selected == 1 || selected == 3 || selected == 6 || selected == 7 {
+            let color = themeModel.themeList[selected].theme.subColor
+            view.viewNavigationBar.barTintColor = UIColor(hex: color)
+        }
         self.view = view
     }
     
@@ -139,4 +137,10 @@ extension WordRememberedListViewController: UITableViewDelegate {
         return UISwipeActionsConfiguration(actions: [categorizeToWordListAction])
     }
 
+}
+
+extension WordRememberedListViewController: UINavigationBarDelegate {
+    func position(for bar: UIBarPositioning) -> UIBarPosition {
+        return .topAttached
+    }
 }

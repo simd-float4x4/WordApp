@@ -32,6 +32,8 @@ class SettingView: UIView {
     
     let ud = UserDefaults.standard
     
+    @IBOutlet weak var viewNavigationBar: CustomNavigationBar!
+    
     override init(frame: CGRect){
         super.init(frame: frame)
         loadNib()

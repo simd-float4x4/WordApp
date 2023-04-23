@@ -5,6 +5,8 @@ import UIKit
 class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     
     var wordModel = WordListModel.shared
+    var themeModel = DesignThemeListModel.shared
+    
     var quiz: [WordModel] = []
     // 選択肢の数
     var maximumAnswerChoicesCount: Int = 5
@@ -28,6 +30,9 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     
     var answerSelectionArray: [String] = []
     
+    var isSavedMaximumCountGreaterThanCurrentRememberWordCount: Bool = false
+    
+    @IBOutlet weak var viewNavigationBar: UINavigationBar!
     
     let alertOkButton = NSLocalizedString("alertOkButton", comment: "")
     let alertQuizIsNotAvailableTitleLabel = NSLocalizedString("alertQuizIsNotAvailableTitle", comment: "")
@@ -35,6 +40,8 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     let alertQuizIsFinishedTitleLabel = NSLocalizedString("alertQuizFinishedTitle", comment: "")
     let alertQuizIsFinishedTextLabel = NSLocalizedString("alertQuizFinishedText", comment: "")
     let alertQuizNumberTextLabel = NSLocalizedString("alertQuizNumber", comment: "")
+    
+    let QuizNavigationItem = UINavigationItem(title: "クイズモード")
     
     // プリセット値：ダミー用回答（正解が2個以上ある際に使用する）
     var presetDummyAnswersArray = [
@@ -91,6 +98,13 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     func initializeView() {
         removeAllSubviews(parentView: self.view)
         let view = QuizView()
+        view.viewNavigationBar.delegate = self
+        view.viewNavigationBar.setItems([QuizNavigationItem], animated: false)
+        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
+        if selected == 1 || selected == 3 || selected == 6 || selected == 7 {
+            let color = themeModel.themeList[selected].theme.subColor
+            view.viewNavigationBar.barTintColor = UIColor(hex: color)
+        }
         self.view = view
     }
     
@@ -98,6 +112,9 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     func getQuizCurrentProperties() {
         maximumAnswerChoicesCount = wordModel.getAndReturnQuizChoices()
         maximumQuizCount = wordModel.getMaximumQuizCount()
+        if maximumQuizCount > currentQuizTotal {
+            isSavedMaximumCountGreaterThanCurrentRememberWordCount = true
+        }
     }
     
     // UIの初期化
@@ -214,7 +231,10 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     func makeRandomQuizList() -> [WordModel] {
         // wordListをランダムにシャッフル
         var quizArray = wordModel.wordList.filter({$0.word.isRemembered == true}).shuffled()
-        let _maximumQuizCount = maximumQuizCount
+        let currentQuizTotalDivisionByFive = ( currentQuizTotal / 5 ) * 5
+        //　分母
+        let demominator = isSavedMaximumCountGreaterThanCurrentRememberWordCount == true ? currentQuizTotalDivisionByFive : maximumQuizCount
+        let _maximumQuizCount = demominator
         quizArray = quizArray.prefix(_maximumQuizCount).map { $0 }
         return quizArray
     }
@@ -417,6 +437,7 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
             let solvedCorrectlyCount = totalSolvedQuizCount - totalQuizWrongCount
             let scoreString = String(solvedCorrectlyCount * 100 / totalSolvedQuizCount) + alertQuizIsFinishedTextLabel + "\n⭕️" + String(solvedCorrectlyCount)   + alertQuizNumberTextLabel  + " " + "❌" + String(totalQuizWrongCount)  + alertQuizNumberTextLabel
             let okAction = UIAlertAction(title: alertOkButton, style: .default) { _ in
+                self.isSavedMaximumCountGreaterThanCurrentRememberWordCount = false
                 self.goToTheRootViewController()
             }
             showAlert(title: alertQuizIsFinishedTitleLabel, message: scoreString, actions: [okAction])
@@ -427,8 +448,21 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     // Progressionを更新する
     func reloadProgressionView() {
         let view = self.view as! QuizView
-        let progressionRate = Float(totalSolvedQuizCount) / Float(maximumQuizCount)
+        let currentQuizTotalDivisionByFive = ( currentQuizTotal / 5 ) * 5
+        //　分母
+        let demominator = isSavedMaximumCountGreaterThanCurrentRememberWordCount == true ? currentQuizTotalDivisionByFive : maximumQuizCount
+        if isSavedMaximumCountGreaterThanCurrentRememberWordCount == true {
+            let ud = UserDefaults.standard
+            ud.set(currentQuizTotal / 5, forKey: "quizMaximumSelectedSegmentIndex")
+        }
+        let progressionRate = Float(totalSolvedQuizCount) / Float(demominator)
         view.quizProgressionLabel.text = String(totalSolvedQuizCount+1) + "  問目"
         view.quizProgressBar.progress = Float(progressionRate)
+    }
+}
+
+extension QuizViewController: UINavigationBarDelegate {
+    func position(for bar: UIBarPositioning) -> UIBarPosition {
+        return .topAttached
     }
 }

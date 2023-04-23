@@ -21,6 +21,8 @@ class AddWordView: UIView {
     
     @IBOutlet weak var wordAddContainerView: UIView!
     
+    @IBOutlet weak var viewNavigationBar: UINavigationBar!
+    
     var tappedTextViewName = ""
     
     weak var addWordToWordListDelegate: AddWordToWordListDelegate?
@@ -44,8 +46,6 @@ class AddWordView: UIView {
         }
         initializeTextField()
         initializeUILabel()
-        // テストデータを自動入力。（今後のデバッグ用に残す）
-        inputTestData()
     }
     
     // UILabelの初期値を取得する
@@ -124,5 +124,11 @@ class AddWordView: UIView {
         meaningWordTextView.text = meaningArray[index]
         exampleSentenceTextView.text = exampleArray[index]
         exampleTranslationTextView.text = transArray[index]
+    }
+    
+    @IBAction func autoAddDummyData() {
+        // テストデータを自動入力。（今後のデバッグ用に残す）
+        inputTestData()
+        onTapAddWord()
     }
 }

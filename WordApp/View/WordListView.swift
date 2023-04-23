@@ -26,6 +26,8 @@ class WordListView: UIView {
     weak var reloadWordListDelegate: ReloadWordListWidgetDelegate?
     weak var sortWordListDelegate: SortWordListWidgetDelegate?
     
+    @IBOutlet weak var viewNavigationBar: UINavigationBar!
+    
     let ud = UserDefaults.standard
     
    override init(frame: CGRect){
