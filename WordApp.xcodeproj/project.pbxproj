@@ -274,18 +274,8 @@
 		7024111029D561BC0024ABBD /* View */ = {
 			isa = PBXGroup;
 			children = (
-				706C44BE29DAEEA700B5FBC8 /* AddWordView.swift */,
-				706C44BF29DAEEA700B5FBC8 /* AddWordView.xib */,
-				7024111629D562600024ABBD /* WordListView.swift */,
-				7024111A29D56F410024ABBD /* WordListView.xib */,
-				702F654B29D7FF200041B8DC /* WordDetailView.swift */,
-				702F654929D7FF120041B8DC /* WordDetailView.xib */,
-				709BDBCE29E2398500F06C59 /* WordRememberedListView.swift */,
-				709BDBCC29E2397C00F06C59 /* WordRememberedListView.xib */,
-				709BDBD229E3A7C600F06C59 /* QuizView.swift */,
-				709BDBD429E3A7D400F06C59 /* QuizView.xib */,
-				70A7C42F29EB6F7F007C07FC /* SettingView.swift */,
-				70A7C43129EB6F88007C07FC /* SettingView.xib */,
+				702F24FE29F6B0D4006745A9 /* Class */,
+				702F24FD29F6B0A0006745A9 /* Xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -361,6 +351,32 @@
 				709BDBCA29E2281B00F06C59 /* Notification.swift */,
 			);
 			path = Notification;
+			sourceTree = "<group>";
+		};
+		702F24FD29F6B0A0006745A9 /* Xib */ = {
+			isa = PBXGroup;
+			children = (
+				706C44BF29DAEEA700B5FBC8 /* AddWordView.xib */,
+				7024111A29D56F410024ABBD /* WordListView.xib */,
+				702F654929D7FF120041B8DC /* WordDetailView.xib */,
+				709BDBCC29E2397C00F06C59 /* WordRememberedListView.xib */,
+				709BDBD429E3A7D400F06C59 /* QuizView.xib */,
+				70A7C43129EB6F88007C07FC /* SettingView.xib */,
+			);
+			path = Xib;
+			sourceTree = "<group>";
+		};
+		702F24FE29F6B0D4006745A9 /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				706C44BE29DAEEA700B5FBC8 /* AddWordView.swift */,
+				7024111629D562600024ABBD /* WordListView.swift */,
+				702F654B29D7FF200041B8DC /* WordDetailView.swift */,
+				709BDBCE29E2398500F06C59 /* WordRememberedListView.swift */,
+				709BDBD229E3A7C600F06C59 /* QuizView.swift */,
+				70A7C42F29EB6F7F007C07FC /* SettingView.swift */,
+			);
+			path = Class;
 			sourceTree = "<group>";
 		};
 		709BDBDA29E7A85400F06C59 /* Common */ = {
