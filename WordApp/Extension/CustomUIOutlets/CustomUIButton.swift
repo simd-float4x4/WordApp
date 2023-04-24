@@ -41,11 +41,3 @@ class CustomUIButton: UIButton {
         }
     }
 }
-
-// UIButtonタップ時に背景色を指定できるようにする（UIColorと併用）
-extension UIButton {
-    func setBackgroundColor(_ color: UIColor, for state: UIControl.State) {
-        let image = color.image
-        setBackgroundImage(image, for: state)
-    }
-}
