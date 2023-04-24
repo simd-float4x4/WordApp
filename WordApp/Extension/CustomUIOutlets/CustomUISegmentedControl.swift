@@ -45,7 +45,7 @@ class CustomUISegmentedControl: UISegmentedControl {
         setColors()
         getAndSearchWordsCount()
         setSegmentedIndex()
-        updateQuizCount()
+        // updateQuizCount()
     }
     
     // カラーをセットする
@@ -121,11 +121,11 @@ class CustomUISegmentedControl: UISegmentedControl {
         }
     }
     
-    func updateQuizCount() {
-        wordModel.setMaximumQuiz(count: getMaximumRememberedWordsCount)
-        wordModel.setReturnQuizChoices(count: getQuizSelectionCount)
-    }
-    
+//    func updateQuizCount() {
+//        wordModel.setMaximumQuiz(count: getMaximumRememberedWordsCount)
+//        wordModel.setReturnQuizChoices(count: getQuizSelectionCount)
+//    }
+//    
     //　テーマの名前を取得する
     func getThemeName() -> String{
         // テーマの名称を取得する

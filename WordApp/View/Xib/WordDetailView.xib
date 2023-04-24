@@ -10,12 +10,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WordDetailView" customModule="WordApp" customModuleProvider="target">
             <connections>
-                <outlet property="cancelView" destination="bVQ-0d-VDG" id="jIw-fI-EZS"/>
-                <outlet property="exampleSentenseLabel" destination="Zm2-kW-QtA" id="EtM-tD-YhQ"/>
-                <outlet property="exampleSentenseTranslationLabel" destination="DbO-Lb-FLb" id="19R-1h-o67"/>
-                <outlet property="meaningLabel" destination="y4m-vU-dzY" id="bzP-kO-FRS"/>
-                <outlet property="singleWordLabel" destination="1PO-xY-dWM" id="d7g-et-IhD"/>
-                <outlet property="tapToRootViewTextLabel" destination="6wd-wA-LAK" id="qGj-gf-ZUf"/>
+                <outlet property="onTapDismissView" destination="bVQ-0d-VDG" id="VWW-de-Wf3"/>
+                <outlet property="onTapRootViewTextLabel" destination="6wd-wA-LAK" id="v3i-WJ-hlE"/>
+                <outlet property="showExampleSentenseTextLabel" destination="Zm2-kW-QtA" id="KWg-hO-ZYf"/>
+                <outlet property="showExampleSentenseTranslationTextLabel" destination="DbO-Lb-FLb" id="FHk-J8-ccZ"/>
+                <outlet property="showMeaningTextLabel" destination="y4m-vU-dzY" id="KHn-lP-1gv"/>
+                <outlet property="showSingleWordTextLabel" destination="1PO-xY-dWM" id="RmH-To-G3r"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

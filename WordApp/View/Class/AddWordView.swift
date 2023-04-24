@@ -136,7 +136,9 @@ class AddWordView: UIView {
     
     // ダミーデータを登録する
     @IBAction func autoAddDummyData() {
-        inputDummyData()
-        onTapRegisterWord()
+        for i in 0 ..< 10 {
+            inputDummyData()
+            onTapRegisterWord()
+        }
     }
 }

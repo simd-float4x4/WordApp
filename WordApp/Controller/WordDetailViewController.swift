@@ -18,13 +18,13 @@ class WordDetailViewController: UIViewController {
         let view = WordDetailView()
         let tapGestureRecognizer = UITapGestureRecognizer(target: self,
                                                                   action: #selector(onTapDismissWordView))
-        view.cancelView.addGestureRecognizer(tapGestureRecognizer)
-        view.singleWordLabel.text = singleWord
-        view.meaningLabel.text = meaning
-        view.exampleSentenseLabel.text = exampleSentence
-        view.exampleSentenseTranslationLabel.text = exampleTranslation
-        view.exampleSentenseLabel.adjustsFontSizeToFitWidth = true
-        view.exampleSentenseTranslationLabel.adjustsFontSizeToFitWidth = true
+        view.onTapDismissView.addGestureRecognizer(tapGestureRecognizer)
+        view.showSingleWordTextLabel.text = singleWord
+        view.showMeaningTextLabel.text = meaning
+        view.showExampleSentenseTextLabel.text = exampleSentence
+        view.showExampleSentenseTranslationTextLabel.text = exampleTranslation
+        view.showExampleSentenseTextLabel.adjustsFontSizeToFitWidth = true
+        view.showExampleSentenseTranslationTextLabel.adjustsFontSizeToFitWidth = true
         self.view = view
         getSingleWordFromSentence()
     }
@@ -43,7 +43,7 @@ class WordDetailViewController: UIViewController {
     func changeSingleWordFromExampleSentenceColor(start: Int, end: Int) {
         let view = self.view as! WordDetailView
         // UILabelの文字列（「はい、いいえ」）から、attributedStringを作成します.
-        let attrText = NSMutableAttributedString(string: view.exampleSentenseLabel.text!)
+        let attrText = NSMutableAttributedString(string: view.showExampleSentenseTextLabel.text!)
         // フォントカラーを設定します.
         let length = (end - start) + 1
         let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
@@ -58,7 +58,7 @@ class WordDetailViewController: UIViewController {
             value: UIColor(hex: backgroundColor), range: NSMakeRange(start, length))
 
         // attributedTextとしてUILabelに追加します.
-        view.exampleSentenseLabel.attributedText = attrText
+        view.showExampleSentenseTextLabel.attributedText = attrText
     }
     
     @objc func onTapDismissWordView() {

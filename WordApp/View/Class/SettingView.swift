@@ -2,6 +2,8 @@ import Foundation
 import UIKit
 
 // MARK: SettingViewDelegate
+/// - func updateMaximumQuizSelection(count: Int) → SettingViewControllerと接続
+/// - func updateMaximumQuizCount(count: Int) → SettingViewControllerと接続
 protocol SettingViewDelegate: AnyObject {
     func updateMaximumQuizSelection(count: Int)
     func updateMaximumQuizCount(count: Int)
@@ -10,28 +12,47 @@ protocol SettingViewDelegate: AnyObject {
 // MARK: SettingViewDelegate
 class SettingView: UIView {
     // 回答選択肢を調整するSegmenControl
-    @IBOutlet weak var quizAnserSegmentedControl: UISegmentedControl!
-    
+    @IBOutlet weak var changeQuizAnswerSelectionCountSegmentedControl: UISegmentedControl!
     //　クイズの回答数を生成するControl
-    @IBOutlet weak var makeQuizSumCountControl: UISegmentedControl!
-    
+    @IBOutlet weak var changeMaximumQuizCountSegmentedControl: UISegmentedControl!
     //　テーマ選択用CollectionView
     @IBOutlet weak var collectionThemeCollectionView: UICollectionView!
-    
+    //　クイズの選択肢数変更用SegmentedControlの説明用ラベル
     @IBOutlet weak var settingViewSelectQuizSelectionCountTextLabel: UILabel!
+    //　クイズの出題数変更用SegmentedControlの説明用ラベル
     @IBOutlet weak var settingViewQuizMaximumCountTextLabel: UILabel!
+    //　アプリ全体のテーマ変更用SegmentedControlの説明用ラベル
     @IBOutlet weak var settingViewDesignThemeTextLabel: UILabel!
-    
-    @IBOutlet var testLabel: UILabel!
-    
+    //　settingViewDelegate
+    /// - settingViewDelegate → SettingViewControllerと接続
     weak var settingViewDelegate: SettingViewDelegate!
-    
+    //　現在の選択肢数（デフォルト）
     var currentChoicesTotal: Int = 5
-    
+    //　現在の出題数（デフォルト）
     var currentMaximumQuizSum: Int = 0
-    
+    // フォントカラー：初期値
+    var accentColor: String = "000000"
+    // 透明色
+    let clearColor = UIColor.clear
+    // 一部テーマのナビゲーションバータイトルで使用する白色
+    let navigationItemFontWhiteColor = UIColor.white
+    // テーマモデルID
+    var selectedThemeId: Int = 0
+    //　UserDefaults
     let ud = UserDefaults.standard
+    //　テーマモデル
     let themeModel = DesignThemeListModel.shared
+    //　ナビゲーションバータイトル
+    let navigationBarTitleString = NSLocalizedString("SettingViewTitleText", comment: "")
+    // ナビゲーションバー：フレームサイズ（注意：iPhone X以降の端末）
+    // TODO: iPhone 8、SEなどにも対応できるようにする
+    let navigationBarFrameSize = (x: 0, y: 0, height: 94)
+    // ナビゲーションアイテム：高さ
+    let navigationItemHeight = (x: 0, y: 0, height: 50)
+    // ステータスバー：高さ
+    let statusBarHeight = 44
+    //　ナビゲーションUILabel
+    let navigationBarUILabelProperties = (x: 0, y: 50, fontSize: CGFloat(16.0))
     
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -46,48 +67,155 @@ class SettingView: UIView {
     func loadNib(){
         let view = Bundle.main.loadNibNamed("SettingView", owner: self, options: nil)?.first as! UIView
         view.frame = self.bounds
-        // セグメントが変更された時に呼び出すメソッドの設定
-        quizAnserSegmentedControl.addTarget(self, action: #selector(quizChoicesSegmentedControl(_:)), for: UIControl.Event.valueChanged)
-        makeQuizSumCountControl.addTarget(self, action: #selector(quizMaximumCountSegmentedControl(_:)), for: UIControl.Event.valueChanged)
-        settingViewSelectQuizSelectionCountTextLabel.text = NSLocalizedString("settingSelectionAnswerCountTitle", comment: "")
-        settingViewQuizMaximumCountTextLabel.text = NSLocalizedString("settingMaximumQuizCountTitle", comment: "")
-        settingViewDesignThemeTextLabel.text = NSLocalizedString("settingDesignThemeTitle", comment: "")
-        
         if let subview = view.subviews.first  {
-            let navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: subview.frame.size.width, height: 94))
-            navBar.backgroundColor = UIColor.white
-            let appearance = UINavigationBarAppearance()
-            appearance.configureWithTransparentBackground()
-            navBar.standardAppearance = appearance
-            let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
-            var color = themeModel.themeList[selected].theme.accentColor
-            if selected == 3 || selected == 2 || selected == 5 { color = themeModel.themeList[selected].theme.complementalColor }
-            navBar.barTintColor = UIColor(hex: color)
-            navBar.backgroundColor = UIColor(hex: color)
-            let settingNavigationItem = UINavigationItem(title: "設定画面")
-            navBar.setItems([settingNavigationItem], animated: false)
-            let navigationBarAppearance = UINavigationBarAppearance()
-            navigationBarAppearance.configureWithOpaqueBackground()
-            navigationBarAppearance.shadowColor = .clear
-            navBar.scrollEdgeAppearance = navigationBarAppearance
-        
-            let titleLabelView = UIView()
-            titleLabelView.frame = CGRect(x: subview.frame.size.width / 4, y: 0, width: subview.frame.size.width / 2, height: 94)
-            let title = settingNavigationItem.title
-            let label = UILabel()
-            label.text = title
-            label.textAlignment = .center
-            label.frame = CGRect(x: 0, y: 50, width: subview.frame.size.width / 2, height: 44)
-            label.font = UIFont.boldSystemFont(ofSize: 16)
-            
-            subview.addSubview(navBar)
-            titleLabelView.addSubview(label)
-            subview.addSubview(titleLabelView)
-            self.addSubview(subview)
+            initializeUI(parentView: subview)
         }
     }
     
+    // UIを初期化する
+    func initializeUI(parentView: UIView) {
+        // SegmentedControlを初期化する
+        setSegmentedControl()
+        // UILabelにtextをセットする
+        setLabelText()
+        // 保存したテーマを取得する
+        fetchSavedThemeData()
+        //　テーマのアクセントカラーを取得する
+        getAccentColor()
+        //　アクセントカラーをセットする
+        setAccentColor()
+        // ナビゲーションバーを設定する
+        let navBar = setUpNavigationBar(parentView: parentView)
+        //　ナビゲーションバーのタイトルを格納するViewを設定する
+        let titleView = setAndGetTitleViewProperties(parentView: parentView)
+        //　ナビゲーションバーのタイトルラベルを設定する
+        let titleViewLabel = setAndGetUILabelProperties(parentView: parentView)
+        // subViewをする
+        parentView.addSubview(navBar)
+        titleView.addSubview(titleViewLabel)
+        parentView.addSubview(titleView)
+        self.addSubview(parentView)
+    }
+    
+    func setSegmentedControl() {
+        // セグメントが変更された時に呼び出すメソッドの設定
+        /// - クイズの選択肢変更用SegmentedControlの設定
+        changeQuizAnswerSelectionCountSegmentedControl.addTarget(self, action: #selector(quizChoicesSegmentedControl(_:)), for: UIControl.Event.valueChanged)
+        /// - クイズの出題数変更用SegmentedControlの設定
+        changeMaximumQuizCountSegmentedControl.addTarget(self, action: #selector(quizMaximumCountSegmentedControl(_:)), for: UIControl.Event.valueChanged)
+    }
+    
+    // UILabelTextに初期値を設定
+    func setLabelText() {
+        // UILabelの初期化
+        settingViewSelectQuizSelectionCountTextLabel.text = NSLocalizedString("settingSelectionAnswerCountTitle", comment: "")
+        settingViewQuizMaximumCountTextLabel.text = NSLocalizedString("settingMaximumQuizCountTitle", comment: "")
+        settingViewDesignThemeTextLabel.text = NSLocalizedString("settingDesignThemeTitle", comment: "")
+    }
+    
+    // 保存されたカラーテーマ情報を取得
+    func fetchSavedThemeData() {
+        selectedThemeId = ud.selectedThemeColorId
+    }
+    
+    //　テーマの名前を取得する
+    func getThemeName() -> String{
+        // テーマの名称を取得する
+        let themeName = DesignThemeListModel.shared.themeList[selectedThemeId].theme.name
+        return themeName
+    }
+    
+    //　アクセントカラーを取得
+    func getAccentColor() {
+        accentColor = themeModel.themeList[selectedThemeId].theme.accentColor
+    }
+    
+    //　アクセントカラーをセット
+    func setAccentColor() {
+        let themeName = getThemeName()
+        if themeName == "オレンジ" || themeName == "オリーブ" || themeName == "ストロベリー" {
+            accentColor = themeModel.themeList[selectedThemeId].theme.complementalColor
+        } else {
+            // 上記３テーマ以外は補色をセットする
+            accentColor = themeModel.themeList[selectedThemeId].theme.accentColor
+        }
+    }
+    
+    // ラベルのプロパティを設定してから返す
+    func setAndGetUILabelProperties(parentView: UIView) -> UILabel {
+        // UILabelのインスタンスを作成
+        let label = UILabel()
+        // タイトルをセット
+        label.text = navigationBarTitleString
+        //　タイトルを中央寄せに
+        label.textAlignment = .center
+        //　タイトルをframeに合わせる
+        label.frame = CGRect(
+            x: navigationBarUILabelProperties.x,
+            y: navigationBarUILabelProperties.y,
+            width: Int(parentView.frame.size.width) / 2,
+            height: statusBarHeight)
+        // テーマ名を取得
+        let themeName = getThemeName()
+        //　下記３テーマはナビゲーションバーの文字がDefaultフォントだと見にくいため白糸に
+        if themeName == "ノーマル" || themeName == "スペース" || themeName == "ブルーソーダ" {
+            label.textColor = navigationItemFontWhiteColor
+        }
+        //フォントサイズを指定
+        label.font = UIFont.boldSystemFont(ofSize: navigationBarUILabelProperties.fontSize)
+        return label
+    }
+    
+    // タイトルビューのプロパティを設定してから返す
+    func setAndGetTitleViewProperties(parentView: UIView) -> UIView {
+        // UIViewのインスタンスを作成
+        let titleView = UIView()
+        //　viewをframeに合わせる
+        titleView.frame = CGRect(
+            x: Int(parentView.frame.size.width) / 4,
+            y: navigationBarFrameSize.y,
+            width: Int(parentView.frame.size.width) / 2,
+            height: navigationBarFrameSize.height)
+        return titleView
+        
+    }
+    
+    // navigationBarのセットアップ
+    func setUpNavigationBar(parentView : UIView) -> UINavigationBar {
+        //　ナビゲーションバーのタイトルを取得
+        let wordRememberListNavigationItem = UINavigationItem(title: navigationBarTitleString)
+        // ナビゲーションバーをframeに合わせる
+        var navBar = UINavigationBar(frame: CGRect(
+            x: navigationBarFrameSize.x,
+            y: navigationBarFrameSize.y,
+            width: Int(parentView.frame.size.width),
+            height: navigationBarFrameSize.height))
+        // ナビゲーションバーに色をセットする
+        navBar = setColorOnNavigationBar(navBar: navBar)
+        // ナビゲーションバーにナビゲーションアイテムをセットする
+        navBar.setItems([wordRememberListNavigationItem], animated: false)
+        return navBar
+    }
+    
+    //　navigationBarにカラーをセットする
+    func setColorOnNavigationBar(navBar: UINavigationBar) -> UINavigationBar {
+        // ナビゲーションバーの見た目を設定
+        let navigationBarAppearance = UINavigationBarAppearance()
+        // 透明にする
+        navigationBarAppearance.configureWithOpaqueBackground()
+        // 影のカラーを消す（これにより下線が消える）
+        navigationBarAppearance.shadowColor = clearColor
+        //　背景色を設定
+        navigationBarAppearance.backgroundColor = UIColor(hex: accentColor)
+        //　ApperaranceをNavBarに設定
+        navBar.standardAppearance = navigationBarAppearance
+        navBar.scrollEdgeAppearance = navigationBarAppearance
+        return navBar
+    }
+    
+    // クイズ選択肢変更用SegmentedControl
     @IBAction func quizChoicesSegmentedControl(_ sender: UISegmentedControl) {
+        //　senderの値によって代入値を変更する
         switch Int(sender.selectedSegmentIndex) {
             case 0:
                 currentChoicesTotal = 5
@@ -98,11 +226,15 @@ class SettingView: UIView {
             default:
                 break
         }
+        print("currentChoicesTotal: ", currentChoicesTotal)
+        //　選択肢の数を更新する
         settingViewDelegate.updateMaximumQuizSelection(count: currentChoicesTotal)
+        //　現在の値をUserDefaultsに保存する
         ud.set(sender.selectedSegmentIndex, forKey: "choicesSelectedSegmentIndex")
     }
     
     @IBAction func quizMaximumCountSegmentedControl(_ sender: UISegmentedControl) {
+        //　senderの値によって代入値を変更する
         switch Int(sender.selectedSegmentIndex) {
             case 0:
                 currentMaximumQuizSum = 0
@@ -121,7 +253,9 @@ class SettingView: UIView {
             default:
                 break
         }
+        //　出題数の数を更新する
         settingViewDelegate.updateMaximumQuizCount(count: currentMaximumQuizSum)
+        //　現在の値をUserDefaultsに保存する
         ud.set(sender.selectedSegmentIndex, forKey: "quizMaximumSelectedSegmentIndex")
     }
 }
