@@ -3,9 +3,14 @@ import UIKit
 
 // MARK: CustomUIProgressionBar
 class CustomUIProgressionBar: UIProgressView {
-    
-    var color: String = "000000"
+    // バーのカラー：初期値
+    var barAccentColor: String = "000000"
+    // テーマモデルID
+    var selectedThemeId: Int = 0
+    // テーマモデル
     var themeModel = DesignThemeListModel.shared
+    // UserDefaults
+    let ud = UserDefaults.standard
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -17,13 +22,20 @@ class CustomUIProgressionBar: UIProgressView {
         loadProperties()
     }
     
+    //　呼ばれたときにロードするメソッド
     func loadProperties() {
-        fetchEncodedThemeData()
-        self.progressTintColor = UIColor(hex: color)
+        fetchSavedThemeData()
+        setBarAccentColor()
     }
     
-    func fetchEncodedThemeData() {
-        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
-        color = themeModel.themeList[selected].theme.accentColor
+    // 保存されたカラーテーマ情報を取得
+    func fetchSavedThemeData() {
+        // UdからテーマIdを取得
+        selectedThemeId = ud.selectedThemeColorId
+    }
+    
+    //　バーのアクセントカラーをセットする
+    func setBarAccentColor() {
+        barAccentColor = themeModel.themeList[selectedThemeId].theme.accentColor
     }
 }

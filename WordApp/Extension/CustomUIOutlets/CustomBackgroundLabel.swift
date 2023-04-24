@@ -3,10 +3,16 @@ import Foundation
 
 // MARK: CustomBackgroundLabel
 class CustomBackgroundLabel: UILabel {
-    
+    // フォントカラー：初期値
     var fontColor: String = "000000"
+    // フォント名：初期値
     var fontName: String = ""
+    // テーマモデルID
+    var selectedThemeId: Int = 0
+    // テーマモデル
     var themeModel = DesignThemeListModel.shared
+    // UserDefaults
+    let ud = UserDefaults.standard
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -18,17 +24,24 @@ class CustomBackgroundLabel: UILabel {
         loadProperties()
     }
     
+    //　呼ばれたときにロードするメソッド
     func loadProperties() {
-        fetchEncodedThemeData()
+        fetchSavedThemeData()
+        setThemeProperties()
+    }
+    
+    // 保存されたカラーテーマ情報を取得
+    func fetchSavedThemeData() {
+        selectedThemeId = ud.selectedThemeColorId
+        fontColor = themeModel.themeList[selectedThemeId].theme.fontColor
+        fontName = themeModel.themeList[selectedThemeId].theme.fontName
+    }
+    
+    // CustomUIOutletsにテーマ情報を格納し、再描画
+    func setThemeProperties() {
         self.textColor = UIColor(hex: fontColor)
         let fontSize = self.font.pointSize
         self.font = UIFont(name: fontName, size: fontSize)
         self.adjustsFontSizeToFitWidth = true
-    }
-    
-    func fetchEncodedThemeData() {
-        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
-        fontColor = themeModel.themeList[selected].theme.fontColor
-        fontName = themeModel.themeList[selected].theme.fontName
     }
 }
