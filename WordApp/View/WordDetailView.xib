@@ -97,11 +97,11 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="luxury_frame_001.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZzY-mi-RE9" customClass="ImageForLuxuryTheme" customModule="WordApp" customModuleProvider="target">
+                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="luxury_frame_001.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZzY-mi-RE9" customClass="CustomImageFrame" customModule="WordApp" customModuleProvider="target">
                             <rect key="frame" x="87" y="256" width="240" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="luxury_frame_002.png" translatesAutoresizingMaskIntoConstraints="NO" id="1Qs-x9-GYa" customClass="ImageForLuxuryTheme" customModule="WordApp" customModuleProvider="target">
+                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="luxury_frame_002.png" translatesAutoresizingMaskIntoConstraints="NO" id="1Qs-x9-GYa" customClass="CustomImageFrame" customModule="WordApp" customModuleProvider="target">
                             <rect key="frame" x="87" y="678" width="240" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>

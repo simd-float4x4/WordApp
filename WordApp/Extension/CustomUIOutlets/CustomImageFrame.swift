@@ -1,8 +1,8 @@
 import Foundation
 import UIKit
 
-// MARK: ImageForLuxuryTheme
-class ImageForLuxuryTheme: UIImageView {
+// MARK: CustomImageFrame
+class CustomImageFrame: UIImageView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
