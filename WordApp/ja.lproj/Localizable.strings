@@ -1,11 +1,3 @@
-/* Xib FileNames */
-"AddWordView" = "AddWordView";
-"WordListView" = "WordListView";
-"WordDetailView" = "WordDetailView";
-"WordRememberedListView" = "WordRememberedListView";
-"QuizView" = "QuizView";
-"SettingView" = "SettingView";
-
 /* NavBar Title */
 "WordListViewTitleText" = "単語帳画面";
 "AddWordViewTitleText" = "単語登録画面";

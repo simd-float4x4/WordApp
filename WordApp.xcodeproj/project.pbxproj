@@ -23,6 +23,7 @@
 		7024111D29D577A60024ABBD /* WordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7024111C29D577A50024ABBD /* WordModel.swift */; };
 		702F24F129F66836006745A9 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F24F029F66836006745A9 /* UIImage.swift */; };
 		702F24FC29F686E7006745A9 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F24FB29F686E7006745A9 /* UserDefaults.swift */; };
+		702F250129F72417006745A9 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F250029F72417006745A9 /* DummyData.swift */; };
 		702F654829D7FEDA0041B8DC /* WordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F654729D7FEDA0041B8DC /* WordDetailViewController.swift */; };
 		702F654A29D7FF120041B8DC /* WordDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 702F654929D7FF120041B8DC /* WordDetailView.xib */; };
 		702F654C29D7FF200041B8DC /* WordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F654B29D7FF200041B8DC /* WordDetailView.swift */; };
@@ -111,6 +112,7 @@
 		7024111C29D577A50024ABBD /* WordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordModel.swift; sourceTree = "<group>"; };
 		702F24F029F66836006745A9 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		702F24FB29F686E7006745A9 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		702F250029F72417006745A9 /* DummyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyData.swift; sourceTree = "<group>"; };
 		702F654729D7FEDA0041B8DC /* WordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDetailViewController.swift; sourceTree = "<group>"; };
 		702F654929D7FF120041B8DC /* WordDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WordDetailView.xib; sourceTree = "<group>"; };
 		702F654B29D7FF200041B8DC /* WordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDetailView.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 		7024110E29D561A70024ABBD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				702F24FF29F7240C006745A9 /* Data */,
 				70A7C43829ED15CC007C07FC /* Design */,
 				70A7C43729ED15C1007C07FC /* Word */,
 			);
@@ -377,6 +380,14 @@
 				70A7C42F29EB6F7F007C07FC /* SettingView.swift */,
 			);
 			path = Class;
+			sourceTree = "<group>";
+		};
+		702F24FF29F7240C006745A9 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				702F250029F72417006745A9 /* DummyData.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		709BDBDA29E7A85400F06C59 /* Common */ = {
@@ -627,6 +638,7 @@
 				709BDBD329E3A7C600F06C59 /* QuizView.swift in Sources */,
 				70A7C43029EB6F7F007C07FC /* SettingView.swift in Sources */,
 				709BDBDC29E7A86300F06C59 /* Alert.swift in Sources */,
+				702F250129F72417006745A9 /* DummyData.swift in Sources */,
 				70A7C43C29ED167A007C07FC /* DesignThemeModel.swift in Sources */,
 				70A7C45829EFA73D007C07FC /* CustomUISegmentedControl.swift in Sources */,
 				7024110D29D560EE0024ABBD /* Word.swift in Sources */,
