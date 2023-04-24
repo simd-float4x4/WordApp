@@ -15,7 +15,7 @@
                 <outlet property="progressPercentageLabel" destination="xp8-gS-2ae" id="mEs-Ty-Xh8"/>
                 <outlet property="progressWordSumLabel" destination="Bo5-V4-0EQ" id="ZdT-fb-zYz"/>
                 <outlet property="sortWordListButton" destination="0Ta-xb-upW" id="5hM-5U-I0r"/>
-                <outlet property="thereIsNoUILabel" destination="FG9-dV-98r" id="oFP-Qs-1zp"/>
+                <outlet property="thereIsNoWordLabel" destination="FG9-dV-98r" id="4xR-sd-os1"/>
                 <outlet property="wordListWidget" destination="P40-5r-6Sy" id="iQU-H0-5OO"/>
             </connections>
         </placeholder>

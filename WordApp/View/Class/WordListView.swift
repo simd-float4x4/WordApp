@@ -29,7 +29,7 @@ class WordListView: UIView {
     //　単語リストをソートするためのボタン
     @IBOutlet weak var sortWordListButton: UIButton!
     // 単語リスト登録が0件の際に表示するためのラベル
-    @IBOutlet weak var thereIsNoUILabel: UILabel!
+    @IBOutlet weak var thereIsNoWordLabel: UILabel!
     //　reloadWordListWidgetDelegate
     /// - func reloadWordListWidget() → WordListViewControllerと接続
     weak var reloadWordListDelegate: ReloadWordListWidgetDelegate?
@@ -59,6 +59,7 @@ class WordListView: UIView {
        loadNib()
    }
 
+    // NibFileをLoadする
     func loadNib(){
         let view = Bundle.main.loadNibNamed("WordListView", owner: self, options: nil)?.first as! UIView
         view.frame = self.frame
@@ -88,7 +89,7 @@ class WordListView: UIView {
     // WordListWidgetの初期化
     func initializeWordListWidgetStyle() {
         wordListWidget.backgroundColor = UIColor.clear
-        thereIsNoUILabel.text = NSLocalizedString("WordListWidgetIsNilLabel", comment: "")
+        thereIsNoWordLabel.text = NSLocalizedString("WordListWidgetIsNilLabel", comment: "")
     }
     
     // 意味を表示/隠すトグル

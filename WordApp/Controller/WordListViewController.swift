@@ -125,10 +125,10 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         let itemList =  wordModel.returnFilteredWordList(isWordRememberedStatus: false)
         if itemList.isEmpty == true {
             wordListView.wordListWidget.isHidden = true
-            wordListView.thereIsNoUILabel.isHidden = false
+            wordListView.thereIsNoWordLabel.isHidden = false
         } else {
             wordListView.wordListWidget.isHidden = false
-            wordListView.thereIsNoUILabel.isHidden = true
+            wordListView.thereIsNoWordLabel.isHidden = true
         }
     }
     
