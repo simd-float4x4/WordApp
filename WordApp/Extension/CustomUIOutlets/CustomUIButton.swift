@@ -7,6 +7,8 @@ class CustomUIButton: UIButton {
     var backGroundColor: String = "FF0000"
     // サブ背景色のカラー：初期値
     var backGroundSubColor: String = "FF0000"
+    // 角の丸さ
+    var cornerRadius = 10.0
     // フォントカラー：初期値
     var fontColor: String = "FF0000"
     // テーマモデルID
@@ -68,7 +70,7 @@ class CustomUIButton: UIButton {
     
     //　角を丸くする
     func makeCornerRadius() {
-        self.layer.cornerRadius = 10.0
+        self.layer.cornerRadius = cornerRadius
         self.clipsToBounds = true
     }
     
