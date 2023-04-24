@@ -1,5 +1,6 @@
 import UIKit
 
+// MARK: UIImage
 extension UIImage {
 
     convenience init?(color: UIColor, size: CGSize) {

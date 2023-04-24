@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 
+// MARK: ImageForLuxuryTheme
 class ImageForLuxuryTheme: UIImageView {
     
     override init(frame: CGRect) {

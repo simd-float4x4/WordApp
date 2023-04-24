@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 
+// MARK: CustomUIProgressionBar
 class CustomUIProgressionBar: UIProgressView {
     
     var color: String = "000000"

@@ -1,6 +1,7 @@
 import UIKit
 import Foundation
 
+// MARK: CustomBackgroundLabel
 class CustomBackgroundLabel: UILabel {
     
     var fontColor: String = "000000"

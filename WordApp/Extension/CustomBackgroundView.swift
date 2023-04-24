@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 
+// MARK: CustomBackgroundView
 class CustomBackgroundView: UIView {
     
     var backGroundColor: String = "FFFFFF"

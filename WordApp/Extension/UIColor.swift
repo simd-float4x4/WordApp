@@ -1,5 +1,6 @@
 import UIKit
 
+// MARK: UIColor
 // UIColor(hex: "#COLOR_CODE")で、カラーコードを指定できるようにする
 extension UIColor {
     convenience init(hex: String, alpha: CGFloat = 1.0) {

@@ -1,6 +1,7 @@
 import UIKit
 import Foundation
 
+// MARK: UIsegmentedControl
 class CustomUISegmentedControl: UISegmentedControl {
     
     var color: String = "0000FF"
