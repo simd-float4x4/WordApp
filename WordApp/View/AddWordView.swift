@@ -25,6 +25,8 @@ class AddWordView: UIView {
     
     var tappedTextViewName = ""
     
+    let themeModel = DesignThemeListModel.shared
+    
     weak var addWordToWordListDelegate: AddWordToWordListDelegate?
     
     override init(frame: CGRect){

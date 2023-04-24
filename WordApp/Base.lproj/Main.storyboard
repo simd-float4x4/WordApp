@@ -18,7 +18,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="LUC-MK-Wnq"/>
+                    <tabBarItem key="tabBarItem" title="単語帳画面" image="list.bullet.rectangle.portrait" catalog="system" id="LUC-MK-Wnq"/>
                     <navigationItem key="navigationItem" title="単語帳画面" id="bRt-fu-nAg">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="barButtonItem:k5I-MB-Cej:image" id="k5I-MB-Cej" customClass="CustomNavigationItem" customModule="WordApp" customModuleProvider="target"/>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="barButtonItem:gkn-1x-OPq:image" id="gkn-1x-OPq" customClass="CustomNavigationItem" customModule="WordApp" customModuleProvider="target">
@@ -77,7 +77,7 @@
                         <viewLayoutGuide key="safeArea" id="Vpa-kN-X6i"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="YjY-Uc-BFV"/>
+                    <tabBarItem key="tabBarItem" title="暗記リスト" image="brain.head.profile" catalog="system" id="YjY-Uc-BFV"/>
                     <navigationItem key="navigationItem" title="暗記リスト" id="ODZ-HP-Fmh"/>
                     <connections>
                         <segue destination="eCW-PU-OHY" kind="presentation" identifier="toWordDetailView" id="rGK-Yx-fkq"/>
@@ -107,7 +107,7 @@
             <objects>
                 <tabBarController storyboardIdentifier="customTabBarController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ad8-6t-vsY" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WoQ-A1-vXW" customClass="CustomUITabBar" customModule="WordApp" customModuleProvider="target">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WoQ-A1-vXW">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -133,7 +133,7 @@
                         <viewLayoutGuide key="safeArea" id="fuN-Ed-pvS"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="KID-c1-QVy"/>
+                    <tabBarItem key="tabBarItem" title="クイズ画面" image="questionmark" catalog="system" id="KID-c1-QVy"/>
                     <navigationItem key="navigationItem" title="クイズモード" id="wjm-Yn-Cvl"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QI5-aw-K1M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -150,7 +150,7 @@
                         <viewLayoutGuide key="safeArea" id="1fR-Dq-QAG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="AVM-Px-FSE"/>
+                    <tabBarItem key="tabBarItem" title="設定画面" image="gear.circle" catalog="system" id="AVM-Px-FSE"/>
                     <navigationItem key="navigationItem" title="設定画面" id="ON6-Rt-g6O"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="86Z-0e-yRN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -159,7 +159,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="QnR-9Y-feW"/>
+        <segue reference="rGK-Yx-fkq"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="barButtonItem:gkn-1x-OPq:image" width="128" height="113">
@@ -30097,6 +30097,10 @@ D4QADQ+GAA0PiAAND5EADQ+WAA0PnAAND6QADQ+mAA0PqAAND6oADQ+sAA0hTAANIVEADSFeAA0hYQAN
 IW4ADSFzAA0hewANIX4ADSGDAA0hiwAAAAAAAAQBAAAAAAAAAFYAAAAAAAAAAAAAAAAADSGOA
 </mutableData>
         </image>
+        <image name="brain.head.profile" catalog="system" width="114" height="128"/>
+        <image name="gear.circle" catalog="system" width="128" height="121"/>
+        <image name="list.bullet.rectangle.portrait" catalog="system" width="115" height="128"/>
+        <image name="questionmark" catalog="system" width="96" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

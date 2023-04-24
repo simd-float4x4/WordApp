@@ -61,21 +61,32 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     
     func initializeView() {
         let view = WordListView()
-        view.viewNavigationBar.delegate = self
-        let createButton = UIBarButtonItem(image: UIImage(systemName: navigationBarImageName)!, style: .plain, target: self, action: #selector(switchWordActionMode))
-        wordListNavigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .add, target: self, action: #selector(toAddWordView))
-        wordListNavigationItem.leftBarButtonItem = createButton
-        view.viewNavigationBar.setItems([wordListNavigationItem], animated: false)
+        let navBarView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 94))
+        let navBar = UINavigationBar(frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 44))
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        navBar.standardAppearance = appearance
         let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
-        if selected == 1 || selected == 3 || selected == 6 || selected == 7 {
-            let color = themeModel.themeList[selected].theme.subColor
-            view.viewNavigationBar.barTintColor = UIColor(hex: color)
-            if selected != 1 {
-                wordListNavigationItem.leftBarButtonItem?.tintColor = UIColor(hex: "FFFFFF")
-                wordListNavigationItem.rightBarButtonItem?.tintColor = UIColor(hex: "FFFFFF")
-            }
-        }
+        var color = themeModel.themeList[selected].theme.accentColor
+        if selected == 3 || selected == 2 || selected == 5 { color = themeModel.themeList[selected].theme.complementalColor }
+        navBarView.backgroundColor = UIColor(hex: color)
+        navBarView.tintColor = UIColor.white
+        let settingNavigationItem = UINavigationItem(title: "単語帳画面")
+        
+        settingNavigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: navigationBarImageName)!, style: .plain, target: self, action: #selector(switchWordActionMode))
+        settingNavigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .add, target: self, action: #selector(toAddWordView))
+        
+        navBar.setItems([settingNavigationItem], animated: false)
+        
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.configureWithOpaqueBackground()
+        navigationBarAppearance.shadowColor = .clear
+        navBar.scrollEdgeAppearance = navigationBarAppearance
+    
+        navBarView.addSubview(navBar)
+        view.addSubview(navBarView)
+        
         self.view = view
     }
     

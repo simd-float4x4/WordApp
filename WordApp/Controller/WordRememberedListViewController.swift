@@ -40,12 +40,12 @@ class WordRememberedListViewController: UIViewController, SortWordRememberedList
         view.wordRememberedListWidget.delegate = self
         view.wordRememberedListWidget.dataSource = self.wordModel
         view.sortWordRemeberedListDelegate = self
-        view.viewNavigationBar.delegate = self
-        view.viewNavigationBar.setItems([WordRememberedListNavigationItem], animated: false)
+        // view.viewNavigationBar.delegate = self
+        // view.viewNavigationBar.setItems([WordRememberedListNavigationItem], animated: false)
         let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
         if selected == 1 || selected == 3 || selected == 6 || selected == 7 {
             let color = themeModel.themeList[selected].theme.subColor
-            view.viewNavigationBar.barTintColor = UIColor(hex: color)
+            // view.viewNavigationBar.barTintColor = UIColor(hex: color)
         }
         self.view = view
     }

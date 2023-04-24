@@ -44,20 +44,30 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
         view.meaningWordTextView.delegate = self
         view.exampleSentenceTextView.delegate = self
         view.exampleTranslationTextView.delegate = self
-        view.viewNavigationBar.delegate = self
         view.addWordToWordListDelegate = self
-        let createButton = UIBarButtonItem(image: UIImage(systemName: navigationBarImageName)!, style: .plain, target: self, action: #selector(onTapDismissWordView))
-        addWordNavigationItem.leftBarButtonItem = createButton
-        view.viewNavigationBar.setItems([addWordNavigationItem], animated: false)
+        let navBarView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 94))
+        let navBar = UINavigationBar(frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 44))
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        navBar.standardAppearance = appearance
         let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
-        if selected == 1 || selected == 3 || selected == 6 || selected == 7 {
-            let color = themeModel.themeList[selected].theme.subColor
-            view.viewNavigationBar.barTintColor = UIColor(hex: color)
-            if selected != 1 {
-                addWordNavigationItem.leftBarButtonItem?.tintColor = UIColor(hex: "FFFFFF")
-                addWordNavigationItem.rightBarButtonItem?.tintColor = UIColor(hex: "FFFFFF")
-            }
-        }
+        var color = themeModel.themeList[selected].theme.accentColor
+        if selected == 3 { color = themeModel.themeList[selected].theme.complementalColor }
+        navBarView.tintColor = UIColor.white
+        navBarView.backgroundColor = UIColor(hex: color)
+        let settingNavigationItem = UINavigationItem(title: "単語登録画面")
+        
+        settingNavigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: navigationBarImageName)!, style: .plain, target: self, action: #selector(onTapDismissWordView))
+        navBar.setItems([settingNavigationItem], animated: false)
+        
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.configureWithOpaqueBackground()
+        navigationBarAppearance.shadowColor = .clear
+        navBar.scrollEdgeAppearance = navigationBarAppearance
+    
+        navBarView.addSubview(navBar)
+        view.addSubview(navBarView)
+        
         self.view = view
     }
     

@@ -33,6 +33,8 @@ class QuizView: UIView {
     
     var isAnsweredBool: Bool = false
     
+    let themeModel = DesignThemeListModel.shared
+    
     override init(frame: CGRect){
         super.init(frame: frame)
         loadNib()
@@ -47,6 +49,37 @@ class QuizView: UIView {
         let view = Bundle.main.loadNibNamed("QuizView", owner: self, options: nil)?.first as! UIView
         view.frame = self.bounds
         if let subview = view.subviews.first  {
+            let navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 94))
+            navBar.backgroundColor = UIColor.white
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithTransparentBackground()
+            navBar.standardAppearance = appearance
+            let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
+            var color = themeModel.themeList[selected].theme.accentColor
+            if selected == 3 || selected == 2 || selected == 5 { color = themeModel.themeList[selected].theme.complementalColor }
+            navBar.barTintColor = UIColor(hex: color)
+            navBar.backgroundColor = UIColor(hex: color)
+            let settingNavigationItem = UINavigationItem(title: "クイズモード")
+            navBar.setItems([settingNavigationItem], animated: false)
+            
+            let navigationBarAppearance = UINavigationBarAppearance()
+            navigationBarAppearance.configureWithOpaqueBackground()
+            navigationBarAppearance.shadowColor = .clear
+            navBar.scrollEdgeAppearance = navigationBarAppearance
+        
+            let titleLabelView = UIView()
+            titleLabelView.frame = CGRect(x: UIScreen.main.bounds.width / 4, y: 0, width: UIScreen.main.bounds.width / 2, height: 94)
+            let title = settingNavigationItem.title
+            let label = UILabel()
+            label.text = title
+            label.textAlignment = .center
+            label.frame = CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width / 2, height: 44)
+            label.font = UIFont.boldSystemFont(ofSize: 16)
+            
+            subview.addSubview(navBar)
+            titleLabelView.addSubview(label)
+            subview.addSubview(titleLabelView)
+            
             self.addSubview(subview)
         }
         moveToNextQuizButton.isHidden = true

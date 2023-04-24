@@ -98,12 +98,12 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     func initializeView() {
         removeAllSubviews(parentView: self.view)
         let view = QuizView()
-        view.viewNavigationBar.delegate = self
-        view.viewNavigationBar.setItems([QuizNavigationItem], animated: false)
+        // view.viewNavigationBar.delegate = self
+        // iew.viewNavigationBar.setItems([QuizNavigationItem], animated: false)
         let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
         if selected == 1 || selected == 3 || selected == 6 || selected == 7 {
             let color = themeModel.themeList[selected].theme.subColor
-            view.viewNavigationBar.barTintColor = UIColor(hex: color)
+            // view.viewNavigationBar.barTintColor = UIColor(hex: color)
         }
         self.view = view
     }

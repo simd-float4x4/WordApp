@@ -16,7 +16,6 @@
                 <outlet property="progressWordSumLabel" destination="Bo5-V4-0EQ" id="ZdT-fb-zYz"/>
                 <outlet property="sortWordListButton" destination="0Ta-xb-upW" id="5hM-5U-I0r"/>
                 <outlet property="thereIsNoUILabel" destination="FG9-dV-98r" id="oFP-Qs-1zp"/>
-                <outlet property="viewNavigationBar" destination="sG9-Dw-kc3" id="p4F-hL-dXE"/>
                 <outlet property="wordListWidget" destination="P40-5r-6Sy" id="iQU-H0-5OO"/>
             </connections>
         </placeholder>
@@ -25,20 +24,20 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AlP-wZ-JBc" customClass="CustomBackgroundView" customModule="WordApp" customModuleProvider="target">
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AlP-wZ-JBc" customClass="CustomBackgroundView" customModule="WordApp" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="avi-Kr-Jwq">
-                            <rect key="frame" x="0.0" y="113" width="414" height="671"/>
+                            <rect key="frame" x="0.0" y="133" width="414" height="627"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NVy-wg-pDU" userLabel="Progression_area" customClass="CustomView" customModule="WordApp" customModuleProvider="target">
-                                    <rect key="frame" x="19" y="8" width="376" height="159"/>
+                                    <rect key="frame" x="19" y="8" width="376" height="143"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fYn-Ct-tfb" userLabel="Progression_container">
-                                            <rect key="frame" x="8" y="8" width="360" height="143"/>
+                                            <rect key="frame" x="8" y="8" width="360" height="135"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M8G-gA-LdP" userLabel="Progression_title_container">
@@ -94,27 +93,8 @@
                                         </view>
                                     </subviews>
                                 </view>
-                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PxA-m7-QCP" customClass="CustomView" customModule="WordApp" customModuleProvider="target">
-                                    <rect key="frame" x="19" y="237" width="376" height="386"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="単語が登録されていません" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FG9-dV-98r" customClass="CustomBackgroundLabel" customModule="WordApp" customModuleProvider="target">
-                                            <rect key="frame" x="23" y="157" width="329" height="44"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="P40-5r-6Sy">
-                                            <rect key="frame" x="0.0" y="0.0" width="376" height="366"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        </tableView>
-                                    </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                </view>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gc4-Ht-IAe" customClass="CustomView" customModule="WordApp" customModuleProvider="target">
-                                    <rect key="frame" x="19" y="175" width="376" height="54"/>
+                                    <rect key="frame" x="19" y="159" width="376" height="54"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hSV-mx-M5t">
@@ -150,15 +130,27 @@
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
+                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PxA-m7-QCP" customClass="CustomView" customModule="WordApp" customModuleProvider="target">
+                                    <rect key="frame" x="19" y="221" width="376" height="386"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="単語が登録されていません" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FG9-dV-98r" customClass="CustomBackgroundLabel" customModule="WordApp" customModuleProvider="target">
+                                            <rect key="frame" x="23" y="157" width="329" height="44"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="P40-5r-6Sy">
+                                            <rect key="frame" x="0.0" y="0.0" width="376" height="366"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        </tableView>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                </view>
                             </subviews>
                         </view>
-                        <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sG9-Dw-kc3">
-                            <rect key="frame" x="0.0" y="48" width="414" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <items>
-                                <navigationItem title="Title" id="YNB-FT-Tnw"/>
-                            </items>
-                        </navigationBar>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemGray6Color"/>
                 </view>

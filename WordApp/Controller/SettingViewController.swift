@@ -44,20 +44,13 @@ class SettingViewController: UIViewController, SettingViewDelegate, UICollection
         removeAllSubviews(parentView: self.view)
         let view = SettingView()
         view.settingViewDelegate = self
-        view.viewNavigationBar.delegate = self
         view.collectionThemeCollectionView.delegate = self
         view.collectionThemeCollectionView.dataSource = self.themeModel
         view.collectionThemeCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
-        view.viewNavigationBar.setItems([settingNavigationItem], animated: false)
         // CollectionViewの間隔を設定
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 8
         view.collectionThemeCollectionView.collectionViewLayout = layout
-        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
-        if selected == 1 || selected == 3 || selected == 6 || selected == 7 {
-            let color = themeModel.themeList[selected].theme.subColor
-            view.viewNavigationBar.barTintColor = UIColor(hex: color)
-        }
         self.view = view
     }
     
@@ -65,11 +58,11 @@ class SettingViewController: UIViewController, SettingViewDelegate, UICollection
     func checkMaximumAvaivleForQuizCount() {
         let view = self.view as! SettingView
         let forSegmentAt = currentQuizTotal / 5
+        let choiceIndex = ud.value(forKey: "choicesSelectedSegmentIndex") as? Int ?? 0
+        let quizIndex = ud.value(forKey: "quizMaximumSelectedSegmentIndex") as? Int ?? 0
         for i in 1 ..< 7 {
             var isAvaivable: Bool = true
             if i > forSegmentAt { isAvaivable = false }
-            let choiceIndex = ud.value(forKey: "choicesSelectedSegmentIndex") as? Int ?? 0
-            let quizIndex = ud.value(forKey: "quizMaximumSelectedSegmentIndex") as? Int ?? 0
             view.makeQuizSumCountControl.setEnabled(isAvaivable, forSegmentAt: i)
             view.makeQuizSumCountControl.selectedSegmentIndex = quizIndex
             view.quizAnserSegmentedControl.selectedSegmentIndex = choiceIndex

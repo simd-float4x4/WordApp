@@ -28,6 +28,8 @@ class WordListView: UIView {
     
     @IBOutlet weak var viewNavigationBar: UINavigationBar!
     
+    let themeModel = DesignThemeListModel.shared
+    
     let ud = UserDefaults.standard
     
    override init(frame: CGRect){
