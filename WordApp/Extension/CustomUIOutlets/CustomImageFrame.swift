@@ -12,14 +12,18 @@ class CustomImageFrame: UIImageView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        fetchSavedThemeData()
         loadProperties()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
-        fetchSavedThemeData()
         loadProperties()
+    }
+    
+    //　呼ばれたときにロードするメソッド
+    func loadProperties() {
+        fetchSavedThemeData()
+        hideOrShowImageFrames()
     }
     
     // 保存されたカラーテーマ情報を取得
@@ -27,8 +31,9 @@ class CustomImageFrame: UIImageView {
         selectedThemeId = ud.selectedThemeColorId
     }
     
-    //　呼ばれたときにロードするメソッド
-    func loadProperties() {
+    // フレームを表示するか隠すか決定する
+    func hideOrShowImageFrames() {
+        // テーマの名称を取得する
         let themeName = DesignThemeListModel.shared.themeList[selectedThemeId].theme.name
         // 選択されているテーマがラグジュアリーテーマであれば、frameを表示する。
         if themeName == "ラグジュアリー" {
