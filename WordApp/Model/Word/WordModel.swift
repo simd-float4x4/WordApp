@@ -141,6 +141,15 @@ class WordListModel: NSObject, UITableViewDataSource {
         }
     }
     
+    // 誤答数をアップデート
+    /// - Parameters:
+        ///   - index: 単語ID（Int）
+    func updateWordWrongCount(index: Int, newWrongCount: Int) {
+        let selectedWord = self.wordList.first(where: {$0.word.id == index})
+        selectedWord?.word.wrongCount = newWrongCount
+        self.updateData()
+    }
+    
     // 誤答数をリセット
     /// - Parameters:
         ///   - index: 単語ID（Int）
@@ -216,14 +225,18 @@ class WordListModel: NSObject, UITableViewDataSource {
             // 現在の誤答数を取得
             let currentWrongCount = wordModel.word.wrongCount
             // SystemImageのファイル名を生成
-            let suffixFileName = currentWrongCount >= 6 ? ".circle.fill" : ".circle"
+            let suffixFileName = ".circle"
             let fileName = String(currentWrongCount) + suffixFileName
             // 色を指定
             let priorityRedColor = CGFloat(Float(currentWrongCount)/10)
-            let color = UIColor(red: priorityRedColor, green: 0.25, blue: 0.25, alpha: 1.0)
+            let color = UIColor(red: priorityRedColor, green: 0.2, blue: 0.2, alpha: 1.0)
+            // 画像の定義
+            let iconImage = UIImage(systemName: fileName)?.withTintColor(UIColor.white)
+            let backgroundImage = UIImage(color: color, size: .init(width: 10, height: 10))
+            // UIImageを合成
+            let mixedImage = backgroundImage?.composite(image: iconImage!)
             // 誤答数を表示
-            content.image = UIImage(systemName: fileName)
-            content.imageProperties.tintColor = color
+            content.image = mixedImage
             content.secondaryText = nil
         }
         content.text = wordModel.word.singleWord

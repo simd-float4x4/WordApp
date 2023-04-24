@@ -136,6 +136,38 @@ extension WordRememberedListViewController: UITableViewDelegate {
         categorizeToWordListAction.backgroundColor = UIColor.systemGreen
         return UISwipeActionsConfiguration(actions: [categorizeToWordListAction])
     }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        //ヘッダーにするビューを生成
+        let view = CustomView()
+        let wordListView = self.view as! WordRememberedListView
+        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
+        let color = themeModel.themeList[selected].theme.accentColor
+        var fontColor = themeModel.themeList[selected].theme.fontColor
+        if selected == 0 || selected == 3 || selected == 4 || selected == 5 {
+            fontColor = themeModel.themeList[selected].theme.complementalFontColor
+        }
+        view.backgroundColor = UIColor(hex: color)
+        view.frame = CGRect(x: 20, y: 0, width: wordListView.wordRememberedListWidget.frame.width, height: 30)
+        if selected == 1 {
+            view.layer.shadowColor = UIColor.clear.cgColor
+            view.layer.shadowOffset = CGSize(width: 0, height: 0)
+        }
+        //ヘッダーに追加するラベルを生成
+        let headerLabel = UILabel()
+        headerLabel.frame =  view.frame
+        headerLabel.text = "誤答数"
+        headerLabel.font = UIFont(name: "System", size: 10)
+        headerLabel.textColor = UIColor(hex: fontColor)
+        headerLabel.textAlignment = NSTextAlignment.left
+        view.addSubview(headerLabel)
+        
+        return view
+    }
 
 }
 

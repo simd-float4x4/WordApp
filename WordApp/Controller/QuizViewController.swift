@@ -397,6 +397,8 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
                 quiz[0].word.wrongCount = 0
             }
         }
+        // wordModelにupdateした値を保存
+        wordModel.updateWordWrongCount(index: quiz[0].word.id, newWrongCount: quiz[0].word.wrongCount)
         // 今回のQuizで解答数を更新
         totalSolvedQuizCount += 1
     }

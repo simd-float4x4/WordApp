@@ -66,7 +66,6 @@ class SettingView: UIView {
             navBar.backgroundColor = UIColor(hex: color)
             let settingNavigationItem = UINavigationItem(title: "設定画面")
             navBar.setItems([settingNavigationItem], animated: false)
-            
             let navigationBarAppearance = UINavigationBarAppearance()
             navigationBarAppearance.configureWithOpaqueBackground()
             navigationBarAppearance.shadowColor = .clear
