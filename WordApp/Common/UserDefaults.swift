@@ -6,6 +6,8 @@ extension UserDefaults {
     // UserDefaultsのKeyをまとめたenum
     private enum UDKey: String {
         case selectedThemeColorId
+        case maximumQuizSelectionCount
+        case maximumRememberedWordsCount
     }
     
     // データの全件削除処理
@@ -15,6 +17,26 @@ extension UserDefaults {
     
     // 「selectedThemeColorId」のセッターゲッターの処理（テーマID）
     var selectedThemeColorId: Int {
+        get {
+            return integer(forKey: UDKey.selectedThemeColorId.rawValue)
+        }
+        set(val) {
+            set(val, forKey: UDKey.selectedThemeColorId.rawValue)
+        }
+    }
+    
+    // 「maximumQuizSelectionCount」のセッターゲッターの処理（テーマID）
+    var maximumQuizSelectionCount: Int {
+        get {
+            return integer(forKey: UDKey.selectedThemeColorId.rawValue)
+        }
+        set(val) {
+            set(val, forKey: UDKey.selectedThemeColorId.rawValue)
+        }
+    }
+    
+    // 「maximumRememberedWordsCount」のセッターゲッターの処理（テーマID）
+    var maximumRememberedWordsCount: Int {
         get {
             return integer(forKey: UDKey.selectedThemeColorId.rawValue)
         }

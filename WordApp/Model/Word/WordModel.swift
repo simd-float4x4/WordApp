@@ -177,14 +177,14 @@ class WordListModel: NSObject, UITableViewDataSource {
     func getMaximumQuizCount() -> Int {
         let ud = UserDefaults.standard
         let currentRememberedWordList = getAndReturnMaximumQuizCount()
-        let count = ud.value(forKey: "maximumQuizCount") as? Int ?? currentRememberedWordList
+        let count = ud.value(forKey: "maximumRememberedWordsCount") as? Int ?? currentRememberedWordList
         return count
     }
     
     //　クイズの上限数をセット
     func setMaximumQuiz(count: Int) {
         currentQuizMaximumCount = count
-        ud.set(currentQuizMaximumCount, forKey: "maximumQuizCount")
+        ud.set(currentQuizMaximumCount, forKey: "maximumRememberedWordsCount")
     }
     
     //　選択肢の上限数を返却
