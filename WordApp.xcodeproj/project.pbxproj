@@ -53,12 +53,9 @@
 		70A7C45429EFA6F7007C07FC /* CustomBackgroundLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C45329EFA6F7007C07FC /* CustomBackgroundLabel.swift */; };
 		70A7C45629EFA716007C07FC /* CustomUIProgressionBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C45529EFA716007C07FC /* CustomUIProgressionBar.swift */; };
 		70A7C45829EFA73D007C07FC /* UISegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C45729EFA73D007C07FC /* UISegmentedControl.swift */; };
-		70A7C45C29EFC8E0007C07FC /* CustomNavgiationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C45B29EFC8E0007C07FC /* CustomNavgiationItem.swift */; };
 		70A7C45E29F007E5007C07FC /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C45D29F007E5007C07FC /* logo.png */; };
-		70A7C46029F008C7007C07FC /* CustomUITabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C45F29F008C7007C07FC /* CustomUITabBar.swift */; };
 		70A7C46229F017A5007C07FC /* 851Gkktt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C46129F017A5007C07FC /* 851Gkktt.ttf */; };
 		70A7C46429F0F64C007C07FC /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C46329F0F64C007C07FC /* CustomTabBarController.swift */; };
-		70A7C46629F0FCBE007C07FC /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C46529F0FCBD007C07FC /* CustomNavigationBar.swift */; };
 		70A7C46A29F13616007C07FC /* luxury.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C46929F13616007C07FC /* luxury.png */; };
 		70A7C46C29F144D4007C07FC /* strawberry.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C46B29F144D4007C07FC /* strawberry.png */; };
 		70A7C46E29F14AD5007C07FC /* chocolate.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C46D29F14AD4007C07FC /* chocolate.png */; };
@@ -143,12 +140,9 @@
 		70A7C45329EFA6F7007C07FC /* CustomBackgroundLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackgroundLabel.swift; sourceTree = "<group>"; };
 		70A7C45529EFA716007C07FC /* CustomUIProgressionBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIProgressionBar.swift; sourceTree = "<group>"; };
 		70A7C45729EFA73D007C07FC /* UISegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISegmentedControl.swift; sourceTree = "<group>"; };
-		70A7C45B29EFC8E0007C07FC /* CustomNavgiationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavgiationItem.swift; sourceTree = "<group>"; };
 		70A7C45D29F007E5007C07FC /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
-		70A7C45F29F008C7007C07FC /* CustomUITabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUITabBar.swift; sourceTree = "<group>"; };
 		70A7C46129F017A5007C07FC /* 851Gkktt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = 851Gkktt.ttf; sourceTree = "<group>"; };
 		70A7C46329F0F64C007C07FC /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
-		70A7C46529F0FCBD007C07FC /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
 		70A7C46929F13616007C07FC /* luxury.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = luxury.png; sourceTree = "<group>"; };
 		70A7C46B29F144D4007C07FC /* strawberry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = strawberry.png; sourceTree = "<group>"; };
 		70A7C46D29F14AD4007C07FC /* chocolate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chocolate.png; sourceTree = "<group>"; };
@@ -367,14 +361,11 @@
 			children = (
 				709BDBCA29E2281B00F06C59 /* Notification.swift */,
 				70A7C43E29ED28F1007C07FC /* CustomView.swift */,
-				70A7C45B29EFC8E0007C07FC /* CustomNavgiationItem.swift */,
 				70A7C45729EFA73D007C07FC /* UISegmentedControl.swift */,
 				70A7C44029ED3176007C07FC /* UIColor.swift */,
 				70A7C45129EFA6CD007C07FC /* CustomBackgroundView.swift */,
 				70A7C45329EFA6F7007C07FC /* CustomBackgroundLabel.swift */,
 				70A7C45529EFA716007C07FC /* CustomUIProgressionBar.swift */,
-				70A7C45F29F008C7007C07FC /* CustomUITabBar.swift */,
-				70A7C46529F0FCBD007C07FC /* CustomNavigationBar.swift */,
 				70A7C47329F14EB7007C07FC /* ImageForLuxuryTheme.swift */,
 				70A7C48329F37846007C07FC /* CustomUIButton.swift */,
 				702F24F029F66836006745A9 /* UIImage.swift */,
@@ -569,7 +560,6 @@
 				70A7C45229EFA6CD007C07FC /* CustomBackgroundView.swift in Sources */,
 				709BDBD329E3A7C600F06C59 /* QuizView.swift in Sources */,
 				70A7C43029EB6F7F007C07FC /* SettingView.swift in Sources */,
-				70A7C46029F008C7007C07FC /* CustomUITabBar.swift in Sources */,
 				709BDBDC29E7A86300F06C59 /* Alert.swift in Sources */,
 				70A7C43C29ED167A007C07FC /* DesignThemeModel.swift in Sources */,
 				70A7C45829EFA73D007C07FC /* UISegmentedControl.swift in Sources */,
@@ -579,10 +569,8 @@
 				702410DA29D55F560024ABBD /* AppDelegate.swift in Sources */,
 				70A7C45629EFA716007C07FC /* CustomUIProgressionBar.swift in Sources */,
 				70A7C44129ED3176007C07FC /* UIColor.swift in Sources */,
-				70A7C45C29EFC8E0007C07FC /* CustomNavgiationItem.swift in Sources */,
 				709BDBCF29E2398500F06C59 /* WordRememberedListView.swift in Sources */,
 				70A7C43A29ED15D8007C07FC /* DesignTheme.swift in Sources */,
-				70A7C46629F0FCBE007C07FC /* CustomNavigationBar.swift in Sources */,
 				706C44C329DAEEB500B5FBC8 /* AddWordViewController.swift in Sources */,
 				7024111729D562600024ABBD /* WordListView.swift in Sources */,
 				702F24F129F66836006745A9 /* UIImage.swift in Sources */,
