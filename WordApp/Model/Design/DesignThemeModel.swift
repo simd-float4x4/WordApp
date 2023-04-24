@@ -120,7 +120,7 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
                         name: "ラグジュアリー",
                         useImage: true,
                         themeImageForIconUrl: "luxury_icon",
-                        backgroundImageUrl: "tufting",
+                        backgroundImageUrl: "luxury",
                         mainColor: "222025",
                         subColor: "4D392E",
                         accentColor: "CFAA54",
