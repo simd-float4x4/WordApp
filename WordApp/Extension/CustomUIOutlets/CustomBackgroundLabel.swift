@@ -3,7 +3,6 @@ import Foundation
 
 // MARK: CustomBackgroundLabel
 class CustomBackgroundLabel: UILabel {
-    
     // フォントカラー：初期値
     var fontColor: String = "000000"
     // フォント名：初期値
@@ -12,7 +11,8 @@ class CustomBackgroundLabel: UILabel {
     var themeModel = DesignThemeListModel.shared
     // UserDefaults
     let ud = UserDefaults.standard
-    
+    // テーマモデルID
+    var selectedThemeId: Int = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,15 +26,15 @@ class CustomBackgroundLabel: UILabel {
     
     //　呼ばれたときにロードするメソッド
     func loadProperties() {
-        fetchEncodedThemeData()
+        fetchSavedThemeData()
         setThemeProperties()
     }
     
     // 保存されたカラーテーマ情報を取得
-    func fetchEncodedThemeData() {
-        let selected = ud.selectedThemeColorId
-        fontColor = themeModel.themeList[selected].theme.fontColor
-        fontName = themeModel.themeList[selected].theme.fontName
+    func fetchSavedThemeData() {
+        selectedThemeId = ud.selectedThemeColorId
+        fontColor = themeModel.themeList[selectedThemeId].theme.fontColor
+        fontName = themeModel.themeList[selectedThemeId].theme.fontName
     }
     
     // CustomUIOutletsにテーマ情報を格納し、再描画

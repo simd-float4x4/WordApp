@@ -58,7 +58,7 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
         DesignThemeModel.init(initTheme:
             DesignTheme(id: 3,
                         name: "オレンジ",
-                        useImage: true,
+                        useImage: false,
                         themeImageForIconUrl: "",
                         backgroundImageUrl: "",
                         mainColor: "FAB12F",
