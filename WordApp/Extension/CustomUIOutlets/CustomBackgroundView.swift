@@ -5,14 +5,14 @@ import UIKit
 class CustomBackgroundView: UIView {
     // 背景色
     var backGroundColor: String = "FFFFFF"
+    // テーマモデルID
+    var selectedThemeId: Int = 0
     // テーマモデル
     var themeModel = DesignThemeListModel.shared
     // UserDefaults
     let ud = UserDefaults.standard
     // 画像を使用するか？
     var useImage: Bool = false
-    // テーマモデルID
-    var selectedThemeId: Int = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)

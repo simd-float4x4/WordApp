@@ -7,12 +7,12 @@ class CustomBackgroundLabel: UILabel {
     var fontColor: String = "000000"
     // フォント名：初期値
     var fontName: String = ""
+    // テーマモデルID
+    var selectedThemeId: Int = 0
     // テーマモデル
     var themeModel = DesignThemeListModel.shared
     // UserDefaults
     let ud = UserDefaults.standard
-    // テーマモデルID
-    var selectedThemeId: Int = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
