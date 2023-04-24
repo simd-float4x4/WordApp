@@ -22,6 +22,7 @@
 		7024111B29D56F410024ABBD /* WordListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7024111A29D56F410024ABBD /* WordListView.xib */; };
 		7024111D29D577A60024ABBD /* WordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7024111C29D577A50024ABBD /* WordModel.swift */; };
 		702F24F129F66836006745A9 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F24F029F66836006745A9 /* UIImage.swift */; };
+		702F24FC29F686E7006745A9 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F24FB29F686E7006745A9 /* UserDefaults.swift */; };
 		702F654829D7FEDA0041B8DC /* WordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F654729D7FEDA0041B8DC /* WordDetailViewController.swift */; };
 		702F654A29D7FF120041B8DC /* WordDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 702F654929D7FF120041B8DC /* WordDetailView.xib */; };
 		702F654C29D7FF200041B8DC /* WordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F654B29D7FF200041B8DC /* WordDetailView.swift */; };
@@ -109,6 +110,7 @@
 		7024111A29D56F410024ABBD /* WordListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WordListView.xib; sourceTree = "<group>"; };
 		7024111C29D577A50024ABBD /* WordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordModel.swift; sourceTree = "<group>"; };
 		702F24F029F66836006745A9 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		702F24FB29F686E7006745A9 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		702F654729D7FEDA0041B8DC /* WordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDetailViewController.swift; sourceTree = "<group>"; };
 		702F654929D7FF120041B8DC /* WordDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WordDetailView.xib; sourceTree = "<group>"; };
 		702F654B29D7FF200041B8DC /* WordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDetailView.swift; sourceTree = "<group>"; };
@@ -364,6 +366,7 @@
 		709BDBDA29E7A85400F06C59 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				702F24FB29F686E7006745A9 /* UserDefaults.swift */,
 				709BDBDB29E7A86200F06C59 /* Alert.swift */,
 			);
 			path = Common;
@@ -603,6 +606,7 @@
 				709BDBD129E23BDC00F06C59 /* WordRememberedListViewController.swift in Sources */,
 				702410E429D55F560024ABBD /* WordApp.xcdatamodeld in Sources */,
 				70A7C43F29ED28F1007C07FC /* CustomView.swift in Sources */,
+				702F24FC29F686E7006745A9 /* UserDefaults.swift in Sources */,
 				70A7C45229EFA6CD007C07FC /* CustomBackgroundView.swift in Sources */,
 				709BDBD329E3A7C600F06C59 /* QuizView.swift in Sources */,
 				70A7C43029EB6F7F007C07FC /* SettingView.swift in Sources */,

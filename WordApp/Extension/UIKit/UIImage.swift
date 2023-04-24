@@ -2,19 +2,26 @@ import UIKit
 
 // MARK: UIImage
 extension UIImage {
-
+    // UIImageを背景色で塗りつぶすためのメソッド
+    /// - Parameters:
+        ///   - color: 色を指定。
+        ///   - size: 大きさを指定。
     convenience init?(color: UIColor, size: CGSize) {
         guard let cgImage = UIGraphicsImageRenderer(size: size).image(actions: { rendererContext in
-            rendererContext.cgContext.setFillColor(color.cgColor) // 色を指定
-            rendererContext.fill(.init(origin: .zero, size: size)) // 塗りつぶす
+            // 引数で渡された色を指定する
+            rendererContext.cgContext.setFillColor(color.cgColor)
+            // 指定された色で塗りつぶす
+            rendererContext.fill(.init(origin: .zero, size: size))
         }).cgImage else {
             return nil
         }
         self.init(cgImage: cgImage)
     }
     
+    // UIImageを複数枚合成するためのメソッド
+    /// - Parameters:
+        ///   - image: 画像。この画像は、配列で渡すことで複数枚併用することができる。
     func composite(image: UIImage) -> UIImage? {
-
         UIGraphicsBeginImageContextWithOptions(self.size, false, 0)
         self.draw(in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
 
