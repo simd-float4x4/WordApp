@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 // MARK: QuizViewController
-class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
+class QuizViewController: UIViewController {
     
     var wordModel = WordListModel.shared
     var themeModel = DesignThemeListModel.shared
@@ -44,15 +44,6 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     let alertQuizNumberTextLabel = NSLocalizedString("alertQuizNumber", comment: "")
     
     let QuizNavigationItem = UINavigationItem(title: "クイズモード")
-    
-    // プリセット値：ダミー用回答（正解が2個以上ある際に使用する）
-    var presetDummyAnswersArray = [
-        "〜を明らかにする", "〜を横断する", "〜を乗り越える", "減少する", "分配する", "証明する", "を起訴する", "を回避する", "を蒸発させる",
-        "〜に追従する", "〜を目撃する", "〜が落ちる", "干渉する", "救出する", "痛める", "を再生させる", "を飲む", "を破壊する",
-        "形式上の", "個別の", "交互の", "神経症の〜", "時代遅れの〜", "揮発性の〜", "親切な", "綺麗に保たれている", "一過性の〜",
-        "卓越", "支配権", "酵素", "信条", "領事", "吸収", "友愛", "花婿", "誘導", "完成", "詰め物", "襲撃", "事件", "建築物", "栽培", "（グラスなどの）容器"
-    ]
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -297,8 +288,7 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
                         // dummy選択肢のラベルが、correctAnswerと合致しないのであれば
                         if dummy[index] != correctAnswer {
                             // ランダムプリセットから値をset
-                            let randomInt = Int.random(in: 0 ..< presetDummyAnswersArray.count)
-                            answer = presetDummyAnswersArray[randomInt]
+                            answer = DummyData().returnOneMeaning()
                             // 検索終了
                             finishSearching = true
                         }
@@ -314,8 +304,7 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
             for j in 0 ..< i {
                 if answer == dummy[j] {
                     // ランダムプリセットから値をset
-                    let randomInt = Int.random(in: 0 ..< presetDummyAnswersArray.count)
-                    answer = presetDummyAnswersArray[randomInt]
+                    answer = DummyData().returnOneMeaning()
                 }
             }
             // 各ボタンに描画
@@ -336,61 +325,6 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
         }
     }
     
-    // 回答ボタンの色を変更する
-    func changeInformationOnQuizWidget() {
-        let view = self.view as! QuizView
-        // UIButtonのCongfigを設定
-        var config = UIButton.Configuration.filled()
-        // Configの共通処理
-        config.imagePadding = 8.0
-        config.title = answerSelectionArray[getPressedButtonId]
-        
-        // 不正解の時
-        if answerId != getPressedButtonId {
-            // 背景を赤色かつxアイコンが表示されるように
-            config.background.backgroundColor = UIColor.systemRed
-            config.image = UIImage(systemName: "multiply.circle")
-            switch getPressedButtonId {
-            case 0:
-                view.quizFirstAnswerButton.configuration = config
-            case 1:
-                view.quizSecondAnswerButton.configuration = config
-            case 2:
-                view.quizThirdAnswerButton.configuration = config
-            case 3:
-                view.quizFourthAnswerButton.configuration = config
-            case 4:
-                view.quizFifthAnswerButton.configuration = config
-            default:
-                break
-            }
-        }
-        // 正解時背景を緑かつチェックアイコンが表示されるように
-        config.background.backgroundColor = UIColor.systemGreen
-        config.image = UIImage(systemName: "checkmark.circle")
-        config.title = answerSelectionArray[answerId]
-        switch answerId {
-            case 0:
-                view.quizFirstAnswerButton.configuration = config
-            case 1:
-                view.quizSecondAnswerButton.configuration = config
-            case 2:
-                view.quizThirdAnswerButton.configuration = config
-            case 3:
-                view.quizFourthAnswerButton.configuration = config
-            case 4:
-                view.quizFifthAnswerButton.configuration = config
-            default:
-                break
-        }
-    }
-
-    // QuizViewからIdを取得する
-    func sendPressedButtonId(id: Int) {
-        getPressedButtonId = id
-        checkPressedButtonIsCorrectAnswer(id: getPressedButtonId)
-    }
-    
     // 正解か不正かどうか判定する
     func checkPressedButtonIsCorrectAnswer(id: Int) {
         if id != answerId {
@@ -408,24 +342,6 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
         wordModel.updateWordWrongCount(index: quiz[0].word.id, newWrongCount: quiz[0].word.wrongCount)
         // 今回のQuizで解答数を更新
         totalSolvedQuizCount += 1
-    }
-    
-    // 回答したQuizを配列の最後に持っていく
-    func removeFirstQuiz() {
-        let firstQuiz = quiz[0]
-        deleteFirstQuizFromArray()
-        quiz.append(firstQuiz)
-    }
-    
-    // 次の問題へ進む
-    func moveToNextQuiz() {
-        let view = self.view as! QuizView
-        removeFirstQuiz()
-        reloadQuizState(view: view)
-        resetButtonState(view: view)
-        showCurrentQuiz()
-        reloadProgressionView()
-        checkNextQuizIsLast()
     }
     
     // 問題の状態を更新する
@@ -466,11 +382,5 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
         let progressionRate = Float(totalSolvedQuizCount) / Float(demominator)
         view.quizProgressionLabel.text = String(totalSolvedQuizCount+1) + "  問目"
         view.quizProgressBar.progress = Float(progressionRate)
-    }
-}
-
-extension QuizViewController: UINavigationBarDelegate {
-    func position(for bar: UIBarPositioning) -> UIBarPosition {
-        return .topAttached
     }
 }

@@ -1,20 +1,27 @@
 import Foundation
 import UIKit
 
+// MARK: WordDetailViewController
 class WordDetailViewController: UIViewController {
-    
+    //　単語（AddWordViewControllerから値を受け渡す用の変数）
     var singleWord: String = ""
+    //　意味（AddWordViewControllerから値を受け渡す用の変数）
     var meaning: String = ""
+    //　例文（AddWordViewControllerから値を受け渡す用の変数）
     var exampleSentence: String = ""
+    //　例文・日本語訳（AddWordViewControllerから値を受け渡す用の変数）
     var exampleTranslation: String = ""
+    //　テーマモデル
     var themeModel = DesignThemeListModel.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initializeWordDetailView()
+        //　UIを初期化する
+        initializeUI()
     }
     
-    func initializeWordDetailView() {
+    //　UIを初期化する
+    func initializeUI() {
         let view = WordDetailView()
         let tapGestureRecognizer = UITapGestureRecognizer(target: self,
                                                                   action: #selector(onTapDismissWordView))

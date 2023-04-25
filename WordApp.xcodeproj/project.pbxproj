@@ -24,6 +24,11 @@
 		702F24F129F66836006745A9 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F24F029F66836006745A9 /* UIImage.swift */; };
 		702F24FC29F686E7006745A9 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F24FB29F686E7006745A9 /* UserDefaults.swift */; };
 		702F250129F72417006745A9 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F250029F72417006745A9 /* DummyData.swift */; };
+		702F250429F8963F006745A9 /* AddWordViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F250329F8963F006745A9 /* AddWordViewController+Extension.swift */; };
+		702F250629F896BA006745A9 /* WordListViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F250529F896BA006745A9 /* WordListViewController+Extension.swift */; };
+		702F250829F896EC006745A9 /* WordRememberedListViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F250729F896EC006745A9 /* WordRememberedListViewController+Extension.swift */; };
+		702F250A29F8975D006745A9 /* QuizViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F250929F8975C006745A9 /* QuizViewController+Extension.swift */; };
+		702F250C29F89903006745A9 /* SettingViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F250B29F89903006745A9 /* SettingViewController+Extension.swift */; };
 		702F654829D7FEDA0041B8DC /* WordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F654729D7FEDA0041B8DC /* WordDetailViewController.swift */; };
 		702F654A29D7FF120041B8DC /* WordDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 702F654929D7FF120041B8DC /* WordDetailView.xib */; };
 		702F654C29D7FF200041B8DC /* WordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F654B29D7FF200041B8DC /* WordDetailView.swift */; };
@@ -57,7 +62,6 @@
 		70A7C45829EFA73D007C07FC /* CustomUISegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C45729EFA73D007C07FC /* CustomUISegmentedControl.swift */; };
 		70A7C45E29F007E5007C07FC /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C45D29F007E5007C07FC /* logo.png */; };
 		70A7C46229F017A5007C07FC /* 851Gkktt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C46129F017A5007C07FC /* 851Gkktt.ttf */; };
-		70A7C46429F0F64C007C07FC /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A7C46329F0F64C007C07FC /* CustomTabBarController.swift */; };
 		70A7C46A29F13616007C07FC /* luxury.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C46929F13616007C07FC /* luxury.png */; };
 		70A7C46C29F144D4007C07FC /* strawberry.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C46B29F144D4007C07FC /* strawberry.png */; };
 		70A7C46E29F14AD5007C07FC /* chocolate.png in Resources */ = {isa = PBXBuildFile; fileRef = 70A7C46D29F14AD4007C07FC /* chocolate.png */; };
@@ -113,6 +117,11 @@
 		702F24F029F66836006745A9 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		702F24FB29F686E7006745A9 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		702F250029F72417006745A9 /* DummyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyData.swift; sourceTree = "<group>"; };
+		702F250329F8963F006745A9 /* AddWordViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddWordViewController+Extension.swift"; sourceTree = "<group>"; };
+		702F250529F896BA006745A9 /* WordListViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WordListViewController+Extension.swift"; sourceTree = "<group>"; };
+		702F250729F896EC006745A9 /* WordRememberedListViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WordRememberedListViewController+Extension.swift"; sourceTree = "<group>"; };
+		702F250929F8975C006745A9 /* QuizViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuizViewController+Extension.swift"; sourceTree = "<group>"; };
+		702F250B29F89903006745A9 /* SettingViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingViewController+Extension.swift"; sourceTree = "<group>"; };
 		702F654729D7FEDA0041B8DC /* WordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDetailViewController.swift; sourceTree = "<group>"; };
 		702F654929D7FF120041B8DC /* WordDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WordDetailView.xib; sourceTree = "<group>"; };
 		702F654B29D7FF200041B8DC /* WordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDetailView.swift; sourceTree = "<group>"; };
@@ -146,7 +155,6 @@
 		70A7C45729EFA73D007C07FC /* CustomUISegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUISegmentedControl.swift; sourceTree = "<group>"; };
 		70A7C45D29F007E5007C07FC /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		70A7C46129F017A5007C07FC /* 851Gkktt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = 851Gkktt.ttf; sourceTree = "<group>"; };
-		70A7C46329F0F64C007C07FC /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		70A7C46929F13616007C07FC /* luxury.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = luxury.png; sourceTree = "<group>"; };
 		70A7C46B29F144D4007C07FC /* strawberry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = strawberry.png; sourceTree = "<group>"; };
 		70A7C46D29F14AD4007C07FC /* chocolate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chocolate.png; sourceTree = "<group>"; };
@@ -263,13 +271,13 @@
 		7024110F29D561AC0024ABBD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				702F250229F89623006745A9 /* Extension */,
 				706C44C229DAEEB500B5FBC8 /* AddWordViewController.swift */,
 				7024111229D562160024ABBD /* WordListViewController.swift */,
 				702F654729D7FEDA0041B8DC /* WordDetailViewController.swift */,
 				709BDBD029E23BDC00F06C59 /* WordRememberedListViewController.swift */,
 				709BDBD629E3A83400F06C59 /* QuizViewController.swift */,
 				70A7C43329EB6FF4007C07FC /* SettingViewController.swift */,
-				70A7C46329F0F64C007C07FC /* CustomTabBarController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -388,6 +396,18 @@
 				702F250029F72417006745A9 /* DummyData.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		702F250229F89623006745A9 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				702F250329F8963F006745A9 /* AddWordViewController+Extension.swift */,
+				702F250529F896BA006745A9 /* WordListViewController+Extension.swift */,
+				702F250729F896EC006745A9 /* WordRememberedListViewController+Extension.swift */,
+				702F250929F8975C006745A9 /* QuizViewController+Extension.swift */,
+				702F250B29F89903006745A9 /* SettingViewController+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		709BDBDA29E7A85400F06C59 /* Common */ = {
@@ -629,7 +649,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				70A7C46429F0F64C007C07FC /* CustomTabBarController.swift in Sources */,
 				709BDBD129E23BDC00F06C59 /* WordRememberedListViewController.swift in Sources */,
 				702410E429D55F560024ABBD /* WordApp.xcdatamodeld in Sources */,
 				70A7C43F29ED28F1007C07FC /* CustomView.swift in Sources */,
@@ -638,6 +657,7 @@
 				709BDBD329E3A7C600F06C59 /* QuizView.swift in Sources */,
 				70A7C43029EB6F7F007C07FC /* SettingView.swift in Sources */,
 				709BDBDC29E7A86300F06C59 /* Alert.swift in Sources */,
+				702F250429F8963F006745A9 /* AddWordViewController+Extension.swift in Sources */,
 				702F250129F72417006745A9 /* DummyData.swift in Sources */,
 				70A7C43C29ED167A007C07FC /* DesignThemeModel.swift in Sources */,
 				70A7C45829EFA73D007C07FC /* CustomUISegmentedControl.swift in Sources */,
@@ -650,7 +670,9 @@
 				709BDBCF29E2398500F06C59 /* WordRememberedListView.swift in Sources */,
 				70A7C43A29ED15D8007C07FC /* DesignTheme.swift in Sources */,
 				706C44C329DAEEB500B5FBC8 /* AddWordViewController.swift in Sources */,
+				702F250A29F8975D006745A9 /* QuizViewController+Extension.swift in Sources */,
 				7024111729D562600024ABBD /* WordListView.swift in Sources */,
+				702F250829F896EC006745A9 /* WordRememberedListViewController+Extension.swift in Sources */,
 				702F24F129F66836006745A9 /* UIImage.swift in Sources */,
 				7024111D29D577A60024ABBD /* WordModel.swift in Sources */,
 				702F654C29D7FF200041B8DC /* WordDetailView.swift in Sources */,
@@ -658,9 +680,11 @@
 				709BDBD729E3A83400F06C59 /* QuizViewController.swift in Sources */,
 				709BDBCB29E2281B00F06C59 /* Notification.swift in Sources */,
 				702410DC29D55F560024ABBD /* SceneDelegate.swift in Sources */,
+				702F250C29F89903006745A9 /* SettingViewController+Extension.swift in Sources */,
 				70A7C43429EB6FF4007C07FC /* SettingViewController.swift in Sources */,
 				70A7C47429F14EB7007C07FC /* CustomImageFrame.swift in Sources */,
 				706C44C029DAEEA700B5FBC8 /* AddWordView.swift in Sources */,
+				702F250629F896BA006745A9 /* WordListViewController+Extension.swift in Sources */,
 				702F654829D7FEDA0041B8DC /* WordDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

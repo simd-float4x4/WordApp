@@ -42,6 +42,14 @@ class DummyData {
         "その高校は大学と連携している。"
     ]
     
+    // プリセット値：ダミー用回答（正解が2個以上ある際に使用する）
+    var presetDummyAnswersArray = [
+        "〜を明らかにする", "〜を横断する", "〜を乗り越える", "減少する", "分配する", "証明する", "を起訴する", "を回避する", "を蒸発させる",
+        "〜に追従する", "〜を目撃する", "〜が落ちる", "干渉する", "救出する", "痛める", "を再生させる", "を飲む", "を破壊する",
+        "形式上の", "個別の", "交互の", "神経症の〜", "時代遅れの〜", "揮発性の〜", "親切な", "綺麗に保たれている", "一過性の〜",
+        "卓越", "支配権", "酵素", "信条", "領事", "吸収", "友愛", "花婿", "誘導", "完成", "詰め物", "襲撃", "事件", "建築物", "栽培", "（グラスなどの）容器"
+    ]
+    
     func make() -> [String] {
         let upperIndex = singleArray.count - 1
         let index = Int.random(in: 0 ..< upperIndex)
@@ -53,4 +61,8 @@ class DummyData {
         return dummyData
     }
     
+    func returnOneMeaning() -> String {
+        let randomInt = Int.random(in: 0 ..< presetDummyAnswersArray.count)
+        return presetDummyAnswersArray[randomInt]
+    }
 }
