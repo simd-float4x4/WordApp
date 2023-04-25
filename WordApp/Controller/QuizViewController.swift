@@ -203,14 +203,17 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
         let currentQuiz = quiz[0]
         var meaningArray: [String] = []
         meaningArray.append(currentQuiz.word.meaning)
-        print("meaningArrayCount: ", meaningArray.count)
-        print("maximumAnswerChoices: ", maximumAnswerChoicesCount)
-        if maximumAnswerChoicesCount != quiz.count {
-            let okAction = UIAlertAction(title: alertOkButton, style: .default) { _ in
-                self.goToTheRootViewController()
-            }
-            showAlert(title: "Error: IndexOutOfRange", message: "for i in 1 ..< maximumAnswerChoicesCount { meaningArray.append(quiz[i].word.meaning)", actions: [okAction])
-        }
+        // 10, 1, 5
+        print("⭐︎currentQuizCount: ", quiz.count)
+        print("⭐︎meaningArrayCount: ", meaningArray.count)
+        print("⭐︎maximumAnswerChoices: ", maximumAnswerChoicesCount)
+        // バグの出現条件
+        // 1. 10件登録する→Quizを表示する
+        //　設定した出題数と生成した問題数が合致しない場合
+//        if maximumAnswerChoicesCount != quiz.count {
+//            //　強制的に上書き
+//            wordModel.setMaximumQuiz(count: quiz.count)
+//        }
         for i in 1 ..< maximumAnswerChoicesCount {
             print("i: ", i)
             meaningArray.append(quiz[i].word.meaning)
