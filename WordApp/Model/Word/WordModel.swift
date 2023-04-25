@@ -84,6 +84,8 @@ class WordListModel: NSObject, UITableViewDataSource {
             print("error: cannot get curretRememberStatus")
         }
         self.updateData()
+        let quizCount = self.wordList.filter({$0.word.isRemembered == true}).count
+        self.setMaximumQuiz(count: quizCount)
     }
     
     // 削除モードがONの状態の際に単語データを削除する
@@ -198,22 +200,10 @@ class WordListModel: NSObject, UITableViewDataSource {
     //　クイズの上限数をセット
     func setMaximumQuiz(count: Int) {
         currentQuizMaximumCount = count
+        print("最大値: ", currentQuizMaximumCount)
         ud.set(currentQuizMaximumCount, forKey: "maximumRememberedWordsCount")
     }
-//
-//    //　選択肢の上限数を返却
-//    func getAndReturnQuizChoices() -> Int {
-//        let count = ud.value(forKey: "maximumQuizSelectionCount") as? Int ?? 5
-//        return count
-//    }
-//
-//    //　選択肢の上限数をセット
-//    func setReturnQuizChoices(count: Int) {
-//        currentQuizChoicesCount = count
-//        ud.set(currentQuizChoicesCount, forKey: "maximumQuizSelectionCount")
-//        print("udValue-maximumQuizSelectionCount: ", currentQuizChoicesCount)
-//    }
-    
+
 // MARK: UITableViewDatasoruce
     // UITableViewが返す要素数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -59,36 +59,50 @@ class SettingViewController: UIViewController, SettingViewDelegate, UICollection
         let view = self.view as! SettingView
         let forSegmentAt = currentQuizTotal / 5
         let choiceIndex = ud.value(forKey: "choicesSelectedSegmentIndex") as? Int ?? 0
-        let quizIndex = ud.value(forKey: "quizMaximumSelectedSegmentIndex") as? Int ?? 0
+        var quizIndex = ud.value(forKey: "quizMaximumSelectedSegmentIndex") as? Int ?? 0
+        // quizIndexの妥当性検証
+        let threshold = ud.value(forKey: "maximumRememberedWordsCount") as? Int ?? 0
+        if quizIndex == 0 {
+            quizIndex = 0
+        } else if quizIndex * 5 >= threshold {
+            quizIndex = threshold / 5
+        }
+        view.changeMaximumQuizCountSegmentedControl.selectedSegmentIndex = quizIndex
+        view.changeQuizAnswerSelectionCountSegmentedControl.selectedSegmentIndex = choiceIndex
+        print("保存されたindex: ", quizIndex)
         for i in 1 ..< 7 {
             var isAvaivable: Bool = true
             if i > forSegmentAt { isAvaivable = false }
-            view.makeQuizSumCountControl.setEnabled(isAvaivable, forSegmentAt: i)
-            view.makeQuizSumCountControl.selectedSegmentIndex = quizIndex
-            view.quizAnserSegmentedControl.selectedSegmentIndex = choiceIndex
+            view.changeMaximumQuizCountSegmentedControl.setEnabled(isAvaivable, forSegmentAt: i)
         }
     }
     
     func reloadCurrentStatus() {
         // 利用可能なクイズ数を取得
         currentQuizTotal = wordModel.getAndReturnMaximumQuizCount()
-        //　現在のクイズ上限数を取得
+        //　現在の選択肢の上限数を取得
         currentChoicesTotal = wordModel.getQuizAnswerSelections()
-        // currentChoicesTotal = wordModel.getAndReturnQuizChoices()
+        
+        print("==========================")
+        print("利用可能なクイズ数： ", currentQuizTotal, "現在の選択肢上限数：　", currentChoicesTotal)
+        print("==========================")
     }
     
+    //　"選択肢"
     func updateMaximumQuizSelection(count: Int) {
         reloadCurrentStatus()
         print("updateMaximumQuizSelectionCount: ", count)
-        wordModel.setMaximumQuiz(count: count)
-        // wordModel.setReturnQuizChoices(count: count)
+        wordModel.setQuizAnswerSelections(length: count)
     }
     
+    //　"出題数"
     func updateMaximumQuizCount(count: Int) {
+        var count = count
         reloadCurrentStatus()
-        // segmetnded=0の時0が帰ってくるため、totalを返す
-        let index = count == 0 ? currentQuizTotal : count
-        wordModel.setMaximumQuiz(count: index)
+        print("updateMaximumQuizCount: ", count)
+        // segmentIndex == 0の際は全件返すようにしてあげる
+        if count == 0 { count = currentQuizTotal }
+        wordModel.setMaximumQuiz(count: count)
     }
 }
 

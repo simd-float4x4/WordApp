@@ -3,13 +3,15 @@ import UIKit
 
 // MARK: QuizAnswerButtonisTappedDelegate
 /// - func removeFirstQuiz() → QuizViewControllerと接続
+/// - func moveToNextQuiz() → QuizViewControllerと接続
+/// - func sendPressedButtonId(id: Int) → QuizViewControllerと接続
+/// - func changeInformationOnQuizWidget()→ QuizViewControllerと接続
 protocol QuizAnswerButtonIsTappedDelegate: AnyObject {
     func removeFirstQuiz()
     func moveToNextQuiz()
     func sendPressedButtonId(id: Int)
     func changeInformationOnQuizWidget()
 }
-
 
 // MARK: QuizView
 class QuizView: UIView {
@@ -46,10 +48,10 @@ class QuizView: UIView {
     let navigationItemFontWhiteColor = UIColor.white
     // テーマモデルID
     var selectedThemeId: Int = 0
-    // テーマモデル
-    var themeModel = DesignThemeListModel.shared
-    // UserDefaults
+    //　UserDefaults
     let ud = UserDefaults.standard
+    //　テーマモデル
+    let themeModel = DesignThemeListModel.shared
     //　ナビゲーションバータイトル
     let navigationBarTitleString = NSLocalizedString("QuizViewTitleText", comment: "")
     // ナビゲーションバー：フレームサイズ（注意：iPhone X以降の端末）
@@ -97,13 +99,12 @@ class QuizView: UIView {
         let titleViewLabel = setAndGetUILabelProperties(parentView: parentView)
         // subViewをする
         parentView.addSubview(navBar)
+        print(navBar.frame)
         titleView.addSubview(titleViewLabel)
+        print(titleView.frame)
         parentView.addSubview(titleView)
+        print(parentView.frame)
         self.addSubview(parentView)
-        // 次の問題へ行くためのボタンを非表示にする
-        moveToNextQuizButton.isHidden = true
-        // クイズの問題文のUILabelの初期値を格納する
-        quizDescriptionTextLabel.text = NSLocalizedString("quizQuestionTextLabel", comment: "")
     }
     
     // 保存されたカラーテーマ情報を取得
@@ -146,7 +147,7 @@ class QuizView: UIView {
         label.frame = CGRect(
             x: navigationBarUILabelProperties.x,
             y: navigationBarUILabelProperties.y,
-            width: Int(parentView.frame.size.width) / 2,
+            width: Int(UIScreen.main.bounds.size.width),
             height: statusBarHeight)
         // テーマ名を取得
         let themeName = getThemeName()
@@ -167,7 +168,7 @@ class QuizView: UIView {
         titleView.frame = CGRect(
             x: Int(parentView.frame.size.width) / 4,
             y: navigationBarFrameSize.y,
-            width: Int(parentView.frame.size.width) / 2,
+            width: Int(UIScreen.main.bounds.size.width)  / 2,
             height: navigationBarFrameSize.height)
         return titleView
         
@@ -181,7 +182,7 @@ class QuizView: UIView {
         var navBar = UINavigationBar(frame: CGRect(
             x: navigationBarFrameSize.x,
             y: navigationBarFrameSize.y,
-            width: Int(parentView.frame.size.width),
+            width: Int(UIScreen.main.bounds.size.width),
             height: navigationBarFrameSize.height))
         // ナビゲーションバーに色をセットする
         navBar = setColorOnNavigationBar(navBar: navBar)
