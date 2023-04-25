@@ -8,7 +8,7 @@ import UIKit
 /// - func changeInformationOnQuizWidget()→ QuizViewControllerと接続
 protocol QuizAnswerButtonIsTappedDelegate: AnyObject {
     func removeFirstQuiz()
-    func moveToNextQuiz()
+    func moveToNextQuiz(view: QuizView)
     func sendPressedButtonId(id: Int)
     func changeInformationOnQuizWidget()
 }
@@ -284,6 +284,6 @@ class QuizView: UIView {
     
     //　次の問題へと移動する
     @IBAction func moveToNextQuiz() {
-        quizAnswerButtonIsTappedDelegate?.moveToNextQuiz()
+        quizAnswerButtonIsTappedDelegate?.moveToNextQuiz(view: self)
     }
 }

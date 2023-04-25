@@ -18,12 +18,11 @@ extension QuizViewController: QuizAnswerButtonIsTappedDelegate {
     }
     
     // 次の問題へ進む
-    func moveToNextQuiz() {
-        let view = self.view as! QuizView
+    func moveToNextQuiz(view: QuizView) {
         removeFirstQuiz()
         reloadQuizState(view: view)
         resetButtonState(view: view)
-        showCurrentQuiz()
+        showCurrentQuiz(view: view)
         reloadProgressionView()
         checkNextQuizIsLast()
     }
