@@ -42,40 +42,38 @@ class QuizViewController: UIViewController {
     let alertQuizIsFinishedTitleLabel = NSLocalizedString("alertQuizFinishedTitle", comment: "")
     let alertQuizIsFinishedTextLabel = NSLocalizedString("alertQuizFinishedText", comment: "")
     let alertQuizNumberTextLabel = NSLocalizedString("alertQuizNumber", comment: "")
+    let quizMoveToResultPresentationTextLabel = NSLocalizedString("quizMoveToResultPresentation", comment: "")
     
     let QuizNavigationItem = UINavigationItem(title: "クイズモード")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeView()
-        let isAvailable = checkIsQuizAvailable()
-        if isAvailable {
-            setQuiz()
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         initializeView()
-        let isAvailable = checkIsQuizAvailable()
-        if isAvailable {
-            setQuiz()
-        }
     }
     
     func initializeView() {
         let view = QuizView()
         self.view = view
+        let quizView = self.view as! QuizView
+        let isAvailable = checkIsQuizAvailable()
+        if isAvailable {
+            setQuiz(view: quizView)
+        }
     }
     
-    func setQuiz() {
+    func setQuiz(view: QuizView) {
         // 利用可能なクイズ数を取得
         currentQuizTotal = countCurrentRegisteredWord()
         //　現在のクイズに関してのプロパティを取得
         getQuizCurrentProperties()
         // クイズを初期化する
-        initializeQuiz()
+        initializeQuiz(view: view)
         // 最初のクイズを取得する
-        getFirstQuiz()
+        getFirstQuiz(view: view)
     }
     
     // 設定からクイズに関する情報を取得する
@@ -93,8 +91,7 @@ class QuizViewController: UIViewController {
     }
     
     // UIの初期化
-    func initQuizUI() {
-        let view = self.view as! QuizView
+    func initQuizUI(view: QuizView) {
         initProgressArea(view: view)
         initButtonState(view: view)
         decideButtonDisplayOrNot(view: view)
@@ -144,9 +141,9 @@ class QuizViewController: UIViewController {
     }
     
     // クイズを初期化
-    func initializeQuiz() {
+    func initializeQuiz(view: QuizView) {
         // UIの状態を初期化
-        initQuizUI()
+        initQuizUI(view: view)
         // クイズをシャッフルして配列を生成する
         quiz = makeRandomQuizList()
         totalSolvedQuizCount = 0
@@ -154,7 +151,7 @@ class QuizViewController: UIViewController {
     }
     
     // 最初のクイズを取得
-    func getFirstQuiz() {
+    func getFirstQuiz(view: QuizView) {
         if quiz.isEmpty == true {
             let okAction = UIAlertAction(title: alertOkButton, style: .default) { _ in
                 self.goToTheRootViewController()
@@ -165,12 +162,12 @@ class QuizViewController: UIViewController {
             let currentQuiz = quiz[0]
             // これが一番最初のQuizならストッパーとして利用するためIDを控えておく
             currentQuizStopper = currentQuiz.word.id
-            showCurrentQuiz()
+            showCurrentQuiz(view: view)
         }
     }
     
     // クイズの表示メソッド
-    func showCurrentQuiz() {
+    func showCurrentQuiz(view: QuizView) {
         let currentQuiz = quiz[0]
         var meaningArray: [String] = []
         meaningArray.append(currentQuiz.word.meaning)
@@ -180,7 +177,7 @@ class QuizViewController: UIViewController {
             print("i: ", i)
             meaningArray.append(quiz[i].word.meaning)
         }
-        drawInformationOnQuizWidget(quiz: currentQuiz, dummyAnswers: meaningArray, correctAnswer: meaningArray[0])
+        drawInformationOnQuizWidget(quiz: currentQuiz, dummyAnswers: meaningArray, correctAnswer: meaningArray[0], view: view)
     }
 
     // 登録した単語が特定の単語数未満だった場合アラートを表示する
@@ -254,11 +251,9 @@ class QuizViewController: UIViewController {
     }
     
     // WordListの要素をUIに反映させる
-    func drawInformationOnQuizWidget(quiz: WordModel, dummyAnswers: [String], correctAnswer: String) {
+    func drawInformationOnQuizWidget(quiz: WordModel, dummyAnswers: [String], correctAnswer: String, view: QuizView) {
         // 選択肢配列は問題ごとに削除しておく
         answerSelectionArray.removeAll()
-        // QuizViewを定義
-        let view = self.view as! QuizView
         // 問題を表示
         view.quizSingleWordLabel.text = quiz.word.singleWord
         // dummyAnswerをshuffleする（※　正解のanswerも含まれている）
@@ -352,7 +347,7 @@ class QuizViewController: UIViewController {
         view.moveToNextQuizButton.isHidden = true
         // 次の問題が最初に出題した問題であれば（=この問題が最終問題なら）、ラベルの表示を変更する
         if quiz[1].word.id == currentQuizStopper {
-            view.moveToNextQuizButton.setTitle("結果発表へ", for: .normal)
+            view.moveToNextQuizButton.setTitle(quizMoveToResultPresentationTextLabel, for: .normal)
         }
     }
     
