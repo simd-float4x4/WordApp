@@ -45,6 +45,7 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
         view.exampleSentenceTextView.delegate = self
         view.exampleTranslationTextView.delegate = self
         view.addWordToWordListDelegate = self
+        
         let navBarView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 94))
         let navBar = UINavigationBar(frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 44))
         let appearance = UINavigationBarAppearance()
@@ -144,11 +145,6 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
         return true
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     // TabbarControllerを非表示に
     func hideTabBarController() {
         self.tabBarController?.tabBar.isHidden = true
@@ -213,11 +209,5 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
     
     @objc func onTapDismissWordView() {
         dismiss(animated: true,completion: nil)
-    }
-}
-
-extension AddWordViewController: UINavigationBarDelegate {
-    func position(for bar: UIBarPositioning) -> UIBarPosition {
-        return .topAttached
     }
 }
