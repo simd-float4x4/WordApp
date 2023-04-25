@@ -6,7 +6,7 @@ class SettingViewController: UIViewController, SettingViewDelegate, UICollection
     var themeModel = DesignThemeListModel.shared
     var quiz: [WordModel] = []
     var currentQuizTotal: Int = 0
-    var currentChoicesTotal: Int = 0
+    var currentChoicesTotal: Int = 5
     let ud = UserDefaults.standard
     
     @IBOutlet weak var viewNavigationBar: UINavigationBar!
@@ -73,12 +73,15 @@ class SettingViewController: UIViewController, SettingViewDelegate, UICollection
         // 利用可能なクイズ数を取得
         currentQuizTotal = wordModel.getAndReturnMaximumQuizCount()
         //　現在のクイズ上限数を取得
-        currentChoicesTotal = wordModel.getAndReturnQuizChoices()
+        currentChoicesTotal = wordModel.getQuizAnswerSelections()
+        // currentChoicesTotal = wordModel.getAndReturnQuizChoices()
     }
     
     func updateMaximumQuizSelection(count: Int) {
         reloadCurrentStatus()
-        wordModel.setReturnQuizChoices(count: count)
+        print("updateMaximumQuizSelectionCount: ", count)
+        wordModel.setMaximumQuiz(count: count)
+        // wordModel.setReturnQuizChoices(count: count)
     }
     
     func updateMaximumQuizCount(count: Int) {

@@ -21,7 +21,7 @@ class WordRememberedListView: UIView {
     // 透明色
     let clearColor = UIColor.clear
     // 一部テーマのナビゲーションバータイトルで使用する白色
-    let navigationItemFontWhiteColor = UIColor.clear
+    let navigationItemFontWhiteColor = UIColor.white
     // テーマモデルID
     var selectedThemeId: Int = 0
     // テーマモデル
@@ -102,10 +102,10 @@ class WordRememberedListView: UIView {
     func setAccentColor() {
         let themeName = getThemeName()
         if themeName == "オレンジ" || themeName == "オリーブ" || themeName == "ストロベリー" {
-            accentColor = themeModel.themeList[selectedThemeId].theme.accentColor
+            accentColor = themeModel.themeList[selectedThemeId].theme.complementalColor
         } else {
             // 上記３テーマ以外は補色をセットする
-            accentColor = themeModel.themeList[selectedThemeId].theme.complementalColor
+            accentColor = themeModel.themeList[selectedThemeId].theme.accentColor
         }
     }
     

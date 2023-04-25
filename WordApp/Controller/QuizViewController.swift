@@ -110,10 +110,14 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     
     // 設定からクイズに関する情報を取得する
     func getQuizCurrentProperties() {
-        maximumAnswerChoicesCount = wordModel.getAndReturnQuizChoices()
+        // maximumAnswerChoicesCount = wordModel.getAndReturnQuizChoices()
+        maximumAnswerChoicesCount = wordModel.getQuizAnswerSelections()
         maximumQuizCount = wordModel.getMaximumQuizCount()
         if maximumQuizCount > currentQuizTotal {
+            print(maximumQuizCount, currentQuizTotal)
             isSavedMaximumCountGreaterThanCurrentRememberWordCount = true
+        } else {
+            isSavedMaximumCountGreaterThanCurrentRememberWordCount = false
         }
     }
     
@@ -153,7 +157,8 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     
     // ボタンを描画するかどうか決定する
     func decideButtonDisplayOrNot(view: QuizView) {
-        let selectionCount = wordModel.getAndReturnQuizChoices()
+        // let selectionCount = wordModel.getAndReturnQuizChoices()
+        let selectionCount = wordModel.getQuizAnswerSelections()
         var fourthChoiceIsHidden = true
         var fifthChoiceIsHidden = true
         if selectionCount == 4 {
@@ -179,11 +184,18 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     
     // 最初のクイズを取得
     func getFirstQuiz() {
-        // 最初のQuizを抽出
-        let currentQuiz = quiz[0]
-        // これが一番最初のQuizならストッパーとして利用するためIDを控えておく
-        currentQuizStopper = currentQuiz.word.id
-        showCurrentQuiz()
+        if quiz.isEmpty == true {
+            let okAction = UIAlertAction(title: alertOkButton, style: .default) { _ in
+                self.goToTheRootViewController()
+            }
+            showAlert(title: "Error: Index Out Of Range", message: "let currentQuiz = quiz[0]", actions: [okAction])
+        } else {
+            // 最初のQuizを抽出
+            let currentQuiz = quiz[0]
+            // これが一番最初のQuizならストッパーとして利用するためIDを控えておく
+            currentQuizStopper = currentQuiz.word.id
+            showCurrentQuiz()
+        }
     }
     
     // クイズの表示メソッド
@@ -191,7 +203,16 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
         let currentQuiz = quiz[0]
         var meaningArray: [String] = []
         meaningArray.append(currentQuiz.word.meaning)
+        print("meaningArrayCount: ", meaningArray.count)
+        print("maximumAnswerChoices: ", maximumAnswerChoicesCount)
+        if maximumAnswerChoicesCount != quiz.count {
+            let okAction = UIAlertAction(title: alertOkButton, style: .default) { _ in
+                self.goToTheRootViewController()
+            }
+            showAlert(title: "Error: IndexOutOfRange", message: "for i in 1 ..< maximumAnswerChoicesCount { meaningArray.append(quiz[i].word.meaning)", actions: [okAction])
+        }
         for i in 1 ..< maximumAnswerChoicesCount {
+            print("i: ", i)
             meaningArray.append(quiz[i].word.meaning)
         }
         drawInformationOnQuizWidget(quiz: currentQuiz, dummyAnswers: meaningArray, correctAnswer: meaningArray[0])
@@ -230,13 +251,23 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
     // 暗記したQuizのWordListをランダムにシャッフルして返す
     func makeRandomQuizList() -> [WordModel] {
         // wordListをランダムにシャッフル
-        var quizArray = wordModel.wordList.filter({$0.word.isRemembered == true}).shuffled()
-        let currentQuizTotalDivisionByFive = ( currentQuizTotal / 5 ) * 5
-        //　分母
-        let demominator = isSavedMaximumCountGreaterThanCurrentRememberWordCount == true ? currentQuizTotalDivisionByFive : maximumQuizCount
-        let _maximumQuizCount = demominator
-        quizArray = quizArray.prefix(_maximumQuizCount).map { $0 }
-        return quizArray
+        let quizArray = wordModel.wordList.filter({$0.word.isRemembered == true}).shuffled()
+        print("quizArrayの要素数：　", quizArray.count)
+        //　もし設定画面で保存されてある出題数より、現在の暗記リストの単語が少ない状態なのであれば
+        if isSavedMaximumCountGreaterThanCurrentRememberWordCount == true {
+            // いくら少ないか調べる
+            let demominator = (currentQuizTotal / 5) * 5
+            // 設定数を強制的に更新する
+            wordModel.setMaximumQuiz(count: demominator)
+            //　問題の上限を更新する
+            maximumQuizCount = wordModel.getMaximumQuizCount()
+            print("問題数：　", currentQuizTotal, "　上限数：　", maximumQuizCount, " 分母：　", demominator)
+        }
+        let returnArray = quizArray.prefix(maximumQuizCount).map{$0}
+        print("出題数：　", maximumQuizCount)
+        // 4,5,9,4,4,false
+        // print(quizArray.count, currentQuizTotalDivisionByFive, currentQuizTotal, demominator, maximumQuizCount, isSavedMaximumCountGreaterThanCurrentRememberWordCount)
+        return returnArray
     }
     
     // ダミー解答を生成する
@@ -439,7 +470,6 @@ class QuizViewController: UIViewController, QuizAnswerButtonIsTappedDelegate {
             let solvedCorrectlyCount = totalSolvedQuizCount - totalQuizWrongCount
             let scoreString = String(solvedCorrectlyCount * 100 / totalSolvedQuizCount) + alertQuizIsFinishedTextLabel + "\n⭕️" + String(solvedCorrectlyCount)   + alertQuizNumberTextLabel  + " " + "❌" + String(totalQuizWrongCount)  + alertQuizNumberTextLabel
             let okAction = UIAlertAction(title: alertOkButton, style: .default) { _ in
-                self.isSavedMaximumCountGreaterThanCurrentRememberWordCount = false
                 self.goToTheRootViewController()
             }
             showAlert(title: alertQuizIsFinishedTitleLabel, message: scoreString, actions: [okAction])

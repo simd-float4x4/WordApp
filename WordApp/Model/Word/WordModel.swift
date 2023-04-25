@@ -167,37 +167,52 @@ class WordListModel: NSObject, UITableViewDataSource {
         return array
     }
     
+    func setQuizAnswerSelections(length: Int) {
+        let ud = UserDefaults.standard
+        ud.set(length, forKey: "currentQuisSelections")
+    }
+    
+    func getQuizAnswerSelections() -> Int {
+        let ud = UserDefaults.standard
+        let value = ud.value(forKey: "currentQuisSelections") as? Int ?? 5
+        print("currentQuizAnswerSelection: ", value)
+        return value
+    }
+    
     //　クイズの上限数を返却
     func getAndReturnMaximumQuizCount() -> Int {
         let currentRememberedWordList = self.wordList.filter({$0.word.isRemembered == true})
+        print("getAndReturnMaximumCount: ", currentRememberedWordList.count)
         return currentRememberedWordList.count
     }
-    
+
     //　クイズのうち、設定した先頭n件分のデータを返却
     func getMaximumQuizCount() -> Int {
         let ud = UserDefaults.standard
         let currentRememberedWordList = getAndReturnMaximumQuizCount()
         let count = ud.value(forKey: "maximumRememberedWordsCount") as? Int ?? currentRememberedWordList
+        print("getMaximumQuizCount: ", count)
         return count
     }
-    
+
     //　クイズの上限数をセット
     func setMaximumQuiz(count: Int) {
         currentQuizMaximumCount = count
         ud.set(currentQuizMaximumCount, forKey: "maximumRememberedWordsCount")
     }
-    
-    //　選択肢の上限数を返却
-    func getAndReturnQuizChoices() -> Int {
-        let count = ud.value(forKey: "maximumQuizSelectionCount") as? Int ?? 5
-        return count
-    }
-    
-    //　選択肢の上限数をセット
-    func setReturnQuizChoices(count: Int) {
-        currentQuizChoicesCount = count
-        ud.set(currentQuizChoicesCount, forKey: "maximumQuizSelectionCount")
-    }
+//
+//    //　選択肢の上限数を返却
+//    func getAndReturnQuizChoices() -> Int {
+//        let count = ud.value(forKey: "maximumQuizSelectionCount") as? Int ?? 5
+//        return count
+//    }
+//
+//    //　選択肢の上限数をセット
+//    func setReturnQuizChoices(count: Int) {
+//        currentQuizChoicesCount = count
+//        ud.set(currentQuizChoicesCount, forKey: "maximumQuizSelectionCount")
+//        print("udValue-maximumQuizSelectionCount: ", currentQuizChoicesCount)
+//    }
     
 // MARK: UITableViewDatasoruce
     // UITableViewが返す要素数

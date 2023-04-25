@@ -27,13 +27,34 @@ class QuizView: UIView {
     @IBOutlet weak var moveToNextQuizButton: UIButton!
     @IBOutlet weak var quizDescriptionTextLabel: UILabel!
     
-    @IBOutlet weak var viewNavigationBar: UINavigationBar!
+
     
     weak var quizAnswerButtonIsTappedDelegate: QuizAnswerButtonIsTappedDelegate?
-    
+    //　既に回答したか判定するためのフラグ
     var isAnsweredBool: Bool = false
-    
-    let themeModel = DesignThemeListModel.shared
+    // フォントカラー：初期値
+    var accentColor: String = "000000"
+    // 透明色
+    let clearColor = UIColor.clear
+    // 一部テーマのナビゲーションバータイトルで使用する白色
+    let navigationItemFontWhiteColor = UIColor.white
+    // テーマモデルID
+    var selectedThemeId: Int = 0
+    // テーマモデル
+    var themeModel = DesignThemeListModel.shared
+    // UserDefaults
+    let ud = UserDefaults.standard
+    //　ナビゲーションバータイトル
+    let navigationBarTitleString = NSLocalizedString("QuizViewTitleText", comment: "")
+    // ナビゲーションバー：フレームサイズ（注意：iPhone X以降の端末）
+    // TODO: iPhone 8、SEなどにも対応できるようにする
+    let navigationBarFrameSize = (x: 0, y: 0, height: 94)
+    // ナビゲーションアイテム：高さ
+    let navigationItemHeight = (x: 0, y: 0, height: 50)
+    // ステータスバー：高さ
+    let statusBarHeight = 44
+    //　ナビゲーションUILabel
+    let navigationBarUILabelProperties = (x: 0, y: 50, fontSize: CGFloat(16.0))
     
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -49,41 +70,130 @@ class QuizView: UIView {
         let view = Bundle.main.loadNibNamed("QuizView", owner: self, options: nil)?.first as! UIView
         view.frame = self.bounds
         if let subview = view.subviews.first  {
-            let navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 94))
-            navBar.backgroundColor = UIColor.white
-            let appearance = UINavigationBarAppearance()
-            appearance.configureWithTransparentBackground()
-            navBar.standardAppearance = appearance
-            let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
-            var color = themeModel.themeList[selected].theme.accentColor
-            if selected == 3 || selected == 2 || selected == 5 { color = themeModel.themeList[selected].theme.complementalColor }
-            navBar.barTintColor = UIColor(hex: color)
-            navBar.backgroundColor = UIColor(hex: color)
-            let settingNavigationItem = UINavigationItem(title: "クイズモード")
-            navBar.setItems([settingNavigationItem], animated: false)
-            
-            let navigationBarAppearance = UINavigationBarAppearance()
-            navigationBarAppearance.configureWithOpaqueBackground()
-            navigationBarAppearance.shadowColor = .clear
-            navBar.scrollEdgeAppearance = navigationBarAppearance
-        
-            let titleLabelView = UIView()
-            titleLabelView.frame = CGRect(x: UIScreen.main.bounds.width / 4, y: 0, width: UIScreen.main.bounds.width / 2, height: 94)
-            let title = settingNavigationItem.title
-            let label = UILabel()
-            label.text = title
-            label.textAlignment = .center
-            label.frame = CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width / 2, height: 44)
-            label.font = UIFont.boldSystemFont(ofSize: 16)
-            
-            subview.addSubview(navBar)
-            titleLabelView.addSubview(label)
-            subview.addSubview(titleLabelView)
-            
-            self.addSubview(subview)
+            // UIを初期化する
+            initializeUI(parentView: subview)
         }
+    }
+    
+    // UIを初期化する
+    func initializeUI(parentView: UIView) {
+        // 保存したテーマを取得する
+        fetchSavedThemeData()
+        //　テーマのアクセントカラーを取得する
+        getAccentColor()
+        //　アクセントカラーをセットする
+        setAccentColor()
+        // ナビゲーションバーを設定する
+        let navBar = setUpNavigationBar(parentView: parentView)
+        //　ナビゲーションバーのタイトルを格納するViewを設定する
+        let titleView = setAndGetTitleViewProperties(parentView: parentView)
+        //　ナビゲーションバーのタイトルラベルを設定する
+        let titleViewLabel = setAndGetUILabelProperties(parentView: parentView)
+        // subViewをする
+        parentView.addSubview(navBar)
+        titleView.addSubview(titleViewLabel)
+        parentView.addSubview(titleView)
+        self.addSubview(parentView)
+        // 次の問題へ行くためのボタンを非表示にする
         moveToNextQuizButton.isHidden = true
+        // クイズの問題文のUILabelの初期値を格納する
         quizDescriptionTextLabel.text = NSLocalizedString("quizQuestionTextLabel", comment: "")
+    }
+    
+    // 保存されたカラーテーマ情報を取得
+    func fetchSavedThemeData() {
+        selectedThemeId = ud.selectedThemeColorId
+    }
+    
+    //　テーマの名前を取得する
+    func getThemeName() -> String{
+        // テーマの名称を取得する
+        let themeName = DesignThemeListModel.shared.themeList[selectedThemeId].theme.name
+        return themeName
+    }
+    
+    //　アクセントカラーを取得
+    func getAccentColor() {
+        accentColor = themeModel.themeList[selectedThemeId].theme.accentColor
+    }
+    
+    //　アクセントカラーをセット
+    func setAccentColor() {
+        let themeName = getThemeName()
+        if themeName == "オレンジ" || themeName == "オリーブ" || themeName == "ストロベリー" {
+            accentColor = themeModel.themeList[selectedThemeId].theme.complementalColor
+        } else {
+            // 上記３テーマ以外は補色をセットする
+            accentColor = themeModel.themeList[selectedThemeId].theme.accentColor
+        }
+    }
+    
+    // ラベルのプロパティを設定してから返す
+    func setAndGetUILabelProperties(parentView: UIView) -> UILabel {
+        // UILabelのインスタンスを作成
+        let label = UILabel()
+        // タイトルをセット
+        label.text = navigationBarTitleString
+        //　タイトルを中央寄せに
+        label.textAlignment = .center
+        //　タイトルをframeに合わせる
+        label.frame = CGRect(
+            x: navigationBarUILabelProperties.x,
+            y: navigationBarUILabelProperties.y,
+            width: Int(parentView.frame.size.width) / 2,
+            height: statusBarHeight)
+        // テーマ名を取得
+        let themeName = getThemeName()
+        //　下記３テーマはナビゲーションバーの文字がDefaultフォントだと見にくいため白糸に
+        if themeName == "ノーマル" || themeName == "スペース" || themeName == "ブルーソーダ" {
+            label.textColor = navigationItemFontWhiteColor
+        }
+        //フォントサイズを指定
+        label.font = UIFont.boldSystemFont(ofSize: navigationBarUILabelProperties.fontSize)
+        return label
+    }
+    
+    // タイトルビューのプロパティを設定してから返す
+    func setAndGetTitleViewProperties(parentView: UIView) -> UIView {
+        // UIViewのインスタンスを作成
+        let titleView = UIView()
+        //　viewをframeに合わせる
+        titleView.frame = CGRect(
+            x: Int(parentView.frame.size.width) / 4,
+            y: navigationBarFrameSize.y,
+            width: Int(parentView.frame.size.width) / 2,
+            height: navigationBarFrameSize.height)
+        return titleView
+        
+    }
+    
+    // navigationBarのセットアップ
+    func setUpNavigationBar(parentView : UIView) -> UINavigationBar {
+        //　ナビゲーションバーのタイトルを取得
+        let wordRememberListNavigationItem = UINavigationItem(title: navigationBarTitleString)
+        // ナビゲーションバーをframeに合わせる
+        var navBar = UINavigationBar(frame: CGRect(
+            x: navigationBarFrameSize.x,
+            y: navigationBarFrameSize.y,
+            width: Int(parentView.frame.size.width),
+            height: navigationBarFrameSize.height))
+        // ナビゲーションバーに色をセットする
+        navBar = setColorOnNavigationBar(navBar: navBar)
+        // ナビゲーションバーにナビゲーションアイテムをセットする
+        navBar.setItems([wordRememberListNavigationItem], animated: false)
+        return navBar
+    }
+    
+    //　navigationBarにカラーをセットする
+    func setColorOnNavigationBar(navBar: UINavigationBar) -> UINavigationBar {
+        // ナビゲーションバーの見た目を設定
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.configureWithOpaqueBackground()
+        navigationBarAppearance.shadowColor = clearColor
+        navigationBarAppearance.backgroundColor = UIColor(hex: accentColor)
+        navBar.standardAppearance = navigationBarAppearance
+        navBar.scrollEdgeAppearance = navigationBarAppearance
+        return navBar
     }
     
     @IBAction func pressedFirstbutton() {
@@ -130,7 +240,6 @@ class QuizView: UIView {
         }
         isAnsweredBool = true
     }
-    
     
     // idをControllerに送るだけのメソッド
     func sendPressedButtonId(id: Int) -> Int {

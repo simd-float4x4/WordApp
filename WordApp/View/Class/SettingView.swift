@@ -98,6 +98,7 @@ class SettingView: UIView {
             default:
                 break
         }
+        print("currentChoicesTotal: ", currentChoicesTotal)
         settingViewDelegate.updateMaximumQuizSelection(count: currentChoicesTotal)
         ud.set(sender.selectedSegmentIndex, forKey: "choicesSelectedSegmentIndex")
     }
