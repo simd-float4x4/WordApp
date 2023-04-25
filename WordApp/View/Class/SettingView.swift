@@ -213,7 +213,9 @@ class SettingView: UIView {
         return navBar
     }
     
+    // クイズ選択肢変更用SegmentedControl
     @IBAction func quizChoicesSegmentedControl(_ sender: UISegmentedControl) {
+        //　senderの値によって代入値を変更する
         switch Int(sender.selectedSegmentIndex) {
             case 0:
                 currentChoicesTotal = 5
@@ -225,11 +227,14 @@ class SettingView: UIView {
                 break
         }
         print("currentChoicesTotal: ", currentChoicesTotal)
+        //　選択肢の数を更新する
         settingViewDelegate.updateMaximumQuizSelection(count: currentChoicesTotal)
+        //　現在の値をUserDefaultsに保存する
         ud.set(sender.selectedSegmentIndex, forKey: "choicesSelectedSegmentIndex")
     }
     
     @IBAction func quizMaximumCountSegmentedControl(_ sender: UISegmentedControl) {
+        //　senderの値によって代入値を変更する
         switch Int(sender.selectedSegmentIndex) {
             case 0:
                 currentMaximumQuizSum = 0
@@ -248,7 +253,9 @@ class SettingView: UIView {
             default:
                 break
         }
+        //　出題数の数を更新する
         settingViewDelegate.updateMaximumQuizCount(count: currentMaximumQuizSum)
+        //　現在の値をUserDefaultsに保存する
         ud.set(sender.selectedSegmentIndex, forKey: "quizMaximumSelectedSegmentIndex")
     }
 }
