@@ -11,7 +11,6 @@ protocol SettingViewDelegate: AnyObject {
 class SettingView: UIView {
     // 回答選択肢を調整するSegmenControl
     @IBOutlet weak var quizAnserSegmentedControl: UISegmentedControl!
-    
     //　クイズの回答数を生成するControl
     @IBOutlet weak var makeQuizSumCountControl: UISegmentedControl!
     

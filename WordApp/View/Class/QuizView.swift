@@ -13,22 +13,28 @@ protocol QuizAnswerButtonIsTappedDelegate: AnyObject {
 
 // MARK: QuizView
 class QuizView: UIView {
-    
+    // 単語表示用ラベル
     @IBOutlet weak var quizSingleWordLabel: UILabel!
+    // 1つ目の解答ボタン
     @IBOutlet weak var quizFirstAnswerButton: UIButton!
+    // 2つ目の解答ボタン
     @IBOutlet weak var quizSecondAnswerButton: UIButton!
+    // 3つ目の解答ボタン
     @IBOutlet weak var quizThirdAnswerButton: UIButton!
+    //　4つ目の解答ボタン
     @IBOutlet weak var quizFourthAnswerButton: UIButton!
+    //　5つ目の解答ボタン
     @IBOutlet weak var quizFifthAnswerButton: UIButton!
-    
+    //　クイズの進捗率を示すためのProgressionBar
     @IBOutlet weak var quizProgressBar: UIProgressView!
+    //　クイズの進捗率を示すためのUILabel
     @IBOutlet weak var quizProgressionLabel: UILabel!
-    
+    // 次の問題（最終問題）へと移動するボタン
     @IBOutlet weak var moveToNextQuizButton: UIButton!
+    // 選択肢を選ぶことを説明するためのボタン
     @IBOutlet weak var quizDescriptionTextLabel: UILabel!
-    
-
-    
+    //　quizViewDelegate
+    /// - QuizAnswerButtonIsTappedDelegate → QuizViewControllerと接続
     weak var quizAnswerButtonIsTappedDelegate: QuizAnswerButtonIsTappedDelegate?
     //　既に回答したか判定するためのフラグ
     var isAnsweredBool: Bool = false
@@ -188,64 +194,94 @@ class QuizView: UIView {
     func setColorOnNavigationBar(navBar: UINavigationBar) -> UINavigationBar {
         // ナビゲーションバーの見た目を設定
         let navigationBarAppearance = UINavigationBarAppearance()
+        // 透明にする
         navigationBarAppearance.configureWithOpaqueBackground()
+        // 影のカラーを消す（これにより下線が消える）
         navigationBarAppearance.shadowColor = clearColor
+        //　背景色を設定
         navigationBarAppearance.backgroundColor = UIColor(hex: accentColor)
+        //　ApperaranceをNavBarに設定
         navBar.standardAppearance = navigationBarAppearance
         navBar.scrollEdgeAppearance = navigationBarAppearance
         return navBar
     }
     
+    // 1番目のボタンが呼ばれた際の処理
     @IBAction func pressedFirstbutton() {
+        // 未回答であれば
         if !isAnsweredBool {
+            // Controllerにid=0を送る
             quizAnswerButtonIsTappedDelegate?.sendPressedButtonId(id: 0)
+            //　ボタンの描画を更新する
             quizAnswerButtonIsTappedDelegate?.changeInformationOnQuizWidget()
+            //　次の問題へ行くためのボタンをfalseにする
             moveToNextQuizButton.isHidden = false
         }
+        //　未回答にする
         isAnsweredBool = true
     }
     
+    //　2番目のボタンが呼ばれた際の処理
     @IBAction func pressedSecondbutton() {
+        // 未回答であれば
         if !isAnsweredBool {
+            // Controllerにid=1を送る
             quizAnswerButtonIsTappedDelegate?.sendPressedButtonId(id: 1)
+            //　ボタンの描画を更新する
             quizAnswerButtonIsTappedDelegate?.changeInformationOnQuizWidget()
+            //　次の問題へ行くためのボタンをfalseにする
             moveToNextQuizButton.isHidden = false
         }
+        // 未回答にする
         isAnsweredBool = true
     }
     
+    //　3番目のボタンが呼ばれた際の処理
     @IBAction func pressedThirdbutton() {
+        // 未回答であれば
         if !isAnsweredBool {
+            // Controllerにid=2を送る
             quizAnswerButtonIsTappedDelegate?.sendPressedButtonId(id: 2)
+            //　ボタンの描画を更新する
             quizAnswerButtonIsTappedDelegate?.changeInformationOnQuizWidget()
+            //　次の問題へ行くためのボタンをfalseにする
             moveToNextQuizButton.isHidden = false
         }
+        // 未回答にする
         isAnsweredBool = true
     }
     
+    //　4番目のボタンが呼ばれた際の処理
     @IBAction func pressedFourthbutton() {
+        // 未回答であれば
         if !isAnsweredBool {
+            // Controllerにid=3を送る
             quizAnswerButtonIsTappedDelegate?.sendPressedButtonId(id: 3)
+            //　ボタンの描画を更新する
             quizAnswerButtonIsTappedDelegate?.changeInformationOnQuizWidget()
+            //　次の問題へ行くためのボタンをfalseにする
             moveToNextQuizButton.isHidden = false
         }
+        // 未回答にする
         isAnsweredBool = true
     }
     
+    //　5番目のボタンが呼ばれた際の処理
     @IBAction func pressedFifthbutton() {
+        // 未回答であれば
         if !isAnsweredBool {
+            // Controllerにid=4を送る
             quizAnswerButtonIsTappedDelegate?.sendPressedButtonId(id: 4)
+            //　ボタンの描画を更新する
             quizAnswerButtonIsTappedDelegate?.changeInformationOnQuizWidget()
+            //　次の問題へ行くためのボタンをfalseにする
             moveToNextQuizButton.isHidden = false
         }
+        // 未回答にする
         isAnsweredBool = true
     }
     
-    // idをControllerに送るだけのメソッド
-    func sendPressedButtonId(id: Int) -> Int {
-        return id
-    }
-    
+    //　次の問題へと移動する
     @IBAction func moveToNextQuiz() {
         quizAnswerButtonIsTappedDelegate?.moveToNextQuiz()
     }
