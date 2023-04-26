@@ -72,3 +72,124 @@ extension WordListViewController: UINavigationBarDelegate {
         return .topAttached
     }
 }
+
+extension WordListViewController {
+    // 保存されたカラーテーマ情報を取得
+    func fetchSavedThemeData() {
+        selectedThemeId = ud.selectedThemeColorId
+    }
+    
+    //　スクリーン幅を取得する
+    func getScreenWidth() -> Int {
+        let screenWidth = Int(UIScreen.main.bounds.width)
+        return screenWidth
+    }
+    
+    //　テーマの名前を取得する
+    func getThemeName() -> String{
+        // テーマの名称を取得する
+        let themeName = DesignThemeListModel.shared.themeList[selectedThemeId].theme.name
+        return themeName
+    }
+    
+    //　アクセントカラーを取得
+    func getNavigationBarBackgroundColor() {
+        navigationBarBackgroundColor = themeModel.themeList[selectedThemeId].theme.accentColor
+    }
+    
+    //　アクセントカラーをセット
+    func setNavigationBarBackgroundColor() {
+        let themeName = getThemeName()
+        if themeName == "オレンジ" || themeName == "オリーブ" || themeName == "ストロベリー" {
+            navigationBarBackgroundColor = themeModel.themeList[selectedThemeId].theme.complementalColor
+        } else {
+            // 上記３テーマ以外は補色をセットする
+            navigationBarBackgroundColor = themeModel.themeList[selectedThemeId].theme.accentColor
+        }
+    }
+    
+    // ラベルのプロパティを設定してから返す
+    func setTitleAndTintColorProperties(parentView: UIView) -> UILabel {
+        // UILabelのインスタンスを作成
+        let label = UILabel()
+        // タイトルをセット
+        label.text = navigationBarTitleString
+        //　タイトルを中央寄せに
+        label.textAlignment = .center
+        //　タイトルをframeに合わせる
+        label.frame = CGRect(
+            x: navigationBarUILabelProperties.x,
+            y: navigationBarUILabelProperties.y,
+            width: Int(UIScreen.main.bounds.size.width),
+            height: statusBarHeight)
+        label.backgroundColor = UIColor.red
+        // テーマ名を取得
+        let themeName = getThemeName()
+        //　下記３テーマはナビゲーションバーの文字がDefaultフォントだと見にくいため白糸に
+        if themeName == "ノーマル" || themeName == "スペース" || themeName == "ブルーソーダ" {
+            label.textColor = navigationItemFontWhiteColor
+        }
+        //フォントサイズを指定
+        label.font = UIFont.boldSystemFont(ofSize: navigationBarUILabelProperties.fontSize)
+        return label
+    }
+    
+    // タイトルビューのプロパティを設定してから返す
+    func setAndGetTitleViewProperties(parentView: UIView) -> UIView {
+        // UIViewのインスタンスを作成
+        let titleView = UIView()
+        //　viewをframeに合わせる
+        titleView.frame = CGRect(
+            x: Int(parentView.frame.size.width) / 4,
+            y: navigationBarFrameSize.y,
+            width: Int(UIScreen.main.bounds.size.width)  / 2,
+            height: navigationBarFrameSize.height)
+        titleView.backgroundColor = UIColor.green
+        return titleView
+        
+    }
+    
+    // navigationBarのセットアップ
+    func setUpNavigationBar(parentView : UIView) -> UINavigationBar {
+        //　ナビゲーションバーのタイトルを取得
+        let wordRememberListNavigationItem = UINavigationItem(title: navigationBarTitleString)
+        // ナビゲーションバーをframeに合わせる
+        var navBar = UINavigationBar(frame: CGRect(
+            x: navigationBarFrameSize.x,
+            y: navigationBarFrameSize.y,
+            width: Int(UIScreen.main.bounds.size.width),
+            height: navigationBarFrameSize.height))
+        navBar.backgroundColor = UIColor.yellow
+        // ナビゲーションバーに色をセットする
+        navBar = setColorOnNavigationBar(navBar: navBar)
+        
+        wordRememberListNavigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: navigationBarImageName)!, style: .plain, target: self, action: #selector(switchWordActionMode))
+        wordRememberListNavigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .add, target: self, action: #selector(toAddWordView))
+        // テーマ名を取得
+        let themeName = getThemeName()
+        //　下記３テーマはナビゲーションバーの文字がDefaultフォントだと見にくいため白糸に
+        if themeName == "ノーマル" || themeName == "スペース" || themeName == "ブルーソーダ" {
+            navBar.tintColor = navigationItemFontWhiteColor
+        }
+        // ナビゲーションバーにナビゲーションアイテムをセットする
+        navBar.setItems([wordRememberListNavigationItem], animated: false)
+        return navBar
+    }
+    
+    //　navigationBarにカラーをセットする
+    func setColorOnNavigationBar(navBar: UINavigationBar) -> UINavigationBar {
+        // ナビゲーションバーの見た目を設定
+        let navigationBarAppearance = UINavigationBarAppearance()
+        // 透明にする
+        navigationBarAppearance.configureWithOpaqueBackground()
+        // 影のカラーを消す（これにより下線が消える）
+        navigationBarAppearance.shadowColor = clearColor
+        //　背景色を設定
+        navigationBarAppearance.backgroundColor = UIColor(hex: accentColor)
+        //　ApperaranceをNavBarに設定
+        navBar.standardAppearance = navigationBarAppearance
+        navBar.scrollEdgeAppearance = navigationBarAppearance
+        return navBar
+    }
+}

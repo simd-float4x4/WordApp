@@ -365,8 +365,7 @@ class QuizViewController: UIViewController {
     }
 
     // Progressionを更新する
-    func reloadProgressionView() {
-        let view = self.view as! QuizView
+    func reloadProgressionView(view: QuizView) {
         let currentQuizTotalDivisionByFive = ( currentQuizTotal / 5 ) * 5
         //　分母
         let demominator = isSavedMaximumCountGreaterThanCurrentRememberWordCount == true ? currentQuizTotalDivisionByFive : maximumQuizCount
