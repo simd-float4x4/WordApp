@@ -2,33 +2,63 @@ import UIKit
 
 // MARK: AddWordViewController
 class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWordListDelegate {
-    
+    //　ワードモデル
     var wordModel = WordListModel.shared
+    // テーマモデル
     var themeModel = DesignThemeListModel.shared
+    //　タップしたTextViewの名前
     var tappedTextViewName = ""
-    
-    let alertErrorTitleLabel = NSLocalizedString("alertErrorTitle", comment: "")
-    let alertMessageSucceedLabel = NSLocalizedString("alertRegisterWordIsFinishedText", comment: "")
-    let alertMesssageFailedLabel = NSLocalizedString("alertRegisterWordIsFailedText", comment: "")
-    let alertOkButton = NSLocalizedString("alertOkButton", comment: "")
-    let alertRegisterFinishedPrefixLabel = NSLocalizedString("alertRegisterWordIsFinishedTitle", comment: "")
-    let alertRegisterFinishedSuffixLabel = NSLocalizedString("alertRegisterWordIsFinishedTitleSuffix", comment: "")
-
-    let singleWordTextViewisTapped = NSLocalizedString("single", comment: "")
-    let meaningTextViewisTapped = NSLocalizedString("meaning", comment: "")
-    let exampleSentenceTextViewisTapped = NSLocalizedString("ex-sente", comment: "")
-    let exampleTranslationTextViewisTapped = NSLocalizedString("ex-trans", comment: "")
-    
+    //　アラートタイトル
+    let alertErrorTitleLabel = NSLocalizedString("alertErrorTitle", comment: "エラー")
+    let alertMessageSucceedLabel = NSLocalizedString("alertRegisterWordIsFinishedText", comment: "単語を完了いたしました。")
+    //　アラートタイトル・失敗
+    let alertMesssageFailedLabel = NSLocalizedString("alertRegisterWordIsFailedText", comment: "単語を登録できませんでした。")
+    //　アラートOKボタン（OK）
+    let alertOkButton = NSLocalizedString("alertOkButton", comment: "OK")
+    //　アラート登録完了ラベル・接頭辞
+    let alertRegisterFinishedPrefixLabel = NSLocalizedString("alertRegisterWordIsFinishedTitle", comment: "登録完了(")
+    //　アラート登録完了ラベル・接尾語
+    let alertRegisterFinishedSuffixLabel = NSLocalizedString("alertRegisterWordIsFinishedTitleSuffix", comment: ")")
+    //　単語登録TextView押下時ID
+    let singleWordTextViewisTapped = NSLocalizedString("single", comment: ".single")
+    //　意味登録TextView押下時ID
+    let meaningTextViewisTapped = NSLocalizedString("meaning", comment: ".meaning")
+    //　例文登録TextView押下時ID
+    let exampleSentenceTextViewisTapped = NSLocalizedString("ex-sente", comment: ".exampleSentence")
+    //　日本語訳登録TextView押下時ID
+    let exampleTranslationTextViewisTapped = NSLocalizedString("ex-trans", comment: ".exampleTranslation")
+    //　ナビゲーションアイテム
     let addWordNavigationItem = UINavigationItem(title: "単語登録画面")
-    
+    //　戻るボタン・アイコン名
     var navigationBarImageName = "chevron.backward"
+    // フォントカラー：初期値
+    var accentColor: String = "000000"
+    // 透明色
+    let clearColor = UIColor.clear
+    //　背景色
+    var navigationBarBackgroundColor = "000000"
+    // 一部テーマのナビゲーションバータイトルで使用する白色
+    let navigationItemFontWhiteColor = UIColor.white
+    // テーマモデルID
+    var selectedThemeId: Int = 0
+    // UserDefaults
+    let ud = UserDefaults.standard
+    //　ナビゲーションバータイトル
+    let navigationBarTitleString = NSLocalizedString("WordListViewTitleText", comment: "")
+    // ナビゲーションバー：フレームサイズ（注意：iPhone X以降の端末）
+    // TODO: iPhone 8、SEなどにも対応できるようにする
+    let navigationBarViewFrameSize = (x: 0, y: 0, height: 94)
+    let navigationBarFrameSize = (x: 0, y: 50, height: 44)
+    // ナビゲーションアイテム：高さ
+    let navigationItemHeight = (x: 0, y: 0, height: 50)
+    // ステータスバー：高さ
+    let statusBarHeight = 44
+    //　ナビゲーションUILabel
+    let navigationBarUILabelProperties = (x: 0, y: 50, fontSize: CGFloat(16.0))
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeWordAddView()
-        hideTabBarController()
-        setNotificationCenters()
-        setTapGesuture()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -46,30 +76,62 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
         view.exampleTranslationTextView.delegate = self
         view.addWordToWordListDelegate = self
         
-        let navBarView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 94))
-        let navBar = UINavigationBar(frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 44))
+        let screenWidth = Int(UIScreen.main.bounds.width)
+        let navBarView = UIView(frame: CGRect(
+            x: navigationBarViewFrameSize.x,
+            y: navigationBarViewFrameSize.y,
+            width: screenWidth,
+            height: navigationBarViewFrameSize.height))
+        let navBar = UINavigationBar(frame: CGRect(
+            x: navigationBarFrameSize.x,
+            y: navigationBarFrameSize.y,
+            width: screenWidth,
+            height: navigationBarFrameSize.height))
+        
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
+        appearance.configureWithTransparentBackground()
+        appearance.shadowColor = clearColor
+        
+        selectedThemeId = ud.selectedThemeColorId
+        navigationBarBackgroundColor = themeModel.themeList[selectedThemeId].theme.accentColor
+        
+        let themeName = getThemeName()
+        //　下記３テーマはナビゲーションバーの文字がDefaultフォントだと見にくいため白糸に
+        if themeName == "ノーマル" || themeName == "スペース" || themeName == "ブルーソーダ" {
+            appearance.titleTextAttributes  = [.foregroundColor: navigationItemFontWhiteColor]
+        }
+        
+        if themeName != "ストロベリー" && themeName != "ラグジュアリー" {
+            navBar.tintColor = navigationItemFontWhiteColor
+        }
+        
+        if themeName == "オレンジ" || themeName == "オリーブ" || themeName == "ストロベリー" {
+            navigationBarBackgroundColor = themeModel.themeList[selectedThemeId].theme.complementalColor
+        } else {
+            // 上記３テーマ以外は補色をセットする
+            navigationBarBackgroundColor = themeModel.themeList[selectedThemeId].theme.accentColor
+        }
+        
+        navBarView.backgroundColor = UIColor(hex: navigationBarBackgroundColor)
+        navBarView.tintColor = navigationItemFontWhiteColor
+        
+        navBar.backgroundColor = UIColor(hex: navigationBarBackgroundColor)
+        
+        addWordNavigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: navigationBarImageName)!, style: .plain, target: self, action: #selector(onTapDismissWordView))
+        
+        navBar.setItems([addWordNavigationItem], animated: false)
+        
+        navBar.scrollEdgeAppearance = appearance
         navBar.standardAppearance = appearance
-        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
-        var color = themeModel.themeList[selected].theme.accentColor
-        if selected == 3 { color = themeModel.themeList[selected].theme.complementalColor }
-        navBarView.tintColor = UIColor.white
-        navBarView.backgroundColor = UIColor(hex: color)
-        let settingNavigationItem = UINavigationItem(title: "単語登録画面")
         
-        settingNavigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: navigationBarImageName)!, style: .plain, target: self, action: #selector(onTapDismissWordView))
-        navBar.setItems([settingNavigationItem], animated: false)
-        
-        let navigationBarAppearance = UINavigationBarAppearance()
-        navigationBarAppearance.configureWithOpaqueBackground()
-        navigationBarAppearance.shadowColor = .clear
-        navBar.scrollEdgeAppearance = navigationBarAppearance
-    
-        navBarView.addSubview(navBar)
         view.addSubview(navBarView)
+        view.addSubview(navBar)
         
         self.view = view
+        hideTabBarController()
+        setNotificationCenters()
+        setTapGesuture()
     }
     
     // 単語を登録する

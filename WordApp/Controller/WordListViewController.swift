@@ -3,9 +3,7 @@ import UIKit
 // MARK: WordListViewController
 class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, SortWordListWidgetDelegate {
     
-    var wordModel = WordListModel.shared
-    var themeModel = DesignThemeListModel.shared
-    
+    var wordModel = WordListModel.shared    
     // DetailViewControllerに渡すための文字列
     var singleWord: String = ""
     var meaning: String = ""
@@ -25,12 +23,35 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     var wordDeleteButtonTextLabel = NSLocalizedString("WordDeleteButton", comment: "")
     var wordRememberedButtonTextLabel = NSLocalizedString("WordRememberedButton", comment: "")
     var zeroString = NSLocalizedString("zero", comment: "")
-    
+    // フォントカラー：初期値
+    var accentColor: String = "000000"
+    // 透明色
+    let clearColor = UIColor.clear
+    //　背景色
+    var navigationBarBackgroundColor = "000000"
+    // 一部テーマのナビゲーションバータイトルで使用する白色
+    let navigationItemFontWhiteColor = UIColor.white
+    // テーマモデルID
+    var selectedThemeId: Int = 0
+    // テーマモデル
+    var themeModel = DesignThemeListModel.shared
+    // UserDefaults
+    let ud = UserDefaults.standard
+    //　ナビゲーションバータイトル
+    let navigationBarTitleString = NSLocalizedString("WordListViewTitleText", comment: "")
+    // ナビゲーションバー：フレームサイズ（注意：iPhone X以降の端末）
+    // TODO: iPhone 8、SEなどにも対応できるようにする
+    let navigationBarViewFrameSize = (x: 0, y: 0, height: 94)
+    let navigationBarFrameSize = (x: 0, y: 50, height: 44)
+    // ナビゲーションアイテム：高さ
+    let navigationItemHeight = (x: 0, y: 0, height: 50)
+    // ステータスバー：高さ
+    let statusBarHeight = 44
+    //　ナビゲーションUILabel
+    let navigationBarUILabelProperties = (x: 0, y: 50, fontSize: CGFloat(16.0))
     
     // 削除モード/暗記モード切り替えボタン。NavigationBarの左上に配置するものとする。
     @IBOutlet var nabigationBarLeftButton: UIBarButtonItem!
-    
-    let ud = UserDefaults.standard
     
     let wordListNavigationItem = UINavigationItem(title: "単語帳画面")
     
@@ -61,31 +82,58 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     
     func initializeView() {
         let view = WordListView()
-        let navBarView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 94))
-        let navBar = UINavigationBar(frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 44))
+        let screenWidth = getScreenWidth()
+        
+        let navBarView = UIView(frame: CGRect(
+            x: navigationBarViewFrameSize.x,
+            y: navigationBarViewFrameSize.y,
+            width: screenWidth,
+            height: navigationBarViewFrameSize.height))
+        let navBar = UINavigationBar(frame: CGRect(
+            x: navigationBarFrameSize.x,
+            y: navigationBarFrameSize.y,
+            width: screenWidth,
+            height: navigationBarFrameSize.height))
+        
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
-        navBar.standardAppearance = appearance
-        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
-        var color = themeModel.themeList[selected].theme.accentColor
-        if selected == 3 || selected == 2 || selected == 5 { color = themeModel.themeList[selected].theme.complementalColor }
-        navBarView.backgroundColor = UIColor(hex: color)
-        navBarView.tintColor = UIColor.white
-        let settingNavigationItem = UINavigationItem(title: "単語帳画面")
+        appearance.configureWithTransparentBackground()
+        appearance.shadowColor = clearColor
         
-        settingNavigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: navigationBarImageName)!, style: .plain, target: self, action: #selector(switchWordActionMode))
-        settingNavigationItem.rightBarButtonItem = UIBarButtonItem(
+        //　保存されたテーマIDを取得する
+        fetchSavedThemeData()
+        //　テーマカラーを背景に代入する
+        getNavigationBarBackgroundColor()
+        // nabigationBarの背景色をセットする
+        setNavigationBarBackgroundColor()
+        
+        let themeName = getThemeName()
+        
+        //　下記３テーマはナビゲーションバーの文字がDefaultフォントだと見にくいため白糸に
+        if themeName == "ノーマル" || themeName == "スペース" || themeName == "ブルーソーダ" {
+            appearance.titleTextAttributes  = [.foregroundColor: navigationItemFontWhiteColor]
+        }
+        
+        if themeName != "ストロベリー" && themeName != "ラグジュアリー" {
+            navBar.tintColor = navigationItemFontWhiteColor
+        }
+        
+        navBarView.backgroundColor = UIColor(hex: navigationBarBackgroundColor)
+        navBarView.tintColor = navigationItemFontWhiteColor
+        
+        navBar.backgroundColor = UIColor(hex: navigationBarBackgroundColor)
+        
+        wordListNavigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: navigationBarImageName)!, style: .plain, target: self, action: #selector(switchWordActionMode))
+        wordListNavigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .add, target: self, action: #selector(toAddWordView))
         
-        navBar.setItems([settingNavigationItem], animated: false)
+        navBar.setItems([wordListNavigationItem], animated: false)
         
-        let navigationBarAppearance = UINavigationBarAppearance()
-        navigationBarAppearance.configureWithOpaqueBackground()
-        navigationBarAppearance.shadowColor = .clear
-        navBar.scrollEdgeAppearance = navigationBarAppearance
-    
-        navBarView.addSubview(navBar)
+        navBar.scrollEdgeAppearance = appearance
+        navBar.standardAppearance = appearance
+        
         view.addSubview(navBarView)
+        view.addSubview(navBar)
         
         self.view = view
     }

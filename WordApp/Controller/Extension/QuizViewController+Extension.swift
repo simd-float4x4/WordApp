@@ -23,7 +23,7 @@ extension QuizViewController: QuizAnswerButtonIsTappedDelegate {
         reloadQuizState(view: view)
         resetButtonState(view: view)
         showCurrentQuiz(view: view)
-        reloadProgressionView()
+        reloadProgressionView(view: view)
         checkNextQuizIsLast()
     }
     
