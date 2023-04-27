@@ -75,59 +75,29 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
         view.exampleSentenceTextView.delegate = self
         view.exampleTranslationTextView.delegate = self
         view.addWordToWordListDelegate = self
-        
-        let screenWidth = Int(UIScreen.main.bounds.width)
-        let navBarView = UIView(frame: CGRect(
-            x: navigationBarViewFrameSize.x,
-            y: navigationBarViewFrameSize.y,
-            width: screenWidth,
-            height: navigationBarViewFrameSize.height))
-        let navBar = UINavigationBar(frame: CGRect(
-            x: navigationBarFrameSize.x,
-            y: navigationBarFrameSize.y,
-            width: screenWidth,
-            height: navigationBarFrameSize.height))
-        
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithTransparentBackground()
-        appearance.configureWithTransparentBackground()
-        appearance.shadowColor = clearColor
-        
-        selectedThemeId = ud.selectedThemeColorId
-        navigationBarBackgroundColor = themeModel.themeList[selectedThemeId].theme.accentColor
-        
-        let themeName = getThemeName()
-        //　下記３テーマはナビゲーションバーの文字がDefaultフォントだと見にくいため白糸に
-        if themeName == "ノーマル" || themeName == "スペース" || themeName == "ブルーソーダ" {
-            appearance.titleTextAttributes  = [.foregroundColor: navigationItemFontWhiteColor]
-        }
-        
-        if themeName != "ストロベリー" && themeName != "ラグジュアリー" {
-            navBar.tintColor = navigationItemFontWhiteColor
-        }
-        
-        if themeName == "オレンジ" || themeName == "オリーブ" || themeName == "ストロベリー" {
-            navigationBarBackgroundColor = themeModel.themeList[selectedThemeId].theme.complementalColor
-        } else {
-            // 上記３テーマ以外は補色をセットする
-            navigationBarBackgroundColor = themeModel.themeList[selectedThemeId].theme.accentColor
-        }
-        
-        navBarView.backgroundColor = UIColor(hex: navigationBarBackgroundColor)
-        navBarView.tintColor = navigationItemFontWhiteColor
-        
-        navBar.backgroundColor = UIColor(hex: navigationBarBackgroundColor)
-        
-        addWordNavigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: navigationBarImageName)!, style: .plain, target: self, action: #selector(onTapDismissWordView))
-        
-        navBar.setItems([addWordNavigationItem], animated: false)
-        
+        // ナビゲーションバーを生成
+        let navBar = makeNavBar()
+        // ナビゲーションバービューを生成
+        let navBarView = makeNavBarView()
+        //　保存されたテーマIDを取得する
+        fetchSavedThemeData()
+        //　テーマカラーを色に代入する
+        getNavigationBarColor()
+        // nabigationBarの色をセットする
+        setNavigationBarColor(navBar: navBar)
+        //　appearanceを設定
+        let appearance = setAppearenceConfig()
+        // ナビゲーションアイテムを設定
+        setNavBarItems(navBar: navBar)
+        //　ナビゲーションバービューに色を設定
+        setColorOnNavBarView(navBarView: navBarView)
+        //　ナビゲーションバーにappearanceを設定
         navBar.scrollEdgeAppearance = appearance
         navBar.standardAppearance = appearance
-        
+        // viewに追加
         view.addSubview(navBarView)
         view.addSubview(navBar)
-        
+        // viewを代入
         self.view = view
         hideTabBarController()
         setNotificationCenters()
