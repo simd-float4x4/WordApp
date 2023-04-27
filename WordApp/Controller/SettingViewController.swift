@@ -60,16 +60,15 @@ class SettingViewController: UIViewController, SettingViewDelegate, UICollection
         let forSegmentAt = currentQuizTotal / 5
         let choiceIndex = ud.value(forKey: "choicesSelectedSegmentIndex") as? Int ?? 0
         var quizIndex = ud.value(forKey: "quizMaximumSelectedSegmentIndex") as? Int ?? 0
-        // quizIndexの妥当性検証
         let threshold = ud.value(forKey: "maximumRememberedWordsCount") as? Int ?? 0
-        if quizIndex == 0 {
-            quizIndex = 0
-        } else if quizIndex * 5 >= threshold {
+        print("🍓：", quizIndex, threshold)
+        if quizIndex * 5 > threshold  {
             quizIndex = threshold / 5
+            ud.set(quizIndex, forKey: "quizMaximumSelectedSegmentIndex")
+            print("🍓：", quizIndex, threshold / 5)
         }
         view.changeMaximumQuizCountSegmentedControl.selectedSegmentIndex = quizIndex
         view.changeQuizAnswerSelectionCountSegmentedControl.selectedSegmentIndex = choiceIndex
-        print("保存されたindex: ", quizIndex)
         for i in 1 ..< 7 {
             var isAvaivable: Bool = true
             if i > forSegmentAt { isAvaivable = false }

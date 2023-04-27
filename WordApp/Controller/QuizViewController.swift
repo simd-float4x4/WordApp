@@ -32,8 +32,6 @@ class QuizViewController: UIViewController {
     
     var answerSelectionArray: [String] = []
     
-    var isSavedMaximumCountGreaterThanCurrentRememberWordCount: Bool = false
-    
     @IBOutlet weak var viewNavigationBar: UINavigationBar!
     
     let alertOkButton = NSLocalizedString("alertOkButton", comment: "")
@@ -80,14 +78,10 @@ class QuizViewController: UIViewController {
     func getQuizCurrentProperties() {
         maximumAnswerChoicesCount = wordModel.getQuizAnswerSelections()
         maximumQuizCount = wordModel.getMaximumQuizCount()
-        print("🐰maximumQuizCount: ", maximumQuizCount)
+        let newMaximumQuizCount = maximumQuizCount / 5
+        maximumQuizCount = newMaximumQuizCount * 5
         print("🐰currentQuizCount: ", currentQuizTotal)
-        if maximumQuizCount > currentQuizTotal {
-            print(maximumQuizCount, currentQuizTotal)
-            isSavedMaximumCountGreaterThanCurrentRememberWordCount = true
-        } else {
-            isSavedMaximumCountGreaterThanCurrentRememberWordCount = false
-        }
+        print("🐰maximumQuizCount: ", maximumQuizCount)
     }
     
     // UIの初期化
@@ -215,19 +209,6 @@ class QuizViewController: UIViewController {
         // wordListをランダムにシャッフル
         let quizArray = wordModel.wordList.filter({$0.word.isRemembered == true}).shuffled()
         print("🍄quizArrayCount: ", quizArray.count)
-        //　もし設定画面で保存されてある出題数より、現在の暗記リストの単語が少ない状態なのであれば
-        if isSavedMaximumCountGreaterThanCurrentRememberWordCount == true {
-            // いくら少ないか調べる
-            let demominator = (currentQuizTotal / 5) * 5
-            // 設定数を強制的に更新する
-            wordModel.setMaximumQuiz(count: demominator)
-            //　問題の上限を更新する
-            maximumQuizCount = wordModel.getMaximumQuizCount()
-            // 上限をUserDefaultsにセット
-            ud.set(currentQuizTotal / 5, forKey: "quizMaximumSelectedSegmentIndex")
-            print("🍄demominator: ", demominator)
-            print("🍄currentQuizTotal/5: ", currentQuizTotal / 5)
-        }
         let returnArray = quizArray.prefix(maximumQuizCount).map{$0}
         print("🍄maximumQuizCount: ", maximumQuizCount)
         print("🍄returnArray.count: ", returnArray.count)
@@ -366,13 +347,14 @@ class QuizViewController: UIViewController {
 
     // Progressionを更新する
     func reloadProgressionView(view: QuizView) {
-        let currentQuizTotalDivisionByFive = ( currentQuizTotal / 5 ) * 5
         //　分母
-        let demominator = isSavedMaximumCountGreaterThanCurrentRememberWordCount == true ? currentQuizTotalDivisionByFive : maximumQuizCount
-        if isSavedMaximumCountGreaterThanCurrentRememberWordCount == true {
-            let ud = UserDefaults.standard
-            ud.set(currentQuizTotal / 5, forKey: "quizMaximumSelectedSegmentIndex")
+        var count = ud.value(forKey: "quizMaximumSelectedSegmentIndex") as? Int ?? 0
+        if count != 0 {
+            count = count * 5
+        } else {
+            count = ud.value(forKey: "maximumRememberedWordsCount") as? Int ?? 0
         }
+        let demominator = count
         let progressionRate = Float(totalSolvedQuizCount) / Float(demominator)
         view.quizProgressionLabel.text = String(totalSolvedQuizCount+1) + "  問目"
         view.quizProgressBar.progress = Float(progressionRate)
