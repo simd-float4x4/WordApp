@@ -39,7 +39,8 @@ class WordListModel: NSObject, UITableViewDataSource {
     func updateData(){
         let encodedData = try? JSONEncoder().encode(self.wordList)
         UserDefaults.standard.set(encodedData, forKey: "hoge")
-
+        currentQuizMaximumCount = getAndReturnMaximumQuizCount()
+        ud.set(currentQuizMaximumCount, forKey: "maximumRememberedWordsCount")
     }
     
     // 保存したデータを取得
@@ -177,30 +178,18 @@ class WordListModel: NSObject, UITableViewDataSource {
     func getQuizAnswerSelections() -> Int {
         let ud = UserDefaults.standard
         let value = ud.value(forKey: "currentQuisSelections") as? Int ?? 5
-        print("currentQuizAnswerSelection: ", value)
         return value
     }
     
     //　クイズの上限数を返却
     func getAndReturnMaximumQuizCount() -> Int {
         let currentRememberedWordList = self.wordList.filter({$0.word.isRemembered == true})
-        print("getAndReturnMaximumCount: ", currentRememberedWordList.count)
         return currentRememberedWordList.count
     }
-
-    //　クイズのうち、設定した先頭n件分のデータを返却
-    func getMaximumQuizCount() -> Int {
-        let ud = UserDefaults.standard
-        let currentRememberedWordList = getAndReturnMaximumQuizCount()
-        let count = ud.value(forKey: "maximumRememberedWordsCount") as? Int ?? currentRememberedWordList
-        print("getMaximumQuizCount: ", count)
-        return count
-    }
-
+    
     //　クイズの上限数をセット
     func setMaximumQuiz(count: Int) {
         currentQuizMaximumCount = count
-        print("最大値: ", currentQuizMaximumCount)
         ud.set(currentQuizMaximumCount, forKey: "maximumRememberedWordsCount")
     }
 

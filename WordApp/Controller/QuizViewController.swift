@@ -66,22 +66,51 @@ class QuizViewController: UIViewController {
     func setQuiz(view: QuizView) {
         // 利用可能なクイズ数を取得
         currentQuizTotal = countCurrentRegisteredWord()
+        print("🍫クイズ数：　", currentQuizTotal)
         //　現在のクイズに関してのプロパティを取得
         getQuizCurrentProperties()
+        //　segment強制更新
+        hogehogehoge()
         // クイズを初期化する
         initializeQuiz(view: view)
         // 最初のクイズを取得する
         getFirstQuiz(view: view)
     }
     
+    func hogehogehoge() {
+        //　選択されたSegmentedIndexの値
+        let quizIndex = ud.value(forKey: "quizMaximumSelectedSegmentIndex") as? Int ?? 0
+        // Segmented * 5 = 問題の出現上限数となる
+        let max = 5 * quizIndex
+        print("🍫つまみ：　", quizIndex)
+        print("🍫上限数：　", max)
+        if quizIndex == 0 {
+            // segment==0の際、全部の値を返却する
+            maximumQuizCount = countCurrentRegisteredWord()
+            ud.set(0, forKey: "quizMaximumSelectedSegmentIndex")
+            print("🤗出題数：　", maximumQuizCount)
+        } else {
+            //　segment＝それ以外の場合、値に問題があるかチェック
+            //　保存されたsegmentより単語総数が小さい場合
+            if currentQuizTotal < max { // e.g. 9 < 10
+                maximumQuizCount = (currentQuizTotal/5) * 5 // e.g. 9/5 * 5
+                ud.set(currentQuizTotal/5, forKey: "quizMaximumSelectedSegmentIndex")
+                print("🤗つまみ：　", currentQuizTotal/5)
+            } else {
+                // なにも問題がない場合
+                maximumQuizCount = max
+                ud.set(currentQuizTotal/5, forKey: "quizMaximumSelectedSegmentIndex")
+                print("🤗出題数：　", maximumQuizCount)
+            }
+            print("😱")
+        }
+    }
+    
     // 設定からクイズに関する情報を取得する
     func getQuizCurrentProperties() {
         maximumAnswerChoicesCount = wordModel.getQuizAnswerSelections()
-        maximumQuizCount = wordModel.getMaximumQuizCount()
-        let newMaximumQuizCount = maximumQuizCount / 5
-        maximumQuizCount = newMaximumQuizCount * 5
-        print("🐰currentQuizCount: ", currentQuizTotal)
-        print("🐰maximumQuizCount: ", maximumQuizCount)
+        maximumQuizCount = wordModel.getAndReturnMaximumQuizCount()
+        print("🍫出題数：　", maximumQuizCount)
     }
     
     // UIの初期化
@@ -165,10 +194,10 @@ class QuizViewController: UIViewController {
         let currentQuiz = quiz[0]
         var meaningArray: [String] = []
         meaningArray.append(currentQuiz.word.meaning)
-        print("⭐︎currentQuizCount: ", quiz.count)
-        print("⭐︎maximumAnswerChoices: ", maximumAnswerChoicesCount)
+//        print("⭐︎currentQuizCount: ", quiz.count)
+//        print("⭐︎maximumAnswerChoices: ", maximumAnswerChoicesCount)
         for i in 1 ..< maximumAnswerChoicesCount {
-            print("i: ", i)
+            // print("i: ", i)
             meaningArray.append(quiz[i].word.meaning)
         }
         drawInformationOnQuizWidget(quiz: currentQuiz, dummyAnswers: meaningArray, correctAnswer: meaningArray[0], view: view)
@@ -177,7 +206,6 @@ class QuizViewController: UIViewController {
     // 登録した単語が特定の単語数未満だった場合アラートを表示する
     func checkIsQuizAvailable() -> Bool {
         let currenWordRegisterCount = countCurrentRegisteredWord()
-        // TODO: change variable
         if currenWordRegisterCount < maximumAnswerChoicesCount {
             wordAmountIsNotEnoughToActivateQuizAlert()
             return false
@@ -208,10 +236,8 @@ class QuizViewController: UIViewController {
     func makeRandomQuizList() -> [WordModel] {
         // wordListをランダムにシャッフル
         let quizArray = wordModel.wordList.filter({$0.word.isRemembered == true}).shuffled()
-        print("🍄quizArrayCount: ", quizArray.count)
         let returnArray = quizArray.prefix(maximumQuizCount).map{$0}
         print("🍄maximumQuizCount: ", maximumQuizCount)
-        print("🍄returnArray.count: ", returnArray.count)
         return returnArray
     }
     
@@ -341,20 +367,15 @@ class QuizViewController: UIViewController {
                 self.goToTheRootViewController()
             }
             showAlert(title: alertQuizIsFinishedTitleLabel, message: scoreString, actions: [okAction])
+            getQuizCurrentProperties()
+            ud.set(maximumQuizCount/5, forKey: "quizMaximumSelectedSegmentIndex")
             goToTheRootViewController()
         }
     }
 
     // Progressionを更新する
     func reloadProgressionView(view: QuizView) {
-        //　分母
-        var count = ud.value(forKey: "quizMaximumSelectedSegmentIndex") as? Int ?? 0
-        if count != 0 {
-            count = count * 5
-        } else {
-            count = ud.value(forKey: "maximumRememberedWordsCount") as? Int ?? 0
-        }
-        let demominator = count
+        let demominator = maximumQuizCount
         let progressionRate = Float(totalSolvedQuizCount) / Float(demominator)
         view.quizProgressionLabel.text = String(totalSolvedQuizCount+1) + "  問目"
         view.quizProgressBar.progress = Float(progressionRate)
