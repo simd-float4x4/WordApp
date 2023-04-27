@@ -4,7 +4,6 @@ import Foundation
 // MARK: WordListViewControllerのTableViewDelegate
 // TableViewを描画・処理する為に最低限必要なデリゲートメソッド、データソース
 extension WordListViewController: UITableViewDelegate {
-
     // セルが選択された際の処理
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 表示上の配列をあらかじめfilterしておく
@@ -68,8 +67,11 @@ extension WordListViewController: UITableViewDelegate {
 
 // MARK: WordListViewControllerのViewControleer
 extension WordListViewController {
+    // ナビゲーションバーを作る
     func makeNavBar() -> UINavigationBar{
+        //　スクリーン幅を取得する
         let screenWidth = getScreenWidth()
+        // ナビゲーションバーを宣言する
         let navBar = UINavigationBar(frame: CGRect(
             x: navigationBarFrameSize.x,
             y: navigationBarFrameSize.y,
@@ -78,8 +80,11 @@ extension WordListViewController {
         return navBar
     }
     
+    //　ナビゲーションバーとステータスバーの間を埋めるためのViewを作る
     func makeNavBarView() -> UIView {
+        //　スクリーン幅を取得する
         let screenWidth = getScreenWidth()
+        //　ナビゲーションバーViewを宣言する
         let navBarView = UIView(frame: CGRect(
             x: navigationBarViewFrameSize.x,
             y: navigationBarViewFrameSize.y,
@@ -90,11 +95,13 @@ extension WordListViewController {
     
     // 保存されたカラーテーマ情報を取得
     func fetchSavedThemeData() {
+        //　テーマカラーを取得する
         selectedThemeId = ud.selectedThemeColorId
     }
     
     //　スクリーン幅を取得する
     func getScreenWidth() -> Int {
+        //　スクリーン幅を取得する
         let screenWidth = Int(UIScreen.main.bounds.width)
         return screenWidth
     }
@@ -108,25 +115,32 @@ extension WordListViewController {
     
     //　アクセントカラーを取得
     func getNavigationBarColor() {
+        //　ナビゲーションバーの背景色を取得する
         navigationBarBackgroundColor = themeModel.themeList[selectedThemeId].theme.accentColor
     }
     
     //　アクセントカラーをセット
     func setNavigationBarColor(navBar: UINavigationBar) {
+        //　テーマ名を取得する
         let themeName = getThemeName()
+        //　下記３テーマは特定の色をセットする
         if themeName == "オレンジ" || themeName == "オリーブ" || themeName == "ストロベリー" {
             navigationBarBackgroundColor = themeModel.themeList[selectedThemeId].theme.complementalColor
         } else {
             // 上記３テーマ以外は補色をセットする
             navigationBarBackgroundColor = themeModel.themeList[selectedThemeId].theme.accentColor
         }
+        //　下記２テーマ以外はナビゲーションバーのボタンの色が見にくいため白色にする
         if themeName != "ストロベリー" && themeName != "ラグジュアリー" {
             navBar.tintColor = navigationItemFontWhiteColor
         }
+        // 背景色をセットする
         navBar.backgroundColor = UIColor(hex: navigationBarBackgroundColor)
     }
     
+    //　UINavigationBarAppearanceをセットする
     func setAppearenceConfig() -> UINavigationBarAppearance{
+        //　テーマ名を取得する
         let themeName = getThemeName()
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
@@ -139,6 +153,8 @@ extension WordListViewController {
         return appearance
     }
     
+    
+    //　ナビゲーションアイテムボタンをセットする
     func setNavBarItems(navBar: UINavigationBar) {
         wordListNavigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: navigationBarImageName)!, style: .plain, target: self, action: #selector(switchWordActionMode))
         wordListNavigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -146,6 +162,7 @@ extension WordListViewController {
         navBar.setItems([wordListNavigationItem], animated: false)
     }
     
+    //　ナビゲーションバーViewにも同様の色をセットする
     func setColorOnNavBarView(navBarView: UIView) {
         navBarView.backgroundColor = UIColor(hex: navigationBarBackgroundColor)
         navBarView.tintColor = navigationItemFontWhiteColor
@@ -223,6 +240,7 @@ extension WordListViewController {
     //　navigationBarにカラーをセットする
     func setColorOnNavigationBar(navBar: UINavigationBar) -> UINavigationBar {
         // ナビゲーションバーの見た目を設定
+        //　UINavigationBarAppearanceを初期化する
         let navigationBarAppearance = UINavigationBarAppearance()
         // 透明にする
         navigationBarAppearance.configureWithOpaqueBackground()

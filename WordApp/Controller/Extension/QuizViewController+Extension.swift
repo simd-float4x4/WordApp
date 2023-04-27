@@ -1,13 +1,6 @@
 import UIKit
 import Foundation
 
-// MARK: QuizViewControllerのUINavigationBarDelegate
-extension QuizViewController: UINavigationBarDelegate {
-    func position(for bar: UIBarPositioning) -> UIBarPosition {
-        return .topAttached
-    }
-}
-
 // MARK: QuizViewControllerのQuizAnswerButtonIsTappedDelegate
 extension QuizViewController: QuizAnswerButtonIsTappedDelegate {
     // 回答したQuizを配列の最後に持っていく
@@ -80,5 +73,13 @@ extension QuizViewController: QuizAnswerButtonIsTappedDelegate {
             default:
                 break
         }
+    }
+}
+
+// MARK: QuizViewControllerのUINavigationBarDelegate
+extension QuizViewController: UINavigationBarDelegate {
+    //　ステータスバーとナビゲーションバーの隙間を自動的に埋める
+    func position(for bar: UIBarPositioning) -> UIBarPosition {
+        return .topAttached
     }
 }

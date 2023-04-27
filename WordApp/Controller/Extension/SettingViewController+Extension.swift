@@ -20,6 +20,7 @@ extension SettingViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: WordListViewControllerのNavigationBarDelegate
 extension SettingViewController: UINavigationBarDelegate {
+    //　ステータスバーとナビゲーションバーの隙間を自動的に埋める
     func position(for bar: UIBarPositioning) -> UIBarPosition {
         return .topAttached
     }

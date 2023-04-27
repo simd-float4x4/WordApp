@@ -179,17 +179,6 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
             let backgroundColor = themeList[indexPath.row].theme.mainColor
             cell.backgroundColor = UIColor(hex: backgroundColor)
         }
-    
-    // 以下不要の可能性あり
-        // let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        if let tabBarController = storyboard.instantiateViewController(withIdentifier: "customTabBarController") as? CustomTabBarController {
-//            tabBarController.loadViewIfNeeded()
-//            for viewController in tabBarController.viewControllers ?? [] {
-//                if let reloadable = viewController as? Reloadable {
-//                    reloadable.reloadData()
-//                }
-//            }
-//        }
         return cell
     }
 }
