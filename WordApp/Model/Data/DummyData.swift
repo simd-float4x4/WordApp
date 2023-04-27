@@ -1,5 +1,6 @@
 import Foundation
 
+// MARK: DummyData
 class DummyData {
     let singleArray = [
         "envisage",
@@ -41,7 +42,6 @@ class DummyData {
         "彼は無断で隣人の土地に侵入した。",
         "その高校は大学と連携している。"
     ]
-    
     // プリセット値：ダミー用回答（正解が2個以上ある際に使用する）
     var presetDummyAnswersArray = [
         "〜を明らかにする", "〜を横断する", "〜を乗り越える", "減少する", "分配する", "証明する", "を起訴する", "を回避する", "を蒸発させる",
@@ -50,10 +50,15 @@ class DummyData {
         "卓越", "支配権", "酵素", "信条", "領事", "吸収", "友愛", "花婿", "誘導", "完成", "詰め物", "襲撃", "事件", "建築物", "栽培", "（グラスなどの）容器"
     ]
     
+    //　ダミーデータを生成する
     func make() -> [String] {
-        let upperIndex = singleArray.count - 1
+        //　上限値を取得
+        let upperIndex = singleArray.count
+        //　0〜上限値の範囲でindexを生成
         let index = Int.random(in: 0 ..< upperIndex)
+        //　空のダミーデータを宣言
         var dummyData: [String] = []
+        //　ダミーデータを登録
         dummyData.append(singleArray[index])
         dummyData.append(meaningArray[index])
         dummyData.append(exampleArray[index])
@@ -61,8 +66,11 @@ class DummyData {
         return dummyData
     }
     
+    //　プリセット配列から1つ値を返す
     func returnOneMeaning() -> String {
+        //　ダミーデータの中からランダムに1つindexを生成する
         let randomInt = Int.random(in: 0 ..< presetDummyAnswersArray.count)
+        //　値を返す
         return presetDummyAnswersArray[randomInt]
     }
 }

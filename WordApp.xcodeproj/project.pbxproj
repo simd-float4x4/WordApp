@@ -29,6 +29,8 @@
 		702F250829F896EC006745A9 /* WordRememberedListViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F250729F896EC006745A9 /* WordRememberedListViewController+Extension.swift */; };
 		702F250A29F8975D006745A9 /* QuizViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F250929F8975C006745A9 /* QuizViewController+Extension.swift */; };
 		702F250C29F89903006745A9 /* SettingViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F250B29F89903006745A9 /* SettingViewController+Extension.swift */; };
+		702F250E29FA7166006745A9 /* DesignThemeListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F250D29FA7166006745A9 /* DesignThemeListModel.swift */; };
+		702F251029FA72CD006745A9 /* WordListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F250F29FA72CD006745A9 /* WordListModel.swift */; };
 		702F654829D7FEDA0041B8DC /* WordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F654729D7FEDA0041B8DC /* WordDetailViewController.swift */; };
 		702F654A29D7FF120041B8DC /* WordDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 702F654929D7FF120041B8DC /* WordDetailView.xib */; };
 		702F654C29D7FF200041B8DC /* WordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F654B29D7FF200041B8DC /* WordDetailView.swift */; };
@@ -122,6 +124,8 @@
 		702F250729F896EC006745A9 /* WordRememberedListViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WordRememberedListViewController+Extension.swift"; sourceTree = "<group>"; };
 		702F250929F8975C006745A9 /* QuizViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuizViewController+Extension.swift"; sourceTree = "<group>"; };
 		702F250B29F89903006745A9 /* SettingViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingViewController+Extension.swift"; sourceTree = "<group>"; };
+		702F250D29FA7166006745A9 /* DesignThemeListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignThemeListModel.swift; sourceTree = "<group>"; };
+		702F250F29FA72CD006745A9 /* WordListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListModel.swift; sourceTree = "<group>"; };
 		702F654729D7FEDA0041B8DC /* WordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDetailViewController.swift; sourceTree = "<group>"; };
 		702F654929D7FF120041B8DC /* WordDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WordDetailView.xib; sourceTree = "<group>"; };
 		702F654B29D7FF200041B8DC /* WordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDetailView.swift; sourceTree = "<group>"; };
@@ -424,6 +428,7 @@
 			children = (
 				7024110C29D560EE0024ABBD /* Word.swift */,
 				7024111C29D577A50024ABBD /* WordModel.swift */,
+				702F250F29FA72CD006745A9 /* WordListModel.swift */,
 			);
 			path = Word;
 			sourceTree = "<group>";
@@ -433,6 +438,7 @@
 			children = (
 				70A7C43929ED15D8007C07FC /* DesignTheme.swift */,
 				70A7C43B29ED167A007C07FC /* DesignThemeModel.swift */,
+				702F250D29FA7166006745A9 /* DesignThemeListModel.swift */,
 			);
 			path = Design;
 			sourceTree = "<group>";
@@ -656,12 +662,14 @@
 				70A7C45229EFA6CD007C07FC /* CustomBackgroundView.swift in Sources */,
 				709BDBD329E3A7C600F06C59 /* QuizView.swift in Sources */,
 				70A7C43029EB6F7F007C07FC /* SettingView.swift in Sources */,
+				702F250E29FA7166006745A9 /* DesignThemeListModel.swift in Sources */,
 				709BDBDC29E7A86300F06C59 /* Alert.swift in Sources */,
 				702F250429F8963F006745A9 /* AddWordViewController+Extension.swift in Sources */,
 				702F250129F72417006745A9 /* DummyData.swift in Sources */,
 				70A7C43C29ED167A007C07FC /* DesignThemeModel.swift in Sources */,
 				70A7C45829EFA73D007C07FC /* CustomUISegmentedControl.swift in Sources */,
 				7024110D29D560EE0024ABBD /* Word.swift in Sources */,
+				702F251029FA72CD006745A9 /* WordListModel.swift in Sources */,
 				7024111329D562160024ABBD /* WordListViewController.swift in Sources */,
 				70A7C45429EFA6F7007C07FC /* CustomBackgroundLabel.swift in Sources */,
 				702410DA29D55F560024ABBD /* AppDelegate.swift in Sources */,
