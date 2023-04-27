@@ -66,13 +66,7 @@ extension WordListViewController: UITableViewDelegate {
     }
 }
 
-// MARK: WordListViewControllerのUINavigationBarDelegate
-extension WordListViewController: UINavigationBarDelegate {
-    func position(for bar: UIBarPositioning) -> UIBarPosition {
-        return .topAttached
-    }
-}
-
+// MARK: WordListViewControllerのViewControleer
 extension WordListViewController {
     func makeNavBar() -> UINavigationBar{
         let screenWidth = getScreenWidth()
