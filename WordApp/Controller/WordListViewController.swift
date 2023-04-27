@@ -82,59 +82,29 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     
     func initializeView() {
         let view = WordListView()
-        let screenWidth = getScreenWidth()
-        
-        let navBarView = UIView(frame: CGRect(
-            x: navigationBarViewFrameSize.x,
-            y: navigationBarViewFrameSize.y,
-            width: screenWidth,
-            height: navigationBarViewFrameSize.height))
-        let navBar = UINavigationBar(frame: CGRect(
-            x: navigationBarFrameSize.x,
-            y: navigationBarFrameSize.y,
-            width: screenWidth,
-            height: navigationBarFrameSize.height))
-        
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithTransparentBackground()
-        appearance.configureWithTransparentBackground()
-        appearance.shadowColor = clearColor
-        
+        // ナビゲーションバーを生成
+        let navBar = makeNavBar()
+        // ナビゲーションバービューを生成
+        let navBarView = makeNavBarView()
         //　保存されたテーマIDを取得する
         fetchSavedThemeData()
-        //　テーマカラーを背景に代入する
-        getNavigationBarBackgroundColor()
-        // nabigationBarの背景色をセットする
-        setNavigationBarBackgroundColor()
-        
-        let themeName = getThemeName()
-        
-        //　下記３テーマはナビゲーションバーの文字がDefaultフォントだと見にくいため白糸に
-        if themeName == "ノーマル" || themeName == "スペース" || themeName == "ブルーソーダ" {
-            appearance.titleTextAttributes  = [.foregroundColor: navigationItemFontWhiteColor]
-        }
-        
-        if themeName != "ストロベリー" && themeName != "ラグジュアリー" {
-            navBar.tintColor = navigationItemFontWhiteColor
-        }
-        
-        navBarView.backgroundColor = UIColor(hex: navigationBarBackgroundColor)
-        navBarView.tintColor = navigationItemFontWhiteColor
-        
-        navBar.backgroundColor = UIColor(hex: navigationBarBackgroundColor)
-        
-        wordListNavigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: navigationBarImageName)!, style: .plain, target: self, action: #selector(switchWordActionMode))
-        wordListNavigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .add, target: self, action: #selector(toAddWordView))
-        
-        navBar.setItems([wordListNavigationItem], animated: false)
-        
+        //　テーマカラーを色に代入する
+        getNavigationBarColor()
+        // nabigationBarの色をセットする
+        setNavigationBarColor(navBar: navBar)
+        //　appearanceを設定
+        let appearance = setAppearenceConfig()
+        // ナビゲーションアイテムを設定
+        setNavBarItems(navBar: navBar)
+        //　ナビゲーションバービューに色を設定
+        setColorOnNavBarView(navBarView: navBarView)
+        //　ナビゲーションバーにappearanceを設定
         navBar.scrollEdgeAppearance = appearance
         navBar.standardAppearance = appearance
-        
+        // viewに追加
         view.addSubview(navBarView)
         view.addSubview(navBar)
-        
+        // viewを代入
         self.view = view
     }
     
