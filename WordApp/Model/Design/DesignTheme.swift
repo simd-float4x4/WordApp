@@ -1,17 +1,17 @@
 import Foundation
 
 struct DesignTheme: Codable {
-    var id: Int
-    var name: String
-    var useImage: Bool
-    var themeImageForIconUrl: String
-    var backgroundImageUrl: String
-    var mainColor: String
-    var subColor: String
-    var accentColor: String
-    var vividColor: String
-    var complementalColor: String // 補色
-    var fontColor: String
-    var complementalFontColor: String // フォントの補色
-    var fontName: String
+    var id: Int //id
+    var name: String //デザインテーマ名
+    var useImage: Bool //画像を使用するか？
+    var themeImageForIconUrl: String //アイコン画像URL
+    var backgroundImageUrl: String //背景画像URL
+    var mainColor: String //メインカラー
+    var subColor: String //サブカラー
+    var accentColor: String //アクセントカラー
+    var vividColor: String //ビビッドカラー
+    var complementalColor: String //補色
+    var fontColor: String //フォントカラー
+    var complementalFontColor: String //フォントカラーの補色
+    var fontName: String //フォント名
 }

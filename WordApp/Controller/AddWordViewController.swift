@@ -58,6 +58,7 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //　Viewを初期化する
         initializeWordAddView()
     }
     
@@ -69,38 +70,23 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
     
     // Viewの初期化
     func initializeWordAddView() {
-        let view = AddWordView()
+        //　AddWordViewを初期化する
+        var view = AddWordView()
+        //　UITextViewのdelegateを設定する
         view.singleWordTextView.delegate = self
         view.meaningWordTextView.delegate = self
         view.exampleSentenceTextView.delegate = self
         view.exampleTranslationTextView.delegate = self
         view.addWordToWordListDelegate = self
-        // ナビゲーションバーを生成
-        let navBar = makeNavBar()
-        // ナビゲーションバービューを生成
-        let navBarView = makeNavBarView()
-        //　保存されたテーマIDを取得する
-        fetchSavedThemeData()
-        //　テーマカラーを色に代入する
-        getNavigationBarColor()
-        // nabigationBarの色をセットする
-        setNavigationBarColor(navBar: navBar)
-        //　appearanceを設定
-        let appearance = setAppearenceConfig()
-        // ナビゲーションアイテムを設定
-        setNavBarItems(navBar: navBar)
-        //　ナビゲーションバービューに色を設定
-        setColorOnNavBarView(navBarView: navBarView)
-        //　ナビゲーションバーにappearanceを設定
-        navBar.scrollEdgeAppearance = appearance
-        navBar.standardAppearance = appearance
-        // viewに追加
-        view.addSubview(navBarView)
-        view.addSubview(navBar)
+        //　ナビゲーションバーを生成する
+        view = addNavigationBarToView(view: view)
         // viewを代入
         self.view = view
+        //　タブバーコントローラを隠す
         hideTabBarController()
+        //　notificationCenterを登録する
         setNotificationCenters()
+        //　tapGestureを設定する
         setTapGesuture()
     }
     
@@ -110,21 +96,30 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
         let checkBool = makeValidationToAddWord(data: data)
         // エラー発生時
         if !checkBool {
+            //　OKActionを設定する
             let okAction = UIAlertAction(title: alertOkButton, style: .default) { _ in
                 self.dismiss(animated: true, completion: nil)
             }
+            //　アラートを表示する
             showAlert(title: alertErrorTitleLabel, message: alertMesssageFailedLabel, actions: [okAction])
         } else {
-            // バリデーション追加時
+        //　登録成功時
+            //　現在のwordIdを取得する
             let currentWordId = wordModel.wordList.last?.word.id ?? 0
+            //　単語を登録する
             wordModel.addWordToList(id: currentWordId, data: data)
-            
+            //　OKActionを設定する
             let okAction = UIAlertAction(title: alertOkButton, style: .default) { _ in
+                //　AddWordViewを取得する
                 let view = AddWordView()
+                //　入力欄をリセットする
                 view.resetWordInputField()
+                //　viewを初期化する
                 self.initializeWordAddView()
             }
+            //　アラート終了時のラベルを設定する
             let alertFinishedLabelString = alertRegisterFinishedPrefixLabel + data[0] + alertRegisterFinishedSuffixLabel
+            //　アラートを表示する
             showAlert(title: alertFinishedLabelString, message: alertMessageSucceedLabel, actions: [okAction])
             registerModel()
         }
@@ -192,24 +187,29 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
     
     // キーボードが表示される時の処理
     @objc func keyboardWillShow(notification: NSNotification) {
-        var exampleHeight = 0.0
+        //　キーボードの移動率
+        var rate = 0.0
         // タップされたtextFieldがどれか取得
         DispatchQueue.main.async {
+            //　例文（日本語訳）がタップされたのであれば
             if self.tappedTextViewName == self.exampleTranslationTextViewisTapped {
-                exampleHeight = 0.75
+                //　キーボードの移動率を0.75に設定
+                rate = 0.75
             }
             if self.tappedTextViewName == self.exampleSentenceTextViewisTapped {
-                exampleHeight = 0.5
+                //　キーボードの移動率を0.5に設定
+                rate = 0.5
             }
             // singleWordだったら動かさない
             if self.tappedTextViewName == self.exampleTranslationTextViewisTapped || self.tappedTextViewName == self.exampleSentenceTextViewisTapped {
                 // keyboardのsizeを取得
                 if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
                     // TODO: 条件式の算出方法については要検討、再議論の必要あり
+                    //　viewの座標をキーボードのサイズ*移動率の分だけズラす
                     if self.view.frame.origin.y == 0 {
-                        self.view.frame.origin.y -= keyboardSize.height * exampleHeight
+                        self.view.frame.origin.y -= keyboardSize.height * rate
                     } else {
-                        let suggestionHeight = self.view.frame.origin.y + keyboardSize.height * exampleHeight
+                        let suggestionHeight = self.view.frame.origin.y + keyboardSize.height * rate
                         self.view.frame.origin.y -= suggestionHeight
                     }
                 }
@@ -219,6 +219,7 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
     
     // キーボードが閉じられた時の処理
     @objc func keyboardWillHide() {
+        //　viewの座標を0にリセットする
         DispatchQueue.main.async {
             if self.view.frame.origin.y != 0 {
                 self.view.frame.origin.y = 0
@@ -230,16 +231,21 @@ class AddWordViewController: UIViewController, UITextViewDelegate, AddWordToWord
     func setTapGesuture() {
         // キーボードがキャンセルされたときの処理
         let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        //　キーボードのキャンセルを検知する
         tapGesture.cancelsTouchesInView = false
+        //　tapGestureを登録する
         self.view.addGestureRecognizer(tapGesture)
     }
     
     // キーボードがキャンセルされた時の処理
     @objc func dismissKeyboard() {
+        //　編集が終わったことを通知する
         self.view.endEditing(true)
     }
     
-    @objc func onTapDismissWordView() {
+    //　WordListConrollerに戻る
+    @objc func onTapDismissWordAddView() {
+        // 画面を消す
         dismiss(animated: true,completion: nil)
     }
 }
