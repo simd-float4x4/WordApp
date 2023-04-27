@@ -39,6 +39,8 @@ class WordRememberedListView: UIView {
     let statusBarHeight = 44
     //　ナビゲーションUILabel
     let navigationBarUILabelProperties = (x: 0, y: 50, fontSize: CGFloat(16.0))
+    // 単語リスト登録が0件の際に表示するためのラベル
+    @IBOutlet weak var thereIsNoWordLabel: UILabel!
     
     override init(frame: CGRect){
         super.init(frame: frame)

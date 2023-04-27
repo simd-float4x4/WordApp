@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WordRememberedListView" customModule="WordApp" customModuleProvider="target">
             <connections>
                 <outlet property="sortWordRememberedListButton" destination="ZLZ-9n-Bt8" id="PeP-BJ-eTd"/>
+                <outlet property="thereIsNoWordLabel" destination="2kF-i6-Bnj" id="2a1-pA-SUp"/>
                 <outlet property="wordRememberedListWidget" destination="cON-jH-Gvx" id="Ig7-px-RMZ"/>
             </connections>
         </placeholder>
@@ -51,6 +52,13 @@
                                             <rect key="frame" x="8" y="76" width="382" height="565"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2kF-i6-Bnj" customClass="CustomBackgroundLabel" customModule="WordApp" customModuleProvider="target">
+                                                    <rect key="frame" x="8" y="247" width="366" height="46"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="cON-jH-Gvx">
                                                     <rect key="frame" x="8" y="8" width="366" height="549"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
