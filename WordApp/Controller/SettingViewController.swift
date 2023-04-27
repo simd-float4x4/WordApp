@@ -59,14 +59,7 @@ class SettingViewController: UIViewController, SettingViewDelegate, UICollection
         let view = self.view as! SettingView
         let forSegmentAt = currentQuizTotal / 5
         let choiceIndex = ud.value(forKey: "choicesSelectedSegmentIndex") as? Int ?? 0
-        var quizIndex = ud.value(forKey: "quizMaximumSelectedSegmentIndex") as? Int ?? 0
-        let threshold = ud.value(forKey: "maximumRememberedWordsCount") as? Int ?? 0
-        print("🍓：", quizIndex, threshold)
-        if quizIndex * 5 > threshold  {
-            quizIndex = threshold / 5
-            ud.set(quizIndex, forKey: "quizMaximumSelectedSegmentIndex")
-            print("🍓：", quizIndex, threshold / 5)
-        }
+        let quizIndex = ud.value(forKey: "quizMaximumSelectedSegmentIndex") as? Int ?? 0
         view.changeMaximumQuizCountSegmentedControl.selectedSegmentIndex = quizIndex
         view.changeQuizAnswerSelectionCountSegmentedControl.selectedSegmentIndex = choiceIndex
         for i in 1 ..< 7 {
@@ -81,10 +74,6 @@ class SettingViewController: UIViewController, SettingViewDelegate, UICollection
         currentQuizTotal = wordModel.getAndReturnMaximumQuizCount()
         //　現在の選択肢の上限数を取得
         currentChoicesTotal = wordModel.getQuizAnswerSelections()
-        
-        print("==========================")
-        print("利用可能なクイズ数： ", currentQuizTotal, "現在の選択肢上限数：　", currentChoicesTotal)
-        print("==========================")
     }
     
     //　"選択肢"

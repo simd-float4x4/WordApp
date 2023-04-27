@@ -99,11 +99,8 @@ class QuizView: UIView {
         let titleViewLabel = setAndGetUILabelProperties(parentView: parentView)
         // subViewをする
         parentView.addSubview(navBar)
-        print(navBar.frame)
         titleView.addSubview(titleViewLabel)
-        print(titleView.frame)
         parentView.addSubview(titleView)
-        print(parentView.frame)
         self.addSubview(parentView)
     }
     
