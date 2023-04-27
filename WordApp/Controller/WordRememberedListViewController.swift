@@ -4,6 +4,7 @@ class WordRememberedListViewController: UIViewController, SortWordRememberedList
     
     var wordModel = WordListModel.shared
     var themeModel = DesignThemeListModel.shared
+    let ud = UserDefaults.standard
     
     // DetailViewControllerに渡すための文字列
     var singleWord: String = ""
