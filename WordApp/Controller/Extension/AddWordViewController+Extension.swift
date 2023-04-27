@@ -3,6 +3,35 @@ import Foundation
 
 // MARK: AddWordViewControllerのUIViewController
 extension AddWordViewController {
+    //　viewにナビゲーションバーを追加する
+    func addNavigationBarToView(view: AddWordView) -> AddWordView {
+        // ナビゲーションバーを生成
+        let navBar = makeNavBar()
+        // ナビゲーションバービューを生成
+        let navBarView = makeNavBarView()
+        //　保存されたテーマIDを取得する
+        fetchSavedThemeData()
+        //　テーマカラーを色に代入する
+        getNavigationBarColor()
+        // nabigationBarの色をセットする
+        setNavigationBarColor(navBar: navBar)
+        //　appearanceを設定
+        let appearance = setAppearenceConfig()
+        // ナビゲーションアイテムを設定
+        setNavBarItems(navBar: navBar)
+        //　ナビゲーションバービューに色を設定
+        setColorOnNavBarView(navBarView: navBarView)
+        //　ナビゲーションバーにappearanceを設定
+        navBar.scrollEdgeAppearance = appearance
+        navBar.standardAppearance = appearance
+        // viewに追加
+        view.addSubview(navBarView)
+        view.addSubview(navBar)
+        
+        return view
+    }
+    
+    
     // ナビゲーションバーを作る
     func makeNavBar() -> UINavigationBar{
         //　スクリーン幅を取得する
@@ -92,7 +121,7 @@ extension AddWordViewController {
     
     //　ナビゲーションアイテムボタンをセットする
     func setNavBarItems(navBar: UINavigationBar) {
-        addWordNavigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: navigationBarImageName)!, style: .plain, target: self, action: #selector(onTapDismissWordView))
+        addWordNavigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: navigationBarImageName)!, style: .plain, target: self, action: #selector(onTapDismissWordAddView))
         navBar.setItems([addWordNavigationItem], animated: false)
     }
     
