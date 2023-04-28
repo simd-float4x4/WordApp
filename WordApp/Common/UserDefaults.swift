@@ -3,13 +3,16 @@ import Foundation
 // MARK: UserDefaults
 // UserDefaultsの拡張クラス
 extension UserDefaults {
-    
     // UserDefaultsのKeyをまとめたenum
     private enum UDKey: String {
         case selectedThemeColorId
         case maximumQuizSelectionCount
         case maximumRememberedWordsCount
         case isMeaningHidden
+        case quizMaximumSelectedSegmentIndex
+        case choicesSelectedSegmentIndex
+        case currentQuizSelections
+        case savedEncodedData
     }
     
     // データの全件削除処理
@@ -58,6 +61,50 @@ extension UserDefaults {
         }
         set(val) {
             set(val, forKey: UDKey.isMeaningHidden.rawValue)
+        }
+    }
+    
+    // 「quizMaximumSelectedSegmentIndex」のセッターゲッターの処理
+    //　設定画面でクイズの出題数を保存するための変数
+    var quizMaximumSelectedSegmentIndex: Int {
+        get {
+            return integer(forKey: UDKey.quizMaximumSelectedSegmentIndex.rawValue)
+        }
+        set(val) {
+            set(val, forKey: UDKey.quizMaximumSelectedSegmentIndex.rawValue)
+        }
+    }
+    
+    // 「choicesSelectedSegmentIndex」のセッターゲッターの処理
+    //　設定画面でクイズの選択肢数を保存するための変数
+    var choicesSelectedSegmentIndex: Int {
+        get {
+            return integer(forKey: UDKey.choicesSelectedSegmentIndex.rawValue)
+        }
+        set(val) {
+            set(val, forKey: UDKey.choicesSelectedSegmentIndex.rawValue)
+        }
+    }
+    
+    // 「currentQuizSelections」のセッターゲッターの処理
+    //　設定画面で回答選択肢の数を保存するための変数
+    var currentQuizSelections: Int {
+        get {
+            return integer(forKey: UDKey.currentQuizSelections.rawValue)
+        }
+        set(val) {
+            set(val, forKey: UDKey.currentQuizSelections.rawValue)
+        }
+    }
+    
+    // 「savedEncodedData」のセッターゲッターの処理
+    //　設定画面で回答選択肢の数を保存するための変数
+    var savedEncodedData: Data? {
+        get {
+            return data(forKey: UDKey.savedEncodedData.rawValue)
+        }
+        set(val) {
+            set(val, forKey: UDKey.savedEncodedData.rawValue)
         }
     }
 }

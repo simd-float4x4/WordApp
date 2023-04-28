@@ -70,9 +70,9 @@ class SettingViewController: UIViewController, SettingViewDelegate, UICollection
         //　クイズの出題数上限値
         let forSegmentAt = currentQuizTotal / 5
         //　選択肢数
-        let choiceIndex = ud.value(forKey: "choicesSelectedSegmentIndex") as? Int ?? 0
+        let choiceIndex = ud.choicesSelectedSegmentIndex
         //　クイズの出題数
-        let quizIndex = ud.value(forKey: "quizMaximumSelectedSegmentIndex") as? Int ?? 0
+        let quizIndex = ud.quizMaximumSelectedSegmentIndex
         //　各データをSegmentedControlに設定
         view.changeMaximumQuizCountSegmentedControl.selectedSegmentIndex = quizIndex
         view.changeQuizAnswerSelectionCountSegmentedControl.selectedSegmentIndex = choiceIndex

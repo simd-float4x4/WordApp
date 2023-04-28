@@ -79,7 +79,7 @@ class QuizViewController: UIViewController {
     
     func hogehogehoge() {
         //　選択されたSegmentedIndexの値
-        let quizIndex = ud.value(forKey: "quizMaximumSelectedSegmentIndex") as? Int ?? 0
+        let quizIndex = ud.quizMaximumSelectedSegmentIndex
         // Segmented * 5 = 問題の出現上限数となる
         let max = 5 * quizIndex
         print("🍫つまみ：　", quizIndex)
@@ -87,19 +87,19 @@ class QuizViewController: UIViewController {
         if quizIndex == 0 {
             // segment==0の際、全部の値を返却する
             maximumQuizCount = countCurrentRegisteredWord()
-            ud.set(0, forKey: "quizMaximumSelectedSegmentIndex")
+            ud.quizMaximumSelectedSegmentIndex = 0
             print("🤗出題数：　", maximumQuizCount)
         } else {
             //　segment＝それ以外の場合、値に問題があるかチェック
             //　保存されたsegmentより単語総数が小さい場合
             if currentQuizTotal < max { // e.g. 9 < 10
                 maximumQuizCount = (currentQuizTotal/5) * 5 // e.g. 9/5 * 5
-                ud.set(currentQuizTotal/5, forKey: "quizMaximumSelectedSegmentIndex")
+                ud.quizMaximumSelectedSegmentIndex = currentQuizTotal/5
                 print("🤗つまみ：　", currentQuizTotal/5)
             } else {
                 // なにも問題がない場合
                 maximumQuizCount = max
-                ud.set(currentQuizTotal/5, forKey: "quizMaximumSelectedSegmentIndex")
+                ud.quizMaximumSelectedSegmentIndex = currentQuizTotal/5
                 print("🤗出題数：　", maximumQuizCount)
             }
             print("😱")
@@ -368,7 +368,7 @@ class QuizViewController: UIViewController {
             }
             showAlert(title: alertQuizIsFinishedTitleLabel, message: scoreString, actions: [okAction])
             getQuizCurrentProperties()
-            ud.set(maximumQuizCount/5, forKey: "quizMaximumSelectedSegmentIndex")
+            ud.quizMaximumSelectedSegmentIndex = maximumQuizCount/5
             goToTheRootViewController()
         }
     }
