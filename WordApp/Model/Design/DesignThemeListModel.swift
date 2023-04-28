@@ -5,6 +5,8 @@ import Foundation
 class DesignThemeListModel: NSObject, UICollectionViewDataSource {
     //　テーマモデル
     static let shared = DesignThemeListModel()
+    // UserDefaults
+    let ud = UserDefaults.standard
     // Modelで管理する配列に初期値を設定する。
     var themeList: [DesignThemeModel] = [
         DesignThemeModel.init(initTheme:
@@ -141,7 +143,7 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
         //　セルを登録する
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
         //　テーマIDを取得する
-        let currentThemeId = UserDefaults.standard.value(forKey: "selectedThemeColorId") ?? 0
+        let currentThemeId = ud.selectedThemeColorId
         //　各セルのテキストについて描画を行う
         setUpCollectionViewCellText(cell: cell, index: indexPath.row)
         //　セルを角丸にする
