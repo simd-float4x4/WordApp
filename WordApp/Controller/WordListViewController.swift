@@ -91,6 +91,10 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         var view = WordListView()
         //　ナビゲーションバーを生成する
         view = addNavigationBarToView(view: view)
+        //　削除モード/暗記モードのon/offフラグを取得する
+        isDeleteModeOn = ud.isDeleteModeOn
+        //　ボタンのアイコンを切り替える
+        navigationBarImageName = isDeleteModeOn == true ? "brain" : "trash.fill"
         // viewを代入
         self.view = view
     }
@@ -202,7 +206,7 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         //　ボタンのアイコンを切り替える
         navigationBarImageName = isDeleteModeOn == true ? "brain" : "trash.fill"
         //　現在の削除モードをUserDefaultsに保存する
-        ud.set(isDeleteModeOn, forKey: "isMeaningHidden")
+        ud.isDeleteModeOn = isDeleteModeOn
         //　Viewを読み込む
         viewWillAppear(true)
     }

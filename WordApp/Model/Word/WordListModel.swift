@@ -30,7 +30,7 @@ class WordListModel: NSObject, UITableViewDataSource {
         //　現在の暗記単語数を取得する
         currentQuizMaximumCount = getAndReturnMaximumQuizCount()
         //　暗記単語数をUserDefalutsに保存する
-        ud.set(currentQuizMaximumCount, forKey: "maximumRememberedWordsCount")
+        ud.maximumRememberedWordsCount = currentQuizMaximumCount
     }
     
     // 保存したデータを取得
@@ -196,7 +196,7 @@ class WordListModel: NSObject, UITableViewDataSource {
     //　クイズの上限数をセット
     func setMaximumQuiz(count: Int) {
         currentQuizMaximumCount = count
-        ud.set(currentQuizMaximumCount, forKey: "maximumRememberedWordsCount")
+        ud.maximumRememberedWordsCount = currentQuizMaximumCount
     }
 
 // MARK: UITableViewDatasoruce
@@ -209,9 +209,9 @@ class WordListModel: NSObject, UITableViewDataSource {
     
     // UITableViewの各セルが表示する内容
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let selected = UserDefaults.standard.value(forKey: "selectedThemeColorId") as? Int ?? 0
+        let selected = ud.selectedThemeColorId
         // 現在の意味表示モードのON/OFFを取得
-        let currentMeaningVisibility  = ud.bool(forKey: "isMeaningHidden")
+        let currentMeaningVisibility  = ud.isMeaningHidden
         // WordListをfilterしておく
         let availableWordList = returnFilteredWordList(isWordRememberedStatus: checkIsThisRememberedWordList)
         // wordModelを取得する

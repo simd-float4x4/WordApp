@@ -13,11 +13,7 @@ extension UserDefaults {
         case choicesSelectedSegmentIndex
         case currentQuizSelections
         case savedEncodedData
-    }
-    
-    // データの全件削除処理
-    func removeAllObject() {
-        // removeObject(forKey: UDKey.selectedThemeColorId.rawValue)
+        case isDeleteModeOn
     }
     
     // 「selectedThemeColorId」のセッターゲッターの処理（テーマID）
@@ -46,10 +42,10 @@ extension UserDefaults {
     //　現在選択されているクイズ機能の出題問題数
     var maximumRememberedWordsCount: Int {
         get {
-            return integer(forKey: UDKey.selectedThemeColorId.rawValue)
+            return integer(forKey: UDKey.maximumRememberedWordsCount.rawValue)
         }
         set(val) {
-            set(val, forKey: UDKey.selectedThemeColorId.rawValue)
+            set(val, forKey: UDKey.maximumRememberedWordsCount.rawValue)
         }
     }
     
@@ -105,6 +101,17 @@ extension UserDefaults {
         }
         set(val) {
             set(val, forKey: UDKey.savedEncodedData.rawValue)
+        }
+    }
+    
+    // 「isDeleteModeOn」のセッターゲッターの処理
+    //　設定画面で回答選択肢の数を保存するための変数
+    var isDeleteModeOn: Bool {
+        get {
+            return bool(forKey: UDKey.isDeleteModeOn.rawValue)
+        }
+        set(val) {
+            set(val, forKey: UDKey.isDeleteModeOn.rawValue)
         }
     }
 }
