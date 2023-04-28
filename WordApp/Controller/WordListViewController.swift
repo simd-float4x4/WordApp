@@ -54,8 +54,12 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     let navigationBarUILabelProperties = (x: 0, y: 50, fontSize: CGFloat(16.0))
     //　navigationItem
     let wordListNavigationItem = UINavigationItem(title: "単語帳画面")
-    //　ナビゲーションバーに使用する画像の名前
+    //　ナビゲーションバーに使用する画像の名前（デフォルト）
     var navigationBarImageName = "brain"
+    //　ナビゲーションバーに使用する画像の名前（暗記モード）
+    var navigationBarImageNameBrain = "brain"
+    //　ナビゲーションバーに使用する画像の名前（削除モード）
+    var navigationBarImageNameTrash = "trash.fill"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,7 +98,7 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         //　削除モード/暗記モードのon/offフラグを取得する
         isDeleteModeOn = ud.isDeleteModeOn
         //　ボタンのアイコンを切り替える
-        navigationBarImageName = isDeleteModeOn == true ? "brain" : "trash.fill"
+        navigationBarImageName = isDeleteModeOn == true ? navigationBarImageNameBrain : navigationBarImageNameTrash
         // viewを代入
         self.view = view
     }
@@ -204,7 +208,7 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         //　削除モードのON/OFFを切り替える
         isDeleteModeOn = isDeleteModeOn == true ? false : true
         //　ボタンのアイコンを切り替える
-        navigationBarImageName = isDeleteModeOn == true ? "brain" : "trash.fill"
+        navigationBarImageName = isDeleteModeOn == true ? navigationBarImageNameBrain : navigationBarImageNameTrash
         //　現在の削除モードをUserDefaultsに保存する
         ud.isDeleteModeOn = isDeleteModeOn
         //　Viewを読み込む
