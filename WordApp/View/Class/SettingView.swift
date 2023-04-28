@@ -40,6 +40,8 @@ class SettingView: UIView {
     var selectedThemeId: Int = 0
     //　UserDefaults
     let ud = UserDefaults.standard
+    //　ワードモデル
+    var wordModel = WordListModel.shared
     //　テーマモデル
     let themeModel = DesignThemeListModel.shared
     //　ナビゲーションバータイトル
@@ -103,6 +105,8 @@ class SettingView: UIView {
         changeQuizAnswerSelectionCountSegmentedControl.addTarget(self, action: #selector(quizChoicesSegmentedControl(_:)), for: UIControl.Event.valueChanged)
         /// - クイズの出題数変更用SegmentedControlの設定
         changeMaximumQuizCountSegmentedControl.addTarget(self, action: #selector(quizMaximumCountSegmentedControl(_:)), for: UIControl.Event.valueChanged)
+        // 現在クイズ出来る問題数の上限を指定
+        checkMaximumAvaivleForQuizCount()
     }
     
     // UILabelTextに初期値を設定
@@ -223,6 +227,29 @@ class SettingView: UIView {
         navBar.standardAppearance = navigationBarAppearance
         navBar.scrollEdgeAppearance = navigationBarAppearance
         return navBar
+    }
+    
+    // 現在クイズ出来る問題数の上限を指定
+    func checkMaximumAvaivleForQuizCount() {
+        let currentQuizTotal = wordModel.getAndReturnMaximumQuizCount()
+        //　クイズの出題数上限値
+        let forSegmentAt = currentQuizTotal / 5
+        //　選択肢数
+        let choiceIndex = ud.choicesSelectedSegmentIndex
+        //　クイズの出題数
+        let quizIndex = ud.quizMaximumSelectedSegmentIndex
+        print("🔔4: ", quizIndex)
+        //　各データをSegmentedControlに設定
+        changeMaximumQuizCountSegmentedControl.selectedSegmentIndex = quizIndex
+        changeQuizAnswerSelectionCountSegmentedControl.selectedSegmentIndex = choiceIndex
+        for i in 1 ..< 7 {
+            //　基本は利用可能
+            var isAvaivable: Bool = true
+            //　上限値未満のSegmentは利用不可にする
+            if i > forSegmentAt { isAvaivable = false }
+            //　SegmentedControlに利用状態を登録する
+            changeMaximumQuizCountSegmentedControl.setEnabled(isAvaivable, forSegmentAt: i)
+        }
     }
     
     // クイズ選択肢変更用SegmentedControl

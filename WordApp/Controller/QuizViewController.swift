@@ -102,6 +102,7 @@ class QuizViewController: UIViewController {
             maximumQuizCount = countCurrentRegisteredWord()
             //　selectedSegmentedIndexを0に更新する
             ud.quizMaximumSelectedSegmentIndex = 0
+            print("🔔1: ", ud.quizMaximumSelectedSegmentIndex)
             print("🤗出題数：　", maximumQuizCount)
         } else {
             //　segment＝それ以外の場合、値に問題があるかチェック
@@ -111,6 +112,7 @@ class QuizViewController: UIViewController {
                 maximumQuizCount = (currentQuizTotal/5) * 5 // e.g. 9/5 * 5
                 //　selectedSegmentedIndexを上と同じ要領で強制更新する
                 ud.quizMaximumSelectedSegmentIndex = currentQuizTotal/5
+                print("🔔2: ", ud.quizMaximumSelectedSegmentIndex)
                 print("🤗つまみ：　", currentQuizTotal/5)
             } else {
                 // なにも問題がない場合
@@ -118,6 +120,7 @@ class QuizViewController: UIViewController {
                 maximumQuizCount = max
                 //　selectedSegmentedIndexを強制更新する
                 ud.quizMaximumSelectedSegmentIndex = currentQuizTotal/5
+                print("🔔3: ", ud.quizMaximumSelectedSegmentIndex)
                 print("🤗出題数：　", maximumQuizCount)
             }
             print("😱")

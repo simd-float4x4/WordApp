@@ -33,8 +33,6 @@ class SettingViewController: UIViewController, SettingViewDelegate, UICollection
     func getAndCheckCurrentQuizStatus() {
         //　現在の状態をリロードする
         reloadCurrentStatus()
-        //　現在クイズ出来る問題数の上限を指定
-        checkMaximumAvaivleForQuizCount()
     }
     
     //　Viewを初期化する
@@ -61,29 +59,6 @@ class SettingViewController: UIViewController, SettingViewDelegate, UICollection
         layout.minimumInteritemSpacing = 8
         // UICollectionViewFlowLayOutをviewのCollectionに設定する
         view.collectionThemeCollectionView.collectionViewLayout = layout
-    }
-    
-    // 現在クイズ出来る問題数の上限を指定
-    func checkMaximumAvaivleForQuizCount() {
-        //　SettingViewを取得
-        let view = self.view as! SettingView
-        //　クイズの出題数上限値
-        let forSegmentAt = currentQuizTotal / 5
-        //　選択肢数
-        let choiceIndex = ud.choicesSelectedSegmentIndex
-        //　クイズの出題数
-        let quizIndex = ud.quizMaximumSelectedSegmentIndex
-        //　各データをSegmentedControlに設定
-        view.changeMaximumQuizCountSegmentedControl.selectedSegmentIndex = quizIndex
-        view.changeQuizAnswerSelectionCountSegmentedControl.selectedSegmentIndex = choiceIndex
-        for i in 1 ..< 7 {
-            //　基本は利用可能
-            var isAvaivable: Bool = true
-            //　上限値未満のSegmentは利用不可にする
-            if i > forSegmentAt { isAvaivable = false }
-            //　SegmentedControlに利用状態を登録する
-            view.changeMaximumQuizCountSegmentedControl.setEnabled(isAvaivable, forSegmentAt: i)
-        }
     }
     
     //　現在の状態をリロードする

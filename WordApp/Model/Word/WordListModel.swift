@@ -74,6 +74,17 @@ class WordListModel: NSObject, UITableViewDataSource {
         let selectedWord = self.wordList.first(where: {$0.word.id == index})
         //　現在の暗記情報を取得
         let currentRememberStatus = selectedWord?.word.isRemembered
+        //　暗記リストから単語帳画面に復元するときは
+        if currentRememberStatus == true {
+            //　現在の暗記数を取得（この単語を差し引く）
+            let currentQuizTotal = getAndReturnMaximumQuizCount() - 1
+            //　設定画面の出題数Segmentを強制更新
+            if ud.quizMaximumSelectedSegmentIndex * 5 > currentQuizTotal {
+                ud.quizMaximumSelectedSegmentIndex = currentQuizTotal/5
+            }
+            print("🔔5: ", ud.quizMaximumSelectedSegmentIndex * 5, "/", currentQuizTotal)
+            print("🔔6: ", ud.quizMaximumSelectedSegmentIndex)
+        }
         //　暗記情報を更新
         selectedWord?.word.isRemembered = currentRememberStatus == true ? false : true
         //　データを更新する
