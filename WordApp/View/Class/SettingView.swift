@@ -230,7 +230,7 @@ class SettingView: UIView {
         //　選択肢の数を更新する
         settingViewDelegate.updateMaximumQuizSelection(count: currentChoicesTotal)
         //　現在の値をUserDefaultsに保存する
-        ud.set(sender.selectedSegmentIndex, forKey: "choicesSelectedSegmentIndex")
+        ud.choicesSelectedSegmentIndex = sender.selectedSegmentIndex
     }
     
     @IBAction func quizMaximumCountSegmentedControl(_ sender: UISegmentedControl) {
@@ -256,7 +256,7 @@ class SettingView: UIView {
         //　出題数の数を更新する
         settingViewDelegate.updateMaximumQuizCount(count: currentMaximumQuizSum)
         //　現在の値をUserDefaultsに保存する
-        ud.set(sender.selectedSegmentIndex, forKey: "quizMaximumSelectedSegmentIndex")
+        ud.quizMaximumSelectedSegmentIndex = sender.selectedSegmentIndex
     }
 }
 

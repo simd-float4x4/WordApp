@@ -26,7 +26,7 @@ class WordListModel: NSObject, UITableViewDataSource {
         //　wordListをJSONでエンコードする
         let encodedData = try? JSONEncoder().encode(self.wordList)
         //　UserDefaultsにエンコードしたデータを保存する
-        UserDefaults.standard.set(encodedData, forKey: "savedEncodedData")
+        ud.savedEncodedData = encodedData
         //　現在の暗記単語数を取得する
         currentQuizMaximumCount = getAndReturnMaximumQuizCount()
         //　暗記単語数をUserDefalutsに保存する
@@ -36,7 +36,7 @@ class WordListModel: NSObject, UITableViewDataSource {
     // 保存したデータを取得
     func fetchSavedData() {
         //　JSONにエンコードしたデータをDeCodeする
-        let data = UserDefaults.standard.data(forKey: "savedEncodedData")
+        let data = ud.savedEncodedData
         //　DeCodeした値がなければ
         if data != nil {
             //　データをDeCodeする
@@ -179,13 +179,12 @@ class WordListModel: NSObject, UITableViewDataSource {
     /// - Parameters:
         ///   - length: 回答数3~5
     func setQuizAnswerSelections(length: Int) {
-        ud.set(length, forKey: "currentQuisSelections")
+        ud.currentQuizSelections = length
     }
     
     //　選択肢の数を取得する
     func getQuizAnswerSelections() -> Int {
-        let value = ud.value(forKey: "currentQuisSelections") as? Int ?? 5
-        return value
+        return ud.currentQuizSelections
     }
     
     //　クイズの上限数を返却
