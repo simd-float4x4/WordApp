@@ -32,8 +32,6 @@ class QuizViewController: UIViewController {
     
     var answerSelectionArray: [String] = []
     
-    @IBOutlet weak var viewNavigationBar: UINavigationBar!
-    
     let alertOkButton = NSLocalizedString("alertOkButton", comment: "")
     let alertQuizIsNotAvailableTitleLabel = NSLocalizedString("alertQuizIsNotAvailableTitle", comment: "")
     let alertQuizIsNotAvailableTextLabel = NSLocalizedString("alertQuizIsNotAvailableText", comment: "")
@@ -70,14 +68,15 @@ class QuizViewController: UIViewController {
         //　現在のクイズに関してのプロパティを取得
         getQuizCurrentProperties()
         //　segment強制更新
-        hogehogehoge()
+        checkQuizCount()
         // クイズを初期化する
         initializeQuiz(view: view)
         // 最初のクイズを取得する
         getFirstQuiz(view: view)
     }
     
-    func hogehogehoge() {
+    //　クイズのカウント・segmented
+    func checkQuizCount() {
         //　選択されたSegmentedIndexの値
         let quizIndex = ud.quizMaximumSelectedSegmentIndex
         // Segmented * 5 = 問題の出現上限数となる
@@ -110,6 +109,7 @@ class QuizViewController: UIViewController {
     func getQuizCurrentProperties() {
         maximumAnswerChoicesCount = wordModel.getQuizAnswerSelections()
         maximumQuizCount = wordModel.getAndReturnMaximumQuizCount()
+        print("🍫選択肢数：　", maximumAnswerChoicesCount)
         print("🍫出題数：　", maximumQuizCount)
     }
     
@@ -194,10 +194,10 @@ class QuizViewController: UIViewController {
         let currentQuiz = quiz[0]
         var meaningArray: [String] = []
         meaningArray.append(currentQuiz.word.meaning)
-//        print("⭐︎currentQuizCount: ", quiz.count)
-//        print("⭐︎maximumAnswerChoices: ", maximumAnswerChoicesCount)
+        print("⭐︎currentQuizCount: ", quiz.count)
+        print("⭐︎maximumAnswerChoices: ", maximumAnswerChoicesCount)
         for i in 1 ..< maximumAnswerChoicesCount {
-            // print("i: ", i)
+            print("i: ", i)
             meaningArray.append(quiz[i].word.meaning)
         }
         drawInformationOnQuizWidget(quiz: currentQuiz, dummyAnswers: meaningArray, correctAnswer: meaningArray[0], view: view)
