@@ -25,6 +25,7 @@ class CustomUIProgressionBar: UIProgressView {
     //　呼ばれたときにロードするメソッド
     func loadProperties() {
         fetchSavedThemeData()
+        getBarAccentColor()
         setBarAccentColor()
     }
     
@@ -34,8 +35,13 @@ class CustomUIProgressionBar: UIProgressView {
         selectedThemeId = ud.selectedThemeColorId
     }
     
+    //　バーのアクセントカラーを取得する
+    func getBarAccentColor() {
+        barAccentColor = themeModel.themeList[selectedThemeId].theme.accentColor
+    }
+    
     //　バーのアクセントカラーをセットする
     func setBarAccentColor() {
-        barAccentColor = themeModel.themeList[selectedThemeId].theme.accentColor
+        self.progressTintColor = UIColor(hex: barAccentColor)
     }
 }

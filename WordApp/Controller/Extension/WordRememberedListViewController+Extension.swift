@@ -81,8 +81,15 @@ extension WordRememberedListViewController: UITableViewDelegate {
     func setUpComplementalFontColor(themeName: String, selected: Int) -> String {
         //　フォントカラーを取得
         var fontColor = themeModel.themeList[selected].theme.fontColor
+        //　テーマ名一覧を取得する
+        let themeNameList = ThemeName().list
+        //　テーマ名を一覧から取得する
+        let normal = themeNameList["normal"]
+        let olive = themeNameList["olive"]
+        let soda = themeNameList["soda"]
+        let strawberry = themeNameList["berry"]
         //　テーマ名が特定テーマであれば
-        if themeName == "ノーマル" || themeName == "オリーブ" || themeName == "ブルーソーダ" || themeName == "ストロベリー" {
+        if themeName == normal || themeName == olive || themeName == soda || themeName == strawberry {
             //　フォントカラーを補色にセット
             fontColor = themeModel.themeList[selected].theme.complementalFontColor
         }
@@ -101,8 +108,12 @@ extension WordRememberedListViewController: UITableViewDelegate {
         view.backgroundColor = UIColor(hex: color)
         //　ViewのフレームをWordListWidgetの幅、heightForInSectionにピッタリ合わせるよう返す
         view.frame = CGRect(x: 20, y: 0, width: wordListView.wordRememberedListWidget.frame.width, height: 30)
+        //　テーマ名一覧を取得する
+        let themeNameList = ThemeName().list
+        //　テーマ名を一覧から取得する
+        let space = themeNameList["space"]
         //　テーマ名がスペースだったら
-        if themeName == "スペース" {
+        if themeName == space {
             //　影の色を設定する
             view.layer.shadowColor = UIColor.clear.cgColor
             //　影のオフセットを設定する

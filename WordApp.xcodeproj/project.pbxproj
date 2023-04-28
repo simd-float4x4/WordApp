@@ -31,6 +31,7 @@
 		702F250C29F89903006745A9 /* SettingViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F250B29F89903006745A9 /* SettingViewController+Extension.swift */; };
 		702F250E29FA7166006745A9 /* DesignThemeListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F250D29FA7166006745A9 /* DesignThemeListModel.swift */; };
 		702F251029FA72CD006745A9 /* WordListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F250F29FA72CD006745A9 /* WordListModel.swift */; };
+		702F251229FB7E4F006745A9 /* ThemeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F251129FB7E4F006745A9 /* ThemeName.swift */; };
 		702F654829D7FEDA0041B8DC /* WordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F654729D7FEDA0041B8DC /* WordDetailViewController.swift */; };
 		702F654A29D7FF120041B8DC /* WordDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 702F654929D7FF120041B8DC /* WordDetailView.xib */; };
 		702F654C29D7FF200041B8DC /* WordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F654B29D7FF200041B8DC /* WordDetailView.swift */; };
@@ -126,6 +127,7 @@
 		702F250B29F89903006745A9 /* SettingViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingViewController+Extension.swift"; sourceTree = "<group>"; };
 		702F250D29FA7166006745A9 /* DesignThemeListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignThemeListModel.swift; sourceTree = "<group>"; };
 		702F250F29FA72CD006745A9 /* WordListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListModel.swift; sourceTree = "<group>"; };
+		702F251129FB7E4F006745A9 /* ThemeName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeName.swift; sourceTree = "<group>"; };
 		702F654729D7FEDA0041B8DC /* WordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDetailViewController.swift; sourceTree = "<group>"; };
 		702F654929D7FF120041B8DC /* WordDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WordDetailView.xib; sourceTree = "<group>"; };
 		702F654B29D7FF200041B8DC /* WordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDetailView.swift; sourceTree = "<group>"; };
@@ -419,6 +421,7 @@
 			children = (
 				702F24FB29F686E7006745A9 /* UserDefaults.swift */,
 				709BDBDB29E7A86200F06C59 /* Alert.swift */,
+				702F251129FB7E4F006745A9 /* ThemeName.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -669,6 +672,7 @@
 				70A7C43C29ED167A007C07FC /* DesignThemeModel.swift in Sources */,
 				70A7C45829EFA73D007C07FC /* CustomUISegmentedControl.swift in Sources */,
 				7024110D29D560EE0024ABBD /* Word.swift in Sources */,
+				702F251229FB7E4F006745A9 /* ThemeName.swift in Sources */,
 				702F251029FA72CD006745A9 /* WordListModel.swift in Sources */,
 				7024111329D562160024ABBD /* WordListViewController.swift in Sources */,
 				70A7C45429EFA6F7007C07FC /* CustomBackgroundLabel.swift in Sources */,

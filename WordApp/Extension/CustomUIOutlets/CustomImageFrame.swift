@@ -35,8 +35,12 @@ class CustomImageFrame: UIImageView {
     func hideOrShowImageFrames() {
         // テーマの名称を取得する
         let themeName = DesignThemeListModel.shared.themeList[selectedThemeId].theme.name
+        //　テーマ名一覧を取得する
+        let themeNameList = ThemeName().list
+        //　テーマ名を一覧から取得する
+        guard let luxury = themeNameList["luxury"] else { return }
         // 選択されているテーマがラグジュアリーテーマであれば、frameを表示する。
-        if themeName == "ラグジュアリー" {
+        if themeName == luxury {
             self.isHidden = false
         } else {
             self.isHidden = true

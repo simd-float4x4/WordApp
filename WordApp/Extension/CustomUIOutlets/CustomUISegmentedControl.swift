@@ -93,10 +93,20 @@ class CustomUISegmentedControl: UISegmentedControl {
     
     // テーマで色を変更する
     func changeFontColorByTheme() {
+        //　テーマ名を取得する
         let themeName = getThemeName()
-        if themeName != "スペース" && themeName != "オレンジ" && themeName != "チョコレート" {
+        //　テーマ名一覧を取得する
+        let themeNameList = ThemeName().list
+        //　テーマ名を一覧から取得する
+        guard let space = themeNameList["space"] else { return }
+        guard let orange = themeNameList["orange"] else { return }
+        guard let chocolate = themeNameList["chocolate"] else { return }
+        //　該当するテーマでなければ
+        if themeName != space && themeName != orange && themeName != chocolate {
+            //　色を変更
             customBackgroundColor = themeModel.themeList[selectedThemeId].theme.complementalFontColor
         } else {
+            //　通常のフォントカラーのまま
             customBackgroundColor = themeModel.themeList[selectedThemeId].theme.fontColor
         }
     }
@@ -120,12 +130,7 @@ class CustomUISegmentedControl: UISegmentedControl {
             self.selectedSegmentIndex = getMaximumRememberedWordsCount / quizStepValue
         }
     }
-    
-//    func updateQuizCount() {
-//        wordModel.setMaximumQuiz(count: getMaximumRememberedWordsCount)
-//        wordModel.setReturnQuizChoices(count: getQuizSelectionCount)
-//    }
-//    
+
     //　テーマの名前を取得する
     func getThemeName() -> String{
         // テーマの名称を取得する
