@@ -3,10 +3,11 @@ import UIKit
 
 // MARK: QuizViewController
 class QuizViewController: UIViewController {
-    
+    //　ワードモデル
     var wordModel = WordListModel.shared
+    //　テーマモデル
     var themeModel = DesignThemeListModel.shared
-    
+    //　クイズを格納するための配列
     var quiz: [WordModel] = []
     // 選択肢の数
     var maximumAnswerChoicesCount: Int = 5
@@ -26,41 +27,53 @@ class QuizViewController: UIViewController {
     var totalSolvedQuizCount: Int = 0
     // UserDefaults
     let ud = UserDefaults.standard
-    
-    var topSafeAreaHeight: CGFloat = 0
-    var bottomSafeAreaHeight: CGFloat = 0
-    
+    //　ダミーの選択肢を格納するための配列
     var answerSelectionArray: [String] = []
-    
-    let alertOkButton = NSLocalizedString("alertOkButton", comment: "")
-    let alertQuizIsNotAvailableTitleLabel = NSLocalizedString("alertQuizIsNotAvailableTitle", comment: "")
-    let alertQuizIsNotAvailableTextLabel = NSLocalizedString("alertQuizIsNotAvailableText", comment: "")
-    let alertQuizIsFinishedTitleLabel = NSLocalizedString("alertQuizFinishedTitle", comment: "")
-    let alertQuizIsFinishedTextLabel = NSLocalizedString("alertQuizFinishedText", comment: "")
-    let alertQuizNumberTextLabel = NSLocalizedString("alertQuizNumber", comment: "")
-    let quizMoveToResultPresentationTextLabel = NSLocalizedString("quizMoveToResultPresentation", comment: "")
-    
+    //　定数
+    let alertErrorTitleLabel = NSLocalizedString("alertErrorTitle", comment: "エラー")
+    let alertOkButton = NSLocalizedString("alertOkButton", comment: "OK")
+    let alertQuizIsNotAvailableTitleLabel = NSLocalizedString("alertQuizIsNotAvailableTitle", comment: "クイズを利用するためには、単語を5つ以上暗記してください。")
+    let alertQuizIsNotAvailableTextLabel = NSLocalizedString("alertQuizIsNotAvailableText", comment: "点です。（100点満点中）")
+    let alertQuizIsFinishedTitleLabel = NSLocalizedString("alertQuizFinishedTitle", comment: "お疲れ様でした。")
+    let alertQuizIsFinishedTextLabel = NSLocalizedString("alertQuizFinishedText", comment: "登録完了(")
+    let alertQuizNumberTextLabel = NSLocalizedString("alertQuizNumber", comment: "問")
+    let quizMoveToResultPresentationTextLabel = NSLocalizedString("quizMoveToResultPresentation", comment: "結果発表へ")
+    //　ナビゲーションアイテム
     let QuizNavigationItem = UINavigationItem(title: "クイズモード")
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //　Viewを初期化する
         initializeView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        //　Viewを初期化する
         initializeView()
     }
     
+    //　Viewを初期化する
     func initializeView() {
+        //　QuizViewのインスタンスを生成する
         let view = QuizView()
         self.view = view
+        //　クイズが利用できるか確認する
+        checkQuizIsAvailable()
+    }
+    
+    //　クイズが利用できるか確認する
+    func checkQuizIsAvailable() {
         let quizView = self.view as! QuizView
+        //　クイズが利用できるか確認する
         let isAvailable = checkIsQuizAvailable()
+        //　利用可能であれば
         if isAvailable {
+            //　クイズをセットする
             setQuiz(view: quizView)
         }
     }
     
+    //　クイズをセットする
     func setQuiz(view: QuizView) {
         // 利用可能なクイズ数を取得
         currentQuizTotal = countCurrentRegisteredWord()
@@ -83,21 +96,27 @@ class QuizViewController: UIViewController {
         let max = 5 * quizIndex
         print("🍫つまみ：　", quizIndex)
         print("🍫上限数：　", max)
+        //　出題数が「全部」であるなら
         if quizIndex == 0 {
-            // segment==0の際、全部の値を返却する
+            // 全部の値を返却する
             maximumQuizCount = countCurrentRegisteredWord()
+            //　selectedSegmentedIndexを0に更新する
             ud.quizMaximumSelectedSegmentIndex = 0
             print("🤗出題数：　", maximumQuizCount)
         } else {
             //　segment＝それ以外の場合、値に問題があるかチェック
             //　保存されたsegmentより単語総数が小さい場合
             if currentQuizTotal < max { // e.g. 9 < 10
+                //　出題数を更新。5で割った余りを切り捨てる
                 maximumQuizCount = (currentQuizTotal/5) * 5 // e.g. 9/5 * 5
+                //　selectedSegmentedIndexを上と同じ要領で強制更新する
                 ud.quizMaximumSelectedSegmentIndex = currentQuizTotal/5
                 print("🤗つまみ：　", currentQuizTotal/5)
             } else {
                 // なにも問題がない場合
+                //　上限にmaxを設定する
                 maximumQuizCount = max
+                //　selectedSegmentedIndexを強制更新する
                 ud.quizMaximumSelectedSegmentIndex = currentQuizTotal/5
                 print("🤗出題数：　", maximumQuizCount)
             }
@@ -107,7 +126,9 @@ class QuizViewController: UIViewController {
     
     // 設定からクイズに関する情報を取得する
     func getQuizCurrentProperties() {
+        //　回答選択肢の数を取得する
         maximumAnswerChoicesCount = wordModel.getQuizAnswerSelections()
+        //　出題数の数を取得する
         maximumQuizCount = wordModel.getAndReturnMaximumQuizCount()
         print("🍫選択肢数：　", maximumAnswerChoicesCount)
         print("🍫出題数：　", maximumQuizCount)
@@ -115,7 +136,9 @@ class QuizViewController: UIViewController {
     
     // UIの初期化
     func initQuizUI(view: QuizView) {
+        // ProgressのUIを初期化する
         initProgressArea(view: view)
+        // 回答ボタンのUIを初期化する
         initButtonState(view: view)
         decideButtonDisplayOrNot(view: view)
     }
@@ -130,6 +153,7 @@ class QuizViewController: UIViewController {
     
     // 回答ボタンのUIを初期化する
     func initButtonState(view: QuizView) {
+        // 回答ボタンの色・テキストをリセットする
         resetButtonState(view: view)
         view.quizAnswerButtonIsTappedDelegate = self
     }
@@ -169,44 +193,57 @@ class QuizViewController: UIViewController {
         initQuizUI(view: view)
         // クイズをシャッフルして配列を生成する
         quiz = makeRandomQuizList()
+        //　答えた数を0に設定
         totalSolvedQuizCount = 0
+        //　間違えた数を0に設定
         totalQuizWrongCount = 0
     }
     
     // 最初のクイズを取得
     func getFirstQuiz(view: QuizView) {
+        //　エラーハンドリング：クイズが0問の状態でアクセスした場合
         if quiz.isEmpty == true {
             let okAction = UIAlertAction(title: alertOkButton, style: .default) { _ in
+                // WordListに戻す
                 self.goToTheRootViewController()
             }
-            showAlert(title: "Error: Index Out Of Range", message: "let currentQuiz = quiz[0]", actions: [okAction])
+            //　アラートを表示
+            showAlert(title: alertErrorTitleLabel, message: "クイズを生成できませんでした。", actions: [okAction])
         } else {
             // 最初のQuizを抽出
             let currentQuiz = quiz[0]
             // これが一番最初のQuizならストッパーとして利用するためIDを控えておく
             currentQuizStopper = currentQuiz.word.id
+            // クイズを表示する
             showCurrentQuiz(view: view)
         }
     }
     
-    // クイズの表示メソッド
+    // クイズを表示する
     func showCurrentQuiz(view: QuizView) {
+        //　配列最初のクイズを取得
         let currentQuiz = quiz[0]
+        //　単語の意味用に空配列を宣言
         var meaningArray: [String] = []
+        //　空配列に現在のクイズの意味を格納
         meaningArray.append(currentQuiz.word.meaning)
-        print("⭐︎currentQuizCount: ", quiz.count)
-        print("⭐︎maximumAnswerChoices: ", maximumAnswerChoicesCount)
+        //　回答選択肢の数によってダミー選択肢を生成
         for i in 1 ..< maximumAnswerChoicesCount {
             print("i: ", i)
+            //　配列にダミー選択肢を格納
             meaningArray.append(quiz[i].word.meaning)
         }
+        //　配列最初のクイズ、ダミー選択肢、正解の選択肢を渡す
         drawInformationOnQuizWidget(quiz: currentQuiz, dummyAnswers: meaningArray, correctAnswer: meaningArray[0], view: view)
     }
 
     // 登録した単語が特定の単語数未満だった場合アラートを表示する
     func checkIsQuizAvailable() -> Bool {
+        //　現在の単語の暗記件数を取得する
         let currenWordRegisterCount = countCurrentRegisteredWord()
+        //　5問以下であれば
         if currenWordRegisterCount < maximumAnswerChoicesCount {
+            // 登録した単語が特定の単語数未満だった場合のアラートを表示する
             wordAmountIsNotEnoughToActivateQuizAlert()
             return false
         }
@@ -216,19 +253,24 @@ class QuizViewController: UIViewController {
     // 登録した単語が特定の単語数未満だった場合表示するアラート
     func wordAmountIsNotEnoughToActivateQuizAlert() {
         let okAction = UIAlertAction(title: alertOkButton, style: .default) { _ in
+            //　単語帳画面に戻る
             self.goToTheRootViewController()
         }
+        //　登録した単語が特定の単語数未満だった旨のアラートを表示する
         showAlert(title: alertQuizIsNotAvailableTitleLabel, message: alertQuizIsNotAvailableTextLabel, actions: [okAction])
     }
     
     // RootViewController(WordListViewController)に遷移する
     func goToTheRootViewController() {
+        //　WordListViewControllerのindexを取得する
         let UINavigationController = self.tabBarController?.viewControllers?[0];
+        //　取得したControllerのindexをselectedにする
         self.tabBarController?.selectedViewController = UINavigationController;
     }
     
     // 現在登録されている単語の数を取得
     func countCurrentRegisteredWord() -> Int{
+        //　現在登録されている単語の数を取得
         return wordModel.getAndReturnMaximumQuizCount()
     }
     
@@ -236,19 +278,10 @@ class QuizViewController: UIViewController {
     func makeRandomQuizList() -> [WordModel] {
         // wordListをランダムにシャッフル
         let quizArray = wordModel.wordList.filter({$0.word.isRemembered == true}).shuffled()
+        // 出題数の分だけ配列の[0]から単語を生成する
         let returnArray = quizArray.prefix(maximumQuizCount).map{$0}
         print("🍄maximumQuizCount: ", maximumQuizCount)
         return returnArray
-    }
-    
-    // ダミー解答を生成する
-    func makeDummyQuizMeaning(quiz: [WordModel]) -> [String] {
-        var meaningArray: [String] = []
-        for i in 1 ..< quiz.count {
-            let meaning = quiz[i].word.meaning
-            meaningArray.append(meaning)
-        }
-        return meaningArray
     }
     
     // WordListの一番最初の要素を削除する
@@ -360,14 +393,21 @@ class QuizViewController: UIViewController {
     
     // この問題が最終問題かどうか取得する
     func checkNextQuizIsLast() {
+        // この問題のidがstopperで設定したidと同一であれば
         if quiz[0].word.id == currentQuizStopper {
+            //　正解数を取得
             let solvedCorrectlyCount = totalSolvedQuizCount - totalQuizWrongCount
+            //　スコアを算出し、ラベルに代入
             let scoreString = String(solvedCorrectlyCount * 100 / totalSolvedQuizCount) + alertQuizIsFinishedTextLabel + "\n⭕️" + String(solvedCorrectlyCount)   + alertQuizNumberTextLabel  + " " + "❌" + String(totalQuizWrongCount)  + alertQuizNumberTextLabel
+            // OKが押されたのであれば
             let okAction = UIAlertAction(title: alertOkButton, style: .default) { _ in
+                //　単語帳画面に移動する
                 self.goToTheRootViewController()
             }
+            //　アラートを表示する
             showAlert(title: alertQuizIsFinishedTitleLabel, message: scoreString, actions: [okAction])
             getQuizCurrentProperties()
+            //　TODO: 検証（不要？）
             ud.quizMaximumSelectedSegmentIndex = maximumQuizCount/5
             goToTheRootViewController()
         }
@@ -375,9 +415,13 @@ class QuizViewController: UIViewController {
 
     // Progressionを更新する
     func reloadProgressionView(view: QuizView) {
+        //　分母に回答した問題数を代入する
         let demominator = maximumQuizCount
+        //　進捗率を生成する
         let progressionRate = Float(totalSolvedQuizCount) / Float(demominator)
+        //　進捗率をラベルに設定する
         view.quizProgressionLabel.text = String(totalSolvedQuizCount+1) + "  問目"
+        //　ProgressionBarを設定する
         view.quizProgressBar.progress = Float(progressionRate)
     }
 }
