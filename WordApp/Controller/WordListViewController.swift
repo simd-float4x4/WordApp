@@ -107,16 +107,23 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     func fetchCurrentProgress() {
         //　WordListViewを取得
         let wordListView = self.view as! WordListView
-        //　
+        //　暗記した単語の数をカウント
         let wordSolvedSum = wordModel.wordList.filter({$0.word.isRemembered == true}).count
+        //　単語の総数をカウント
         let wordTotalSum = wordModel.wordList.count
+        //　進捗率
         let wordRememberedPercentage = wordTotalSum != 0 ? wordSolvedSum * 100 / wordTotalSum : 100
+        //　回答状況
         wordListView.progressWordSumLabel.text = String(wordSolvedSum) + slashString + String(wordTotalSum)
+        //　%
         wordListView.progressPercentageLabel.text = String(wordRememberedPercentage) + percetnageString
+        //　ProgressBarの進捗率
         wordListView.progressBarWidget.progress = Float(wordRememberedPercentage) / 100.0
         // データ個数が0の場合
         if wordTotalSum == 0 && wordSolvedSum == 0 {
+            //　0%にする
             wordListView.progressPercentageLabel.text = zeroString + percetnageString
+            //　ProgressionBarを0に設定する
             wordListView.progressBarWidget.progress = 0.0 / 100.0
         }
     }
@@ -124,10 +131,13 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     // WordListWidgetを初期化する
     func initializeWordListWidget() {
         let wordListView = self.view as! WordListView
+        // Delegateを設定する
         wordListView.reloadWordListDelegate = self
         wordListView.sortWordListDelegate = self
         wordListView.wordListWidget.delegate = self
+        // DataSourceを設定する
         wordListView.wordListWidget.dataSource = self.wordModel
+        //　セルを登録する
         wordListView.wordListWidget.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
     }
     
@@ -138,10 +148,13 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         wordListView.wordListWidget.reloadData()
         // 表示上の配列をあらかじめfilterしておく
         let itemList =  wordModel.returnFilteredWordList(isWordRememberedStatus: false)
+        //　配列が空だったら
         if itemList.isEmpty == true {
+            //　テーブル/ラベルのhiddenを更新
             wordListView.wordListWidget.isHidden = true
             wordListView.thereIsNoWordLabel.isHidden = false
         } else {
+            //　テーブル/ラベルのhiddenを更新
             wordListView.wordListWidget.isHidden = false
             wordListView.thereIsNoWordLabel.isHidden = true
         }
