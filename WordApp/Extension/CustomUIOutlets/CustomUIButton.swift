@@ -40,7 +40,11 @@ class CustomUIButton: UIButton {
         backGroundSubColor = themeModel.themeList[selectedThemeId].theme.complementalColor
         fontColor = themeModel.themeList[selectedThemeId].theme.fontColor
         let themeName = getThemeName()
-        if themeName == "ブルーソーダ" { changetitleLabelColor() }
+        //　テーマ名一覧を取得する
+        let themeNameList = ThemeName().list
+        //　テーマ名を一覧から取得する
+        guard let soda = themeNameList["soda"] else { return }
+        if themeName == soda { changetitleLabelColor() }
         changeDesignStyle()
     }
     

@@ -11,7 +11,7 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
     var themeList: [DesignThemeModel] = [
         DesignThemeModel.init(initTheme:
             DesignTheme(id: 1,
-                        name: "ノーマル",
+                        name: NSLocalizedString("designThemeNameNormal", comment: "ノーマル"),
                         useImage: false,
                         themeImageForIconUrl: "",
                         backgroundImageUrl: "",
@@ -26,7 +26,7 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
         ),
         DesignThemeModel.init(initTheme:
             DesignTheme(id: 2,
-                        name: "スペース",
+                        name: NSLocalizedString("designThemeNameSpace", comment: "スペース"),
                         useImage: true,
                         themeImageForIconUrl: "earth_icon",
                         backgroundImageUrl: "earth",
@@ -41,7 +41,7 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
         ),
         DesignThemeModel.init(initTheme:
             DesignTheme(id: 3,
-                        name: "オレンジ",
+                        name: NSLocalizedString("designThemeNameOrange", comment: "オレンジ"),
                         useImage: false,
                         themeImageForIconUrl: "",
                         backgroundImageUrl: "",
@@ -56,7 +56,7 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
         ),
         DesignThemeModel.init(initTheme:
             DesignTheme(id: 4,
-                        name: "オリーブ",
+                        name: NSLocalizedString("designThemeNameOlive", comment: "オリーブ"),
                         useImage: false,
                         themeImageForIconUrl: "",
                         backgroundImageUrl: "",
@@ -71,7 +71,7 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
         ),
         DesignThemeModel.init(initTheme:
             DesignTheme(id: 5,
-                        name: "ブルーソーダ",
+                        name: NSLocalizedString("designThemeNameBlueSoda", comment: "ブルーソーダ"),
                         useImage: true,
                         themeImageForIconUrl: "soda_icon",
                         backgroundImageUrl: "soda",
@@ -86,7 +86,7 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
         ),
         DesignThemeModel.init(initTheme:
             DesignTheme(id: 6,
-                        name: "ストロベリー",
+                        name: NSLocalizedString("designThemeNameStrawberry", comment: "ストロベリー"),
                         useImage: true,
                         themeImageForIconUrl: "strawberry_icon",
                         backgroundImageUrl: "strawberry",
@@ -101,7 +101,7 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
         ),
         DesignThemeModel.init(initTheme:
             DesignTheme(id: 7,
-                        name: "ラグジュアリー",
+                        name: NSLocalizedString("designThemeNameLuxury", comment: "ラグジュアリー"),
                         useImage: true,
                         themeImageForIconUrl: "luxury_icon",
                         backgroundImageUrl: "luxury",
@@ -116,7 +116,7 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
         ),
         DesignThemeModel.init(initTheme:
             DesignTheme(id: 8,
-                        name: "チョコレート",
+                        name: NSLocalizedString("designThemeNameChocolate", comment: "チョコレート"),
                         useImage: true,
                         themeImageForIconUrl: "chocolate_icon",
                         backgroundImageUrl: "chocolate",
@@ -147,7 +147,7 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
         //　各セルのテキストについて描画を行う
         setUpCollectionViewCellText(cell: cell, index: indexPath.row)
         //　セルを角丸にする
-        makeCellCornerRadius(cell: cell, currentThemeId: currentThemeId as! Int, index: indexPath.row)
+        makeCellCornerRadius(cell: cell, currentThemeId: currentThemeId, index: indexPath.row)
         //　セルの背景を設定する
         setUpCellBackground(cell: cell, index: indexPath.row)
         return cell

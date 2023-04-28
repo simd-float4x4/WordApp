@@ -124,7 +124,13 @@ class QuizView: UIView {
     //　アクセントカラーをセット
     func setAccentColor() {
         let themeName = getThemeName()
-        if themeName == "オレンジ" || themeName == "オリーブ" || themeName == "ストロベリー" {
+        //　テーマ名一覧を取得する
+        let themeNameList = ThemeName().list
+        //　テーマ名を一覧から取得する
+        guard let orange = themeNameList["orange"] else { return }
+        guard let olive = themeNameList["olive"] else { return }
+        guard let strawberry = themeNameList["berry"] else { return }
+        if themeName == orange || themeName == olive || themeName == strawberry {
             accentColor = themeModel.themeList[selectedThemeId].theme.complementalColor
         } else {
             // 上記３テーマ以外は補色をセットする
@@ -148,8 +154,14 @@ class QuizView: UIView {
             height: statusBarHeight)
         // テーマ名を取得
         let themeName = getThemeName()
+        //　テーマ名一覧を取得する
+        let themeNameList = ThemeName().list
+        //　テーマ名を一覧から取得する
+        let normal = themeNameList["normal"]
+        let space = themeNameList["space"]
+        let soda = themeNameList["soda"]
         //　下記３テーマはナビゲーションバーの文字がDefaultフォントだと見にくいため白糸に
-        if themeName == "ノーマル" || themeName == "スペース" || themeName == "ブルーソーダ" {
+        if themeName == normal || themeName == space || themeName == soda {
             label.textColor = navigationItemFontWhiteColor
         }
         //フォントサイズを指定

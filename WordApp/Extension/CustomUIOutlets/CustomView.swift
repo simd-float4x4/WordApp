@@ -49,7 +49,11 @@ class CustomView: UIView {
     func reloadCustomView() {
         let themeName = getThemeName()
         setCommonShadowProperties()
-        if themeName == "スペース" {
+        //　テーマ名一覧を取得する
+        let themeNameList = ThemeName().list
+        //　テーマ名を一覧から取得する
+        guard let space = themeNameList["space"] else { return }
+        if themeName == space {
             setBackgroundColor(alpha: backgroundTransparency[0])
             setShadowColor(color: pinkColor)
         } else {
