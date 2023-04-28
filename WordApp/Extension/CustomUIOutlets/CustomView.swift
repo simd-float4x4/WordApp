@@ -11,6 +11,8 @@ class CustomView: UIView {
     var blackColor = UIColor.black
     // 背景色のカラー：初期値
     var customViewBackgroundColor: String = "FFFFFF"
+    // 背景色（補色）
+    var complementalCustomViewBackGroundColor: String = "29324D"
     // テーマモデルID
     var selectedThemeId: Int = 0
     // テーマモデル
@@ -52,14 +54,20 @@ class CustomView: UIView {
         //　テーマ名一覧を取得する
         let themeNameList = ThemeName().list
         //　テーマ名を一覧から取得する
+        guard let normal = themeNameList["normal"] else { return }
         guard let space = themeNameList["space"] else { return }
         if themeName == space {
             setBackgroundColor(alpha: backgroundTransparency[0])
             setShadowColor(color: pinkColor)
-        } else {
+        } else if themeName == normal {
+            setShadowColor(color: blackColor)
+            setBackgroundColorCaseNormal(mainModeColor: UIColor(hex: customViewBackgroundColor), darkModeColor: UIColor(hex: complementalCustomViewBackGroundColor))
             setCornerRadius()
+            self.clipsToBounds = true
+        } else {
             setBackgroundColor(alpha: backgroundTransparency[1])
             setShadowColor(color: blackColor)
+            setCornerRadius()
             self.clipsToBounds = true
         }
         setShadowOffsets(w: shadowOffsetXandY[0], h: shadowOffsetXandY[1])
@@ -110,5 +118,17 @@ class CustomView: UIView {
         // テーマの名称を取得する
         let themeName = DesignThemeListModel.shared.themeList[selectedThemeId].theme.name
         return themeName
+    }
+    
+    //　ノーマルテーマのみダークモード対応
+    func setBackgroundColorCaseNormal(mainModeColor: UIColor, darkModeColor: UIColor) {
+        let dynamicColor = UIColor { (traitCollection: UITraitCollection) -> UIColor in
+           if traitCollection.userInterfaceStyle == .dark {
+               return darkModeColor
+           } else {
+               return mainModeColor
+           }
+        }
+        self.backgroundColor = dynamicColor
     }
 }
