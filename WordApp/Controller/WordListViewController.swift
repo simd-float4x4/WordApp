@@ -60,6 +60,10 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     var navigationBarImageNameBrain = "brain"
     //　ナビゲーションバーに使用する画像の名前（削除モード）
     var navigationBarImageNameTrash = "trash.fill"
+    // 「日本語訳を表示する」UILabel
+    let showTranslation = NSLocalizedString("showTranslation", comment: "")
+    //　「日本語訳を隠す」UILabel
+    let hideTranslation = NSLocalizedString("hideTranslation", comment: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -139,6 +143,12 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         wordListView.wordListWidget.dataSource = self.wordModel
         //　セルを登録する
         wordListView.wordListWidget.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        // ソートボタンのラベル文字を適宜変更する
+        wordListView.sortWordListButton.setTitle(sortTypeTextArray[sortType-1], for: .normal)
+        //　日本語訳の表示/非表示を取得する
+        let isTranslationHiddenTrue = ud.isMeaningHidden != true ?  hideTranslation : showTranslation
+        //　日本語訳の表示/非表示を適宜変更する
+        wordListView.hideMeaningButton.setTitle(isTranslationHiddenTrue, for: .normal)
     }
     
     // WordListWidgetをリロードする
