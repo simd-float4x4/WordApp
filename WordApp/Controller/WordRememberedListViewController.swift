@@ -57,6 +57,8 @@ class WordRememberedListViewController: UIViewController, SortWordRememberedList
         view.wordRememberedListWidget.dataSource = self.wordModel
         //　ラベルに初期値を設定する
         view.thereIsNoWordLabel.text = NSLocalizedString("WordListWidgetIsNilLabel", comment: "")
+        // ソートボタンのラベル文字を適宜変更する
+        view.sortWordRememberedListButton.setTitle(sortTypeTextArray[sortType-1], for: .normal)
         self.view = view
     }
     
