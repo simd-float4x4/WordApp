@@ -156,13 +156,22 @@ class DesignThemeListModel: NSObject, UICollectionViewDataSource {
     //　各セルのテキストについて描画を行う
     func setUpCollectionViewCellText(cell: UICollectionViewCell, index: Int) {
         //　フォントカラーを取得する
-        let fontColor = themeList[index].theme.fontColor
+        var fontColor = themeList[index].theme.fontColor
         //　UIListContentConfiguration.cell()を宣言する
         var config = UIListContentConfiguration.cell()
         //　セルのテキストを設定する
         config.text = self.themeList[index].theme.name
         //　テキストを中央揃えにする
         config.textProperties.alignment = .center
+        //　テーマ名一覧を取得する
+        let themeNameList = ThemeName().list
+        //　テーマ名を一覧から取得する
+        guard let soda = themeNameList["soda"] else { return }
+        //　ソーダテーマの場合
+        if config.text == soda {
+            //　フォントカラーを補色に
+            fontColor = themeList[index].theme.complementalFontColor
+        }
         //　テキストをフォントカラーに設定する
         config.textProperties.color = UIColor(hex: fontColor)
         //　現在のフォントサイズを取得する

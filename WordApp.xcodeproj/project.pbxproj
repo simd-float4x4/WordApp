@@ -32,6 +32,7 @@
 		702F250E29FA7166006745A9 /* DesignThemeListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F250D29FA7166006745A9 /* DesignThemeListModel.swift */; };
 		702F251029FA72CD006745A9 /* WordListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F250F29FA72CD006745A9 /* WordListModel.swift */; };
 		702F251229FB7E4F006745A9 /* ThemeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F251129FB7E4F006745A9 /* ThemeName.swift */; };
+		702F251629FC8615006745A9 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F251529FC8615006745A9 /* CustomTabBar.swift */; };
 		702F654829D7FEDA0041B8DC /* WordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F654729D7FEDA0041B8DC /* WordDetailViewController.swift */; };
 		702F654A29D7FF120041B8DC /* WordDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 702F654929D7FF120041B8DC /* WordDetailView.xib */; };
 		702F654C29D7FF200041B8DC /* WordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702F654B29D7FF200041B8DC /* WordDetailView.swift */; };
@@ -128,6 +129,7 @@
 		702F250D29FA7166006745A9 /* DesignThemeListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignThemeListModel.swift; sourceTree = "<group>"; };
 		702F250F29FA72CD006745A9 /* WordListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListModel.swift; sourceTree = "<group>"; };
 		702F251129FB7E4F006745A9 /* ThemeName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeName.swift; sourceTree = "<group>"; };
+		702F251529FC8615006745A9 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		702F654729D7FEDA0041B8DC /* WordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDetailViewController.swift; sourceTree = "<group>"; };
 		702F654929D7FF120041B8DC /* WordDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WordDetailView.xib; sourceTree = "<group>"; };
 		702F654B29D7FF200041B8DC /* WordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDetailView.swift; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 				70A7C45529EFA716007C07FC /* CustomUIProgressionBar.swift */,
 				70A7C43E29ED28F1007C07FC /* CustomView.swift */,
 				70A7C47329F14EB7007C07FC /* CustomImageFrame.swift */,
+				702F251529FC8615006745A9 /* CustomTabBar.swift */,
 			);
 			path = CustomUIOutlets;
 			sourceTree = "<group>";
@@ -698,6 +701,7 @@
 				706C44C029DAEEA700B5FBC8 /* AddWordView.swift in Sources */,
 				702F250629F896BA006745A9 /* WordListViewController+Extension.swift in Sources */,
 				702F654829D7FEDA0041B8DC /* WordDetailViewController.swift in Sources */,
+				702F251629FC8615006745A9 /* CustomTabBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

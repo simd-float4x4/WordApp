@@ -246,8 +246,25 @@ class WordListModel: NSObject, UITableViewDataSource {
         }
         //　textに単語を表示
         content.text = wordModel.word.singleWord
+        //　テーマ名を取得する
+        let themeName = getThemeName(themeId: selected)
+        //　テーマ名一覧を取得する
+        let themeNameList = ThemeName().list
+        //　テーマ名を一覧から取得する
+        let normal = themeNameList["normal"]
         //　フォントカラーを取得
-        let fontColor = UIColor(hex: themeModel.themeList[selected].theme.fontColor)
+        var fontColor = UIColor(hex: themeModel.themeList[selected].theme.fontColor)
+        //　ノーマルだったらダークモード対応するために分岐
+        if themeName == normal {
+            //　フォントカラー（補色）を取得
+            let complementalFontColor = UIColor(hex: themeModel.themeList[selected].theme.complementalFontColor)
+            //　ノーマルテーマのみダークモード対応
+            fontColor = setFontColorCaseNormal(mainModeColor: fontColor, darkModeColor: complementalFontColor)
+            //　textにフォントカラーを設定
+            content.textProperties.color = fontColor
+            //　textにサブカラーを設定
+            content.secondaryTextProperties.color = fontColor
+        }
         //　textにフォントカラーを設定
         content.textProperties.color = fontColor
         //　textにサブカラーを設定
@@ -283,5 +300,24 @@ class WordListModel: NSObject, UITableViewDataSource {
             return 0
         }
         return section
+    }
+    
+    //　テーマの名前を取得する
+    func getThemeName(themeId: Int) -> String{
+        // テーマの名称を取得する
+        let themeName = themeModel.themeList[themeId].theme.name
+        return themeName
+    }
+    
+    //　ノーマルテーマのみダークモード対応
+    func setFontColorCaseNormal(mainModeColor: UIColor, darkModeColor: UIColor) -> UIColor {
+        let dynamicColor = UIColor { (traitCollection: UITraitCollection) -> UIColor in
+           if traitCollection.userInterfaceStyle == .dark {
+               return darkModeColor
+           } else {
+               return mainModeColor
+           }
+        }
+        return dynamicColor
     }
 }
