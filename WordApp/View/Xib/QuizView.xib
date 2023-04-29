@@ -95,7 +95,7 @@
                                                                     <state key="normal" title="Button"/>
                                                                     <buttonConfiguration key="configuration" style="plain" title="次の問題へ"/>
                                                                     <connections>
-                                                                        <action selector="moveToNextQuiz" destination="-1" eventType="touchUpInside" id="0x4-2m-Lce"/>
+                                                                        <action selector="moveToNextQuiz" destination="-1" eventType="touchUpInside" id="kFV-ab-6Gb"/>
                                                                     </connections>
                                                                 </button>
                                                             </subviews>

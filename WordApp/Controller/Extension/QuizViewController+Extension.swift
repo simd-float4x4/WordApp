@@ -12,6 +12,7 @@ extension QuizViewController: QuizAnswerButtonIsTappedDelegate {
         deleteFirstQuizFromArray()
         //　appendすることで、配列の一番最後に現在のクイズを持っていく
         quiz.append(firstQuiz)
+        print("✈️ removeFirstQuiz")
     }
     
     // 次の問題へ進む
@@ -28,6 +29,7 @@ extension QuizViewController: QuizAnswerButtonIsTappedDelegate {
         reloadProgressionView(view: view)
         //　次の問題が最後の問題か確認する
         checkNextQuizIsLast()
+        print("✈️ moveToNextQuiz")
     }
     
     // QuizViewからIdを取得する
@@ -36,6 +38,7 @@ extension QuizViewController: QuizAnswerButtonIsTappedDelegate {
         getPressedButtonId = id
         //　押されたボタンが正解かどうか判定する
         checkPressedButtonIsCorrectAnswer(id: getPressedButtonId)
+        print("✈️ sendPressedButtonId")
     }
     
     // 回答ボタンの色を変更する
@@ -102,6 +105,7 @@ extension QuizViewController: QuizAnswerButtonIsTappedDelegate {
                 default:
                     break
         }
+        print("✈️ changeInformationOnQuizWidget")
     }
 }
 

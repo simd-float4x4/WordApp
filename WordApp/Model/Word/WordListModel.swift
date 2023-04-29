@@ -195,7 +195,7 @@ class WordListModel: NSObject, UITableViewDataSource {
     
     //　選択肢の数を取得する
     func getQuizAnswerSelections() -> Int {
-        if ud.currentQuizSelections == 0 {
+        if ud.currentQuizSelections != 5 && ud.currentQuizSelections != 4 && ud.currentQuizSelections != 3 {
             ud.currentQuizSelections = 5
         }
         return ud.currentQuizSelections
