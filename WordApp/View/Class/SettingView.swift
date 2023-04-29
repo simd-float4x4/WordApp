@@ -46,15 +46,14 @@ class SettingView: UIView {
     let themeModel = DesignThemeListModel.shared
     //　ナビゲーションバータイトル
     let navigationBarTitleString = NSLocalizedString("SettingViewTitleText", comment: "")
-    // ナビゲーションバー：フレームサイズ（注意：iPhone X以降の端末）
-    // TODO: iPhone 8、SEなどにも対応できるようにする
-    let navigationBarFrameSize = (x: 0, y: 0, height: 94)
+    // ナビゲーションバー：フレームサイズ
+    var navigationBarFrameSize = (x: 0, y: 0, height: 94)
     // ナビゲーションアイテム：高さ
-    let navigationItemHeight = (x: 0, y: 0, height: 50)
+    var navigationItemHeight = (x: 0, y: 0, height: 50)
     // ステータスバー：高さ
     let statusBarHeight = 44
     //　ナビゲーションUILabel
-    let navigationBarUILabelProperties = (x: 0, y: 50, fontSize: CGFloat(16.0))
+    var navigationBarUILabelProperties = (x: 0, y: 50, fontSize: CGFloat(16.0))
     
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -74,12 +73,26 @@ class SettingView: UIView {
         }
     }
     
+    //　ノッチによってナビゲーションバーのサイズを決定する
+    func decideNavigationSizeByNotch() {
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScene = scenes.first as? UIWindowScene
+        let window = windowScene?.windows.first
+        //safeAreaの値が44.0以上であれば、ノッチがあるので、x位置をずらします。
+        if(window?.safeAreaInsets.top ?? 0.0 <= 44.0){
+            navigationBarFrameSize.height = 60
+            navigationBarUILabelProperties.y = 16
+        }
+    }
+    
     // UIを初期化する
     func initializeUI(parentView: UIView) {
         // SegmentedControlを初期化する
         setSegmentedControl()
         // UILabelにtextをセットする
         setLabelText()
+        //　ノッチによってナビゲーションバーのサイズを決定する
+        decideNavigationSizeByNotch()
         // 保存したテーマを取得する
         fetchSavedThemeData()
         //　テーマのアクセントカラーを取得する
@@ -199,7 +212,7 @@ class SettingView: UIView {
     // navigationBarのセットアップ
     func setUpNavigationBar(parentView : UIView) -> UINavigationBar {
         //　ナビゲーションバーのタイトルを取得
-        let wordRememberListNavigationItem = UINavigationItem(title: navigationBarTitleString)
+        let settingViewNavigationItem = UINavigationItem(title: "")
         // ナビゲーションバーをframeに合わせる
         var navBar = UINavigationBar(frame: CGRect(
             x: navigationBarFrameSize.x,
@@ -209,7 +222,7 @@ class SettingView: UIView {
         // ナビゲーションバーに色をセットする
         navBar = setColorOnNavigationBar(navBar: navBar)
         // ナビゲーションバーにナビゲーションアイテムをセットする
-        navBar.setItems([wordRememberListNavigationItem], animated: false)
+        navBar.setItems([settingViewNavigationItem], animated: false)
         return navBar
     }
     
