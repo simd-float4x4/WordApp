@@ -121,8 +121,6 @@ class QuizViewController: UIViewController {
                 // なにも問題がない場合
                 //　上限にmaxを設定する
                 maximumQuizCount = max
-                //　selectedSegmentedIndexを強制更新する
-                ud.quizMaximumSelectedSegmentIndex = currentQuizTotal/5
                 print("🔔3: ", ud.quizMaximumSelectedSegmentIndex)
                 print("🤗出題数：　", maximumQuizCount)
             }
@@ -244,7 +242,7 @@ class QuizViewController: UIViewController {
         meaningArray.append(currentQuiz.word.meaning)
         print("✊:　", maximumAnswerChoicesCount)
         print("🃏: ", quiz.count)
-        print("🕊：　", quiz[maximumAnswerChoicesCount].word.meaning)
+        print("🕊：　", quiz[maximumAnswerChoicesCount-1].word.meaning)
         //　回答選択肢の数によってダミー選択肢を生成
         for i in 1 ..< maximumAnswerChoicesCount {
             //　配列にダミー選択肢を格納
