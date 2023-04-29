@@ -42,16 +42,15 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
     let ud = UserDefaults.standard
     //　ナビゲーションバータイトル
     let navigationBarTitleString = NSLocalizedString("WordListViewTitleText", comment: "")
-    // ナビゲーションバー：フレームサイズ（注意：iPhone X以降の端末）
-    // TODO: iPhone 8、SEなどにも対応できるようにする
-    let navigationBarViewFrameSize = (x: 0, y: 0, height: 94)
-    let navigationBarFrameSize = (x: 0, y: 50, height: 44)
+    // ナビゲーションバー：フレームサイズ
+    var navigationBarViewFrameSize = (x: 0, y: 0, height: 94)
+    var navigationBarFrameSize = (x: 0, y: 50, height: 44)
     // ナビゲーションアイテム：高さ
-    let navigationItemHeight = (x: 0, y: 0, height: 50)
+    var navigationItemHeight = (x: 0, y: 0, height: 50)
     // ステータスバー：高さ
-    let statusBarHeight = 44
+    var statusBarHeight = 44
     //　ナビゲーションUILabel
-    let navigationBarUILabelProperties = (x: 0, y: 50, fontSize: CGFloat(16.0))
+    var navigationBarUILabelProperties = (x: 0, y: 50, fontSize: CGFloat(16.0))
     //　navigationItem
     let wordListNavigationItem = UINavigationItem(title: "単語帳画面")
     //　ナビゲーションバーに使用する画像の名前（デフォルト）
@@ -93,8 +92,23 @@ class WordListViewController: UIViewController, ReloadWordListWidgetDelegate, So
         showTabBarController()
     }
     
+    //　ノッチによってナビゲーションバーのサイズを決定する
+    func decideNavigationSizeByNotch() {
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScene = scenes.first as? UIWindowScene
+        let window = windowScene?.windows.first
+        //safeAreaの値が44.0以上であれば、ノッチがあるので、x位置をずらします。
+        if(window?.safeAreaInsets.top ?? 0.0 <= 44.0){
+            navigationBarFrameSize.height = 44
+            navigationBarFrameSize.y = 16
+            navigationBarViewFrameSize.height = 16
+        }
+    }
+    
     //　Viewを初期化する
     func initializeView() {
+        //　ノッチによってナビゲーションバーのサイズを決定する
+        decideNavigationSizeByNotch()
         //　WordListViewを取得する
         var view = WordListView()
         //　ナビゲーションバーを生成する

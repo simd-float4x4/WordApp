@@ -222,7 +222,6 @@ extension WordListViewController {
             y: navigationBarUILabelProperties.y,
             width: Int(UIScreen.main.bounds.size.width),
             height: statusBarHeight)
-        label.backgroundColor = UIColor.red
         // テーマ名を取得
         let themeName = getThemeName()
         //　テーマ名一覧を取得する
@@ -250,7 +249,6 @@ extension WordListViewController {
             y: navigationBarFrameSize.y,
             width: Int(UIScreen.main.bounds.size.width)  / 2,
             height: navigationBarFrameSize.height)
-        titleView.backgroundColor = UIColor.green
         return titleView
         
     }
@@ -265,10 +263,8 @@ extension WordListViewController {
             y: navigationBarFrameSize.y,
             width: Int(UIScreen.main.bounds.size.width),
             height: navigationBarFrameSize.height))
-        navBar.backgroundColor = UIColor.yellow
         // ナビゲーションバーに色をセットする
         navBar = setColorOnNavigationBar(navBar: navBar)
-        
         wordRememberListNavigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: navigationBarImageName)!, style: .plain, target: self, action: #selector(switchWordActionMode))
         wordRememberListNavigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .add, target: self, action: #selector(toAddWordView))
