@@ -23,9 +23,9 @@ class DummyData {
         "〜を連携させる"
     ]
     let exampleArray = [
-        "Did you ever envisage that your book might be translated into different languages?",
-        "The ceremony was culminated with the national anthem.",
-        "This picture was taken in the evening to accentuate the shows of ancient remains.",
+        "Did you ever envisage that your dream could come true even if you fall into despair?",
+        "The ceremony was culminated with the a long and tedious speech by the chief.",
+        "This picture was taken in the evening to accentuate the scene of a gruesome murder scene..",
         "He was accused of the responsibility of sloppy accounting.",
         "She can transcribe melodic patterns from sound even if melody is adlib",
         "The country denounced Japan's protectionism to conceal its own lack of economic policy.",
@@ -33,9 +33,9 @@ class DummyData {
         "The high school is affiliated with the college."
     ]
     let transArray = [
-        "自分の本がいろいろな国の言葉に翻訳されると予想されましたか？",
-        "その式典は国歌斉唱で締めくくられた。",
-        "この写真は古代遺物の出現を強調するために夕方撮影された。",
+        "たとえ絶望の淵に落ちても、夢は叶うって想像できましたか？",
+        "その式典は首長の長ったらしく退屈なスピーチで締めくくられた。",
+        "この写真は凄惨な殺人事件の現場を強調するために夕方撮影された。",
         "彼は杜撰な会計処理の責任を責め立てられた",
         "たとえアドリブであっても、彼女は聴いた旋律パターンを楽譜に起こすことができる",
         "その国は自らの経済的な無策を隠すために日本の保護貿易主義を非難しました。",
